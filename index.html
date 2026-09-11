@@ -240,6 +240,48 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
   h1 { font-size: 16px; }
   .filters select, .filters input, .dash-filters select, .dash-filters input { font-size: 16px; }
 }
+
+/* ===== ROLES-PATCH v1 ===== */
+/* ---------- 角色化标签页 ---------- */
+.tabs {
+  display: flex; align-items: center; gap: 6px;
+  padding: 2px clamp(18px, 2.4vw, 44px) 11px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: 0 0 auto; min-height: 36px; padding: 7px 15px; border: 0; border-radius: 999px;
+  background: transparent; color: var(--text2); font: inherit; font-size: 13.5px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; transition: background .15s, color .15s;
+}
+.tab:hover { background: #EDEBE5; color: var(--text); }
+.tab.on { background: var(--text); color: #FAFAF8; }
+.tab-spacer { flex: 1 1 auto; }
+.role-tag {
+  flex: 0 0 auto; padding: 5px 11px; border-radius: 999px; background: var(--card2);
+  color: var(--text2); font-size: 11.5px; font-weight: 700; white-space: nowrap;
+}
+body.is-admin .role-tag { background: #FBE6DC; color: #A8390A; }
+body:not(.is-admin) .admin-only { display: none !important; }
+
+/* ---------- 视图（标签页内容） ---------- */
+.view { display: none; }
+.view.on { display: block; }
+.view-stack { display: flex; flex-direction: column; gap: clamp(14px, 1.2vw, 20px); }
+.narrow { width: 100%; max-width: 880px; margin: 0 auto; }
+
+/* 门店锁定后的只读感 */
+select.locked { background: var(--card2); color: var(--text2); cursor: not-allowed; }
+
+/* ---------- 手机：把提交按钮钉在底部，长表单不用滚到底 ---------- */
+@media (max-width: 760px) {
+  #odSubmit {
+    position: sticky; bottom: 10px; z-index: 30;
+    box-shadow: 0 8px 22px rgba(28, 28, 26, .16);
+  }
+  .tabs { padding-bottom: 9px; }
+  .role-tag { display: none; }
+}
 </style>
 </head>
 <body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
@@ -264,12 +306,20 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
       </button>
     </div>
   </div>
+  <nav class="tabs" id="tabs" data-page-node-id="tabsBar">
+    <button class="tab on" data-view="order" onclick="setView('order')">下定</button>
+    <button class="tab" data-view="orders" onclick="setView('orders')">订单明细</button>
+    <button class="tab admin-only" data-view="ledger" onclick="setView('ledger')">台账总览</button>
+    <button class="tab admin-only" data-view="admin" onclick="setView('admin')">商品与额度维护</button>
+    <span class="tab-spacer"></span>
+    <span class="role-tag" id="roleTag">油站</span>
+  </nav>
 </header>
 
 <div class="wrap" data-page-node-id="LQQUmm8s5CkNGoR21EHioR">
 
-  <div class="cols">
-    <div class="col colA">
+  <section class="view on" data-view="order" data-page-node-id="viewOrder">
+    <div class="view-stack narrow">
   <!-- ① 今天要处理 -->
   <div class="card today" data-page-node-id="VEWHdL4DW0gnRlzM0owhVR">
     <div class="card-h" data-page-node-id="O1oAOuZJDhfyBYV5Y1P8qx">
@@ -319,7 +369,10 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
   </div>
 
     </div>
-    <div class="col colB">
+  </section>
+
+  <section class="view admin-only" data-view="ledger" data-page-node-id="viewLedger">
+    <div class="view-stack">
   <!-- 供应商余额仪表盘 -->
   <div class="card" data-page-node-id="FdEJkxgp0NSe2CyTjmgNWn">
     <div class="card-h" data-page-node-id="5yiW0MipCNLehsACviensy">
@@ -340,7 +393,6 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
   </div>
 
     </div>
-  </div>
 
   <!-- ③ 商品数量余额：22 列的宽表，独立成全宽卡，别挤在两栏里 -->
   <div class="card" data-page-node-id="prodBalCard">
@@ -365,6 +417,27 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
       <button id="dashNext" class="btn sm">下一页</button>
     </div>
     <div class="tbl-wrap" data-page-node-id="fQkomTXvpUXiap9YbN4H53"><table class="tbl" id="tblProduct" data-page-node-id="YPUxOszy1DMzkIMAFKMD6c"></table></div>
+  </div>
+    </div>
+  </section>
+
+  <section class="view admin-only" data-view="admin" data-page-node-id="viewAdmin">
+    <div class="view-stack">
+  <!-- ⑥ 管理口令（仅管理员可见） -->
+  <div class="card" data-page-node-id="keyCard">
+    <div class="card-h" data-page-node-id="keyCardH">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <h2>管理口令</h2>
+      <span class="spacer"></span>
+      <span class="hint">油站看不到本页</span>
+    </div>
+    <div class="note" data-page-node-id="keyCardNote">油站打开页面时只有「下定 / 订单明细」两个标签，台账与维护功能对他们不可见。<br>
+      修改口令后<b>本机立即生效</b>；若要让所有设备统一，把生成的两行哈希发给维护人员写进页面即可。</div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:12px" data-page-node-id="keyCardBtns">
+      <button class="btn sm" onclick="openChangeKey()">修改管理口令</button>
+      <button class="btn sm" onclick="exitAdmin()">退出管理员模式</button>
+    </div>
+    <div class="note" id="keyHashBox" style="display:none;word-break:break-all"></div>
   </div>
 
   <!-- ④ 额度维护（网页临时改额度 + 导出补丁回贴台账） -->
@@ -393,7 +466,11 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
     </div>
     <div class="tbl-wrap" data-page-node-id="capTblWrap"><table class="tbl" id="tblCap" data-page-node-id="tblCap"></table></div>
   </div>
+    </div>
+  </section>
 
+  <section class="view" data-view="orders" data-page-node-id="viewOrders">
+    <div class="view-stack">
   <!-- ⑤ 下定明细 -->
   <div class="card" data-page-node-id="p3kJTFNJtgw41CFn1G4HID">
     <div class="card-h" data-page-node-id="QOaiTo47jPaNBnpPvJTCoF">
@@ -424,6 +501,8 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
     <div class="chart-title" style="margin-top:14px">订单明细</div>
     <div class="tbl-wrap"><table class="tbl" id="tblOrders"></table></div>
   </div>
+    </div>
+  </section>
 
   <footer data-page-node-id="yB3ZSBohfeddG3mHC3oaxF">
     数据源：金山在线表格《供应商订货台账》 → GitHub Actions → data.json<br data-page-node-id="OLaHTae59yL75PGE62S9mf">
@@ -444,6 +523,35 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
     <div class="modal-actions" data-page-node-id="qWAnci6PRQApylUqzklH1j">
       <button class="btn" onclick="closeSettings()" data-page-node-id="YrRwxxzYo8pCWGSOQWO9wt">取消</button>
       <button class="btn primary" onclick="saveSettings()" data-page-node-id="yGIw1dTt9zfaToZ2PxduYQ">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 管理员验证 -->
+<div class="mask" id="admMask" data-page-node-id="admMask">
+  <div class="modal" style="max-width:390px" data-page-node-id="admModal">
+    <h3>管理员验证</h3>
+    <div class="field"><label for="admKey">管理口令</label>
+      <input id="admKey" type="password" autocomplete="off" placeholder="请输入管理口令" onkeydown="if(event.key==='Enter')tryAdminLogin()"></div>
+    <div class="note" id="admNote">只有管理员才能查看台账与维护功能。</div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeAdminLogin()">取消</button>
+      <button class="btn primary" onclick="tryAdminLogin()">进入</button>
+    </div>
+  </div>
+</div>
+
+<!-- 修改管理口令 -->
+<div class="mask" id="chgMask" data-page-node-id="chgMask">
+  <div class="modal" style="max-width:430px" data-page-node-id="chgModal">
+    <h3>修改管理口令</h3>
+    <div class="field"><label for="chgOld">当前口令</label><input id="chgOld" type="password" autocomplete="off"></div>
+    <div class="field"><label for="chgNew">新口令（至少 4 位）</label><input id="chgNew" type="password" autocomplete="off"></div>
+    <div class="field"><label for="chgNew2">再输一次新口令</label><input id="chgNew2" type="password" autocomplete="off"></div>
+    <div class="note" id="chgNote">改完本机立即生效。</div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeChangeKey()">取消</button>
+      <button class="btn primary" onclick="doChangeKey()">保存</button>
     </div>
   </div>
 </div>
@@ -782,16 +890,173 @@ function loadLocal() {
 }
 function saveCfg() { try { localStorage.setItem(LS_CFG, JSON.stringify(cfg)); } catch (e) {} }
 function loadCfg() { try { var s = localStorage.getItem(LS_CFG); if (s) cfg = Object.assign(cfg, JSON.parse(s)); } catch (e) {} }
-// 桌面 bat 传入 URL 片段（#pat=<token>）：一次性注入 PAT，存本机并清掉地址栏（页面源码里始终没有密钥）
-function applyHashToken() {
+/* ===== ROLES-PATCH v1 ===== */
+var LS_ROLE  = 'wb_order_role_v1';      // 角色 + 绑定门店
+var LS_VIEW  = 'wb_order_view_v1';      // 上次停留的标签
+var ADMIN_SHA = '3d56c9d0407ceacccdb3e74cd3238566e219104da3af57ab3c4bcaf8cf7c5907';   // sha256(管理口令)
+var ADMIN_FNV = 'b349ee67';   // fnv1a(管理口令)，仅作无 crypto.subtle 时的降级
+
+var role = 'store';          // 'store' | 'admin'
+var boundStore = '';         // 油站绑定的门店（来自 #store=，锁定后不可改）
+var adminSha = ADMIN_SHA, adminFnv = ADMIN_FNV;
+var currentView = 'order';
+var hashWantAdmin = false;   // 本次 URL 带了 #admin
+
+function isAdmin() { return role === 'admin'; }
+function setRole(r) { role = r; saveRole(); }
+
+function loadRole() {
   try {
-    var m = (location.hash || '').match(/[#&]pat=([^&]+)/);
-    if (!m) return;
-    cfg.pat = decodeURIComponent(m[1]);
-    saveCfg();
-    if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    var s = localStorage.getItem(LS_ROLE);
+    if (!s) return;
+    var o = JSON.parse(s) || {};
+    if (o.role === 'admin') role = 'admin';
+    if (o.store) boundStore = o.store;
+    if (o.sha) adminSha = o.sha;
+    if (o.fnv) adminFnv = o.fnv;
   } catch (e) {}
 }
+function saveRole() {
+  try { localStorage.setItem(LS_ROLE, JSON.stringify({ role: role, store: boundStore, sha: adminSha, fnv: adminFnv })); } catch (e) {}
+}
+
+// 简易 32 位哈希：crypto.subtle 不可用时的降级（只有 file:// 预览才会走到）
+function fnv1a(str) {
+  var h = 0x811c9dc5;
+  for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return ('0000000' + h.toString(16)).slice(-8);
+}
+function sha256Hex(str, cb) {
+  try {
+    if (window.crypto && crypto.subtle && crypto.subtle.digest && window.TextEncoder) {
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function (buf) {
+        var b = new Uint8Array(buf), s = '';
+        for (var i = 0; i < b.length; i++) s += ('00' + b[i].toString(16)).slice(-2);
+        cb(s);
+      }).catch(function () { cb(null); });
+      return;
+    }
+  } catch (e) {}
+  cb(null);
+}
+function checkAdminKey(key, cb) {
+  sha256Hex(key, function (hx) { cb(hx ? (hx === adminSha) : (fnv1a(key) === adminFnv)); });
+}
+function hashBoth(key, cb) { sha256Hex(key, function (hx) { cb(hx || fnv1a(key), fnv1a(key)); }); }
+
+// 桌面 bat 传入 URL 片段：一次性注入（#pat=密钥 / #store=门店 / #admin），存本机后清掉地址栏
+function applyHashParams() {
+  try {
+    var h = location.hash || '';
+    var touched = false;
+    var mPat = h.match(/[#&]pat=([^&]+)/);
+    if (mPat) { cfg.pat = decodeURIComponent(mPat[1]); saveCfg(); touched = true; }
+    var mStore = h.match(/[#&]store=([^&]+)/);
+    if (mStore) { boundStore = decodeURIComponent(mStore[1]); touched = true; }
+    if (/(^|[#&])admin([=&]|$)/.test(h)) { hashWantAdmin = true; touched = true; }
+    if (touched) {
+      saveRole();
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    }
+  } catch (e) {}
+}
+// 兼容旧名（万一别处引用）
+function applyHashToken() { applyHashParams(); }
+
+/* ---------- 视图切换 ---------- */
+function setView(name) {
+  if (!isAdmin() && (name === 'ledger' || name === 'admin')) return;
+  var qsa = document.querySelectorAll ? function (sel) { return document.querySelectorAll(sel); } : function () { return []; };
+  var vs = qsa('.view');
+  for (var i = 0; i < vs.length; i++) vs[i].classList.toggle('on', vs[i].getAttribute('data-view') === name);
+  var ts = qsa('.tab');
+  for (var j = 0; j < ts.length; j++) ts[j].classList.toggle('on', ts[j].getAttribute('data-view') === name);
+  currentView = name;
+  try { localStorage.setItem(LS_VIEW, name); } catch (e) {}
+  try { window.scrollTo(0, 0); } catch (e) {}
+}
+
+/* ---------- 角色渲染 ---------- */
+function renderRole() {
+  var admin = isAdmin();
+  if (document.body && document.body.classList) document.body.classList.toggle('is-admin', admin);
+  var tag = document.getElementById('roleTag');
+  if (tag) tag.textContent = admin ? '管理员' : (boundStore ? boundStore : '油站');
+  var cur = document.querySelector ? document.querySelector('.view.on') : null;
+  if (!admin && cur) {
+    var v = cur.getAttribute('data-view');
+    if (v === 'ledger' || v === 'admin') setView('order');
+  }
+  applyStoreLock();
+}
+
+/* ---------- 门店锁定 ---------- */
+function applyStoreLock() {
+  var locked = !!boundStore && !isAdmin();
+  var st = document.getElementById('odStore');
+  if (st) {
+    if (locked) {
+      st.innerHTML = '<option value="' + esc(boundStore) + '">' + esc(boundStore) + '（本店已锁定）</option>';
+      st.value = boundStore; st.disabled = true; st.classList.add('locked');
+    } else if (st.disabled) {
+      st.disabled = false; st.classList.remove('locked');
+      st.innerHTML = STORES.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join('');
+    }
+  }
+  var ft = document.getElementById('fStore');
+  if (ft) {
+    if (locked) { ft.value = boundStore; ft.disabled = true; ft.classList.add('locked'); }
+    else { ft.disabled = false; ft.classList.remove('locked'); }
+  }
+}
+
+/* ---------- 管理员登录 ---------- */
+function openAdminLogin() {
+  var m = document.getElementById('admMask'); if (!m) return;
+  m.classList.add('open');
+  var i = document.getElementById('admKey'); if (i) { i.value = ''; setTimeout(function () { i.focus(); }, 60); }
+  var n = document.getElementById('admNote'); if (n) { n.textContent = '只有管理员才能查看台账与维护功能。'; n.style.color = ''; }
+}
+function closeAdminLogin() { var m = document.getElementById('admMask'); if (m) m.classList.remove('open'); }
+function tryAdminLogin() {
+  var inp = document.getElementById('admKey');
+  var key = inp ? inp.value : '';
+  if (!key) { toast('请输入管理口令'); return; }
+  checkAdminKey(key, function (ok) {
+    var n = document.getElementById('admNote');
+    if (!ok) { if (n) { n.textContent = '口令不对，请重试。'; n.style.color = 'var(--red)'; } toast('口令不对'); return; }
+    setRole('admin'); closeAdminLogin(); renderRole(); setView('ledger'); toast('已进入管理员模式');
+  });
+}
+/* ---------- 修改管理口令 ---------- */
+function openChangeKey() {
+  ['chgOld', 'chgNew', 'chgNew2'].forEach(function (id) { var e = document.getElementById(id); if (e) e.value = ''; });
+  var n = document.getElementById('chgNote'); if (n) { n.textContent = '改完本机立即生效。'; n.style.color = ''; }
+  var m = document.getElementById('chgMask'); if (m) m.classList.add('open');
+}
+function closeChangeKey() { var m = document.getElementById('chgMask'); if (m) m.classList.remove('open'); }
+function setChgNote(t, bad) { var n = document.getElementById('chgNote'); if (n) { n.textContent = t; n.style.color = bad ? 'var(--red)' : ''; } }
+function doChangeKey() {
+  var o = document.getElementById('chgOld'), a = document.getElementById('chgNew'), b = document.getElementById('chgNew2');
+  checkAdminKey(o ? o.value : '', function (ok) {
+    if (!ok) { setChgNote('当前口令不对', true); return; }
+    var nv = a ? a.value : '', nv2 = b ? b.value : '';
+    if (!nv || nv.length < 4) { setChgNote('新口令至少 4 位', true); return; }
+    if (nv !== nv2) { setChgNote('两次输入的新口令不一致', true); return; }
+    hashBoth(nv, function (sha, fnv) {
+      adminSha = sha; adminFnv = fnv; saveRole();
+      closeChangeKey();
+      var box = document.getElementById('keyHashBox');
+      if (box) {
+        box.style.display = 'block';
+        box.innerHTML = '新口令已在本机生效。要让所有设备统一，把下面两行发给维护人员：<br>SHA-256:<br><b>' + esc(sha) + '</b><br>FNV:<br><b>' + esc(fnv) + '</b>';
+      }
+      toast('管理口令已修改（本机生效）');
+    });
+  });
+}
+function exitAdmin() { setRole('store'); renderRole(); setView('order'); toast('已退出管理员模式'); }
+
 function savePending() { try { localStorage.setItem(LS_PENDING, JSON.stringify(pending)); } catch (e) {} }
 function loadPending() {
   try { var s = localStorage.getItem(LS_PENDING); pending = s ? (JSON.parse(s) || []) : []; } catch (e) { pending = []; }
@@ -1095,6 +1360,7 @@ function renderForm() {
   if (!stSel.options.length) {
     stSel.innerHTML = STORES.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join('');
   }
+  applyStoreLock();   // ★ 绑定门店时锁定门店栏
   if (!document.getElementById('odDate').value) document.getElementById('odDate').value = todayStr();
   renderFormInfo();
 }
@@ -1160,6 +1426,7 @@ function renderFilters() {
   var fs = document.getElementById('fSupplier').value;
   var goods = fs ? productsOf(fs).map(function (p) { return p.name; }) : data.products.map(function (p) { return p.name; });
   fill('fProduct', goods, '全部商品');
+  applyStoreLock();   // ★ fill 会重建门店下拉，这里再锁一次
 }
 
 // 数量按单位分列汇总（箱/桶/提不可直接相加）
@@ -1301,6 +1568,7 @@ function submitOrder() {
   var sup = document.getElementById('odSupplier').value;
   var prod = document.getElementById('odProduct').value;
   var store = document.getElementById('odStore').value;
+  if (!isAdmin() && boundStore) store = boundStore;   // ★ 绑定门店优先，防止改 DOM 换站
   var qty = Number(document.getElementById('odQty').value);
   var date = document.getElementById('odDate').value || todayStr();
   var p = prodOf(sup, prod);
@@ -1630,10 +1898,24 @@ function bindCapPanel() {
   if (cl) cl.addEventListener('click', function () { clearCaps(); });
 }
 
+// 提交按钮：回车 / 触摸重复触发也走同一道互斥锁
+function bindSubmitGuard() {
+  var btn = document.getElementById('odSubmit');
+  if (btn && !btn.__guarded) { btn.__guarded = 1; }
+}
+
 /* ---------- 启动 ---------- */
 function boot() {
-  loadCfg(); applyHashToken(); loadPending(); loadCaps(); loadRecent();
-  bindDashFilters(); bindCapPanel();
+  loadCfg(); applyHashParams(); loadRole(); loadPending(); loadCaps(); loadRecent();
+  bindDashFilters(); bindCapPanel(); bindSubmitGuard();
+  renderRole();
+  var want = isAdmin() ? 'ledger' : 'order';
+  try {
+    var sv = localStorage.getItem(LS_VIEW);
+    if (sv && (isAdmin() || (sv !== 'ledger' && sv !== 'admin'))) want = sv;
+  } catch (e) {}
+  setView(want);
+  if (hashWantAdmin) { if (isAdmin()) setView('ledger'); else openAdminLogin(); }
   var hasLocal = loadLocal();
   syncState = 'busy'; refreshAll();
   fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
