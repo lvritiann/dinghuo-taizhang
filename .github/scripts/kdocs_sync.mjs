@@ -7,9 +7,10 @@
  * 浏览器（含 GitHub Pages 页面）无法直连金山，必须由无 Origin 的服务器代发。
  *
  * 流程：
- *   1. mode=order 时按 payload.orders 逐笔 POST 写入金山「供应商 Sheet」
+ *   0. 读回上一次的 data.json，取出「已写过的 cid」建立幂等基线（防重复入账）
+ *   1. mode=order 时按 payload.orders 逐笔 POST 写入金山「供应商 Sheet」（cid 已写过的直接跳过）
  *   2. POST dump 拉回全量数据（商品档案 + 全部订单 + 算好的余额）
- *   3. 生成 data.json
+ *   3. 生成 data.json（含 recentCids 幂等基线）
  *   4. git commit + push（用 workflow 自带的 GITHUB_TOKEN）
  *
  * 环境变量：
@@ -78,9 +79,30 @@ if (MODE === 'probe') {
   process.exit(0);
 }
 
+// 0) 服务端幂等（第二道防线）：读回上一次的 data.json，取出「已写过的客户端单号 cid」
+//    场景：油站提交后页面没等到回执就关了/刷了 → 人工点「确认重发」时会带同一个 cid 再来一次。
+//    这里直接跳过，保证金山台账绝不因为重试而重复入账。
+let recentCids = [];
+try {
+  const prev = JSON.parse(fs.readFileSync(path.join(ROOT, 'data.json'), 'utf8'));
+  recentCids = Array.isArray(prev.recentCids) ? prev.recentCids.filter(Boolean) : [];
+} catch (e) {
+  console.log('· 首次运行：workspace 内没有 data.json，幂等基线为空');
+}
+const seenCids = new Set(recentCids);
+
 // 1) 逐笔下单
-const orders = Array.isArray(payload.orders) ? payload.orders : [];
+const rawOrders = Array.isArray(payload.orders) ? payload.orders : [];
+const orders = [];
+let dupSkipped = 0;
+for (const o of rawOrders) {
+  if (o && o.cid && seenCids.has(o.cid)) { dupSkipped++; continue; }   // ★ 幂等：cid 已写过，跳过
+  orders.push(o);
+}
+if (dupSkipped) console.log(`· 幂等跳过 ${dupSkipped} 笔重复提交（cid 已在历史记录中）`);
+
 let done = 0, amountSum = 0, failed = [];
+const writtenCids = [];
 for (const o of orders) {
   if (!o || !o.supplier || !o.product || !o.store || !(Number(o.qty) > 0)) {
     failed.push('订单格式错误：' + JSON.stringify(o));
@@ -97,6 +119,7 @@ for (const o of orders) {
     });
     if (r && r.ok) {
       done++; amountSum += Number(r.amount || 0);
+      if (o.cid) writtenCids.push(o.cid);
       console.log(`  ✓ ${o.supplier} / ${o.store} / ${o.product} × ${o.qty} → ¥${r.amount}（余额 ${r.balQty}${r.unit || ''}）`);
     } else {
       failed.push(`${o.supplier} ${o.store} ${o.product} → ${(r && r.error) || '未知'}`);
@@ -119,6 +142,9 @@ const cleanOrders = (dump.orders || []).filter(o => o && o.supplier && o.product
 const dropped = (dump.orders || []).length - cleanOrders.length;
 if (dropped > 0) console.log(`· 已过滤 ${dropped} 条无效行（无供应商/商品名，通常是表格小计行）`);
 
+// 幂等基线：本次写成功的 cid + 历史 cid，最多留 1000 条（够覆盖任意重试窗口）
+recentCids = Array.from(new Set(writtenCids.concat(recentCids).filter(Boolean))).slice(0, 1000);
+
 const data = {
   updatedAt: dump.updatedAt || new Date().toISOString(),
   source: 'kdocs',
@@ -128,12 +154,13 @@ const data = {
   productBal: dump.productBal,
   supplierBal: dump.supplierBal,
   expiring: (dump.expiring || []).filter(o => o && o.supplier && o.product),
-  missingSheets: dump.missingSheets || []
+  missingSheets: dump.missingSheets || [],
+  recentCids: recentCids
 };
 
 const outPath = path.join(ROOT, 'data.json');
 fs.writeFileSync(outPath, JSON.stringify(data, null, 2), 'utf8');
-console.log(`✓ data.json 已更新：商品 ${data.products.length} 款 / 订单 ${data.orders.length} 笔 / 供应商 ${data.supplierBal.length} 家`);
+console.log(`✓ data.json 已更新：商品 ${data.products.length} 款 / 订单 ${data.orders.length} 笔 / 供应商 ${data.supplierBal.length} 家（幂等基线 ${recentCids.length} 条）`);
 // 4) 提交
 const hasChange = execSync('git status --porcelain data.json', { cwd: ROOT }).toString().trim();
 if (!hasChange) {
