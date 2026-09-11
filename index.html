@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="AlrBLsH8ySnpevZ41trnUV">
+<head data-page-node-id="PvSF3ykNGj6DFpJZX0qB4g">
+<meta charset="UTF-8" data-page-node-id="41WGRY50DAXJzeZsizVVLH">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" data-page-node-id="hpgHDQYB0L5op2LoFQNOLI">
+<meta name="apple-mobile-web-app-capable" content="yes" data-page-node-id="TEzDMOVT3aDD2JILz6kHZA">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" data-page-node-id="K8klzbvQa3Tan3jKCnlMI5">
+<title>供应商订货管理</title>
+<!-- 单文件零依赖：图表与图标全部内联 SVG，不引任何 CDN / 框架 / 字体 -->
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #0f1117; --card: #1a1d27; --card2: #222632; --border: #2e3345;
+  --text: #e4e6ed; --text2: #8b90a0; --accent: #4f8ef7;
+  --red: #f85566; --orange: #ff9f43; --green: #36d399; --purple: #a78bfa;
+  --radius: 12px;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); min-height: 100vh;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 14px; }
+
+header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(15,17,23,.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  max-width: 1000px; margin: 0 auto; padding: 11px 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+}
+.brand { display: flex; align-items: center; gap: 9px; }
+h1 { font-size: 16px; font-weight: 700; letter-spacing: .2px; }
+.sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text2); flex: none; }
+.sync-dot.ok { background: var(--green); }
+.sync-dot.busy { background: var(--orange); animation: pulse 1s infinite; }
+.sync-dot.err { background: var(--red); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+.sync-txt { font-size: 12px; color: var(--text2); }
+.header-btns { display: flex; gap: 7px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  padding: 8px 13px; border-radius: 9px; border: 1px solid var(--border);
+  background: var(--card2); color: var(--text);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  min-height: 40px; font-family: inherit; transition: filter .15s;
+}
+.btn:hover { filter: brightness(1.18); }
+.btn:active { filter: brightness(.9); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.sm { min-height: 34px; padding: 6px 11px; font-size: 12px; }
+.btn.block { width: 100%; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 15px; margin-top: 14px; }
+.card-h { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.card-h h2 { font-size: 14px; font-weight: 700; }
+.card-h .spacer { flex: 1; }
+.card-h .hint { font-size: 11px; color: var(--text2); font-weight: 500; }
+.ico { width: 16px; height: 16px; flex: none; }
+
+.today { border-color: var(--orange); background: linear-gradient(180deg, rgba(255,159,67,.09), transparent 60%); }
+.todo-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.todo-item:last-child { border-bottom: none; padding-bottom: 0; }
+.todo-item:first-child { padding-top: 0; }
+.todo-main { flex: 1; min-width: 0; }
+.todo-t { font-size: 13px; font-weight: 600; line-height: 1.4; }
+.todo-s { font-size: 12px; color: var(--text2); margin-top: 3px; line-height: 1.45; }
+.todo-item.urgent .todo-t { color: var(--red); }
+.todo-item.warn .todo-t { color: var(--orange); }
+.empty { font-size: 13px; color: var(--text2); padding: 14px 0; text-align: center; }
+
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.kpi { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 11px 12px; }
+.kpi .v { font-size: 20px; font-weight: 800; line-height: 1.15; letter-spacing: -.5px; }
+.kpi .l { font-size: 11px; color: var(--text2); margin-top: 3px; }
+.kpi.red .v { color: var(--red); }
+
+.cat-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 10px; margin-bottom: 12px; }
+.cat-card { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 11px 12px; }
+.cat-card .cn { font-size: 12.5px; font-weight: 700; color: var(--accent); }
+.cat-card .cv { font-size: 18px; font-weight: 800; margin-top: 5px; letter-spacing: -.5px; }
+.cat-card .cs { font-size: 11px; color: var(--text2); margin-top: 3px; }
+.cat-card .bar-mini { margin-top: 7px; }
+.cat-card.warn { border-color: var(--orange); }
+.cat-card.full { border-color: var(--red); }
+@media (max-width: 768px) { .cat-cards { grid-template-columns: repeat(2, 1fr); } }
+.cap-in { width: 92px; padding: 5px 7px; font-size: 13px; }
+.kpi.orange .v { color: var(--orange); }
+.kpi.green .v { color: var(--green); }
+.kpi.accent .v { color: var(--accent); }
+
+.chart-box { margin-top: 16px; overflow-x: auto; }
+.chart-title { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 8px; }
+svg.chart { display: block; width: 100%; height: auto; min-width: 420px; }
+
+.field { margin-bottom: 11px; }
+.field label { display: block; font-size: 12px; color: var(--text2); margin-bottom: 5px; font-weight: 600; }
+input, select {
+  width: 100%; padding: 10px 12px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card2); color: var(--text);
+  font-size: 16px; font-family: inherit; min-height: 44px;
+}
+input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 11px 0; }
+.info-cell { background: var(--card2); border: 1px solid var(--border); border-radius: 9px; padding: 8px 10px; }
+.info-cell .k { font-size: 10.5px; color: var(--text2); }
+.info-cell .v { font-size: 14px; font-weight: 700; margin-top: 2px; }
+.info-cell .v.g { color: var(--green); } .info-cell .v.o { color: var(--orange); } .info-cell .v.r { color: var(--red); }
+
+.filters { display: grid; grid-template-columns: 1.05fr 1.15fr 0.95fr 1.25fr 0.9fr; gap: 8px; margin-bottom: 10px; }
+.filters select, .filters input { min-height: 40px; font-size: 13px; padding: 8px 10px; }
+.dash-filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+.dash-filters select, .dash-filters input { min-height: 40px; font-size: 13px; padding: 8px 10px; flex: 1 1 160px; min-width: 130px; }
+.dash-filters .hint { flex: 1 1 100%; font-size: 11.5px; color: var(--text2); }
+.dash-filters .btn.sm { flex: 0 0 auto; }
+.filter-tip { font-size: 11.5px; color: var(--text2); margin-bottom: 11px; line-height: 1.5; }
+.result-banner {
+  background: linear-gradient(180deg, rgba(79,142,247,.14), rgba(79,142,247,.04));
+  border: 1px solid var(--accent); border-radius: 10px;
+  padding: 12px 14px; margin-bottom: 12px;
+}
+.result-banner .rb-main { font-size: 15px; font-weight: 700; line-height: 1.5; }
+.result-banner .rb-main b { color: var(--accent); font-size: 18px; }
+.result-banner .rb-sub { font-size: 12.5px; color: var(--text2); margin-top: 5px; line-height: 1.55; }
+.result-banner.none { border-color: var(--border); background: var(--card2); }
+.result-banner.none .rb-main { color: var(--text2); font-weight: 600; }
+.sum-line { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px; margin-bottom: 10px; align-items: center; }
+.sum-line b { font-variant-numeric: tabular-nums; }
+.date-row { cursor: pointer; }
+.date-row:hover td { background: var(--card2); }
+.date-row.on td { background: rgba(79,142,247,.12); }
+.date-row .pick { color: var(--accent); font-size: 11.5px; white-space: nowrap; }
+
+.tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.tbl th {
+  text-align: left; padding: 8px 8px; color: var(--text2); font-weight: 700;
+  border-bottom: 1px solid var(--border); font-size: 11.5px; white-space: nowrap;
+}
+.tbl td { padding: 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tbl-wrap { overflow-x: auto; }
+.bar-mini { height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; margin-top: 4px; }
+.bar-mini i { display: block; height: 100%; border-radius: 3px; }
+.tag { display: inline-block; padding: 1px 6px; border-radius: 5px; font-size: 10px; font-weight: 700; }
+.tag.full { background: rgba(248,85,102,.16); color: var(--red); }
+.tag.low  { background: rgba(255,159,67,.16); color: var(--orange); }
+.tag.ok   { background: rgba(54,211,153,.16); color: var(--green); }
+
+.mask { position: fixed; inset: 0; background: rgba(0,0,0,.62); display: none; align-items: center; justify-content: center; z-index: 100; padding: 16px; }
+.mask.open { display: flex; }
+.modal { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; width: 100%; max-width: 460px; max-height: 86vh; overflow-y: auto; }
+.modal h3 { font-size: 15px; margin-bottom: 13px; }
+.modal-actions { display: flex; gap: 9px; margin-top: 15px; }
+.modal-actions .btn { flex: 1; }
+.note { font-size: 11.5px; color: var(--text2); line-height: 1.6; margin-top: 9px; }
+
+#toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(20px);
+  background: #2b3040; color: #fff; padding: 11px 18px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; opacity: 0; pointer-events: none;
+  transition: opacity .22s, transform .22s; z-index: 200; max-width: 88vw; text-align: center;
+  border: 1px solid var(--border);
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+footer { margin-top: 26px; font-size: 11.5px; color: var(--text2); text-align: center; line-height: 1.7; }
+
+@media (max-width: 768px) {
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  .info-grid { grid-template-columns: repeat(2, 1fr); }
+  .filters { grid-template-columns: repeat(2, 1fr); }
+  .filters select, .filters input { font-size: 16px; }
+  .dash-filters select, .dash-filters input { font-size: 16px; }
+  .form-row { grid-template-columns: 1fr; }
+  h1 { font-size: 15px; }
+}
+</style>
+</head>
+<body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
+
+<header data-page-node-id="rKiviHOZJMYxu1Vl9jjdOc">
+  <div class="header-inner" data-page-node-id="Hemj6catSxUl3aYnDQ0ELk">
+    <div class="brand" data-page-node-id="MlJPGL0S6OC3KG6reTPvdM">
+      <span class="sync-dot" id="syncDot" data-page-node-id="lpiOMpYwPy7aYkwghGTILf"></span>
+      <div data-page-node-id="M0miu96iLlu4dfHRGcNhd7">
+        <h1 data-page-node-id="NwW4gCeO1WxLuRATJZYEvx">供应商订货管理</h1>
+        <div class="sync-txt" id="syncTxt" data-page-node-id="4ktgy49LOnYP4Ci5CennYd">加载中…</div>
+      </div>
+    </div>
+    <div class="header-btns" data-page-node-id="nBjSozxfdoz5XCzhtoxqlu">
+      <button class="btn sm" onclick="manualSync()" data-page-node-id="a5PA4fryaFZHxo2Rzr1Sys">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="z1vVALvEqR2RD4R5x7owPX"><path d="M21 12a9 9 0 1 1-2.64-6.36" data-page-node-id="on6zuARCcldDxQdzyiv9Be"/><path d="M21 3v6h-6" data-page-node-id="OtRYcof5uyem1PnITnD7cC"/></svg>
+        刷新
+      </button>
+      <button class="btn sm" onclick="openSettings()" data-page-node-id="kmA8OSFrrASAqph1O4cbbh">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="eJF0aDyVFVxQ9BIr3PcAe2"><circle cx="12" cy="12" r="3" data-page-node-id="noCpaCsXKZffwk9L05jj4R"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" data-page-node-id="dZ4SPVwdoPLhFV3LFsGkBy"/></svg>
+        设置
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" data-page-node-id="LQQUmm8s5CkNGoR21EHioR">
+
+  <!-- ① 今天要处理 -->
+  <div class="card today" data-page-node-id="VEWHdL4DW0gnRlzM0owhVR">
+    <div class="card-h" data-page-node-id="O1oAOuZJDhfyBYV5Y1P8qx">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="QQeWTd8koSgoZlTJ6rkgyG"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" data-page-node-id="AH2SaqvNhmUVW4RgxctB2g"/><line x1="12" y1="9" x2="12" y2="13" data-page-node-id="EX9EH2kDSdEN8aZEsCvUkZ"/><line x1="12" y1="17" x2="12.01" y2="17" data-page-node-id="29ZE6FuGHTHfAeXasnINks"/></svg>
+      <h2 data-page-node-id="eHKsc02CJH9XbhAlwwYrtl">今天要处理</h2>
+      <span class="spacer" data-page-node-id="F9oB4QCq3o5AtiY8S3Smnx"></span>
+      <span class="hint" id="todayHint" data-page-node-id="o4GTnIXz7zlyMNdk8zwvUe"></span>
+    </div>
+    <div id="todayList" data-page-node-id="RU4mNYYfxUvMrQATfPx1uo"></div>
+  </div>
+
+  <!-- ② 供应商余额仪表盘 -->
+  <div class="card" data-page-node-id="FdEJkxgp0NSe2CyTjmgNWn">
+    <div class="card-h" data-page-node-id="5yiW0MipCNLehsACviensy">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="atggOogcTMnJG06Kd2AxxK"><line x1="18" y1="20" x2="18" y2="10" data-page-node-id="LvNXbWSP4UsB5Ch2paWE6v"/><line x1="12" y1="20" x2="12" y2="4" data-page-node-id="5Wcl2yqksDm2B4Wb1gEiHf"/><line x1="6" y1="20" x2="6" y2="14" data-page-node-id="xR9tGDE0rFd6LZ9wpr1nKU"/></svg>
+      <h2 data-page-node-id="nqyMxS8p3D88YKlVmEIBbJ">供应商余额仪表盘</h2>
+      <span class="spacer" data-page-node-id="lJu8rJO7PCJaFvxFHiAjzv"></span>
+      <span class="hint" id="dashHint" data-page-node-id="W7wM9hcCKpySo1sbH80gaV"></span>
+    </div>
+    <div class="kpis" id="kpis" data-page-node-id="Ly29JaJi46hPuB5fQoXy8x"></div>
+    <div class="chart-box" data-page-node-id="GCh5r7pIdrVyO2s3RsvauX">
+      <div class="chart-title" data-page-node-id="bMuafoBld7O60GkKQEWWGi">各供应商已下订 / 金额余额（元）</div>
+      <svg class="chart" id="chartSup" viewBox="0 0 640 60" preserveAspectRatio="xMinYMin meet" data-page-node-id="I4gAPN1TzK928Wv6OqOeEi"></svg>
+    </div>
+    <div class="chart-box" data-page-node-id="catSumBox">
+      <div class="chart-title" data-page-node-id="catSumTitle">各大类余额（金额 · 防定超监管）</div>
+      <div class="cat-cards" id="catCards" data-page-node-id="catCards"></div>
+    </div>
+    <div class="chart-box" data-page-node-id="kWBgPlqsICzVOEw72VfftN">
+      <div class="chart-title" data-page-node-id="58q8BxkZaiM348KJOrq0Xv">各商品数量余额（按商品 · 同单位可比）</div>
+      <div class="dash-filters" id="dashFilters">
+        <select id="dashCat"></select>
+        <select id="dashSup"></select>
+        <select id="dashStatus">
+          <option value="all">全部状态</option>
+          <option value="warn">仅看需关注</option>
+          <option value="ok">仅看充足</option>
+          <option value="nocap">仅看未设额度</option>
+        </select>
+        <input id="dashSearch" type="search" placeholder="搜索商品名" />
+        <span class="hint" id="dashPageInfo"></span>
+        <button id="dashPrev" class="btn sm">上一页</button>
+        <button id="dashNext" class="btn sm">下一页</button>
+      </div>
+      <div class="tbl-wrap" data-page-node-id="fQkomTXvpUXiap9YbN4H53"><table class="tbl" id="tblProduct" data-page-node-id="YPUxOszy1DMzkIMAFKMD6c"></table></div>
+    </div>
+  </div>
+
+  <!-- ②b 额度维护（网页临时改额度 + 导出补丁回贴台账） -->
+  <div class="card" data-page-node-id="capPanelCard">
+    <div class="card-h" data-page-node-id="capPanelH">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="capIco"><path d="M3 3h18v4H3z" data-page-node-id="ca1"/><path d="M5 7v14h14V7" data-page-node-id="ca2"/><path d="M9 11h6" data-page-node-id="ca3"/></svg>
+      <h2 data-page-node-id="capTitle">额度维护（最高可下订数量）</h2>
+      <span class="spacer" data-page-node-id="capSp"></span>
+      <span class="hint" id="capHint" data-page-node-id="capHint"></span>
+    </div>
+    <div class="dash-filters" id="capFilters" data-page-node-id="capFilters">
+      <select id="capCat"></select>
+      <select id="capSup"></select>
+      <select id="capStatus">
+        <option value="all">全部</option>
+        <option value="set">仅看已设</option>
+        <option value="nocap">仅看未设</option>
+        <option value="local">仅看本地改过</option>
+      </select>
+      <input id="capSearch" type="search" placeholder="搜索商品名" />
+      <span class="hint" id="capPageInfo"></span>
+      <button id="capPrev" class="btn sm">上一页</button>
+      <button id="capNext" class="btn sm">下一页</button>
+      <button id="capExport" class="btn sm" style="margin-left:auto">导出补丁</button>
+      <button id="capClear" class="btn sm">清空本地覆盖</button>
+    </div>
+    <div class="tbl-wrap" data-page-node-id="capTblWrap"><table class="tbl" id="tblCap" data-page-node-id="tblCap"></table></div>
+  </div>
+
+  <!-- ③ 下定录入 -->
+  <div class="card" data-page-node-id="HsHyXJ6ehlGqkFlgZ9f8Vl">
+    <div class="card-h" data-page-node-id="bcH9SGbBPHCDkw1ulrG151">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="byasb7v96qMYjkxtzdmaGL"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" data-page-node-id="Wvb4RZr5oo9PqBdxyK88vn"/><line x1="3" y1="6" x2="21" y2="6" data-page-node-id="xiBRXvmA6LXhhUTykEVowY"/><path d="M16 10a4 4 0 0 1-8 0" data-page-node-id="bJtc3qLZ2t9O2ziOT5mJXs"/></svg>
+      <h2 data-page-node-id="qBlsD1DyqyN6kNCJoMDvoP">按供应商下定</h2>
+    </div>
+    <div class="form-row" data-page-node-id="6RocbbZDzRlHvrmVGzLB1O">
+      <div class="field" data-page-node-id="YFlHwr8R5LsyjQsnmAIQwd">
+        <label for="odSupplier" data-page-node-id="KID1IEUuTGjbsMwF4iYkTc">供应商</label>
+        <select id="odSupplier" onchange="onSupplierPick()" data-page-node-id="q2ORcQd1EQ86wuRTTqjqGB"></select>
+      </div>
+      <div class="field" data-page-node-id="zGn6u9GwJnrWlBS0lTzoSt">
+        <label for="odProduct" data-page-node-id="a3gO5thncaW6c3dGemC2M2">商品</label>
+        <select id="odProduct" onchange="onProductPick()" data-page-node-id="e6ghIQIWaAGTWCocUbPh5p"></select>
+      </div>
+    </div>
+    <div class="form-row" data-page-node-id="TY7j5uCTpgIWjel6BVpDB1">
+      <div class="field" data-page-node-id="BG835rwEbRDGbfDpmy3TKG">
+        <label for="odStore" data-page-node-id="ErSwtwI5nUdBR4RAmv7r9l">门店</label>
+        <select id="odStore" data-page-node-id="GxlFlt8TKWGHhWu9R6XuNf"></select>
+      </div>
+      <div class="field" data-page-node-id="0eWwhWdKnD2Oq1iWhzZd1c">
+        <label for="odQty" data-page-node-id="PyrNOMGOcc3WHaHEEvWZ4I">下订数量</label>
+        <input type="number" id="odQty" inputmode="numeric" placeholder="0" step="1" min="1" oninput="onQtyInput()" data-page-node-id="u2zlLQfpXNd8yke0WAHfVh">
+      </div>
+    </div>
+    <div class="field" data-page-node-id="tGNzzCxABwcvUtUpbsW0UF">
+      <label for="odDate" data-page-node-id="CXHeWWsI8higjRU7s9nc8t">下订日期</label>
+      <input type="date" id="odDate" data-page-node-id="5WZtJ6zY8sc2c4wU0aDGhX">
+    </div>
+    <div class="info-grid" id="odInfo" data-page-node-id="dtbPOFQzUQbmMGH09fxADH"></div>
+    <button class="btn primary block" id="odSubmit" onclick="submitOrder()" data-page-node-id="5pR8jIEoGHxbioIzKKl5T3">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="kAx24T8rWRIgwAphBPLEnR"><line x1="22" y1="2" x2="11" y2="13" data-page-node-id="olGiygt7zcZnT8gGd7a0tP"/><polygon points="22 2 15 22 11 13 2 9 22 2" data-page-node-id="9Zqwq5gKrIzurITJ0iZ0Do"/></svg>
+      <span id="odSubmitTxt" data-page-node-id="jfLBwIYtlTf9VFqHJPvlbM">提交下定</span>
+    </button>
+  </div>
+
+  <!-- ④ 下定明细 -->
+  <div class="card" data-page-node-id="p3kJTFNJtgw41CFn1G4HID">
+    <div class="card-h" data-page-node-id="QOaiTo47jPaNBnpPvJTCoF">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="SlesnbD2QxmTojA4QJWk29"><line x1="8" y1="6" x2="21" y2="6" data-page-node-id="EWkP5fiTTWhmHx4TY5GfBJ"/><line x1="8" y1="12" x2="21" y2="12" data-page-node-id="o6EhfH3NmkGc1PQKJRJBCe"/><line x1="8" y1="18" x2="21" y2="18" data-page-node-id="0BhHxqwENX5mMBNxf2WsrR"/><line x1="3" y1="6" x2="3.01" y2="6" data-page-node-id="yUO7nXW8fd6RwLiwi3YUtw"/><line x1="3" y1="12" x2="3.01" y2="12" data-page-node-id="EhZCqr31GOSYt0SUqmuDZF"/><line x1="3" y1="18" x2="3.01" y2="18" data-page-node-id="iof3wPAIQvIrCAnEEFoQF0"/></svg>
+      <h2 data-page-node-id="FSpnn7cMoCkJxfMbhdesNw">下定明细（哪天 · 哪个站 · 订了多少）</h2>
+      <span class="spacer" data-page-node-id="03qoB4da2DgNRSr8YCRkFv"></span>
+      <span class="hint" id="detHint" data-page-node-id="oIFU2EAwhJqg8SyBS2udvx"></span>
+    </div>
+    <div class="filter-tip">选「供应商 + 订货日期」→ 下方横幅直接告诉你那天那家订了多少笔。点「按订货日期汇总」里的一行可快速切换日期。</div>
+    <div class="filters">
+      <select id="fSupplier" onchange="refreshAll()"></select>
+      <input type="date" id="fDate" onchange="refreshAll()" title="订货日期">
+      <select id="fStore" onchange="refreshAll()"></select>
+      <select id="fProduct" onchange="refreshAll()"></select>
+      <select id="fDays" onchange="refreshAll()">
+        <option value="0">全部时间</option>
+        <option value="7">近 7 天</option>
+        <option value="30">近 30 天</option>
+        <option value="90">近 90 天</option>
+      </select>
+    </div>
+    <div id="detBanner"></div>
+    <div class="sum-line" id="detSum"></div>
+    <div class="chart-box">
+      <div class="chart-title">按订货日期汇总（点一行即筛选当天）</div>
+      <div class="tbl-wrap"><table class="tbl" id="tblByDate"></table></div>
+    </div>
+    <div class="chart-title" style="margin-top:14px">订单明细</div>
+    <div class="tbl-wrap"><table class="tbl" id="tblOrders"></table></div>
+  </div>
+
+  <footer data-page-node-id="yB3ZSBohfeddG3mHC3oaxF">
+    数据源：金山在线表格《供应商订货台账》 → GitHub Actions → data.json<br data-page-node-id="OLaHTae59yL75PGE62S9mf">
+    <span id="footMeta" data-page-node-id="QXeEUOf8RDwTv2Pa2rJTwB"></span>
+  </footer>
+</div>
+
+<!-- 设置 -->
+<div class="mask" id="setMask" onclick="if(event.target===this)closeSettings()" data-page-node-id="KBFRdH4LOsSI5wcH1YcIJ0">
+  <div class="modal" data-page-node-id="pCkXfWPJZ4FxIh5JL8OkEo">
+    <h3 data-page-node-id="D7SHl21ZHToSAi2Z9DfuFY">GitHub 同步设置</h3>
+    <div class="field" data-page-node-id="1iet1bKyhn4b5jED7qeAwm"><label for="cfOwner" data-page-node-id="ksfVkQigQvrEBXXAH5SjvL">仓库所有者（GitHub 用户名）</label><input id="cfOwner" placeholder="例如 zhangsan" autocomplete="off" data-page-node-id="ue0px83tM3LX4zHQJFlszu"></div>
+    <div class="field" data-page-node-id="OrLF2E3a2TEBerLEJfWBHL"><label for="cfRepo" data-page-node-id="TWfFUfnBdh64J3rLLwNmi1">仓库名</label><input id="cfRepo" placeholder="例如 order-ledger" autocomplete="off" data-page-node-id="D98mTOiJVbZcqLDimGCqps"></div>
+    <div class="field" data-page-node-id="k7Giq2qF1bFPASm0H3pxuM"><label for="cfPat" data-page-node-id="M2jOc5SDA4IWni4hU5BYtV">Fine-grained PAT（只需 Actions: 读写）</label><input id="cfPat" type="password" placeholder="github_pat_..." autocomplete="off" data-page-node-id="e6fYyqwNlaQT5BPxC0R49I"></div>
+    <div class="field" data-page-node-id="uoowFrHSUZIaPhOfNAB8Y1"><label for="cfToken" data-page-node-id="apUHfpVtTK7l7rg6XWgiQR">APP_TOKEN（与仓库 Secrets 一致）</label><input id="cfToken" type="password" placeholder="自定义口令" autocomplete="off" data-page-node-id="asBfr6BjBP7OBl1I72zaLC"></div>
+    <div class="note" data-page-node-id="FtwCHzVFNrUy0yEp1EA7Vz">PAT 只存本机浏览器，不会上传。建议用 <b data-page-node-id="ikQY0e7p5I2E5ToRtsGwIh">fine-grained PAT</b>，只勾目标仓库的 <b data-page-node-id="L0hlWVwnHAf0lAgBsBnqLK">Actions: 读写</b>，不要给 Contents 权限 —— 令牌即使泄露，对方也只能触发同步，改不了数据。</div>
+    <div class="modal-actions" data-page-node-id="qWAnci6PRQApylUqzklH1j">
+      <button class="btn" onclick="closeSettings()" data-page-node-id="YrRwxxzYo8pCWGSOQWO9wt">取消</button>
+      <button class="btn primary" onclick="saveSettings()" data-page-node-id="yGIw1dTt9zfaToZ2PxduYQ">保存</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" data-page-node-id="VsEk5oJ6B2ggQcBowHT1mL"></div>
+
+<script>
+/* ==========================================================
+ * 数据层
+ * ========================================================== */
+var DATA_URL = './data.json';
+var LS_KEY     = 'wb_supplier_order_v1';
+var LS_CFG     = 'wb_order_cfg';
+var LS_PENDING = 'wb_order_pending_v1';
+
+var STORES = ['秦岭东','秦岭西','宁陕东','宁陕西','洋县东','洋县西','汉中东','汉中西','富平东','富平西',
+  '韩城东','韩城西','富县东','富县西','华山南','华山北','南沙南','南沙北','白河南','白河北',
+  '玉华宫东','玉华宫西','照金南','照金北','旬阳南','旬阳北','略阳东','略阳西','天汉水城东','天汉水城西'];
+
+// 商品余额表筛选 + 分页状态（UI 态，非业务数据）
+var dashState = { sup: '', cat: '', status: 'all', q: '', page: 1, size: 20 };
+
+// 商品细类（八类：润滑油 / 玻璃水 / 尿素 / 燃油宝 / 红牛 / 东鹏 / 冰淇淋 / 便利店零食饮料）
+// 一家供应商会跨多个细类（如河南心连心既供玻璃水又供尿素，杨凌酷凌既供红牛/东鹏/冰淇淋又供其它零食），
+// 故细类按「商品名」逐款判定，而非按供应商归组。
+var CATS = ['润滑油', '玻璃水', '尿素', '燃油宝', '红牛', '东鹏', '冰淇淋', '便利店零食饮料'];
+// 按商品名关键词判定细类（带供应商兜底，保证无关键词时也落入合理大类）
+function classifyCat(p) {
+  var s = (p.supplier || '') + '', n = (p.name != null ? p.name : (p.product != null ? p.product : '')) + '';
+  if (n.indexOf('尿素') >= 0) return '尿素';
+  if (n.indexOf('玻璃水') >= 0) return '玻璃水';
+  if (n.indexOf('红牛') >= 0) return '红牛';
+  if (n.indexOf('东鹏') >= 0) return '东鹏';
+  var ICE = ['冰工厂', '冰片', '冰棍', '老冰棍', '冰激凌', '冰淇淋', '雪糕', '雪棒', '脆筒', '千层雪', '绿舌头', '火炬', '小布丁', '小雪生', '巧乐兹', '梦龙', '和路雪', '奥雪', '宏宝莱', '天冰', '甄稀', '三色心香', '奶糕', '苦咖啡', '心情', '奶昔雪糕', '随变', '大随变', '绿色心情', '玉米棒', '哈蜜瓜脆筒', '姜撞奶脆筒', '流心', '奶提子'];
+  for (var i = 0; i < ICE.length; i++) if (n.indexOf(ICE[i]) >= 0) return '冰淇淋';
+  if (n.indexOf('机油') >= 0 || n.indexOf('润滑油') >= 0) return '润滑油';
+  if (n.indexOf('燃油宝') >= 0) return '燃油宝';
+  if (s === '天朗尚品') return '润滑油';
+  if (s === '靖其贸易') return '燃油宝';
+  if (s === '山东新蓝') return '尿素';
+  if (s === '河南心连心') return '尿素';
+  return '便利店零食饮料';
+}
+
+// 商品档案（与金山《供应商订货台账》「商品档案」表一致；线上以该表为准）
+var PRODUCTS = [
+  ['河南心连心','心连心','','',14.8,0,0,''],
+  ['河南心连心','玻璃水-20#','2L','桶',3.76,0,0,''],
+  ['河南心连心','玻璃水0#','2L','桶',2.26,0,0,''],
+  ['靖其贸易','车仆三元催化清洗剂(尾气净）','300ML','瓶',40.0,0,0,''],
+  ['靖其贸易','车仆玻璃净油膜清洗剂','450ML','瓶',15.0,0,0,''],
+  ['靖其贸易','车仆金罐燃油宝','60ML','瓶',14.0,0,0,''],
+  ['靖其贸易','车仆金罐燃油宝','120ML','瓶',20.0,0,0,''],
+  ['靖其贸易','车仆防冻液2公斤红色-35度','2KG','桶',23.0,0,0,''],
+  ['靖其贸易','车仆防冻液2公斤绿色-35度','2KG','桶',23.0,0,0,''],
+  ['靖其贸易','车仆防冻液4公斤红色-35度','4KG','桶',45.0,0,0,''],
+  ['靖其贸易','车仆防冻液4公斤绿色-35度','4KG','桶',45.0,0,0,''],
+  ['靖其贸易','车仆防凝剂','250ML','瓶',39.0,0,0,''],
+  ['天朗尚品','壳牌劲霸 R3 15W40','4L','桶',92.66,0,0,'进价多变,202512:84.46/202601:84.46/202602:84.46/202603:84.46/202604:84.46/202605:84.46/202606:92.66/202607:92.66/202608:92.66'],
+  ['天朗尚品','壳牌劲霸 R3 15W50','4L','桶',92.66,0,0,'进价多变,202512:84.46/202601:84.46/202602:84.46/202603:84.46/202604:84.46/202605:84.46/202606:92.66/202607:92.66/202608:92.66'],
+  ['天朗尚品','壳牌劲霸 R3 20W50','4L','桶',92.66,0,0,'进价多变,202512:84.46/202601:84.46/202602:84.46/202603:84.46/202604:84.46/202605:84.46/202606:92.66/202607:92.66/202608:92.66'],
+  ['天朗尚品','壳牌劲霸 R4 15W40','4L','桶',93.79,0,0,'进价多变,202512:87.55/202601:87.55/202602:87.55/202603:87.55/202604:87.55/202605:87.55/202606:93.79/202607:93.79/202608:93.79'],
+  ['天朗尚品','壳牌劲霸 R4 15W50','4L','桶',93.79,0,0,'进价多变,202512:87.55/202601:87.55/202602:87.55/202603:87.55/202604:87.55/202605:87.55/202606:93.79/202607:93.79/202608:93.79'],
+  ['天朗尚品','壳牌劲霸 R4 20W50','4L','桶',93.79,0,0,'进价多变,202512:87.55/202601:87.55/202602:87.55/202603:87.55/202604:87.55/202605:87.55/202606:93.79/202607:93.79/202608:93.79'],
+  ['天朗尚品','壳牌喜力HX5 +10W40','4L','桶',119.78,0,0,'进价多变,202512:109.18/202601:109.18/202602:109.18/202603:109.18/202604:109.18/202605:109.18/202606:119.78/202607:119.78/202608:119.78'],
+  ['天朗尚品','壳牌喜力HX5 +5W30','4L','桶',119.78,0,0,'进价多变,202512:109.18/202601:109.18/202602:109.18/202603:109.18/202604:109.18/202605:109.18/202606:119.78/202607:119.78/202608:119.78'],
+  ['天朗尚品','壳牌喜力HX6+ 5W30','1L','桶',47.46,0,0,'进价多变,202512:44.29/202601:44.29/202602:44.29/202603:44.29/202604:44.29/202605:44.29/202606:47.46/202607:47.46/202608:47.46'],
+  ['天朗尚品','壳牌喜力HX6+ 5W40','1L','桶',47.46,0,0,'进价多变,202512:44.29/202601:44.29/202602:44.29/202603:44.29/202604:44.29/202605:44.29/202606:47.46/202607:47.46/202608:47.46'],
+  ['天朗尚品','壳牌喜力HX7+ 5W30','1L','桶',56.5,0,0,'进价多变,202512:48.41/202601:48.41/202602:48.41/202603:48.41/202604:48.41/202605:48.41/202606:56.5/202607:56.5/202608:56.5'],
+  ['天朗尚品','壳牌喜力HX7+ 5W40','1L','桶',56.5,0,0,'进价多变,202512:48.41/202601:48.41/202602:48.41/202603:48.41/202604:48.41/202605:48.41/202606:56.5/202607:56.5/202608:56.5'],
+  ['天朗尚品','壳牌喜力HX8 0W30','1L','桶',62.15,0,0,'进价多变,202512:53.56/202601:53.56/202602:53.56/202603:53.56/202604:53.56/202605:53.56/202606:62.15/202607:62.15/202608:62.15'],
+  ['天朗尚品','壳牌喜力HX8 0W40','1L','桶',62.15,0,0,'进价多变,202512:53.56/202601:53.56/202602:53.56/202603:53.56/202604:53.56/202605:53.56/202606:62.15/202607:62.15/202608:62.15'],
+  ['天朗尚品','壳牌超凡喜力 5W30','1L','桶',64.41,0,0,'进价多变,202512:53.56/202601:53.56/202602:53.56/202603:53.56/202604:53.56/202605:53.56/202606:64.41/202607:64.41/202608:64.41'],
+  ['天朗尚品','壳牌超凡喜力 5W40','1L','桶',64.41,0,0,'进价多变,202604:53.56/202605:53.56/202606:64.41/202607:64.41/202608:64.41'],
+  ['天朗尚品','壳牌防冻液-红色 -45℃','4KG','桶',45.2,0,0,'进价多变,202512:38.11/202601:38.11/202602:38.11/202603:38.11/202604:38.11/202605:38.11/202606:45.2/202607:45.2/202608:45.2'],
+  ['天朗尚品','壳牌防冻液-绿色 -45℃','4KG','桶',45.2,0,0,'进价多变,202512:38.11/202601:38.11/202602:38.11/202603:38.11/202604:38.11/202605:38.11/202606:45.2/202607:45.2/202608:45.2'],
+  ['天朗尚品','车仆柴油防凝剂','250ml','瓶',32.96,0,0,''],
+  ['山东新蓝','尚纯（山东新蓝）','','',15.18,0,0,''],
+  ['山东新蓝','山东新蓝','','',15.8,0,0,''],
+  ['天朗','伊利 冰工厂-果纷呈  92g','1*30','件',2.07,0,0,''],
+  ['天朗','伊利 奶皮子酸奶味70g','1*40','件',2.23,0,0,''],
+  ['天朗','伊利三色心香','1*30盒','件',2.83,0,0,''],
+  ['天朗','伊利冰工厂冰片蜜桃（70g）','1*45','件',1.09,0,0,''],
+  ['天朗','伊利冰工厂山楂爽棒冰（70g）','1*40','件',1.3,0,0,''],
+  ['天朗','伊利冰工厂清爽蓝莓（70g）','1*45','件',1.09,0,0,''],
+  ['天朗','伊利冰工厂炫白桃（70g）','1*40支','件',1.84,0,0,''],
+  ['天朗','伊利冰工厂炫菠萝（70g）','1*40支','件',1.84,0,0,''],
+  ['天朗','伊利哈蜜瓜脆筒（73g）','1*16支','件',3.18,0,0,''],
+  ['天朗','伊利奶提子','1*40支','件',1.5,0,0,''],
+  ['天朗','伊利奶糕（70克）','1*4盒=40支','件',1.92,0,0,''],
+  ['天朗','伊利姜撞奶脆筒（85g）','1*16支','件',4.1,0,0,''],
+  ['天朗','伊利小布丁','1*50支','件',0.79,0,0,''],
+  ['天朗','伊利小雪生','1*40支','件',2.26,0,0,''],
+  ['天朗','伊利巧乐兹四个圈','1*40支','件',2.43,0,0,''],
+  ['天朗','伊利巧乐兹巧丝绒','1*35支','件',3.16,0,0,''],
+  ['天朗','伊利巧乐兹巧恋果','1*40支','件',2.99,0,0,''],
+  ['天朗','伊利巧乐兹巧脆棒','1*40支','件',2.99,0,0,''],
+  ['天朗','伊利心情','1*40支','件',1.5,0,0,''],
+  ['天朗','伊利甄稀白桃乌龙杯（90g）','1*16杯','件',6.0,0,0,''],
+  ['天朗','伊利甄稀葡萄满满杯（90g）','1*16杯','件',6.0,0,0,''],
+  ['天朗','伊利甄稀青柑蜜瓜杯','1*16杯','件',6.0,0,0,''],
+  ['天朗','伊利甄稀青梅流心','1*35支','件',3.71,0,0,''],
+  ['天朗','伊利甄稀香草杯（90g）','1*16杯','件',6.71,0,0,''],
+  ['天朗','伊利精火炬雪糕（80g）','1*25支','件',2.03,0,0,''],
+  ['天朗','伊利老冰棍','1*50支','件',0.81,0,0,''],
+  ['天朗','伊利苦咖啡','1*40支','件',1.95,0,0,''],
+  ['天朗','伊利茉莉荔枝流心','1*35支','件',3.71,0,0,''],
+  ['天朗','和路雪  千层雪棒巧克力口味66g','1*18','件',4.39,0,0,''],
+  ['天朗','和路雪  千层雪棒香草口味62g','1*18','件',4.39,0,0,''],
+  ['天朗','和路雪-绿舌头苹果口味 54g','1*36','件',2.04,0,0,''],
+  ['天朗','和路雪千层雪棒抹茶口味65g','1*18','件',4.39,0,0,''],
+  ['天朗','天冰【嘿！小白】','1*50','件',1.02,0,0,''],
+  ['天朗','奥雪 椰子灰','1*32','件',2.68,0,0,''],
+  ['天朗','宏宝莱 千层榴莲雪糕','1*30','件',2.64,0,0,''],
+  ['天朗','小叮当 100g','1*24','件',2.35,0,0,''],
+  ['天朗','巧乐兹巧克力香草口味脆筒冰激凌（85g）','1*16','件',4.1,0,0,''],
+  ['天朗','巧乐兹焦糖烤栗口味脆筒冰淇淋（85g）','1*16','件',4.1,0,0,''],
+  ['天朗','梦龙  -太妃榛子 味  64g','1*21','件',7.53,0,0,''],
+  ['天朗','梦龙 -香草口味 64g','1*21','件',7.53,0,0,''],
+  ['天朗','梦龙- 浓郁开心果口味 64g','1*21','件',7.53,0,0,''],
+  ['天朗','甄稀杯 -草莓多多 味     90g','1*16杯','件',6.0,0,0,''],
+  ['天朗','甄稀杯-海盐焦糖华夫脆  90g','1*16杯','件',6.0,0,0,''],
+  ['天朗','甄稀袋 挚恋草莓味 70g','1*30支','件',3.39,0,0,''],
+  ['天朗','甄稀袋-桑葚莓莓乌龙','1*35支','件',3.71,0,0,''],
+  ['天朗','甄稀袋-蓝莓芝芝黑巧','1*35支','件',3.71,0,0,''],
+  ['天朗','蒙牛 大随变 香草味 75g','1*45','件',2.76,0,0,''],
+  ['天朗','蒙牛 绿色心情  炼乳盒 68g','1*30盒','件',2.64,0,0,''],
+  ['天朗','蒙牛-随变 (咖啡味)  75g','1*45','件',2.76,0,0,''],
+  ['天朗','蒙牛玉米棒65g4','1*40','件',1.41,0,0,''],
+  ['天朗','速力奥发酵人参营养饮料(含气)（天朗）','1*12','瓶',6.5,0,0,''],
+  ['天朗','速力奥发酵人参营养饮料(能量风味)（天朗）','1*12','瓶',6.5,0,0,''],
+  ['天朗','雀巢-8次方-甜橙乳酸菌','1*18','件',7.22,0,0,''],
+  ['天朗','雀巢-8次方-青提味','1*18','件',7.22,0,0,''],
+  ['天朗','雀巢-8次方-香草巧克力','1*18','件',7.22,0,0,''],
+  ['天天','东鹏特饮1*24瓶500ML（天天）【进价3.67】','1*24','瓶',3.67,0,0,''],
+  ['天天','东鹏特饮1*24瓶500ML（天天）【进价3.92】','1*24','瓶',3.92,0,0,''],
+  ['天天','红牛维生素功能饮料（天天）','1*24','瓶',4.78,0,0,''],
+  ['天天','红牛维生素功能饮料（杨凌酷凌）','1*24','瓶',4.62,0,0,''],
+  ['鑫湘缘','20元枸杞槟榔/包','','包',12.0,0,0,''],
+  ['鑫湘缘','30元枸杞槟榔/包','','包',18.0,0,0,''],
+  ['鑫湘缘','50元枸杞槟榔/包','','包',32.0,0,0,''],
+  ['杨凌酷凌','30克爆浆熊仔饼巧克力1*10包*15中袋','1*10包','袋',1.6,0,0,''],
+  ['杨凌酷凌','40g 柠檬味薄荷含片','','袋',4.5,0,0,''],
+  ['杨凌酷凌','40g 薄荷味 薄荷含片','','袋',4.5,0,0,''],
+  ['杨凌酷凌','40g草莓味 薄荷含片','','袋',4.5,0,0,''],
+  ['杨凌酷凌','40g西瓜味薄荷含片','','袋',4.5,0,0,''],
+  ['杨凌酷凌','68g笑喔喔柠檬维c软糖','','袋',4.5,0,0,''],
+  ['杨凌酷凌','68g笑喔喔苹果维c软糖','','袋',4.5,0,0,''],
+  ['杨凌酷凌','三色心香(95克*27杯)','','袋',2.7,0,0,''],
+  ['杨凌酷凌','东鹏特饮1*24瓶500ML','','袋',4.17,0,0,''],
+  ['杨凌酷凌','东鹏特饮促销','','袋',4.17,0,0,''],
+  ['杨凌酷凌','东鹏特饮促销1','','袋',4.17,0,0,''],
+  ['杨凌酷凌','伊利冰工厂冰片蜜桃70g','','支',1.0,0,0,''],
+  ['杨凌酷凌','伊利冰工厂清爽蓝莓','','支',1.0,0,0,''],
+  ['杨凌酷凌','伊利奶提子','','袋',1.5,0,0,''],
+  ['杨凌酷凌','伊利巧乐兹巧丝绒35支','','支',3.0,0,0,''],
+  ['杨凌酷凌','伊利心情','','袋',1.5,0,0,''],
+  ['杨凌酷凌','伊利牧场香草味奶昔雪糕（90克*16杯）','','支',2.85,0,0,''],
+  ['杨凌酷凌','伊利牧场香草味奶昔雪糕（90克*16杯）1','','支',2.85,0,0,''],
+  ['杨凌酷凌','伊利精火炬雪糕（80克*25支）','80克*25支','支',2.1,0,0,''],
+  ['杨凌酷凌','伊利红枣牛奶味雪糕65g*35支','65g*35支','支',2.0,0,0,''],
+  ['杨凌酷凌','卤师叔 30克鸭掌酱香味1*20*8中袋','','袋',2.45,0,0,''],
+  ['杨凌酷凌','卤师叔 30克鸭掌香辣味1*20*8中袋','','袋',2.45,0,0,''],
+  ['杨凌酷凌','巧乐兹6重巧巧冰淇淋(70克*35支)','70克*35支','支',4.5,0,0,''],
+  ['杨凌酷凌','巧乐兹四个圈蛋奶巧克力味雪糕（75克*30支）','75克*30支','支',2.25,0,0,''],
+  ['杨凌酷凌','巧乐兹巧榛橘冰淇凌70g*35支','70g*35支','支',4.5,0,0,''],
+  ['杨凌酷凌','巧乐兹焦糖烤栗口味脆筒冰淇淋（85克)','','支',4.0,0,0,''],
+  ['杨凌酷凌','巧乐兹熔岩巧巧冰淇淋（70克*35支）','70克*35支','支',4.25,0,0,''],
+  ['杨凌酷凌','巧乐兹红榴巧巧冰淇淋（70克*35支）','70克*35支','支',4.25,0,0,''],
+  ['杨凌酷凌','巧乐兹经典巧恋果冰淇淋（75克×40支）','75克×40支','支',2.66,0,0,''],
+  ['杨凌酷凌','巧乐兹经典巧脆棒冰淇淋（75克×40支）','75克×40支','支',2.66,0,0,''],
+  ['杨凌酷凌','巧乐兹经典香奶棒冰淇淋（75克*40支）','75克*40支','支',3.0,0,0,''],
+  ['杨凌酷凌','巧乐兹绮炫(黑加仑味巧克力脆层+开心果口味)冰淇淋（65克*20支）','65克*20支','支',5.28,0,0,''],
+  ['杨凌酷凌','巧乐兹绮炫【水蜜桃】65克*20','','支',5.28,0,0,''],
+  ['杨凌酷凌','巧乐兹绮炫比利时65克*20支','65克*20支','支',5.28,0,0,''],
+  ['杨凌酷凌','巧乐兹香草巧克力口味脆筒冰淇淋（73克*16支）','73克*16支','支',2.69,0,0,''],
+  ['杨凌酷凌','巧乐兹香草巧克力口味脆筒冰淇淋（73克*16支）1','73克*16支','支',2.69,0,0,''],
+  ['杨凌酷凌','巧乐兹（姜撞奶+蜜桃乌龙）脆筒冰淇凌85*16支g','','支',4.25,0,0,''],
+  ['杨凌酷凌','玉米香雪糕65克*40支','65克*40支','支',1.4,0,0,''],
+  ['杨凌酷凌','甄稀层层趣巧克力牛奶冰淇淋(90克*16杯)','','支',5.5,0,0,''],
+  ['杨凌酷凌','甄稀挚恋草莓70克*30支','70克*30支','支',2.9,0,0,''],
+  ['杨凌酷凌','甄稀满满葡萄味90克*16','','支',5.7,0,0,''],
+  ['杨凌酷凌','甄稀白桃乌龙冰淇凌90g*16支','90g*16支','支',5.7,0,0,''],
+  ['杨凌酷凌','甄稀醇真原味冰淇淋（70克*30支）','70克*30支','支',2.9,0,0,''],
+  ['杨凌酷凌','笑喔喔什锦味','','袋',4.5,0,0,''],
+  ['杨凌酷凌','笑喔喔水蜜桃味','','袋',4.5,0,0,''],
+  ['杨凌酷凌','笑喔喔葡萄味','','袋',4.5,0,0,''],
+  ['杨凌酷凌','绮炫紫梦黑巧/巴旦木冰淇淋（67克*20支）','67克*20支','支',7.0,0,0,''],
+  ['杨凌酷凌','老冰棍棒冰（70克*50支）','70克*50支','支',0.8,0,0,''],
+  ['杨凌酷凌','苦咖啡雪糕（70克*35支）','70克*35支','支',2.0,0,0,''],
+  ['杨凌酷凌','趣趣脆 30克 小馒头蛋黄味1*10*15中袋','','袋',1.6,0,0,''],
+  ['杨凌酷凌','趣趣脆 35克乳酪蛋烧芝士味','','袋',1.6,0,0,''],
+  ['杨凌酷凌','香雪儿牛奶巧克力口味雪糕（145克*12杯）','','支',3.0,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 20克每日坚果B套餐1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 20克每日坚果综合型1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 20克香蕉脆片1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 25克坚果多水果脆麦1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 25克奇亚籽水果脆麦1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克可乐瓶橡皮糖1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克奶片糖1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克奶酪糖1*10*14袋','1*10*14袋','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克情人梅1*10*14袋','1*10*14袋','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克果C卷软糖1*10*14','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克石头糖1*10*14袋','1*10*14袋','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克维C乌龟软糖1*10*14袋','1*10*14袋','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克维C西瓜软糖1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克西瓜泡泡糖1*10*14袋','1*10*14袋','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 40克酸砂彩虫橡皮糖1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 45克彩豆软糖1*10*14袋','1*10*14袋','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 45克椰子糕1*10*14袋','1*10*14袋','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 45克瑞士糖1*10*14袋','1*10*14袋','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 45克维生素C软糖1*10*14','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 45克脆脆梅1*10*14中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 45克芒果糕1*10*14袋','1*10*14袋','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 45克车厘子李果1*10*14','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享包 妙酸梅1*10*14包','1*10*14包','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 20克牛肉粒（沙爹味）1*10*20袋','1*10*20袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 20克牛肉粒（香辣味）1*10*20袋','1*10*20袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 30克鱼皮（烧烤味）1*10*20袋','1*10*20袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 30克鱼皮（香辣味）1*10*20','','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 40克兰花豆（牛肉味）1*10*15袋','1*10*15袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 40克虾条豆果1*10*15袋','1*10*15袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 40克雪糕杯棉花糖1*10*12袋','1*10*12袋','支',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 45克薯条（烧烤味）1*10*12','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 45克薯条（番茄味）1*10*12','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 45克薯条（香辣味）1*10*12中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 45克软萌卷棉花糖1*10*12','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 50克拉面丸子香辣味1*10*12中袋','','袋',1.5,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 65克蒟蒻果冻百香果味1*10*14袋','1*10*14袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 65克蒟蒻果冻芒果味1*10*14袋','1*10*14袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 65克蒟蒻果冻草莓味1*10*14袋','1*10*14袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 65克蒟蒻果冻荔枝味1*10*14袋蒟蒻果冻 荔枝味1*10*14袋','1*10*14袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 65克蒟蒻果冻葡萄味1*10*14袋','1*10*14袋','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克 分享装 65克蒟蒻果冻蜜桃味1*10*14','','袋',1.6,0,0,''],
+  ['杨凌酷凌','马赛克分享包果汁软糖菠萝味','','袋',1.5,0,0,''],
+];
+
+var data = { products: [], orders: [], productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '' };
+var cfg  = { owner: '', repo: '', pat: '', appToken: '' };
+var pending = [];
+var syncState = 'idle';
+
+/* ---------- 工具 ---------- */
+function pad2(n) { return String(n).padStart(2, '0'); }
+function todayStr() { var d = new Date(); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+function esc(s) { return String(s === undefined || s === null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function n2(v) { return Math.round(Number(v || 0) * 100) / 100; }
+function nf(n) { return Number(n || 0).toLocaleString('zh-CN'); }
+function money(n) { return '¥' + Number(n || 0).toLocaleString('zh-CN', { minimumFractionDigits: 0, maximumFractionDigits: 0 }); }
+function addDays(iso, n) {
+  var p = String(iso).split('-'); if (p.length < 3) return '';
+  var d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+  if (isNaN(d.getTime())) return '';
+  d.setDate(d.getDate() + Number(n || 0));
+  return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+}
+function daysLeft(e) {
+  if (!e) return null;
+  var p = String(e).split('-'); if (p.length < 3) return null;
+  var a = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+  var t = new Date(); var b = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+  if (isNaN(a.getTime())) return null;
+  return Math.round((a - b) / 86400000);
+}
+function statusOf(d) { if (d === null) return '正常'; if (d < 0) return '已过期'; if (d <= 10) return '紧急'; if (d <= 30) return '临期'; return '正常'; }
+function sColor(st) { return (st === '已过期' || st === '紧急') ? 'var(--red)' : (st === '临期' ? 'var(--orange)' : 'var(--green)'); }
+
+/* ---------- 计算层：无论数据来自金山还是本地，都重算一遍 ---------- */
+function computeAll() {
+  var byP = {};
+  data.orders.forEach(function (o) {
+    var k = o.supplier + '|' + o.product;
+    if (!byP[k]) byP[k] = { qty: 0, amt: 0, count: 0 };
+    byP[k].qty += Number(o.qty || 0);
+    byP[k].amt += Number(o.amount || 0);
+    byP[k].count++;
+  });
+  data.productBal = data.products.map(function (p) {
+    var u = byP[p.supplier + '|' + p.name] || { qty: 0, amt: 0, count: 0 };
+    var bal = p.capQty - u.qty;
+    return {
+      supplier: p.supplier, product: p.name, spec: p.spec, unit: p.unit,
+      price: p.price, shelf: p.shelf, capQty: effCap(p), cat: classifyCat(p),
+      usedQty: u.qty, balQty: bal,
+      usedAmt: n2(u.amt), capAmt: n2(p.capQty * p.price),
+      orderCount: u.count,
+      pct: p.capQty > 0 ? Math.round(u.qty / p.capQty * 1000) / 10 : 0,
+      full: p.capQty > 0 && u.qty >= p.capQty,
+      low: p.capQty > 0 && bal > 0 && bal <= p.capQty * 0.1
+    };
+  });
+  var sups = suppliers();
+  data.supplierBal = sups.map(function (s) {
+    var ps = data.productBal.filter(function (x) { return x.supplier === s; });
+    var cap = 0, used = 0, cnt = 0;
+    ps.forEach(function (x) { cap += x.capAmt; used += x.usedAmt; cnt += x.orderCount; });
+    var last = '';
+    data.orders.forEach(function (o) { if (o.supplier === s && o.date > last) last = o.date; });
+    return {
+      supplier: s, capAmt: n2(cap), usedAmt: n2(used), balAmt: n2(cap - used),
+      pct: cap > 0 ? Math.round(used / cap * 1000) / 10 : 0,
+      orderCount: cnt, productCount: ps.length, lastDate: last,
+      full: ps.length > 0 && ps.every(function (x) { return x.full; }),
+      low: ps.some(function (x) { return x.low; })
+    };
+  });
+  data.expiring = data.orders.filter(function (o) { return o.expireDate; })
+    .map(function (o) { var d = daysLeft(o.expireDate); return { supplier: o.supplier, store: o.store, product: o.product, unit: o.unit, qty: o.qty, expireDate: o.expireDate, days: d, status: statusOf(d) }; })
+    .filter(function (o) { return o.days !== null && o.days <= 30; })
+    .sort(function (a, b) { return a.days - b.days; });
+}
+function suppliers() {
+  var s = [];
+  data.products.forEach(function (p) { if (s.indexOf(p.supplier) < 0) s.push(p.supplier); });
+  return s;
+}
+function productsOf(sup) { return data.products.filter(function (p) { return p.supplier === sup; }); }
+function prodOf(sup, name) {
+  for (var i = 0; i < data.products.length; i++) if (data.products[i].supplier === sup && data.products[i].name === name) return data.products[i];
+  return null;
+}
+function balOf(sup, name) {
+  for (var i = 0; i < data.productBal.length; i++) if (data.productBal[i].supplier === sup && data.productBal[i].product === name) return data.productBal[i];
+  return null;
+}
+
+/* ---------- 存储 ---------- */
+function saveLocal() { try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch (e) {} }
+function loadLocal() {
+  try { var s = localStorage.getItem(LS_KEY); if (!s) return false;
+    var o = JSON.parse(s); if (o && o.products) { data = normalize(o); return true; } } catch (e) {}
+  return false;
+}
+function saveCfg() { try { localStorage.setItem(LS_CFG, JSON.stringify(cfg)); } catch (e) {} }
+function loadCfg() { try { var s = localStorage.getItem(LS_CFG); if (s) cfg = Object.assign(cfg, JSON.parse(s)); } catch (e) {} }
+function savePending() { try { localStorage.setItem(LS_PENDING, JSON.stringify(pending)); } catch (e) {} }
+function loadPending() { try { var s = localStorage.getItem(LS_PENDING); pending = s ? (JSON.parse(s) || []) : []; } catch (e) { pending = []; } }
+
+function normalize(raw) {
+  var o = raw || {};
+  o.products = Array.isArray(o.products) ? o.products : [];
+  o.orders = Array.isArray(o.orders) ? o.orders : [];
+  o.products = o.products.map(function (p) {
+    return { supplier: String(p.supplier || ''), name: String(p.name || p.product || ''), spec: String(p.spec || ''),
+      unit: String(p.unit || ''), price: Number(p.price || 0), shelf: Math.round(Number(p.shelf || 0)),
+      capQty: Number(p.capQty || 0), note: String(p.note || '') };
+  });
+  o.orders = o.orders.map(function (r) {
+    var qty = Number(r.qty || 0), price = Number(r.price || 0);
+    return { supplier: String(r.supplier || ''), date: r.date || '', store: String(r.store || ''),
+      product: String(r.product || ''), spec: String(r.spec || ''), unit: String(r.unit || ''),
+      qty: qty, price: price, amount: Number(r.amount || (Math.round(qty * price * 100) / 100)),
+      expireDate: r.expireDate || '', note: String(r.note || '') };
+  });
+  return o;
+}
+
+/* ---------- 额度本地覆盖层（网页临时改额度，导出补丁回贴台账后由 _gen 重新生成 data.json 生效） ---------- */
+var LS_CAP = 'wb_order_cap_v1';
+var capOverrides = {};   // { '供应商|商品': 数字 }，优先级高于 data.json 里的 capQty
+function loadCaps() { try { var s = localStorage.getItem(LS_CAP); if (s) capOverrides = JSON.parse(s) || {}; } catch (e) {} }
+function saveCaps() { try { localStorage.setItem(LS_CAP, JSON.stringify(capOverrides)); } catch (e) {} }
+function effCap(p) {
+  var k = (p.supplier || '') + '|' + (p.name != null ? p.name : '');
+  return (capOverrides[k] != null) ? Number(capOverrides[k]) : Number(p.capQty || 0);
+}
+function setCap(sup, name, v) {
+  var k = sup + '|' + name;
+  if (v === '' || v == null || isNaN(Number(v))) delete capOverrides[k];
+  else capOverrides[k] = Number(v);
+  saveCaps();
+}
+
+/* ---------- 示例数据（与 Excel 模板一致，首次打开不空白） ---------- */
+function sampleData() {
+  var products = PRODUCTS.map(function (p) {
+    return { supplier: p[0], name: p[1], spec: p[2], unit: p[3], price: p[4], shelf: p[5], capQty: p[6], note: p[7] };
+  });
+  var sups = []; products.forEach(function (p) { if (sups.indexOf(p.supplier) < 0) sups.push(p.supplier); });
+  var orders = [];
+  sups.forEach(function (sup, si) {
+    var goods = products.filter(function (p) { return p.supplier === sup; });
+    goods.forEach(function (g, gi) {
+      if (g.capQty <= 0) return;
+      if (g.capQty <= 0) return;
+      for (var k = 0; k < 6; k++) {
+        var st = STORES[(si * 3 + gi * 4 + k * 5) % STORES.length];
+        var q = Math.max(1, Math.floor(g.capQty * (0.05 + ((k * 7 + gi * 3) % 5) * 0.03)));
+        var dt = addDays(todayStr(), -(3 + (k * 2 + si) % 14));
+        orders.push({ supplier: sup, date: dt, store: st, product: g.name, spec: g.spec, unit: g.unit,
+          qty: q, price: g.price, amount: n2(q * g.price), expireDate: g.shelf ? addDays(dt, g.shelf) : '', note: g.note });
+      }
+    });
+  });
+  return { products: products, orders: orders, productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '示例数据' };
+}
+
+/* ==========================================================
+ * 渲染层（严格单向：只由 refreshAll 调度）
+ * ========================================================== */
+function refreshAll() {
+  computeAll();
+  renderSync();
+  renderToday();
+  renderDash();
+  renderForm();
+  renderFilters();
+  renderDetail();
+  renderFooter();
+  renderCap();
+}
+
+function renderSync() {
+  var dot = document.getElementById('syncDot'), txt = document.getElementById('syncTxt');
+  dot.className = 'sync-dot' + (syncState === 'busy' ? ' busy' : syncState === 'ok' ? ' ok' : syncState === 'err' ? ' err' : '');
+  if (syncState === 'busy') { txt.textContent = '同步中…'; return; }
+  if (syncState === 'err') { txt.textContent = '读取失败，用本地数据'; return; }
+  if (data.source === '示例数据') { txt.textContent = '示例数据（未连接金山）'; return; }
+  txt.textContent = '已同步 ' + (data.updatedAt ? data.updatedAt.slice(5, 16).replace('T', ' ') : '—');
+}
+
+function renderToday() {
+  var items = [];
+  pending.forEach(function (p, i) {
+    items.push({ lvl: 'warn', t: '待提交：' + p.supplier + ' / ' + p.store + ' / ' + p.product + ' × ' + p.qty,
+      s: '日期 ' + p.date + (p.err ? ' · 上次失败：' + p.err : ''), b: '重试', f: 'retryPending(' + i + ')' });
+  });
+  data.expiring.slice(0, 6).forEach(function (e) {
+    var lvl = e.days <= 10 ? 'urgent' : 'warn';
+    items.push({ lvl: lvl, t: e.product + ' ' + (e.days < 0 ? '已过期 ' + Math.abs(e.days) + ' 天' : '还剩 ' + e.days + ' 天到期'),
+      s: e.store + ' · ' + e.qty + e.unit + ' · 到期 ' + e.expireDate, b: '定位', f: "focusProduct('" + esc(e.supplier) + "','" + esc(e.product) + "')" });
+  });
+  data.productBal.forEach(function (b) {
+    if (b.full) items.push({ lvl: 'urgent', t: '额度用尽：' + b.product + '（' + b.supplier + '）',
+      s: '已订 ' + nf(b.usedQty) + ' / 上限 ' + nf(b.capQty) + ' ' + b.unit + '，不能再下订', b: '查看', f: "focusProduct('" + esc(b.supplier) + "','" + esc(b.product) + "')" });
+    else if (b.low) items.push({ lvl: 'warn', t: '额度将尽：' + b.product + '（' + b.supplier + '）还剩 ' + b.balQty + b.unit,
+      s: '已订 ' + nf(b.usedQty) + ' / 上限 ' + nf(b.capQty) + ' ' + b.unit + '（' + b.pct + '%）', b: '去下订', f: "focusProduct('" + esc(b.supplier) + "','" + esc(b.product) + "')" });
+  });
+  document.getElementById('todayHint').textContent = items.length ? items.length + ' 项' : '';
+  document.getElementById('todayList').innerHTML = items.length ? items.map(function (it) {
+    return '<div class="todo-item ' + it.lvl + '"><div class="todo-main"><div class="todo-t">' + esc(it.t) + '</div>' +
+      '<div class="todo-s">' + esc(it.s) + '</div></div><button class="btn sm" onclick="' + it.f + '">' + it.b + '</button></div>';
+  }).join('') : '<div class="empty">暂无需要处理的事项</div>';
+}
+
+function renderDash() {
+  var cap = 0, used = 0, lowCnt = 0, fullCnt = 0;
+  data.supplierBal.forEach(function (s) { cap += s.capAmt; used += s.usedAmt; });
+  data.productBal.forEach(function (b) { if (b.low) lowCnt++; if (b.full) fullCnt++; });
+  document.getElementById('kpis').innerHTML = [
+    { v: money(cap), l: '可下订总额度', c: 'accent' },
+    { v: money(used), l: '已下订金额', c: '' },
+    { v: money(cap - used), l: '金额余额', c: (cap - used) < cap * 0.15 ? 'orange' : 'green' },
+    { v: fullCnt + ' 款', l: '额度已用尽商品', c: fullCnt ? 'red' : '' }
+  ].map(function (k) { return '<div class="kpi ' + k.c + '"><div class="v">' + k.v + '</div><div class="l">' + k.l + '</div></div>'; }).join('');
+  document.getElementById('dashHint').textContent = '供应商 ' + data.supplierBal.length + ' 家 / 商品 ' + data.productBal.length + ' 款 / 订单 ' + data.orders.length + ' 笔';
+
+  // 供应商金额余额条形图
+  var rows = data.supplierBal.slice().sort(function (a, b) { return b.capAmt - a.capAmt; });
+  var rowH = 30, H = Math.max(60, rows.length * rowH + 16);
+  var labW = 108, barX = labW + 8, barW = 640 - barX - 96;
+  var mx = 1; rows.forEach(function (r) { mx = Math.max(mx, r.capAmt); });
+  var s = '<svg class="chart" id="chartSup" viewBox="0 0 640 ' + H + '" preserveAspectRatio="xMinYMin meet">';
+  rows.forEach(function (r, i) {
+    var y = 8 + i * rowH;
+    var wU = Math.max(0, Math.round(r.usedAmt / mx * barW));
+    var nm = r.supplier.length > 7 ? r.supplier.slice(0, 7) + '…' : r.supplier;
+    s += '<text x="' + (labW - 4) + '" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="#8b90a0">' + esc(nm) + '</text>';
+    s += '<rect x="' + barX + '" y="' + (y + 3) + '" width="' + Math.round(r.capAmt / mx * barW) + '" height="14" rx="3" fill="#2e3345"/>';
+    s += '<rect x="' + barX + '" y="' + (y + 3) + '" width="' + wU + '" height="14" rx="3" fill="' + (r.full ? '#f85566' : r.pct >= 80 ? '#ff9f43' : '#4f8ef7') + '"/>';
+    s += '<text x="' + (barX + Math.round(r.capAmt / mx * barW) + 6) + '" y="' + (y + 14) + '" font-size="10" fill="#8b90a0">' + money(r.balAmt) + '</text>';
+  });
+  s += '</svg>';
+  document.getElementById('chartSup').outerHTML = s;
+
+  // 各大类余额（金额）汇总卡 —— 供应商余额监管、防定超的核心视图
+  var catEl2 = document.getElementById('catCards');
+  if (catEl2) {
+    var ch = '';
+    CATS.forEach(function (c) {
+      var cap = 0, used = 0, full = 0, low = 0;
+      data.productBal.forEach(function (x) {
+        if (x.cat !== c) return;
+        cap += x.capQty * x.price; used += x.usedQty * x.price;
+        if (x.full) full++; if (x.low) low++;
+      });
+      var pct = cap > 0 ? Math.round(used / cap * 1000) / 10 : 0;
+      var cls = cap > 0 && used >= cap ? 'full' : cap > 0 && pct >= 80 ? 'warn' : '';
+      var col = cap > 0 && used >= cap ? '#f85566' : pct >= 80 ? '#ff9f43' : '#4f8ef7';
+      ch += '<div class="cat-card ' + cls + '"><div class="cn">' + esc(c) + '</div>' +
+        '<div class="cv">' + money(cap - used) + '</div>' +
+        '<div class="cs">余额 · 已订 ' + money(used) + ' / 额度 ' + (cap > 0 ? money(cap) : '未设') + '</div>' +
+        '<div class="bar-mini"><i style="width:' + Math.min(100, pct) + '%;background:' + col + '"></i></div>' +
+        '<div style="font-size:10px;color:var(--text2);margin-top:3px">' + (cap > 0 ? pct + '% · ' : '') +
+        (full ? '<span style="color:var(--red)">' + full + '款用尽</span> ' : '') +
+        (low ? '<span style="color:var(--orange)">' + low + '款将尽</span>' : (full || low ? '' : '充足')) + '</div></div>';
+    });
+    catEl2.innerHTML = ch;
+  }
+
+  // 商品数量余额表（筛选 + 分页，避免全量 189 行一次性铺开）
+  var catEl = document.getElementById('dashCat');
+  if (catEl) {
+    var curCat = catEl.value;
+    catEl.innerHTML = '<option value="">全部大类</option>' + CATS.map(function (c) {
+      return '<option value="' + esc(c) + '">' + esc(c) + '</option>';
+    }).join('');
+    catEl.value = curCat;
+  }
+  var dsEl = document.getElementById('dashSup');
+  if (dsEl) {
+    var curSup = dsEl.value;
+    dsEl.innerHTML = '<option value="">全部供应商</option>' + data.supplierBal.map(function (s) {
+      return '<option value="' + esc(s.supplier) + '">' + esc(s.supplier) + '</option>';
+    }).join('');
+    dsEl.value = curSup;
+  }
+  var ds = dashState;
+  var list = data.productBal.filter(function (b) {
+    if (ds.cat && b.cat !== ds.cat) return false;
+    if (ds.sup && b.supplier !== ds.sup) return false;
+    if (ds.status === 'warn' && !(b.full || b.low)) return false;
+    if (ds.status === 'ok' && (b.full || b.low || b.capQty <= 0)) return false;
+    if (ds.status === 'nocap' && b.capQty > 0) return false;
+    if (ds.q && b.product.indexOf(ds.q) < 0) return false;
+    return true;
+  });
+  var total = list.length, size = ds.size;
+  var pages = Math.max(1, Math.ceil(total / size));
+  if (ds.page > pages) ds.page = pages;
+  if (ds.page < 1) ds.page = 1;
+  var start = (ds.page - 1) * size;
+  var pageRows = list.slice(start, start + size);
+  var piEl = document.getElementById('dashPageInfo');
+  if (piEl) piEl.textContent = '共 ' + total + ' 款 · 第 ' + ds.page + '/' + pages + ' 页' + (total ? ' · 显示 ' + (start + 1) + '-' + Math.min(start + size, total) : '');
+
+  var h = '<thead><tr><th>大类</th><th>供应商</th><th>商品</th><th>规格</th><th>单位</th><th class="num">单价</th>' +
+    '<th class="num">最高可订</th><th class="num">已订</th><th class="num">余额</th><th style="width:90px">使用率</th><th>状态</th></tr></thead><tbody>';
+  if (!pageRows.length) {
+    h += '<tr><td colspan="11" style="text-align:center;color:var(--text2);padding:18px">没有匹配的商品</td></tr>';
+  }
+  pageRows.forEach(function (b) {
+    var col = b.full ? '#f85566' : b.pct >= 80 ? '#ff9f43' : '#4f8ef7';
+    var noCap = b.capQty <= 0;
+    h += '<tr><td style="white-space:nowrap;color:var(--accent)">' + esc(b.cat) + '</td><td>' + esc(b.supplier) + '</td><td>' + esc(b.product) + '</td>' +
+      '<td style="color:var(--text2)">' + esc(b.spec) + '</td><td>' + esc(b.unit) + '</td>' +
+      '<td class="num">' + money(b.price) + '</td>' +
+      '<td class="num">' + (noCap ? '<span style="color:var(--text2)">未设</span>' : nf(b.capQty)) + '</td>' +
+      '<td class="num">' + nf(b.usedQty) + '</td>' +
+      '<td class="num"><b style="color:' + (noCap ? 'var(--text2)' : b.balQty <= 0 ? 'var(--red)' : 'var(--green)') + '">' + nf(b.balQty) + '</b></td>' +
+      '<td><div class="bar-mini"><i style="width:' + Math.min(100, b.pct) + '%;background:' + col + '"></i></div>' +
+      '<div style="font-size:10px;color:var(--text2);margin-top:2px">' + (noCap ? '—' : b.pct + '%') + '</div></td>' +
+      '<td>' + (noCap ? '<span class="tag" style="background:#3a3f52;color:#8b90a0">未设</span>' : b.full ? '<span class="tag full">用尽</span>' : b.low ? '<span class="tag low">将尽</span>' : '<span class="tag ok">充足</span>') + '</td></tr>';
+  });
+  document.getElementById('tblProduct').innerHTML = h + '</tbody>';
+}
+
+function renderForm() {
+  var supSel = document.getElementById('odSupplier');
+  var sups = suppliers();
+  var cur = supSel.value;
+  // 按「商品细类」分组供应商：一家供应商若跨多个细类，会在多个 optgroup 中重复出现，
+  // 这样下单时按大类挑选供应商更直观（如杨凌酷凌同时出现在 红牛/东鹏/冰淇淋/便利店零食饮料 下）
+  var g = '';
+  CATS.forEach(function (c) {
+    var seen = {}, members = [];
+    data.products.forEach(function (p) {
+      if (classifyCat(p) === c && !seen[p.supplier]) { seen[p.supplier] = 1; members.push(p.supplier); }
+    });
+    if (!members.length) return;
+    g += '<optgroup label="' + esc(c) + '">' + members.map(function (s) {
+      return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
+    }).join('') + '</optgroup>';
+  });
+  supSel.innerHTML = g;
+  if (cur && sups.indexOf(cur) >= 0) supSel.value = cur;
+  if (!supSel.value && sups.length) supSel.value = sups[0];
+
+  var pdSel = document.getElementById('odProduct');
+  var goods = productsOf(supSel.value);
+  var curP = pdSel.value;
+  pdSel.innerHTML = goods.map(function (p) {
+    var b = balOf(supSel.value, p.name);
+    var tail = (effCap(p) > 0 && b) ? '（余 ' + b.balQty + p.unit + '）' : '';
+    return '<option value="' + esc(p.name) + '">' + esc(p.name) + tail + '</option>';
+  }).join('');
+  if (curP && goods.some(function (p) { return p.name === curP; })) pdSel.value = curP;
+
+  var stSel = document.getElementById('odStore');
+  if (!stSel.options.length) {
+    stSel.innerHTML = STORES.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join('');
+  }
+  if (!document.getElementById('odDate').value) document.getElementById('odDate').value = todayStr();
+  renderFormInfo();
+}
+
+function renderFormInfo() {
+  var sup = document.getElementById('odSupplier').value;
+  var nm = document.getElementById('odProduct').value;
+  var p = prodOf(sup, nm);
+  var b = balOf(sup, nm);
+  var box = document.getElementById('odInfo');
+  var btn = document.getElementById('odSubmit');
+  var txt = document.getElementById('odSubmitTxt');
+  if (!p) { box.innerHTML = ''; btn.disabled = true; txt.textContent = '请先维护商品档案'; return; }
+  var qty = Number(document.getElementById('odQty').value) || 0;
+  var amt = n2(qty * p.price);
+  var hasCap = effCap(p) > 0;                       // capQty<=0 视为「额度未设 / 不限制」
+  var bal = hasCap ? (b ? b.balQty : effCap(p)) : (b ? b.balQty : null);
+  var after = (hasCap && bal != null) ? bal - qty : null;
+  var exp = p.shelf ? addDays(document.getElementById('odDate').value || todayStr(), p.shelf) : '—';
+  var over = after != null && after < 0;
+  box.innerHTML =
+    '<div class="info-cell"><div class="k">规格</div><div class="v" style="font-size:12px">' + esc(p.spec || '—') + '</div></div>' +
+    '<div class="info-cell"><div class="k">单位 / 单价</div><div class="v" style="font-size:13px">' + esc(p.unit) + ' · ' + money(p.price) + '</div></div>' +
+    (hasCap
+      ? '<div class="info-cell"><div class="k">当前余额</div><div class="v ' + (bal <= 0 ? 'r' : bal <= effCap(p) * 0.1 ? 'o' : 'g') + '">' + nf(bal) + ' ' + esc(p.unit) + '</div></div>'
+      : '<div class="info-cell"><div class="k">额度上限</div><div class="v" style="font-size:12px;color:var(--text2)">未设置（不限制）</div></div>') +
+    '<div class="info-cell"><div class="k">本次金额</div><div class="v">' + money(amt) + '</div></div>' +
+    (hasCap
+      ? '<div class="info-cell"><div class="k">下订后余额</div><div class="v ' + (over ? 'r' : 'g') + '">' + nf(after) + ' ' + esc(p.unit) + '</div></div>'
+      : '') +
+    '<div class="info-cell"><div class="k">预计到期</div><div class="v" style="font-size:12px">' + esc(exp) + '</div></div>' +
+    '<div class="info-cell"><div class="k">保质期</div><div class="v" style="font-size:13px">' + (p.shelf ? p.shelf + ' 天' : '—') + '</div></div>' +
+    '<div class="info-cell"><div class="k">累计已订</div><div class="v" style="font-size:13px">' + nf(b ? b.usedQty : 0) + ' ' + esc(p.unit) + '</div></div>';
+  btn.disabled = qty <= 0 || (over && !allowForce);
+  txt.textContent = over ? '超出额度 ' + Math.abs(after) + p.unit + (allowForce ? '（强制提交）' : '，无法提交') : '提交下定（' + money(amt) + '）';
+}
+
+var allowForce = false;
+function onSupplierPick() { refreshAll(); }
+function onProductPick() { renderFormInfo(); }
+function onQtyInput() { renderFormInfo(); }
+function focusProduct(sup, prod) {
+  document.getElementById('odSupplier').value = sup;
+  refreshAll();
+  document.getElementById('odProduct').value = prod;
+  renderFormInfo();
+  document.getElementById('odQty').focus();
+  document.getElementById('odQty').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function renderFilters() {
+  var sups = suppliers();
+  function fill(id, arr, all) {
+    var el = document.getElementById(id);
+    var cur = el.value;
+    el.innerHTML = '<option value="">' + all + '</option>' + arr.map(function (x) { return '<option value="' + esc(x) + '">' + esc(x) + '</option>'; }).join('');
+    if (cur && (arr.indexOf(cur) >= 0)) el.value = cur;
+  }
+  fill('fSupplier', sups, '全部供应商');
+  fill('fStore', STORES, '全部门店');
+  var fs = document.getElementById('fSupplier').value;
+  var goods = fs ? productsOf(fs).map(function (p) { return p.name; }) : data.products.map(function (p) { return p.name; });
+  fill('fProduct', goods, '全部商品');
+}
+
+// 数量按单位分列汇总（箱/桶/提不可直接相加）
+function qtyText(list) {
+  var byU = {};
+  list.forEach(function (o) { var u = o.unit || ''; byU[u] = (byU[u] || 0) + Number(o.qty || 0); });
+  var ks = Object.keys(byU);
+  if (!ks.length) return '—';
+  return ks.map(function (u) { return nf(byU[u]) + (u || ''); }).join(' + ');
+}
+
+function renderDetail() {
+  var fs = document.getElementById('fSupplier').value;
+  var fdate = document.getElementById('fDate').value;
+  var fst = document.getElementById('fStore').value;
+  var fp = document.getElementById('fProduct').value;
+  var fd = Number(document.getElementById('fDays').value) || 0;
+  var from = (!fdate && fd) ? addDays(todayStr(), -fd) : '';
+
+  function match(o, withDate) {
+    if (fs && o.supplier !== fs) return false;
+    if (withDate && fdate && o.date !== fdate) return false;
+    if (fst && o.store !== fst) return false;
+    if (fp && o.product !== fp) return false;
+    if (from && o.date < from) return false;
+    return true;
+  }
+  var list = data.orders.filter(function (o) { return match(o, true); })
+    .sort(function (a, b) { return b.date.localeCompare(a.date) || a.store.localeCompare(b.store) || a.product.localeCompare(b.product); });
+  var base = data.orders.filter(function (o) { return match(o, false); });   // 不含日期，供「按日期汇总」切换用
+
+  var ta = 0, stores = {}, goods = {};
+  list.forEach(function (o) { ta += Number(o.amount || 0); stores[o.store] = 1; goods[o.product] = 1; });
+  var nStore = Object.keys(stores).length, nGood = Object.keys(goods).length;
+  document.getElementById('detHint').textContent = list.length + ' 笔';
+
+  // 结果横幅：直接回答「某供应商某天订了多少笔」
+  var banner = document.getElementById('detBanner');
+  if (fs && fdate) {
+    banner.innerHTML = '<div class="result-banner' + (list.length ? '' : ' none') + '">' +
+      '<div class="rb-main">' + esc(fs) + ' 在 ' + esc(fdate) + ' 共 <b>' + list.length + '</b> 笔订货订单</div>' +
+      '<div class="rb-sub">' + (list.length
+        ? '数量 ' + esc(qtyText(list)) + ' · 金额 ' + money(ta) + ' · 覆盖 ' + nStore + ' 座门店 · ' + nGood + ' 款商品'
+        : '该供应商在这一天没有下订记录') + '</div></div>';
+  } else if (fs) {
+    banner.innerHTML = '<div class="result-banner"><div class="rb-main">' + esc(fs) + ' 累计 <b>' + list.length + '</b> 笔订货订单</div>' +
+      '<div class="rb-sub">数量 ' + esc(qtyText(list)) + ' · 金额 ' + money(ta) + ' · 覆盖 ' + nStore + ' 座门店 · ' + nGood + ' 款商品' +
+      '<br>再选一个「订货日期」就能只看当天</div></div>';
+  } else if (fdate) {
+    banner.innerHTML = '<div class="result-banner"><div class="rb-main">' + esc(fdate) + ' 全站共 <b>' + list.length + '</b> 笔订货订单</div>' +
+      '<div class="rb-sub">数量 ' + esc(qtyText(list)) + ' · 金额 ' + money(ta) + ' · 涉及 ' + nStore + ' 座门店' +
+      '<br>再选「供应商」可只看某一家</div></div>';
+  } else {
+    banner.innerHTML = '';
+  }
+
+  document.getElementById('detSum').innerHTML =
+    '<span>笔数 <b>' + list.length + '</b></span>' +
+    '<span>数量 <b>' + esc(qtyText(list)) + '</b></span>' +
+    '<span>金额 <b>' + money(ta) + '</b></span>' +
+    '<span>门店 <b>' + nStore + '</b> 座</span>' +
+    '<span>商品 <b>' + nGood + '</b> 款</span>' +
+    '<button class="btn sm" onclick="resetFilters()" style="margin-left:auto">重置筛选</button>';
+
+  // 按订货日期汇总（不受日期筛选影响，方便点着切换）
+  var byDate = {};
+  base.forEach(function (o) {
+    if (!byDate[o.date]) byDate[o.date] = { cnt: 0, amt: 0, rows: [] };
+    byDate[o.date].cnt++;
+    byDate[o.date].amt += Number(o.amount || 0);
+    byDate[o.date].rows.push(o);
+  });
+  var dates = Object.keys(byDate).sort().reverse();
+  var dh = '<thead><tr><th>订货日期</th><th class="num">订单笔数</th><th>数量（按单位）</th><th class="num">金额</th><th></th></tr></thead><tbody>';
+  if (!dates.length) {
+    dh += '<tr><td colspan="5" class="empty">暂无记录</td></tr>';
+  } else {
+    dates.forEach(function (d) {
+      var b = byDate[d];
+      dh += '<tr class="date-row' + (d === fdate ? ' on' : '') + '" onclick="pickDate(\'' + d + '\')">' +
+        '<td><b>' + esc(d) + '</b></td>' +
+        '<td class="num"><b>' + b.cnt + '</b></td>' +
+        '<td>' + esc(qtyText(b.rows)) + '</td>' +
+        '<td class="num">' + money(b.amt) + '</td>' +
+        '<td class="pick">' + (d === fdate ? '已选中 · 点此取消' : '看这天') + '</td></tr>';
+    });
+  }
+  document.getElementById('tblByDate').innerHTML = dh + '</tbody>';
+
+  // 明细
+  var h = '<thead><tr><th>日期</th><th>供应商</th><th>门店</th><th>商品</th><th>规格</th>' +
+    '<th class="num">数量</th><th>单位</th><th class="num">单价</th><th class="num">金额</th><th>到期</th></tr></thead><tbody>';
+  if (!list.length) {
+    document.getElementById('tblOrders').innerHTML = h + '<tr><td colspan="10" class="empty">暂无记录</td></tr></tbody>';
+    return;
+  }
+  list.slice(0, 200).forEach(function (o) {
+    var d = daysLeft(o.expireDate);
+    var st = o.expireDate ? statusOf(d) : '';
+    h += '<tr><td>' + esc(o.date) + '</td><td>' + esc(o.supplier) + '</td><td>' + esc(o.store) + '</td>' +
+      '<td>' + esc(o.product) + '</td><td style="color:var(--text2)">' + esc(o.spec) + '</td>' +
+      '<td class="num">' + nf(o.qty) + '</td><td>' + esc(o.unit) + '</td>' +
+      '<td class="num">' + money(o.price) + '</td><td class="num"><b>' + money(o.amount) + '</b></td>' +
+      '<td style="color:' + (o.expireDate ? sColor(st) : 'var(--text2)') + ';white-space:nowrap">' +
+      (o.expireDate ? esc(o.expireDate) + '<span style="font-size:10px"> (' + d + '天)</span>' : '—') + '</td></tr>';
+  });
+  document.getElementById('tblOrders').innerHTML = h + '</tbody>';
+}
+
+function pickDate(d) {
+  var el = document.getElementById('fDate');
+  el.value = (el.value === d) ? '' : d;
+  refreshAll();
+  var card = document.getElementById('detBanner');
+  if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetFilters() {
+  document.getElementById('fSupplier').value = '';
+  document.getElementById('fDate').value = '';
+  document.getElementById('fStore').value = '';
+  document.getElementById('fProduct').value = '';
+  document.getElementById('fDays').value = '0';
+  refreshAll();
+}
+
+function renderFooter() {
+  document.getElementById('footMeta').textContent =
+    (data.source || '未知') + ' · 更新于 ' + (data.updatedAt || '—') +
+    ' · 供应商 ' + data.supplierBal.length + ' 家 / 商品 ' + data.productBal.length + ' 款 / 订单 ' + data.orders.length + ' 笔';
+}
+
+/* ==========================================================
+ * 交互层
+ * ========================================================== */
+function submitOrder() {
+  var sup = document.getElementById('odSupplier').value;
+  var prod = document.getElementById('odProduct').value;
+  var store = document.getElementById('odStore').value;
+  var qty = Number(document.getElementById('odQty').value);
+  var date = document.getElementById('odDate').value || todayStr();
+  var p = prodOf(sup, prod);
+  if (!p) { toast('请先选择商品'); return; }
+  if (!(qty > 0)) { toast('请填写大于 0 的数量'); return; }
+  var b = balOf(sup, prod);
+  var hasCap = effCap(p) > 0;
+  var bal = hasCap ? (b ? b.balQty : effCap(p)) : null;
+  var amt = n2(qty * p.price);
+  // 供应商金额额度（派生自各商品 capQty×price，用于余额监管、防定超）
+  var sb = null;
+  for (var i = 0; i < data.supplierBal.length; i++) if (data.supplierBal[i].supplier === sup) { sb = data.supplierBal[i]; break; }
+  var overProduct = hasCap && qty > bal;
+  var overAmt = false, amtBal = null;
+  if (sb && sb.capAmt > 0) { amtBal = sb.capAmt - sb.usedAmt; if (amt > amtBal) overAmt = true; }
+  var force = false;
+  if (overProduct || overAmt) {
+    var msg = '即将超出额度，确认强制下订吗？（强制会在金山表里记为超订）\n';
+    if (overProduct) msg += '· 商品「' + prod + '」剩余 ' + bal + p.unit + '（已订 ' + nf(b ? b.usedQty : 0) + '/' + nf(effCap(p)) + '）\n';
+    if (overAmt) msg += '· 供应商「' + sup + '」金额剩余 ' + money(amtBal) + '（已订 ' + money(sb.usedAmt) + '/额度 ' + money(sb.capAmt) + '）\n本单 ' + qty + p.unit + ' = ' + money(amt);
+    force = confirm(msg);
+    if (!force) return;
+  }
+  pending.push({ supplier: sup, store: store, product: prod, qty: qty, date: date, note: '', force: force, ts: Date.now(), err: '' });
+  savePending();
+  document.getElementById('odQty').value = '';
+  renderFormInfo();
+  refreshAll();
+  flushPending();
+}
+
+function flushPending() {
+  if (!pending.length) return;
+  if (!cfg.owner || !cfg.repo || !cfg.pat) { toast('未配置 GitHub，订单已暂存（可在「今天要处理」补提交）'); return; }
+  syncState = 'busy'; refreshAll();
+  ghDispatch({ orders: pending.map(function (p) {
+    return { supplier: p.supplier, store: p.store, product: p.product, qty: p.qty, date: p.date, note: p.note, force: !!p.force };
+  }) }).then(function () {
+    syncState = 'ok'; pending = []; savePending();
+    toast('已提交，约 30 秒后自动更新…'); refreshAll(); pollUpdate();
+  }).catch(function (e) {
+    syncState = 'err'; pending.forEach(function (p) { p.err = e.message; }); savePending();
+    toast('提交失败：' + e.message); refreshAll();
+  });
+}
+function retryPending(i) { var p = pending[i]; if (!p) return; pending = [p]; savePending(); flushPending(); }
+
+function ghDispatch(payload) {
+  var url = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) + '/dispatches';
+  return fetch(url, {
+    method: 'POST',
+    headers: { 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + cfg.pat, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ event_type: 'kdocs-write', client_payload: Object.assign({ appToken: cfg.appToken || '' }, payload) })
+  }).then(function (r) {
+    if (r.status === 204) return true;
+    return r.text().then(function (t) {
+      var m = ''; try { m = JSON.parse(t).message || t; } catch (e) { m = t; }
+      throw new Error('GitHub ' + r.status + '：' + String(m).slice(0, 120));
+    });
+  });
+}
+
+var pollTimer = null;
+function pollUpdate() {
+  if (pollTimer) clearInterval(pollTimer);
+  var before = data.updatedAt, tries = 0;
+  syncState = 'busy'; renderSync();
+  pollTimer = setInterval(function () {
+    tries++;
+    fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+      .then(function (o) {
+        var nd = normalize(o);
+        if (nd.updatedAt && nd.updatedAt !== before) {
+          data = nd; data.source = 'kdocs'; saveLocal();
+          clearInterval(pollTimer); pollTimer = null; syncState = 'ok'; refreshAll(); toast('数据已更新');
+        } else if (tries >= 18) {
+          clearInterval(pollTimer); pollTimer = null; syncState = 'ok'; refreshAll(); toast('已提交，稍后自动刷新');
+        }
+      })
+      .catch(function () { if (tries >= 18) { clearInterval(pollTimer); pollTimer = null; syncState = 'ok'; refreshAll(); } });
+  }, 10000);
+}
+
+function manualSync() {
+  syncState = 'busy'; refreshAll();
+  fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+    .then(function (o) { data = normalize(o); data.source = 'kdocs'; saveLocal(); syncState = 'ok'; refreshAll(); toast('已刷新'); })
+    .catch(function (e) { syncState = 'err'; refreshAll(); toast('读取 data.json 失败：' + e.message); });
+}
+
+function openSettings() {
+  document.getElementById('cfOwner').value = cfg.owner;
+  document.getElementById('cfRepo').value = cfg.repo;
+  document.getElementById('cfPat').value = cfg.pat;
+  document.getElementById('cfToken').value = cfg.appToken;
+  document.getElementById('setMask').classList.add('open');
+}
+function closeSettings() { document.getElementById('setMask').classList.remove('open'); }
+function saveSettings() {
+  cfg.owner = document.getElementById('cfOwner').value.trim();
+  cfg.repo = document.getElementById('cfRepo').value.trim();
+  cfg.pat = document.getElementById('cfPat').value.trim();
+  cfg.appToken = document.getElementById('cfToken').value.trim();
+  saveCfg(); closeSettings(); refreshAll();
+  toast(cfg.owner && cfg.repo && cfg.pat ? '已保存' : '配置不完整，提交时只会暂存到本地');
+}
+
+var toastTimer = null;
+function toast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { el.classList.remove('show'); }, 2800);
+}
+
+/* ---------- 仪表盘筛选 / 分页 绑定（事件 → 改 UI 态 → 调 renderDash，不与其他渲染互调） ---------- */
+function bindDashFilters() {
+  var sup = document.getElementById('dashSup');
+  var catEl = document.getElementById('dashCat');
+  var st = document.getElementById('dashStatus');
+  var q = document.getElementById('dashSearch');
+  var pv = document.getElementById('dashPrev');
+  var nx = document.getElementById('dashNext');
+  if (sup) sup.addEventListener('change', function () { dashState.sup = this.value; dashState.page = 1; renderDash(); });
+  if (catEl) catEl.addEventListener('change', function () { dashState.cat = this.value; dashState.page = 1; renderDash(); });
+  if (st) st.addEventListener('change', function () { dashState.status = this.value; dashState.page = 1; renderDash(); });
+  if (q) q.addEventListener('input', function () { dashState.q = this.value.trim(); dashState.page = 1; renderDash(); });
+  if (pv) pv.addEventListener('click', function () { if (dashState.page > 1) { dashState.page--; renderDash(); } });
+  if (nx) nx.addEventListener('click', function () { dashState.page++; renderDash(); });
+}
+
+/* ---------- 额度维护面板（本地覆盖层 + 导出补丁回贴台账） ---------- */
+var capState = { cat: '', sup: '', status: 'all', q: '', page: 1, size: 20 };
+
+function refreshDerived() { computeAll(); renderSync(); renderToday(); renderDash(); renderForm(); renderFilters(); }
+
+function renderCap() {
+  var catEl = document.getElementById('capCat');
+  if (catEl) {
+    var curCat = catEl.value;
+    catEl.innerHTML = '<option value="">全部大类</option>' + CATS.map(function (c) {
+      return '<option value="' + esc(c) + '">' + esc(c) + '</option>';
+    }).join('');
+    catEl.value = curCat;
+  }
+  var supEl = document.getElementById('capSup');
+  if (supEl) {
+    var curSup = supEl.value;
+    supEl.innerHTML = '<option value="">全部供应商</option>' + data.supplierBal.map(function (s) {
+      return '<option value="' + esc(s.supplier) + '">' + esc(s.supplier) + '</option>';
+    }).join('');
+    supEl.value = curSup;
+  }
+  var cs = capState;
+  var list = data.products.filter(function (p) {
+    var ec = effCap(p);
+    if (cs.cat && classifyCat(p) !== cs.cat) return false;
+    if (cs.sup && p.supplier !== cs.sup) return false;
+    if (cs.status === 'set' && !(ec > 0)) return false;
+    if (cs.status === 'nocap' && ec > 0) return false;
+    if (cs.status === 'local' && capOverrides[p.supplier + '|' + p.name] == null) return false;
+    if (cs.q && p.name.indexOf(cs.q) < 0) return false;
+    return true;
+  });
+  var total = list.length, size = cs.size;
+  var pages = Math.max(1, Math.ceil(total / size));
+  if (cs.page > pages) cs.page = pages;
+  if (cs.page < 1) cs.page = 1;
+  var start = (cs.page - 1) * size;
+  var rows = list.slice(start, start + size);
+  var piEl = document.getElementById('capPageInfo');
+  if (piEl) piEl.textContent = '共 ' + total + ' 款 · 第 ' + cs.page + '/' + pages + ' 页' + (total ? ' · 显示 ' + (start + 1) + '-' + Math.min(start + size, total) : '');
+  var ovN = 0; for (var kk in capOverrides) if (capOverrides.hasOwnProperty(kk)) ovN++;
+  var hintEl = document.getElementById('capHint');
+  if (hintEl) hintEl.textContent = ovN ? ('本地已改 ' + ovN + ' 款（尚未回贴台账）') : '网页临时改额度，导出补丁回贴台账后即生效';
+  var h = '<thead><tr><th>大类</th><th>供应商</th><th>商品</th><th>单位</th><th class="num">最高可下订数量</th><th>状态</th></tr></thead><tbody>';
+  if (!rows.length) {
+    h += '<tr><td colspan="6" style="text-align:center;color:var(--text2);padding:18px">没有匹配的商品</td></tr>';
+  }
+  rows.forEach(function (p) {
+    var k = p.supplier + '|' + p.name;
+    var ec = effCap(p);
+    var local = capOverrides[k] != null;
+    var st = local ? '<span class="tag" style="background:#3a3f52;color:#8b90a0">本地改</span>'
+      : (ec > 0 ? '<span class="tag ok">已设</span>' : '<span class="tag" style="background:#3a3f52;color:#8b90a0">未设</span>');
+    var reset = local ? ' <a href="#" onclick="onCapReset(\'' + esc(p.supplier) + '\',\'' + esc(p.name) + '\');return false" style="font-size:11px;color:var(--orange)">复原</a>' : '';
+    h += '<tr><td style="white-space:nowrap;color:var(--accent)">' + esc(classifyCat(p)) + '</td>' +
+      '<td>' + esc(p.supplier) + '</td><td>' + esc(p.name) + '</td><td>' + esc(p.unit) + '</td>' +
+      '<td class="num"><input class="cap-in" type="number" min="0" step="1" data-sup="' + esc(p.supplier) + '" data-name="' + esc(p.name) +
+        '" value="' + (local ? esc(capOverrides[k]) : (ec > 0 ? esc(ec) : '')) + '" placeholder="0" onchange="onCapInput(this)" /></td>' +
+      '<td>' + st + reset + '</td></tr>';
+  });
+  var t = document.getElementById('tblCap');
+  if (t) t.innerHTML = h + '</tbody>';
+}
+
+function onCapInput(inp) {
+  var v = inp.value.trim();
+  setCap(inp.getAttribute('data-sup'), inp.getAttribute('data-name'), v);
+  refreshDerived(); // 重算余额/监管卡/拦截，但不重建额度表（保留输入焦点）
+  // 就地更新本行状态 + 顶部提示，避免整表重渲染打断连续录入
+  var tr = inp.parentNode.parentNode, stTd = tr.children[5];
+  var sup = inp.getAttribute('data-sup'), nm = inp.getAttribute('data-name');
+  var local = capOverrides[sup + '|' + nm] != null;
+  stTd.innerHTML = (local ? '<span class="tag" style="background:#3a3f52;color:#8b90a0">本地改</span> <a href="#" onclick="onCapReset(\'' + esc(sup) + '\',\'' + esc(nm) + '\');return false" style="font-size:11px;color:var(--orange)">复原</a>' : '<span class="tag" style="background:#3a3f52;color:#8b90a0">未设</span>');
+  var ovN = 0; for (var kk in capOverrides) if (capOverrides.hasOwnProperty(kk)) ovN++;
+  var he = document.getElementById('capHint'); if (he) he.textContent = ovN ? ('本地已改 ' + ovN + ' 款（尚未回贴台账）') : '网页临时改额度，导出补丁回贴台账后即生效';
+}
+function onCapReset(sup, name) { setCap(sup, name, ''); refreshAll(); }
+
+function exportCaps() {
+  var rows = ['供应商,商品名称,最高可下订数量'];
+  var n = 0;
+  data.products.forEach(function (p) {
+    var k = p.supplier + '|' + p.name;
+    if (capOverrides[k] != null) { rows.push(p.supplier + ',' + p.name + ',' + capOverrides[k]); n++; }
+  });
+  if (!n) { toast('没有本地改过的额度可导出'); return; }
+  var csv = '﻿' + rows.join('\n');
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '额度补丁_' + todayStr().replace(/-/g, '') + '.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  toast('已导出 ' + n + ' 条覆盖 → 粘贴到台账《商品档案》第7列后，找我重新生成 data.json');
+}
+function clearCaps() { capOverrides = {}; saveCaps(); refreshAll(); toast('已清空本地覆盖，恢复台账额度'); }
+
+function bindCapPanel() {
+  var cat = document.getElementById('capCat');
+  var sup = document.getElementById('capSup');
+  var st = document.getElementById('capStatus');
+  var q = document.getElementById('capSearch');
+  var pv = document.getElementById('capPrev');
+  var nx = document.getElementById('capNext');
+  var ex = document.getElementById('capExport');
+  var cl = document.getElementById('capClear');
+  if (cat) cat.addEventListener('change', function () { capState.cat = this.value; capState.page = 1; renderCap(); });
+  if (sup) sup.addEventListener('change', function () { capState.sup = this.value; capState.page = 1; renderCap(); });
+  if (st) st.addEventListener('change', function () { capState.status = this.value; capState.page = 1; renderCap(); });
+  if (q) q.addEventListener('input', function () { capState.q = this.value.trim(); capState.page = 1; renderCap(); });
+  if (pv) pv.addEventListener('click', function () { if (capState.page > 1) { capState.page--; renderCap(); } });
+  if (nx) nx.addEventListener('click', function () { capState.page++; renderCap(); });
+  if (ex) ex.addEventListener('click', function () { exportCaps(); });
+  if (cl) cl.addEventListener('click', function () { clearCaps(); });
+}
+
+/* ---------- 启动 ---------- */
+function boot() {
+  loadCfg(); loadPending(); loadCaps();
+  bindDashFilters(); bindCapPanel();
+  var hasLocal = loadLocal();
+  syncState = 'busy'; refreshAll();
+  fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+    .then(function (o) {
+      data = normalize(o); data.source = o.source || 'kdocs'; saveLocal();
+      syncState = 'ok'; refreshAll();
+      if (pending.length) flushPending();
+    })
+    .catch(function () {
+      if (!hasLocal) { data = normalize(sampleData()); data.source = '示例数据'; saveLocal(); }
+      syncState = 'err'; refreshAll();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () { boot(); });
+</script>
+</body>
+</html>

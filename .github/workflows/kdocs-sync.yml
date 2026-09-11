@@ -1,0 +1,54 @@
+name: kdocs-sync
+
+# 中转层：GitHub ⇄ 金山在线表格
+# 网页（GitHub Pages）无法直连金山（金山网关 403 掉一切带 Origin 的请求），
+# 因此在 GitHub 云端 runner 上代发——完全脱离本机。
+
+on:
+  # 页面提交入库/出库时触发
+  repository_dispatch:
+    types: [kdocs-write]
+  # 手动跑：自检 / 立即同步
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'probe=自检  sync=只拉取不写入  order=按 payload 下单'
+        required: true
+        default: 'sync'
+        type: choice
+        options: [probe, sync, order]
+      payload_json:
+        description: 'order 模式下填 {"orders":[{"supplier":"杨凌酷凌","store":"秦岭东","product":"红牛维生素功能饮料","qty":20}]}'
+        required: false
+        default: '{}'
+        type: string
+  # 兜底：每 30 分钟自动同步一次，保证页面数据不会长期落后
+  schedule:
+    - cron: '*/30 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kdocs-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 运行同步
+        env:
+          KDOCS_WEBHOOK: ${{ secrets.KDOCS_WEBHOOK }}
+          KDOCS_TOKEN:   ${{ secrets.KDOCS_TOKEN }}
+          APP_TOKEN:     ${{ secrets.APP_TOKEN }}
+          # dispatch 走 client_payload；手动/定时走空（sync 模式）
+          PAYLOAD_JSON:  ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload) || github.event.inputs.payload_json || '{}' }}
+          MODE:          ${{ github.event_name == 'repository_dispatch' && 'order' || github.event.inputs.mode || 'sync' }}
+        run: node .github/scripts/kdocs_sync.mjs
