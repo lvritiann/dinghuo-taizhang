@@ -609,7 +609,8 @@ var PRODUCTS = [
 ];
 
 var data = { products: [], orders: [], productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '' };
-var cfg  = { owner: '', repo: '', pat: '', appToken: '' };
+// 预填默认值：油站打开页面即自带仓库信息+口令，只需补一个 fine-grained PAT 即可下单（见设置面板）
+var cfg  = { owner: 'lvritiann', repo: 'dinghuo-taizhang', pat: '', appToken: 'cg8RIFAwDMA-vQVfV9hUXb4iHDqGpFS4' };
 var pending = [];
 var syncState = 'idle';
 
