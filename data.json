@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T14:16:25.594Z",
+  "updatedAt": "2026-09-11T14:40:12.653Z",
   "source": "kdocs",
   "today": "2026-09-11",
   "products": [
@@ -1894,7 +1894,21 @@
       "unit": "袋"
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "amount": 4.5,
+      "date": "2026-09-11",
+      "expireDate": "",
+      "note": "自检用，稍后自动删除",
+      "price": 4.5,
+      "product": "40g 柠檬味薄荷含片",
+      "qty": 1,
+      "spec": "",
+      "store": "测试门店",
+      "supplier": "杨凌酷凌",
+      "unit": "袋"
+    }
+  ],
   "productBal": [
     {
       "balQty": 0,
@@ -3529,12 +3543,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -1,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 4.5,
       "product": "40g 柠檬味薄荷含片",
@@ -3542,8 +3556,8 @@
       "spec": "",
       "supplier": "杨凌酷凌",
       "unit": "袋",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 4.5,
+      "usedQty": 1
     },
     {
       "balQty": 0,
@@ -5196,18 +5210,21 @@
       "usedAmt": 0
     },
     {
-      "balAmt": 0,
+      "balAmt": -4.5,
       "capAmt": 0,
       "full": false,
-      "lastDate": "",
+      "lastDate": "2026-09-11",
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "productCount": 94,
       "supplier": "杨凌酷凌",
-      "usedAmt": 0
+      "usedAmt": 4.5
     }
   ],
   "expiring": [],
-  "missingSheets": []
+  "missingSheets": [],
+  "recentCids": [
+    "E2E-DUP-1789137568"
+  ]
 }
