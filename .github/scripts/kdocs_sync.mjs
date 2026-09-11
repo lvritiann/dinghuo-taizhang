@@ -7,17 +7,17 @@
  * 浏览器（含 GitHub Pages 页面）无法直连金山，必须由无 Origin 的服务器代发。
  *
  * 流程：
- *   1. （可选）按 client_payload.rows 逐行 POST append 到金山「入库」/「出库」
- *   2. POST dump 拉回全量数据
+ *   1. mode=order 时按 payload.orders 逐笔 POST 写入金山「供应商 Sheet」
+ *   2. POST dump 拉回全量数据（商品档案 + 全部订单 + 算好的余额）
  *   3. 生成 data.json
  *   4. git commit + push（用 workflow 自带的 GITHUB_TOKEN）
  *
  * 环境变量：
- *   KD_WEBHOOK   金山 AirScript webhook URL      （Secrets）
- *   KD_TOKEN     AirScript-Token                 （Secrets）
- *   APP_TOKEN    自定义二次口令，防 PAT 泄露被滥用（Secrets）
- *   PAYLOAD_JSON dispatch 的 client_payload JSON
- *   MODE         append | sync | probe
+ *   KDOCS_WEBHOOK 金山 AirScript webhook URL     （Secrets）
+ *   KDOCS_TOKEN   AirScript-Token                （Secrets）
+ *   APP_TOKEN     自定义二次口令，防 PAT 泄露被滥用（Secrets）
+ *   PAYLOAD_JSON  dispatch 传入的 JSON（含 appToken + orders）
+ *   MODE          probe | sync | order
  * ============================================================= */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -74,7 +74,7 @@ if (MODE === 'probe') {
   const r = await kdocs({ mode: 'probe', appToken: payload.appToken || '' });
   console.log('探针结果：', JSON.stringify(r, null, 2));
   if (!r.ok) die('自检未通过：' + (r.error || JSON.stringify(r)));
-  console.log('✓ 三张表（批次/入库/出库）均就位');
+  console.log('✓ 商品档案与 8 家供应商 Sheet 均就位');
   process.exit(0);
 }
 
@@ -112,22 +112,28 @@ const dump = await kdocs({ mode: 'dump', appToken: payload.appToken || '', today
 if (!dump.ok) die('dump 失败：' + (dump.error || JSON.stringify(dump)));
 
 // 3) 生成 data.json
+// ★ 防御：丢掉没有供应商/商品名的残行 —— 老版式表格里那行「合计」小计
+//   会被 AirScript 当成一条订单读回来（日期=合计、商品为空、数量 0），
+//   在这里统一滤掉，保证 data.json 永远是干净数据。
+const cleanOrders = (dump.orders || []).filter(o => o && o.supplier && o.product);
+const dropped = (dump.orders || []).length - cleanOrders.length;
+if (dropped > 0) console.log(`· 已过滤 ${dropped} 条无效行（无供应商/商品名，通常是表格小计行）`);
+
 const data = {
   updatedAt: dump.updatedAt || new Date().toISOString(),
   source: 'kdocs',
   today: dump.today || today,
   products: dump.products,
-  orders: dump.orders,
+  orders: cleanOrders,
   productBal: dump.productBal,
   supplierBal: dump.supplierBal,
-  expiring: dump.expiring || [],
+  expiring: (dump.expiring || []).filter(o => o && o.supplier && o.product),
   missingSheets: dump.missingSheets || []
 };
 
 const outPath = path.join(ROOT, 'data.json');
 fs.writeFileSync(outPath, JSON.stringify(data, null, 2), 'utf8');
 console.log(`✓ data.json 已更新：商品 ${data.products.length} 款 / 订单 ${data.orders.length} 笔 / 供应商 ${data.supplierBal.length} 家`);
-
 // 4) 提交
 const hasChange = execSync('git status --porcelain data.json', { cwd: ROOT }).toString().trim();
 if (!hasChange) {
@@ -145,6 +151,7 @@ if (!hasChange) {
 if (failed.length) {
   console.error('⚠ 部分流水写入失败：');
   for (const f of failed) console.error('  - ' + f);
-  process.exit(failed.length && appended === 0 ? 1 : 0);
+  // 一笔都没写成功才判定失败；部分成功视为成功（避免一条坏数据卡死整批）
+  process.exit(done === 0 ? 1 : 0);
 }
 console.log('✓ 全部完成');
