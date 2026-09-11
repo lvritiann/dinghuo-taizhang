@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T13:48:32.329Z",
+  "updatedAt": "2026-09-11T13:55:39.327Z",
   "source": "kdocs",
   "today": "2026-09-11",
   "products": [
@@ -1894,112 +1894,7 @@
       "unit": "袋"
     }
   ],
-  "orders": [
-    {
-      "amount": 0,
-      "date": "合计",
-      "expireDate": "",
-      "note": "",
-      "price": 0,
-      "product": "",
-      "qty": 0,
-      "spec": "",
-      "store": "",
-      "supplier": "河南心连心",
-      "unit": ""
-    },
-    {
-      "amount": 0,
-      "date": "合计",
-      "expireDate": "",
-      "note": "",
-      "price": 0,
-      "product": "",
-      "qty": 0,
-      "spec": "",
-      "store": "",
-      "supplier": "靖其贸易",
-      "unit": ""
-    },
-    {
-      "amount": 0,
-      "date": "合计",
-      "expireDate": "",
-      "note": "",
-      "price": 0,
-      "product": "",
-      "qty": 0,
-      "spec": "",
-      "store": "",
-      "supplier": "天朗尚品",
-      "unit": ""
-    },
-    {
-      "amount": 0,
-      "date": "合计",
-      "expireDate": "",
-      "note": "",
-      "price": 0,
-      "product": "",
-      "qty": 0,
-      "spec": "",
-      "store": "",
-      "supplier": "山东新蓝",
-      "unit": ""
-    },
-    {
-      "amount": 0,
-      "date": "合计",
-      "expireDate": "",
-      "note": "",
-      "price": 0,
-      "product": "",
-      "qty": 0,
-      "spec": "",
-      "store": "",
-      "supplier": "天朗",
-      "unit": ""
-    },
-    {
-      "amount": 0,
-      "date": "合计",
-      "expireDate": "",
-      "note": "",
-      "price": 0,
-      "product": "",
-      "qty": 0,
-      "spec": "",
-      "store": "",
-      "supplier": "天天",
-      "unit": ""
-    },
-    {
-      "amount": 0,
-      "date": "合计",
-      "expireDate": "",
-      "note": "",
-      "price": 0,
-      "product": "",
-      "qty": 0,
-      "spec": "",
-      "store": "",
-      "supplier": "鑫湘缘",
-      "unit": ""
-    },
-    {
-      "amount": 0,
-      "date": "合计",
-      "expireDate": "",
-      "note": "",
-      "price": 0,
-      "product": "",
-      "qty": 0,
-      "spec": "",
-      "store": "",
-      "supplier": "杨凌酷凌",
-      "unit": ""
-    }
-  ],
+  "orders": [],
   "productBal": [
     {
       "balQty": 0,
