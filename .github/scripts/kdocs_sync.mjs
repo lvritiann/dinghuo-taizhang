@@ -38,8 +38,9 @@ let payload = {};
 try { payload = JSON.parse(process.env.PAYLOAD_JSON || '{}'); }
 catch (e) { die('PAYLOAD_JSON 解析失败：' + e.message); }
 
-// 口令校验：即便 PAT 泄露，不知道 APP_TOKEN 也无法驱动本流程
-if (APP_TOKEN) {
+// 口令校验：仅对「写入类」动作（order）强校验；probe/sync 为只读，无需口令
+// （手动/定时触发时 payload 里没有 appToken，但仍应放行只读动作）
+if (APP_TOKEN && MODE === 'order') {
   if (payload.appToken !== APP_TOKEN) die('appToken 不匹配，拒绝执行（防止令牌泄露后被滥用）');
 }
 
