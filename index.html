@@ -368,6 +368,7 @@ footer { margin-top: 26px; font-size: 11.5px; color: var(--text2); text-align: c
     <div class="field" data-page-node-id="k7Giq2qF1bFPASm0H3pxuM"><label for="cfPat" data-page-node-id="M2jOc5SDA4IWni4hU5BYtV">Fine-grained PAT（只需 Actions: 读写）</label><input id="cfPat" type="password" placeholder="github_pat_..." autocomplete="off" data-page-node-id="e6fYyqwNlaQT5BPxC0R49I"></div>
     <div class="field" data-page-node-id="uoowFrHSUZIaPhOfNAB8Y1"><label for="cfToken" data-page-node-id="apUHfpVtTK7l7rg6XWgiQR">APP_TOKEN（与仓库 Secrets 一致）</label><input id="cfToken" type="password" placeholder="自定义口令" autocomplete="off" data-page-node-id="asBfr6BjBP7OBl1I72zaLC"></div>
     <div class="note" data-page-node-id="FtwCHzVFNrUy0yEp1EA7Vz">PAT 只存本机浏览器，不会上传。建议用 <b data-page-node-id="ikQY0e7p5I2E5ToRtsGwIh">fine-grained PAT</b>，只勾目标仓库的 <b data-page-node-id="L0hlWVwnHAf0lAgBsBnqLK">Actions: 读写</b>，不要给 Contents 权限 —— 令牌即使泄露，对方也只能触发同步，改不了数据。</div>
+    <div class="field" data-page-node-id="SelfTestField01"><button class="btn" type="button" onclick="selfTest()" data-page-node-id="SelfTestBtn0001">连接自检（不提交订单）</button><div class="note" id="testResult" style="margin-top:8px" data-page-node-id="SelfTestRes0001"></div></div>
     <div class="modal-actions" data-page-node-id="qWAnci6PRQApylUqzklH1j">
       <button class="btn" onclick="closeSettings()" data-page-node-id="YrRwxxzYo8pCWGSOQWO9wt">取消</button>
       <button class="btn primary" onclick="saveSettings()" data-page-node-id="yGIw1dTt9zfaToZ2PxduYQ">保存</button>
@@ -610,6 +611,7 @@ var PRODUCTS = [
 
 var data = { products: [], orders: [], productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '' };
 // 预填默认值：油站打开页面即自带仓库信息+口令，只需补一个 fine-grained PAT 即可下单（见设置面板）
+// 页面里不放任何密钥：桌面 bat 通过 URL 片段一次性注入（#pat=…），存入本机 localStorage 后抹掉地址栏
 var cfg  = { owner: 'lvritiann', repo: 'dinghuo-taizhang', pat: '', appToken: 'cg8RIFAwDMA-vQVfV9hUXb4iHDqGpFS4' };
 var pending = [];
 var syncState = 'idle';
@@ -707,6 +709,16 @@ function loadLocal() {
 }
 function saveCfg() { try { localStorage.setItem(LS_CFG, JSON.stringify(cfg)); } catch (e) {} }
 function loadCfg() { try { var s = localStorage.getItem(LS_CFG); if (s) cfg = Object.assign(cfg, JSON.parse(s)); } catch (e) {} }
+// 桌面 bat 传入 URL 片段（#pat=<token>）：一次性注入 PAT，存本机并清掉地址栏（页面源码里始终没有密钥）
+function applyHashToken() {
+  try {
+    var m = (location.hash || '').match(/[#&]pat=([^&]+)/);
+    if (!m) return;
+    cfg.pat = decodeURIComponent(m[1]);
+    saveCfg();
+    if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+  } catch (e) {}
+}
 function savePending() { try { localStorage.setItem(LS_PENDING, JSON.stringify(pending)); } catch (e) {} }
 function loadPending() { try { var s = localStorage.getItem(LS_PENDING); pending = s ? (JSON.parse(s) || []) : []; } catch (e) { pending = []; } }
 
@@ -1214,17 +1226,45 @@ function flushPending() {
 function retryPending(i) { var p = pending[i]; if (!p) return; pending = [p]; savePending(); flushPending(); }
 
 function ghDispatch(payload) {
-  var url = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) + '/dispatches';
+  // 走 workflow_dispatch：fine-grained PAT 可触发；repository_dispatch 会被 GitHub 403
+  var url = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) + '/actions/workflows/kdocs-sync.yml/dispatches';
   return fetch(url, {
     method: 'POST',
     headers: { 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + cfg.pat, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ event_type: 'kdocs-write', client_payload: Object.assign({ appToken: cfg.appToken || '' }, payload) })
+    body: JSON.stringify({ ref: 'main', inputs: { mode: 'order', payload_json: JSON.stringify(Object.assign({ appToken: cfg.appToken || '' }, payload)) } })
   }).then(function (r) {
     if (r.status === 204) return true;
     return r.text().then(function (t) {
       var m = ''; try { m = JSON.parse(t).message || t; } catch (e) { m = t; }
       throw new Error('GitHub ' + r.status + '：' + String(m).slice(0, 120));
     });
+  });
+}
+
+// 连接自检：用设置框里的值发一个只读 probe（不下单），把真实 HTTP 结果显示出来
+function selfTest() {
+  var el = document.getElementById('testResult');
+  var o = document.getElementById('cfOwner').value.trim();
+  var r = document.getElementById('cfRepo').value.trim();
+  var p = document.getElementById('cfPat').value.trim();
+  var a = document.getElementById('cfToken').value.trim();
+  if (!o || !r || !p) { el.textContent = '请先填写 仓库所有者 / 仓库名 / PAT'; el.style.color = '#c0392b'; return; }
+  el.textContent = '测试中…'; el.style.color = '';
+  var url = 'https://api.github.com/repos/' + encodeURIComponent(o) + '/' + encodeURIComponent(r) + '/actions/workflows/kdocs-sync.yml/dispatches';
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + p, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ref: 'main', inputs: { mode: 'probe' } })
+  }).then(function (res) {
+    if (res.status === 204) { el.textContent = '通过（HTTP 204）：PAT 有效，可以下单'; el.style.color = '#1e8e3e'; return; }
+    return res.text().then(function (t) {
+      var m = ''; try { m = JSON.parse(t).message || t; } catch (e) { m = t; }
+      el.textContent = '失败 HTTP ' + res.status + '：' + String(m).replace(/\s+/g, ' ').slice(0, 160);
+      el.style.color = '#c0392b';
+    });
+  }).catch(function (e) {
+    el.textContent = '请求未发出/被拦截：' + e.message + '（可能是网络或浏览器插件）';
+    el.style.color = '#c0392b';
   });
 }
 
@@ -1417,7 +1457,7 @@ function bindCapPanel() {
 
 /* ---------- 启动 ---------- */
 function boot() {
-  loadCfg(); loadPending(); loadCaps();
+  loadCfg(); applyHashToken(); loadPending(); loadCaps();
   bindDashFilters(); bindCapPanel();
   var hasLocal = loadLocal();
   syncState = 'busy'; refreshAll();
