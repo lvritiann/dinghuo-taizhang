@@ -23,8 +23,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 
-const KD_WEBHOOK = process.env.KD_WEBHOOK || '';
-const KD_TOKEN   = process.env.KD_TOKEN   || '';
+const KD_WEBHOOK = process.env.KDOCS_WEBHOOK || '';
+const KD_TOKEN   = process.env.KDOCS_TOKEN   || '';
 const APP_TOKEN  = process.env.APP_TOKEN  || '';
 const MODE       = (process.env.MODE || 'sync').toLowerCase();
 const ROOT       = process.env.GITHUB_WORKSPACE || process.cwd();
