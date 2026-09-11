@@ -737,7 +737,9 @@ function normalize(raw) {
       product: String(r.product || ''), spec: String(r.spec || ''), unit: String(r.unit || ''),
       qty: qty, price: price, amount: Number(r.amount || (Math.round(qty * price * 100) / 100)),
       expireDate: r.expireDate || '', note: String(r.note || '') };
-  });
+  })
+  // 防御：丢掉没有供应商/商品名的残行（例如表格里的「合计」小计行被误读成订单）
+  .filter(function (r) { return r.supplier && r.product; });
   return o;
 }
 
