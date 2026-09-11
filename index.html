@@ -196,9 +196,9 @@ footer { margin-top: 26px; font-size: 11.5px; color: var(--text2); text-align: c
       </div>
     </div>
     <div class="header-btns" data-page-node-id="nBjSozxfdoz5XCzhtoxqlu">
-      <button class="btn sm" onclick="manualSync()" data-page-node-id="a5PA4fryaFZHxo2Rzr1Sys">
+      <button class="btn sm" onclick="syncNow()" data-page-node-id="a5PA4fryaFZHxo2Rzr1Sys">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="z1vVALvEqR2RD4R5x7owPX"><path d="M21 12a9 9 0 1 1-2.64-6.36" data-page-node-id="on6zuARCcldDxQdzyiv9Be"/><path d="M21 3v6h-6" data-page-node-id="OtRYcof5uyem1PnITnD7cC"/></svg>
-        刷新
+        同步
       </button>
       <button class="btn sm" onclick="openSettings()" data-page-node-id="kmA8OSFrrASAqph1O4cbbh">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="eJF0aDyVFVxQ9BIr3PcAe2"><circle cx="12" cy="12" r="3" data-page-node-id="noCpaCsXKZffwk9L05jj4R"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" data-page-node-id="dZ4SPVwdoPLhFV3LFsGkBy"/></svg>
@@ -1290,6 +1290,27 @@ function pollUpdate() {
       })
       .catch(function () { if (tries >= 18) { clearInterval(pollTimer); pollTimer = null; syncState = 'ok'; refreshAll(); } });
   }, 10000);
+}
+
+// 顶部「同步」：先让 GitHub 去金山拉一次（只读 dump），再轮询 data.json
+// 已配置 PAT 时才触发云端同步；否则退回「只重读 data.json」（manualSync）
+function syncNow() {
+  var p = String(cfg.pat || '').trim();
+  if (!p || !cfg.owner || !cfg.repo) { manualSync(); return; }
+  syncState = 'busy'; refreshAll();
+  var url = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) + '/actions/workflows/kdocs-sync.yml/dispatches';
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + p, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ref: 'main', inputs: { mode: 'sync' } })
+  }).then(function (res) {
+    if (res.status === 204) { toast('已触发同步，20~40 秒后自动更新'); pollUpdate(); return; }
+    return res.text().then(function (t) {
+      var m = ''; try { m = JSON.parse(t).message || t; } catch (e) { m = t; }
+      syncState = 'err'; refreshAll();
+      toast('同步失败 HTTP ' + res.status + '：' + String(m).slice(0, 100));
+    });
+  }).catch(function () { manualSync(); });
 }
 
 function manualSync() {
