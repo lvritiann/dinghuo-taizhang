@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T13:59:09.454Z",
+  "updatedAt": "2026-09-11T14:16:25.594Z",
   "source": "kdocs",
   "today": "2026-09-11",
   "products": [
@@ -1894,21 +1894,7 @@
       "unit": "袋"
     }
   ],
-  "orders": [
-    {
-      "amount": 4.5,
-      "date": "2026-09-11",
-      "expireDate": "",
-      "note": "★系统测试请删除",
-      "price": 4.5,
-      "product": "40g 柠檬味薄荷含片",
-      "qty": 1,
-      "spec": "",
-      "store": "测试门店",
-      "supplier": "杨凌酷凌",
-      "unit": "袋"
-    }
-  ],
+  "orders": [],
   "productBal": [
     {
       "balQty": 0,
@@ -3543,12 +3529,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -1,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 4.5,
       "product": "40g 柠檬味薄荷含片",
@@ -3556,8 +3542,8 @@
       "spec": "",
       "supplier": "杨凌酷凌",
       "unit": "袋",
-      "usedAmt": 4.5,
-      "usedQty": 1
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
       "balQty": 0,
@@ -5129,7 +5115,7 @@
       "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "合计",
+      "lastDate": "",
       "low": false,
       "orderCount": 0,
       "pct": 0,
@@ -5141,7 +5127,7 @@
       "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "合计",
+      "lastDate": "",
       "low": false,
       "orderCount": 0,
       "pct": 0,
@@ -5153,7 +5139,7 @@
       "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "合计",
+      "lastDate": "",
       "low": false,
       "orderCount": 0,
       "pct": 0,
@@ -5165,7 +5151,7 @@
       "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "合计",
+      "lastDate": "",
       "low": false,
       "orderCount": 0,
       "pct": 0,
@@ -5177,7 +5163,7 @@
       "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "合计",
+      "lastDate": "",
       "low": false,
       "orderCount": 0,
       "pct": 0,
@@ -5189,7 +5175,7 @@
       "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "合计",
+      "lastDate": "",
       "low": false,
       "orderCount": 0,
       "pct": 0,
@@ -5201,7 +5187,7 @@
       "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "合计",
+      "lastDate": "",
       "low": false,
       "orderCount": 0,
       "pct": 0,
@@ -5210,16 +5196,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -4.5,
+      "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "合计",
+      "lastDate": "",
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "productCount": 94,
       "supplier": "杨凌酷凌",
-      "usedAmt": 4.5
+      "usedAmt": 0
     }
   ],
   "expiring": [],
