@@ -271,7 +271,7 @@ body:not(.is-admin) .admin-only { display: none !important; }
 .narrow { width: 100%; max-width: 880px; margin: 0 auto; }
 
 /* 门店锁定后的只读感 */
-select.locked { background: var(--card2); color: var(--text2); cursor: not-allowed; }
+select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/西 */
 
 /* ---------- 手机：把提交按钮钉在底部，长表单不用滚到底 ---------- */
 @media (max-width: 760px) {
@@ -571,6 +571,34 @@ var LS_RECENT  = 'wb_order_recent_v1';   // 最近提交指纹（防误触重复
 var STORES = ['秦岭东','秦岭西','宁陕东','宁陕西','洋县东','洋县西','汉中东','汉中西','富平东','富平西',
   '韩城东','韩城西','富县东','富县西','华山南','华山北','南沙南','南沙北','白河南','白河北',
   '玉华宫东','玉华宫西','照金南','照金北','旬阳南','旬阳北','略阳东','略阳西','天汉水城东','天汉水城西'];
+
+// ★ 业务口径：一共 15 座服务区，每座含东/西（或南/北）两个门店。
+//   分站启动器按「座」绑定：座内两个门店可自由切换，座外选不到。
+var STORE_GROUPS = [
+  { site: '秦岭',     stores: ['秦岭东', '秦岭西'] },
+  { site: '宁陕',     stores: ['宁陕东', '宁陕西'] },
+  { site: '洋县',     stores: ['洋县东', '洋县西'] },
+  { site: '汉中',     stores: ['汉中东', '汉中西'] },
+  { site: '富平',     stores: ['富平东', '富平西'] },
+  { site: '韩城',     stores: ['韩城东', '韩城西'] },
+  { site: '富县',     stores: ['富县东', '富县西'] },
+  { site: '华山',     stores: ['华山南', '华山北'] },
+  { site: '南沙',     stores: ['南沙南', '南沙北'] },
+  { site: '白河',     stores: ['白河南', '白河北'] },
+  { site: '玉华宫',   stores: ['玉华宫东', '玉华宫西'] },
+  { site: '照金',     stores: ['照金南', '照金北'] },
+  { site: '旬阳',     stores: ['旬阳南', '旬阳北'] },
+  { site: '略阳',     stores: ['略阳东', '略阳西'] },
+  { site: '天汉水城', stores: ['天汉水城东', '天汉水城西'] }
+];
+
+function siteStores() {   // 当前绑定站的允许门店；未绑定 / 管理员 → null（不限制）
+  if (!boundSite || isAdmin()) return null;
+  for (var i = 0; i < STORE_GROUPS.length; i++) {
+    if (STORE_GROUPS[i].site === boundSite) return STORE_GROUPS[i].stores;
+  }
+  return null;
+}
 
 // 商品余额表筛选 + 分页状态（UI 态，非业务数据）
 var dashState = { sup: '', cat: '', status: 'all', q: '', page: 1, size: 20 };
@@ -897,7 +925,7 @@ var ADMIN_SHA = '3d56c9d0407ceacccdb3e74cd3238566e219104da3af57ab3c4bcaf8cf7c590
 var ADMIN_FNV = 'b349ee67';   // fnv1a(管理口令)，仅作无 crypto.subtle 时的降级
 
 var role = 'store';          // 'store' | 'admin'
-var boundStore = '';         // 油站绑定的门店（来自 #store=，锁定后不可改）
+var boundSite = '';          // 油站绑定的「站」（来自 #site=；站内门店可选，站外不可选）
 var adminSha = ADMIN_SHA, adminFnv = ADMIN_FNV;
 var currentView = 'order';
 var hashWantAdmin = false;   // 本次 URL 带了 #admin
@@ -911,13 +939,13 @@ function loadRole() {
     if (!s) return;
     var o = JSON.parse(s) || {};
     if (o.role === 'admin') role = 'admin';
-    if (o.store) boundStore = o.store;
+    if (o.site) boundSite = o.site;
     if (o.sha) adminSha = o.sha;
     if (o.fnv) adminFnv = o.fnv;
   } catch (e) {}
 }
 function saveRole() {
-  try { localStorage.setItem(LS_ROLE, JSON.stringify({ role: role, store: boundStore, sha: adminSha, fnv: adminFnv })); } catch (e) {}
+  try { localStorage.setItem(LS_ROLE, JSON.stringify({ role: role, site: boundSite, sha: adminSha, fnv: adminFnv })); } catch (e) {}
 }
 
 // 简易 32 位哈希：crypto.subtle 不可用时的降级（只有 file:// 预览才会走到）
@@ -944,15 +972,15 @@ function checkAdminKey(key, cb) {
 }
 function hashBoth(key, cb) { sha256Hex(key, function (hx) { cb(hx || fnv1a(key), fnv1a(key)); }); }
 
-// 桌面 bat 传入 URL 片段：一次性注入（#pat=密钥 / #store=门店 / #admin），存本机后清掉地址栏
+// 桌面 bat 传入 URL 片段：一次性注入（#pat=密钥 / #site=服务区 / #admin），存本机后清掉地址栏
 function applyHashParams() {
   try {
     var h = location.hash || '';
     var touched = false;
     var mPat = h.match(/[#&]pat=([^&]+)/);
     if (mPat) { cfg.pat = decodeURIComponent(mPat[1]); saveCfg(); touched = true; }
-    var mStore = h.match(/[#&]store=([^&]+)/);
-    if (mStore) { boundStore = decodeURIComponent(mStore[1]); touched = true; }
+    var mSite = h.match(/[#&]site=([^&]+)/);
+    if (mSite) { boundSite = decodeURIComponent(mSite[1]); touched = true; }
     if (/(^|[#&])admin([=&]|$)/.test(h)) { hashWantAdmin = true; touched = true; }
     if (touched) {
       saveRole();
@@ -981,7 +1009,7 @@ function renderRole() {
   var admin = isAdmin();
   if (document.body && document.body.classList) document.body.classList.toggle('is-admin', admin);
   var tag = document.getElementById('roleTag');
-  if (tag) tag.textContent = admin ? '管理员' : (boundStore ? boundStore : '油站');
+  if (tag) tag.textContent = admin ? '管理员' : (boundSite ? boundSite : '油站');
   var cur = document.querySelector ? document.querySelector('.view.on') : null;
   if (!admin && cur) {
     var v = cur.getAttribute('data-view');
@@ -992,21 +1020,39 @@ function renderRole() {
 
 /* ---------- 门店锁定 ---------- */
 function applyStoreLock() {
-  var locked = !!boundStore && !isAdmin();
+  var allowed = siteStores();                 // 绑定了站 → 该站的门店数组；否则 null
   var st = document.getElementById('odStore');
   if (st) {
-    if (locked) {
-      st.innerHTML = '<option value="' + esc(boundStore) + '">' + esc(boundStore) + '（本店已锁定）</option>';
-      st.value = boundStore; st.disabled = true; st.classList.add('locked');
-    } else if (st.disabled) {
-      st.disabled = false; st.classList.remove('locked');
+    if (allowed) {
+      var cur = st.value;
+      st.innerHTML = allowed.map(function (s) {
+        return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
+      }).join('');
+      st.value = (allowed.indexOf(cur) >= 0) ? cur : allowed[0];
+      st.classList.add('locked');             // ★ 仍可选东/西，但不给选站外
+      st.disabled = false;
+    } else if (st.classList.contains('locked')) {
+      st.classList.remove('locked');
       st.innerHTML = STORES.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join('');
     }
   }
   var ft = document.getElementById('fStore');
   if (ft) {
-    if (locked) { ft.value = boundStore; ft.disabled = true; ft.classList.add('locked'); }
-    else { ft.disabled = false; ft.classList.remove('locked'); }
+    if (allowed) {
+      var fcur = ft.value;
+      ft.innerHTML = '<option value="">' + esc(boundSite) + '（全部）</option>' + allowed.map(function (s) {
+        return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
+      }).join('');
+      ft.value = (fcur === '' || allowed.indexOf(fcur) >= 0) ? fcur : '';
+      ft.classList.add('locked');
+      ft.disabled = false;
+    } else if (ft.classList.contains('locked')) {
+      ft.classList.remove('locked');
+      ft.disabled = false;
+      ft.innerHTML = '<option value="">全部门店</option>' + STORES.map(function (s) {
+        return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
+      }).join('');
+    }
   }
 }
 
@@ -1445,8 +1491,10 @@ function renderDetail() {
   var fp = document.getElementById('fProduct').value;
   var fd = Number(document.getElementById('fDays').value) || 0;
   var from = (!fdate && fd) ? addDays(todayStr(), -fd) : '';
+  var scope = siteStores();                 // ★ 绑定了站：明细只看本站门店
 
   function match(o, withDate) {
+    if (scope && scope.indexOf(o.store) < 0) return false;
     if (fs && o.supplier !== fs) return false;
     if (withDate && fdate && o.date !== fdate) return false;
     if (fst && o.store !== fst) return false;
@@ -1568,7 +1616,11 @@ function submitOrder() {
   var sup = document.getElementById('odSupplier').value;
   var prod = document.getElementById('odProduct').value;
   var store = document.getElementById('odStore').value;
-  if (!isAdmin() && boundStore) store = boundStore;   // ★ 绑定门店优先，防止改 DOM 换站
+  var scope = siteStores();
+  if (scope && scope.indexOf(store) < 0) {   // ★ 站点绑定：只允许本站门店（防改 DOM 换站）
+    toast('门店只能选 ' + scope.join(' / '));
+    return;
+  }
   var qty = Number(document.getElementById('odQty').value);
   var date = document.getElementById('odDate').value || todayStr();
   var p = prodOf(sup, prod);
