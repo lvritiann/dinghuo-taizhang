@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T06:54:53.795Z",
+  "updatedAt": "2026-09-14T06:55:53.379Z",
   "source": "kdocs",
   "today": "2026-09-14",
   "products": [
@@ -2776,21 +2776,7 @@
       "unit": "根"
     }
   ],
-  "orders": [
-    {
-      "amount": 0.03,
-      "date": "2026-09-14",
-      "expireDate": "",
-      "note": "写入自检-可删",
-      "price": 0.03,
-      "product": "塑包小吸管",
-      "qty": 1,
-      "spec": "",
-      "store": "秦岭",
-      "supplier": "天朗",
-      "unit": "个"
-    }
-  ],
+  "orders": [],
   "productBal": [
     {
       "balQty": 0,
@@ -6244,12 +6230,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -1,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 0.03,
       "product": "塑包小吸管",
@@ -6257,8 +6243,8 @@
       "spec": "",
       "supplier": "天朗",
       "unit": "个",
-      "usedAmt": 0.03,
-      "usedQty": 1
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
       "balQty": 0,
@@ -6770,16 +6756,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -0.03,
+      "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-09-14",
+      "lastDate": "",
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "productCount": 97,
       "supplier": "天朗",
-      "usedAmt": 0.03
+      "usedAmt": 0
     },
     {
       "balAmt": 0,
