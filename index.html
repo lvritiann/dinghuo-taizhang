@@ -1111,6 +1111,12 @@ var PRODUCTS = [
   ['天朗','一次性手套','','盒',18,0,0,'照金专属','照金'],
 ];
 
+/* ★ COFFEE-PATCH v1.2：本地「限定站点」索引（供应商|商品名 → 限定站点）。
+   线上 data.json 的 siteOnly 依赖金山端 AirScript（需用户手工重贴）；
+   在重贴生效前，用本地档案兜底，保证页面端的站点限定始终生效。 */
+var LOCAL_SITE = {};
+PRODUCTS.forEach(function (p) { if (p[8]) LOCAL_SITE[p[0] + '|' + p[1]] = p[8]; });
+
 var data = { products: [], orders: [], productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '', catCaps: [], catBal: [], hasAnyCap: false };   /* CATCH-PATCH v2 */
 // 预填默认值：油站打开页面即自带仓库信息+口令，只需补一个 fine-grained PAT 即可下单（见设置面板）
 // 页面里不放任何密钥：桌面 bat 通过 URL 片段一次性注入（#pat=…），存入本机 localStorage 后抹掉地址栏
@@ -1664,7 +1670,8 @@ function normalize(raw) {
   o.products = o.products.map(function (p) {
     return { supplier: String(p.supplier || ''), name: String(p.name || p.product || ''), spec: String(p.spec || ''),
       unit: String(p.unit || ''), price: Number(p.price || 0), shelf: Math.round(Number(p.shelf || 0)),
-      capQty: Number(p.capQty || 0), note: String(p.note || ''), siteOnly: String(p.siteOnly || '') };
+      capQty: Number(p.capQty || 0), note: String(p.note || ''),
+      siteOnly: String(p.siteOnly || LOCAL_SITE[String(p.supplier || '') + '|' + String(p.name || p.product || '')] || '') };
   });
   o.orders = o.orders.map(function (r) {
     var qty = Number(r.qty || 0), price = Number(r.price || 0);
