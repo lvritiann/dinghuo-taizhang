@@ -485,6 +485,123 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
 .share-wrap { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .share-donut { flex: 0 0 auto; }
 .share-legend { flex: 1 1 150px; min-width: 140px; }
+
+/* ===== ARRIVE-PATCH v1：收货确认 ===== */
+.tab .tdot { display: none; min-width: 17px; height: 17px; line-height: 17px; padding: 0 5px;
+  margin-left: 6px; border-radius: 999px; background: var(--red); color: #fff;
+  font-size: 10.5px; font-weight: 800; text-align: center; }
+.tab .tdot.on { display: inline-block; }
+.recv-diff { display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  background: var(--card2); border-radius: 12px; padding: 10px 12px; }
+.recv-diff label { font-size: 12px; color: var(--text2); }
+.recv-diff input { min-height: 36px; width: 118px; font-size: 13px; }
+.recv-diff input.wide { width: 200px; }
+.recv-live { font-size: 12.5px; color: var(--text2); }
+.recv-live b { color: var(--text); }
+.diff-neg { color: var(--red); font-weight: 700; }
+.diff-pos { color: var(--orange); font-weight: 700; }
+
+/* 手机窄屏（≤900px，与页面既有堆叠断点同一档）：
+   12 列的待收货表在手机上会被挤成「一列一个字」，还把【确认到货】按钮顶到屏幕外。
+   这里只藏「手机上不看也懂」的列，保证 门店/商品/待收/单位/操作 都露在外面。
+   ★ 用 #id 限定，绝不动全站 .tbl —— 订单明细等其他表一个像素都不变。 */
+@media (max-width: 900px) {
+  /* ── ARRIVE-PATCH v1.5：手机端收货确认两表 ──
+     症状（iframe 真 390px 实测）：12 列宽表被压成一字一行 —— 商品列只剩 39px、
+     行高 204px，【确认到货】还被顶出屏幕 22px。手机恰恰是"货到了掏手机点一下"的地方。
+     根因：`.tbl` 是 auto 布局，中文的最小不可断单元＝一个字，7 列在 390px 里
+           每列都被压到 min-content。
+     修法：① 能藏就藏  ② table-layout:fixed + 逐列钉死像素宽
+           ③ 操作格的两个按钮竖排（横排要 100px，竖排只要 66px，省下的给商品列）
+     ★ 只用 #id 限定，绝不动全站 .tbl —— 订单明细/商品余额等表一个像素都不变。 */
+  #tblRecvWait th:nth-child(2), #tblRecvWait td:nth-child(2),      /* 服务区 */
+  #tblRecvWait th:nth-child(6), #tblRecvWait td:nth-child(6),      /* 规格 */
+  #tblRecvWait th:nth-child(7), #tblRecvWait td:nth-child(7),      /* 已订 */
+  #tblRecvWait th:nth-child(8), #tblRecvWait td:nth-child(8),      /* 已收 */
+  #tblRecvWait th:nth-child(11), #tblRecvWait td:nth-child(11),    /* 最近下单（状态标已含「超期未收」） */
+  #tblRecvDone th:nth-child(1), #tblRecvDone td:nth-child(1),      /* 确认时间 */
+  #tblRecvDone th:nth-child(5), #tblRecvDone td:nth-child(5),      /* 应收 */
+  #tblRecvDone th:nth-child(8), #tblRecvDone td:nth-child(8),      /* 差异原因（手机上放不下，桌面看） */
+  #tblRecvDone th:nth-child(9), #tblRecvDone td:nth-child(9) {     /* 确认人 */
+    display: none;
+  }
+  /* ★ 关键：auto 布局会把每列压到 min-content（中文＝一个字宽）→ 必须 fixed */
+  #tblRecvWait, #tblRecvDone { table-layout: fixed; width: 100%; font-size: 11.5px; }
+  #tblRecvWait th, #tblRecvDone th {
+    padding: 7px 4px; font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  #tblRecvWait td, #tblRecvDone td { padding: 7px 4px; vertical-align: middle; }
+  /* 只对「数据行」做 nowrap/省略号；差异面板行(tr[id])必须放行，否则【保存修改】被裁 */
+  #tblRecvWait tbody tr:not([id]) td,
+  #tblRecvDone tbody tr:not([id]) td {
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  /* 商品列：唯一允许换行的列，自动吃满剩余宽度 */
+  #tblRecvWait tbody tr:not([id]) td:nth-child(5),
+  #tblRecvDone tbody tr:not([id]) td:nth-child(4) {
+    white-space: normal; word-break: break-word;
+  }
+  /* ★ 操作格：两个按钮竖排。
+     td 自身带着 inline style="white-space:nowrap"，改不动换行，只能让按钮变成块级。 */
+  #tblRecvWait tbody tr:not([id]) td:last-child,
+  #tblRecvDone tbody tr:not([id]) td:last-child { overflow: visible; }
+  #tblRecvWait tbody tr:not([id]) td:last-child > .btn,
+  #tblRecvDone tbody tr:not([id]) td:last-child > .btn {
+    display: block; width: 100%; min-height: 28px;
+    margin: 0 0 4px 0; padding: 4px 2px; font-size: 10px;
+  }
+  #tblRecvWait tbody tr:not([id]) td:last-child > .btn:last-child,
+  #tblRecvDone tbody tr:not([id]) td:last-child > .btn:last-child { margin-bottom: 0; }
+  /* 待收货：状态|门店|供应商|商品|待收|单位|操作 = 44+46+46+?+42+30+66 */
+  #tblRecvWait th:nth-child(1)  { width: 42px; }   /* 状态 */
+  #tblRecvWait th:nth-child(3)  { width: 44px; }   /* 门店 */
+  #tblRecvWait th:nth-child(4)  { width: 46px; }   /* 供应商 */
+  #tblRecvWait th:nth-child(9)  { width: 42px; }   /* 待收 */
+  #tblRecvWait th:nth-child(10) { width: 34px; }   /* 单位 */
+  #tblRecvWait th:nth-child(12) { width: 66px; }   /* 操作 */
+  /* 已确认：门店|供应商|商品|实收|差异|操作 = 46+46+?+44+40+66 */
+  #tblRecvDone th:nth-child(2)  { width: 46px; }   /* 门店 */
+  #tblRecvDone th:nth-child(3)  { width: 46px; }   /* 供应商 */
+  #tblRecvDone th:nth-child(6)  { width: 44px; }   /* 实收 */
+  #tblRecvDone th:nth-child(7)  { width: 40px; }   /* 差异 */
+  #tblRecvDone th:nth-child(10) { width: 66px; }   /* 操作 */
+  /* 状态标允许折成两行（「超期/未收」），否则 44px 里会被截成省略号 */
+  #tblRecvWait .tag { font-size: 10px; padding: 1px 4px; line-height: 1.2; white-space: normal; }
+  /* 差异面板：手机上允许换行，输入行不许溢出 */
+  .recv-diff { gap: 6px; padding: 9px 10px; flex-wrap: wrap; }
+  .recv-diff input { width: 96px; }
+  .recv-diff input.wide { width: 150px; }
+
+  /* ── ARRIVE-PATCH v1.6：台账「入库进度」明细表（管理员在手机上看） ──
+     同一个病：11 列在 390px 下被压成一字一行（「超期未收」竖排、商品名一字一行）。
+     藏掉 服务区/已订/最近下单/下单后（「超期未收」状态标已承担时效提醒），
+     留 状态|门店|供应商|商品|已收|待收|单位，再 fixed + 钉宽把余量给商品列。
+     ★ nth-child 数的是原始 DOM 位置，display:none 后编号不变。 */
+  #tblRecvLedger th:nth-child(2), #tblRecvLedger td:nth-child(2),     /* 服务区 */
+  #tblRecvLedger th:nth-child(6), #tblRecvLedger td:nth-child(6),     /* 已订 */
+  #tblRecvLedger th:nth-child(10), #tblRecvLedger td:nth-child(10),   /* 最近下单 */
+  #tblRecvLedger th:nth-child(11), #tblRecvLedger td:nth-child(11) {  /* 下单后 */
+    display: none;
+  }
+  #tblRecvLedger { table-layout: fixed; width: 100%; font-size: 11.5px; }
+  #tblRecvLedger th {
+    padding: 7px 4px; font-size: 10.5px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  #tblRecvLedger td {
+    padding: 7px 4px; vertical-align: middle;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  #tblRecvLedger td:nth-child(5) { white-space: normal; word-break: break-word; }  /* 商品列吃余量 */
+  #tblRecvLedger th:nth-child(1) { width: 40px; }   /* 状态 */
+  #tblRecvLedger th:nth-child(3) { width: 44px; }   /* 门店 */
+  #tblRecvLedger th:nth-child(4) { width: 42px; }   /* 供应商 */
+  #tblRecvLedger th:nth-child(7) { width: 38px; }   /* 已收 */
+  #tblRecvLedger th:nth-child(8) { width: 40px; }   /* 待收 */
+  #tblRecvLedger th:nth-child(9) { width: 32px; }   /* 单位 */
+  /* ARRIVE-PATCH v1.6.1：钉宽合计 236，商品列在 320 宽下得 84px */
+  #tblRecvLedger .tag { font-size: 10px; padding: 1px 4px; line-height: 1.2; white-space: normal; }
+}
 </style>
 </head>
 <body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
@@ -513,6 +630,7 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
   <nav class="tabs" id="tabs" data-page-node-id="tabsBar">
     <button class="tab on" data-view="order" onclick="setView('order')">下定</button>
     <button class="tab" data-view="orders" onclick="setView('orders')">订单明细</button>
+    <button class="tab" data-view="recv" onclick="setView('recv')">收货确认<span class="tdot" id="recvDot"></span></button>
     <button class="tab admin-only" data-view="ledger" onclick="setView('ledger')">台账总览</button>
     <button class="tab admin-only" data-view="admin" onclick="setView('admin')">商品与额度维护</button>
     <span class="tab-spacer"></span>
@@ -675,6 +793,29 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
     </div>
     <div class="tbl-wrap" data-page-node-id="fQkomTXvpUXiap9YbN4H53"><table class="tbl" id="tblProduct" data-page-node-id="YPUxOszy1DMzkIMAFKMD6c"></table></div>
   </div>
+
+  <!-- ⑨ 入库进度（ARRIVE-PATCH v1）—— 回答「下了订，到底入没入库」 -->
+  <div class="card" data-page-node-id="recvLedgerCard">
+    <div class="card-h">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14.5l3-3 3 3 5-6.5"/></svg>
+      <h2>入库进度（已下订 / 已入库 / 待收货）</h2>
+      <span class="spacer"></span>
+      <span class="hint" id="recvLedgerHint"></span>
+    </div>
+    <div class="kpis" id="recvKpis"></div>
+    <div class="dash-filters" id="recvLedgerFilters">
+      <select id="rlSite"></select>
+      <select id="rlSupplier"></select>
+      <select id="rlScope">
+        <option value="wait">仅看待收货</option>
+        <option value="all">全部（含已收完）</option>
+      </select>
+      <span class="hint" id="rlInfo"></span>
+    </div>
+    <div class="tbl-wrap"><table class="tbl" id="tblRecvLedger"></table></div>
+    <div class="note">「待收货」= 该门店向该供应商订的累计数量 − 已确认收货的累计数量（按 <b>供应商+门店+商品</b> 累计口径比对）。<br>
+      距最近一次下单超过 <b>7 天</b>还没收完的标红 —— 老订单照常提醒，不会自动消失。</div>
+  </div>
     </div>
   </section>
 
@@ -775,6 +916,47 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
     </div>
     <div class="chart-title" style="margin-top:14px">订单明细</div>
     <div class="tbl-wrap"><table class="tbl" id="tblOrders"></table></div>
+  </div>
+    </div>
+  </section>
+
+  <section class="view" data-view="recv" data-page-node-id="viewRecv">
+    <div class="view-stack">
+  <!-- ⑦ 收货确认（ARRIVE-PATCH v1）—— 货到了点一下，台账才知道「到底入没入库」 -->
+  <div class="card" data-page-node-id="recvWaitCard">
+    <div class="card-h">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--hero)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7 12 3 4 7v10l8 4 8-4z"/><path d="M4 7l8 4 8-4"/><path d="M12 21V11"/><path d="M9 13.5l3 3 3-3"/></svg>
+      <h2>待收货 —— 下了订、还没入库的</h2>
+      <span class="spacer"></span>
+      <span class="hint" id="recvWaitHint"></span>
+    </div>
+    <div class="note">货到了就点 <b>确认到货</b>（默认整批收齐，一步到位）；数量对不上就点 <b>有差异</b>，
+      只填「多收 / 少收」的差额，系统自动换算实收数量 —— 少收填负数（如 <b>-2</b>），多收填正数。<br>
+      确认结果写入金山《到货确认》表，管理员可在「台账总览 → 入库进度」看全站入库情况。</div>
+    <div class="filters" id="recvFilters">
+      <select id="rvSite"></select>
+      <select id="rvSupplier"></select>
+      <select id="rvScope">
+        <option value="wait">仅看待收货</option>
+        <option value="diff">仅看有差异的</option>
+        <option value="all">全部（含已收完）</option>
+      </select>
+      <input id="rvSearch" type="search" placeholder="搜索商品 / 门店 / 供应商" />
+    </div>
+    <div class="sum-line" id="recvSum"></div>
+    <div class="tbl-wrap"><table class="tbl" id="tblRecvWait"></table></div>
+  </div>
+
+  <!-- ⑧ 已确认记录（可改 / 可撤） -->
+  <div class="card" data-page-node-id="recvDoneCard">
+    <div class="card-h">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+      <h2>已确认记录（可改数量 / 可撤销）</h2>
+      <span class="spacer"></span>
+      <span class="hint" id="recvDoneHint"></span>
+    </div>
+    <div class="note" id="recvDoneNote">油站<b>当天内</b>可改数量、可撤销（点错了当天还能救回来）；隔天的请找管理员。管理员不受时间限制。</div>
+    <div class="tbl-wrap"><table class="tbl" id="tblRecvDone"></table></div>
   </div>
     </div>
   </section>
@@ -1284,6 +1466,56 @@ function computeAll() {
     .map(function (o) { var d = daysLeft(o.expireDate); return { supplier: o.supplier, store: o.store, product: o.product, unit: o.unit, qty: o.qty, expireDate: o.expireDate, days: d, status: statusOf(d) }; })
     .filter(function (o) { return o.days !== null && o.days <= 30; })
     .sort(function (a, b) { return a.days - b.days; });
+
+  /* ===== ARRIVE-PATCH v1：到货 / 入库聚合 =====
+     键 = (供应商 | 门店 | 商品)，按【累计量】比 —— 不按订单行匹配。
+     为什么必须累计：金山订单行没有唯一号，同商品可能分多次下单；
+     累计口径天然支持「一单分两车到」这种分次到货。 */
+  data.arrivals = Array.isArray(data.arrivals) ? data.arrivals : [];
+  var ordAgg = {}, gotAgg = {}, diffAgg = {};
+  data.orders.forEach(function (o) {
+    var k = o.supplier + '\u0001' + o.store + '\u0001' + o.product;
+    if (!ordAgg[k]) ordAgg[k] = { qty: 0, unit: o.unit || '', spec: o.spec || '', lastDate: '' };
+    ordAgg[k].qty += Number(o.qty || 0);
+    if (o.date > ordAgg[k].lastDate) ordAgg[k].lastDate = o.date;
+  });
+  data.arrivals.forEach(function (a) {
+    var k = a.supplier + '\u0001' + a.store + '\u0001' + a.product;
+    if (!gotAgg[k]) gotAgg[k] = { qty: 0, n: 0 };
+    gotAgg[k].qty = n2(gotAgg[k].qty + Number(a.qtyGot || 0));
+    gotAgg[k].n++;
+    if (Number(a.diff || 0) !== 0) diffAgg[k] = 1;
+  });
+  var priceOf = {};
+  data.products.forEach(function (p) { priceOf[p.supplier + '|' + p.name] = Number(p.price || 0); });
+  data.recvAll = Object.keys(ordAgg).map(function (k) {
+    var pt = k.split('\u0001');
+    var od = ordAgg[k], gt = gotAgg[k] || { qty: 0, n: 0 };
+    var remain = n2(od.qty - gt.qty);
+    var price = priceOf[pt[0] + '|' + pt[2]] || 0;
+    return {
+      supplier: pt[0], store: pt[1], product: pt[2],
+      unit: od.unit, spec: od.spec,
+      should: n2(od.qty), got: n2(gt.qty), remain: remain,
+      price: price,
+      amtShould: n2(od.qty * price), amtGot: n2(gt.qty * price), amtRemain: n2(remain * price),
+      lastDate: od.lastDate, recvCount: gt.n,
+      hasDiff: !!diffAgg[k],
+      late: remain > 0 && !!od.lastDate && Math.abs(daysLeft(od.lastDate)) > RECV_LATE_DAYS
+    };
+  });
+  data.recvWait = data.recvAll.filter(function (x) { return x.remain > 0; });
+  data.recvSummary = {
+    amtShould: n2(data.recvAll.reduce(function (s, x) { return s + x.amtShould; }, 0)),
+    amtGot: n2(data.recvAll.reduce(function (s, x) { return s + x.amtGot; }, 0)),
+    amtRemain: n2(data.recvWait.reduce(function (s, x) { return s + x.amtRemain; }, 0)),
+    waitCount: data.recvWait.length,
+    lateCount: data.recvWait.filter(function (x) { return x.late; }).length,
+    waitSites: (function () {
+      var m = {}; data.recvWait.forEach(function (x) { m[siteOfStore(x.store)] = 1; });
+      return Object.keys(m).length;
+    })()
+  };
 }
 function suppliers() {
   var s = [];
@@ -1747,6 +1979,19 @@ function normalize(raw) {
   o.catCaps = (Array.isArray(o.catCaps) ? o.catCaps : []).map(function (c) {
     return { cat: String(c.cat || '').trim(), cap: Number(c.cap || 0), mode: String(c.mode || '').trim() };
   }).filter(function (c) { return c.cat; });
+  /* ★ ARRIVE-PATCH v1：《到货确认》表的记录。row 是金山表里的绝对行号 ——
+     改数量 / 撤销要靠它定位，所以必须原样透传，不能丢。 */
+  o.arrivals = (Array.isArray(o.arrivals) ? o.arrivals : []).map(function (a) {
+    var should = Number(a.qtyShould || 0), got = Number(a.qtyGot || 0);
+    return { row: Number(a.row || 0), ts: String(a.ts || ''), site: String(a.site || ''),
+      store: String(a.store || ''), supplier: String(a.supplier || ''), product: String(a.product || ''),
+      spec: String(a.spec || ''), unit: String(a.unit || ''),
+      qtyShould: should, qtyGot: got,
+      diff: Number(a.diff === undefined ? (Math.round((got - should) * 100) / 100) : a.diff),
+      reason: String(a.reason || ''), by: String(a.by || ''), note: String(a.note || '') };
+  })
+  // 防御：没有供应商/商品名的残行一律丢掉（与订单同口径）
+  .filter(function (a) { return a.supplier && a.product && a.row > 1; });
   return o;
 }
 
@@ -2085,6 +2330,8 @@ function refreshAll() {
   renderFooter();
   renderCap();
   renderCatCap();
+  renderRecv();
+  renderRecvLedger();
   renderCharts();
 }
 
@@ -2131,6 +2378,18 @@ function renderToday() {
     else if (b.low) items.push({ lvl: 'warn', t: '额度将尽：' + b.product + '（' + b.supplier + '）还剩 ' + b.balQty + b.unit,
       s: '已订 ' + nf(b.usedQty) + ' / 上限 ' + nf(b.capQty) + ' ' + b.unit + '（' + b.pct + '%）', b: '去下订', f: "focusProduct('" + esc(b.supplier) + "','" + esc(b.product) + "')" });
   });
+  // ★ ARRIVE-PATCH v1：待收货提醒 —— 老单也照常提醒，不会自己消失
+  var _rw = (data.recvWait || []).filter(recvVisible);
+  if (_rw.length) {
+    var _old = _rw.slice().sort(function (a, b) { return String(a.lastDate).localeCompare(String(b.lastDate)); })[0];
+    var _days = _old.lastDate ? Math.abs(daysLeft(_old.lastDate)) : 0;
+    var _lateCnt = 0;                                   // ★ 现场数已经过滤过的列表
+    _rw.forEach(function (x) { if (x.late) _lateCnt++; });
+    items.push({ lvl: _days > RECV_LATE_DAYS ? 'urgent' : 'warn',
+      t: '待收货 ' + _rw.length + ' 项还没确认入库' + (_lateCnt ? '（其中 ' + _lateCnt + ' 项超期）' : ''),
+      s: '最早的单 ' + (_old.lastDate || '—') + ' 下的（' + _days + ' 天前）· 货到了就点「确认到货」',
+      b: '去确认', f: "setView('recv')" });
+  }
   document.getElementById('todayHint').textContent = items.length ? items.length + ' 项' : '';
   document.getElementById('todayList').innerHTML = items.length ? items.map(function (it) {
     return '<div class="todo-item ' + it.lvl + '"><div class="todo-main"><div class="todo-t">' + esc(it.t) + '</div>' +
@@ -2727,13 +2986,13 @@ function retryPending(i) {
   flushPending();
 }
 
-function ghDispatch(payload) {
+function ghDispatch(payload, mode) {
   // 走 workflow_dispatch：fine-grained PAT 可触发；repository_dispatch 会被 GitHub 403
   var url = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) + '/actions/workflows/kdocs-sync.yml/dispatches';
   return fetch(url, {
     method: 'POST',
     headers: { 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + cfg.pat, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ref: 'main', inputs: { mode: 'order', payload_json: JSON.stringify(Object.assign({ appToken: cfg.appToken || '' }, payload)) } })
+    body: JSON.stringify({ ref: 'main', inputs: { mode: mode || 'order', payload_json: JSON.stringify(Object.assign({ appToken: cfg.appToken || '' }, payload)) } })
   }).then(function (r) {
     if (r.status === 204) return true;
     return r.text().then(function (t) {
@@ -3047,10 +3306,408 @@ function bindSubmitGuard() {
   if (btn && !btn.__guarded) { btn.__guarded = 1; }
 }
 
+/* ==========================================================
+ * ARRIVE-PATCH v1：收货确认（油站点一下，台账才知道到底入没入库）
+ * ----------------------------------------------------------
+ * 语义与金山 AirScript_订货闭环.js 的 arrive 分支逐字对齐：
+ *   · 对账键 = (供应商 | 门店 | 商品)，按【累计量】比，不按订单行匹配
+ *   · 应收累计 = 该键下所有订单数量之和
+ *   · 实收累计 = 《到货确认》表里该键的「实收数量」之和
+ *   · 待收     = 应收累计 − 实收累计
+ *   · 差异     = 本批实收 − 本批应到（= 确认时的待收）→ 每行自洽：应收 − 实收 = 差异
+ * 防重复（与下单同一套思路，但更轻）：
+ *   ① 本地哨兵：点完立刻打「已提交」标记（3 分钟），按钮变灰，防手快连点；
+ *   ② 云端硬拦：AirScript 里 remain<=0 直接拒绝，重复点绝不会写第二行。
+ *   —— 所以这里**不需要** pending 队列：整批一键确认，重复发是安全的。
+ * ========================================================== */
+var RECV_LATE_DAYS = 7;                 // 距最近一次下单超过这么多天还没收完 → 标「超期未收」
+var LS_RECV = 'wb_order_recv_sent_v1';
+var recvSent = {};                      // { 键: 哨兵过期时间戳 }
+var recvBusy = false;
+
+function recvKeyOf(sup, store, prod) { return sup + '\u0001' + store + '\u0001' + prod; }
+function recvPending(key) { return Number(recvSent[key] || 0) > Date.now(); }
+function saveRecvSent() { try { localStorage.setItem(LS_RECV, JSON.stringify(recvSent)); } catch (e) {} }
+function loadRecvSent() {
+  try { var s = localStorage.getItem(LS_RECV); recvSent = s ? (JSON.parse(s) || {}) : {}; }
+  catch (e) { recvSent = {}; }
+  var now = Date.now();                                  // 顺手清掉过期哨兵，别让 localStorage 越滚越大
+  for (var k in recvSent) if (recvSent.hasOwnProperty(k) && !(Number(recvSent[k]) > now)) delete recvSent[k];
+}
+function recvMarkSent(key) { recvSent[key] = Date.now() + 180000; saveRecvSent(); }
+function recvBy(x) { return isAdmin() ? ('管理员' + (boundSite ? '/' + boundSite : '')) : String((x && x.store) || boundSite || ''); }
+
+// 油站只看本服务区（与「订单明细」同口径：新单记服务区名、老单记门店名，两种都算在本站里）
+function recvVisible(x) {
+  if (isAdmin()) return true;
+  if (!boundSite) return true;          // 通用入口未绑定 → 不限制；金山端有服务区硬校验兜底
+  if (x.store === boundSite) return true;
+  return storesOfSite(boundSite).indexOf(x.store) >= 0;
+}
+
+// ★ 收货确认的唯一提交出口（先落哨兵、再发；失败可原地重试）
+function recvReq(arrive, okMsg, key) {
+  if (recvBusy) { toast('正在提交中，请稍候…'); return; }
+  if (!cfg.owner || !cfg.repo || !cfg.pat) { toast('未配置 GitHub 同步，无法提交（点右上角「设置」）'); return; }
+  if (key) recvMarkSent(key);
+  recvBusy = true; syncState = 'busy'; refreshAll();
+  ghDispatch({ arrive: Object.assign({ cid: newCid() }, arrive) }, 'arrive').then(function () {
+    recvBusy = false; syncState = 'ok'; refreshAll();
+    toast(okMsg + '，约 30 秒后自动更新…');
+    pollUpdate();
+  }).catch(function (e) {
+    recvBusy = false; syncState = 'err'; refreshAll();
+    toast('提交失败：' + e.message + '（再点一次即可重试）');
+  });
+}
+
+// ① 一键确认到货（实收 = 待收，无差异）
+function recvConfirm(i) {
+  var w = (data.recvView || [])[i]; if (!w) return;
+  var key = recvKeyOf(w.supplier, w.store, w.product);
+  if (recvPending(key)) { toast('这一项刚提交过，等它入库（约 30 秒）'); return; }
+  recvReq({
+    action: 'new', site: siteOfStore(w.store) || boundSite, by: recvBy(w),
+    items: [{ supplier: w.supplier, store: w.store, product: w.product, qtyGot: '', reason: '', note: '' }]
+  }, '已确认到货：' + w.product + ' × ' + nf(w.remain) + w.unit, key);
+}
+
+// ② 有差异：展开 / 收起面板。
+//    ★ 用显式开关（open 参数），而不是「读 style.display 猜状态」：
+//      初始的 style="display:none" 是写在 HTML 字符串里的，靠读回样式推状态
+//      在「属性没被解析进 el.style」的环境会猜反（把关闭判成打开）。
+function recvDiffPanel(i, open) {
+  var el = document.getElementById('rdr_' + i);
+  if (!el) return;
+  el.style.display = open ? '' : 'none';
+  if (open) { var inp = document.getElementById('rdi_' + i); if (inp) inp.focus(); recvDiffLive(i); }
+}
+
+// 差异输入实时换算：待收 + 差异 = 实收
+function recvDiffLive(i) {
+  var w = (data.recvView || [])[i]; if (!w) return;
+  var el = document.getElementById('rdl_' + i); if (!el) return;
+  var box = document.getElementById('rdi_' + i); if (!box) return;
+  var raw = box.value;
+  if (raw === '' || isNaN(Number(raw))) {
+    el.innerHTML = '待收 <b>' + nf(w.remain) + esc(w.unit) + '</b>；实收 = 待收 + 差异';
+    return;
+  }
+  var dv = Number(raw), got = n2(w.remain + dv);
+  el.innerHTML = '待收 <b>' + nf(w.remain) + esc(w.unit) + '</b> ' + (dv < 0 ? '− ' : '+ ') + nf(Math.abs(dv)) +
+    ' → 实收 <b class="' + (got < 0 ? 'diff-neg' : '') + '">' + nf(got) + esc(w.unit) + '</b>' +
+    (got < 0 ? '（不能为负）' : '');
+}
+
+// ③ 按差异确认
+function recvConfirmDiff(i) {
+  var w = (data.recvView || [])[i]; if (!w) return;
+  var key = recvKeyOf(w.supplier, w.store, w.product);
+  if (recvPending(key)) { toast('这一项刚提交过，等它入库（约 30 秒）'); return; }
+  var box = document.getElementById('rdi_' + i);
+  var raw = box ? box.value : '';
+  if (raw === '' || isNaN(Number(raw))) { toast('请填差异数量：少收填负数（如 -2），多收填正数'); return; }
+  var dv = Number(raw), got = n2(w.remain + dv);
+  if (got < 0) { toast('实收数量不能为负数（待收 ' + w.remain + '，差异 ' + dv + '）'); return; }
+  var rb = document.getElementById('rdr2_' + i);
+  var reason = String((rb && rb.value) || '').trim();
+  if (!reason && !confirm('差异 ' + dv + w.unit + '（实收 ' + got + w.unit + '）还没填原因，仍然提交吗？')) return;
+  recvReq({
+    action: 'new', site: siteOfStore(w.store) || boundSite, by: recvBy(w),
+    items: [{ supplier: w.supplier, store: w.store, product: w.product, qtyGot: got, reason: reason, note: '' }]
+  }, '已确认到货（差异 ' + (dv > 0 ? '+' : '') + dv + w.unit + '）：' + w.product, key);
+}
+
+// ── 已确认记录：改数量 / 撤销 ──
+// 规则：油站当天内可改可撤；管理员（admin:true）不限 —— 金山端有同样一道硬校验
+function recvCanEdit(a) { return isAdmin() || String(a.ts || '').slice(0, 10) === todayStr(); }
+function recvFixPanel(j, open) {
+  var el = document.getElementById('rvf_' + j);
+  if (!el) return;
+  el.style.display = open ? '' : 'none';
+  if (open) { var inp = document.getElementById('rvi_' + j); if (inp) inp.focus(); }
+}
+function recvFixApply(j) {
+  var a = (data.recvDoneView || [])[j]; if (!a) return;
+  var box = document.getElementById('rvi_' + j);
+  var v = box ? box.value : '';
+  if (v === '' || isNaN(Number(v)) || Number(v) < 0) { toast('请填一个 ≥ 0 的实收数量'); return; }
+  var rb = document.getElementById('rvr_' + j);
+  recvReq({ action: 'fix', row: a.row, qtyGot: Number(v), reason: String((rb && rb.value) || '').trim(), note: '', admin: isAdmin() },
+    '已改：' + a.product + ' 实收改为 ' + Number(v) + (a.unit || ''));
+}
+function recvVoid(j) {
+  var a = (data.recvDoneView || [])[j]; if (!a) return;
+  if (!confirm('撤销这条到货确认？\n\n' + a.store + ' / ' + a.supplier + ' / ' + a.product +
+    '\n应收 ' + a.qtyShould + (a.unit || '') + ' · 实收 ' + a.qtyGot + (a.unit || '') +
+    '\n撤销后这一项会重新回到「待收货」。')) return;
+  recvReq({ action: 'void', row: a.row, admin: isAdmin() }, '已撤销：' + a.product);
+}
+
+/* ---------- 渲染：收货确认（油站 + 管理员都看得到） ---------- */
+function renderRecv() {
+  var waitEl = document.getElementById('tblRecvWait');
+  if (!waitEl) return;
+
+  // 先读回筛选值（下拉要被重建，值必须自己兜住）
+  var siteSel = document.getElementById('rvSite');
+  var supSel = document.getElementById('rvSupplier');
+  var scopeSel = document.getElementById('rvScope');
+  var searchEl = document.getElementById('rvSearch');
+  var preSite = siteSel ? siteSel.value : '';
+  var preSup = supSel ? supSel.value : '';
+  var fScope = (scopeSel && scopeSel.value) ? scopeSel.value : 'wait';   /* 空值也当「仅看待收货」 */
+  var q = searchEl ? String(searchEl.value || '').trim() : '';
+
+  var i, g;
+  if (siteSel) {
+    g = '';
+    if (isAdmin()) {
+      g = '<option value="">全部服务区</option>';
+      for (i = 0; i < STORE_GROUPS.length; i++) g += '<option value="' + esc(STORE_GROUPS[i].site) + '">' + esc(STORE_GROUPS[i].site) + '</option>';
+    }
+    siteSel.innerHTML = g;
+    siteSel.style.display = isAdmin() ? '' : 'none';
+    siteSel.value = (isAdmin() && preSite) ? preSite : '';
+  }
+  if (supSel) {
+    g = '<option value="">全部供应商</option>';
+    var sps = suppliers();
+    for (i = 0; i < sps.length; i++) g += '<option value="' + esc(sps[i]) + '">' + esc(sps[i]) + '</option>';
+    supSel.innerHTML = g;
+    supSel.value = preSup || '';
+  }
+
+  var fSite = isAdmin() ? (siteSel ? siteSel.value : '') : boundSite;
+  var fSup = supSel ? supSel.value : '';
+
+  function keep(x) {
+    if (fSite && siteOfStore(x.store) !== fSite) return false;
+    if (fSup && x.supplier !== fSup) return false;
+    if (q && String(x.product).indexOf(q) < 0 && String(x.store).indexOf(q) < 0 && String(x.supplier).indexOf(q) < 0) return false;
+    return true;
+  }
+
+  var wl = (data.recvWait || []).filter(recvVisible);
+  var dot = document.getElementById('recvDot');
+  if (dot) { dot.textContent = wl.length ? String(wl.length) : ''; dot.className = 'tdot' + (wl.length ? ' on' : ''); }
+
+  var rows = (data.recvAll || []).filter(function (x) {
+    if (!recvVisible(x)) return false;
+    if (fScope === 'wait' && !(x.remain > 0)) return false;
+    if (fScope === 'diff' && !x.hasDiff) return false;
+    return keep(x);
+  }).sort(function (a, b) {
+    if ((a.remain > 0) !== (b.remain > 0)) return (a.remain > 0) ? -1 : 1;
+    if (a.late !== b.late) return a.late ? -1 : 1;                      // 超期的排最前
+    return String(a.lastDate).localeCompare(String(b.lastDate)) ||
+      String(a.store).localeCompare(String(b.store)) ||
+      String(a.product).localeCompare(String(b.product));
+  });
+  data.recvView = rows;
+
+  var sR = 0, sG = 0, lateCnt = 0;
+  rows.forEach(function (x) { sR += x.amtRemain; sG += x.amtGot; if (x.late) lateCnt++; });
+  document.getElementById('recvSum').innerHTML =
+    '<span>本页项数 <b>' + rows.length + '</b></span>' +
+    '<span>待收金额 <b>' + money(sR) + '</b></span>' +
+    '<span>已入库金额 <b>' + money(sG) + '</b></span>' +
+    (lateCnt ? '<span style="color:var(--red)">超期未收 <b style="color:var(--red)">' + lateCnt + '</b> 项</span>' : '') +
+    '<span style="color:var(--text2)">（数量跨商品不可相加，按单位在表内分列）</span>';
+  document.getElementById('recvWaitHint').textContent = rows.length + ' 项' +
+    ((!isAdmin() && !boundSite) ? '  ·  ⚠ 通用入口（未绑定服务区）：能确认到哪一站由云端校验，建议用本站二维码打开' : '');
+
+  var h = '<thead><tr><th>状态</th><th>服务区</th><th>门店</th><th>供应商</th><th>商品</th><th>规格</th>' +
+    '<th class="num">已订</th><th class="num">已收</th><th class="num">待收</th><th>单位</th><th>最近下单</th><th></th></tr></thead><tbody>';
+  if (!rows.length) {
+    h += '<tr><td colspan="12" class="empty">' +
+      (fScope === 'wait' ? '没有待收货的项 —— 都入过库了' : '没有符合条件的记录') + '</td></tr>';
+  }
+  rows.forEach(function (x, idx) {
+    var st = x.remain <= 0 ? '<span class="tag ok">已入库</span>'
+      : x.late ? '<span class="tag full">超期未收</span>'
+        : '<span class="tag low">待收货</span>';
+    var kx = recvKeyOf(x.supplier, x.store, x.product);
+    var sent = recvPending(kx);
+    var act = x.remain <= 0 ? '<span class="hint">已收齐</span>'
+      : sent ? '<span class="hint">已提交，等待入库…</span>'
+        : '<button class="btn sm primary" onclick="recvConfirm(' + idx + ')">确认到货</button> ' +
+          '<button class="btn sm" onclick="recvDiffPanel(' + idx + ',1)">有差异</button>';
+    h += '<tr>' +
+      '<td>' + st + '</td>' +
+      '<td>' + esc(siteOfStore(x.store)) + '</td>' +
+      '<td>' + esc(x.store) + '</td>' +
+      '<td>' + esc(x.supplier) + '</td>' +
+      '<td>' + esc(x.product) + (x.hasDiff ? ' <span class="tag full">有过差异</span>' : '') + '</td>' +
+      '<td style="color:var(--text2)">' + esc(x.spec || '—') + '</td>' +
+      '<td class="num">' + nf(x.should) + '</td>' +
+      '<td class="num">' + nf(x.got) + '</td>' +
+      '<td class="num"><b>' + nf(x.remain) + '</b></td>' +
+      '<td>' + esc(x.unit || '') + '</td>' +
+      '<td style="white-space:nowrap">' + esc(x.lastDate || '—') +
+        (x.remain > 0 && x.lastDate ? ' <span style="font-size:10px;color:var(--text3)">(' + Math.abs(daysLeft(x.lastDate)) + '天前)</span>' : '') + '</td>' +
+      '<td style="white-space:nowrap">' + act + '</td></tr>';
+    if (x.remain > 0) {
+      h += '<tr id="rdr_' + idx + '" style="display:none"><td colspan="12"><div class="recv-diff">' +
+        '<label>差异数量（少收填负数，如 −2；多收填正数）：</label>' +
+        '<input id="rdi_' + idx + '" type="number" step="1" placeholder="如 -2" oninput="recvDiffLive(' + idx + ')">' +
+        '<label>差异原因：</label>' +
+        '<input id="rdr2_' + idx + '" type="text" class="wide" placeholder="如：破损 2 件 / 少发 1 箱">' +
+        '<span class="recv-live" id="rdl_' + idx + '"></span>' +
+        '<button class="btn sm primary" onclick="recvConfirmDiff(' + idx + ')">按差异确认</button>' +
+        '<button class="btn sm" onclick="recvDiffPanel(' + idx + ',0)">取消</button>' +
+        '</div></td></tr>';
+    }
+  });
+  waitEl.innerHTML = h + '</tbody>';
+
+  /* ---------- 已确认记录 ---------- */
+  var dv = (data.arrivals || []).filter(function (a) {
+    if (!recvVisible(a)) return false;
+    return keep(a);
+  }).sort(function (a, b) {
+    return String(b.ts).localeCompare(String(a.ts)) || (b.row - a.row);
+  });
+  data.recvDoneView = dv;
+  var mine = dv.filter(function (a) { return recvCanEdit(a); }).length;
+  document.getElementById('recvDoneHint').textContent = dv.length + ' 条' + (mine ? '（可改 ' + mine + '）' : '');
+  var dn = document.getElementById('recvDoneNote');
+  if (dn) dn.innerHTML = isAdmin()
+    ? '管理员不受时间限制：任何一条都能改数量、能撤销。'
+    : '油站<b>当天内</b>可改数量、可撤销（点错了当天还能救回来）；隔天的请找管理员。';
+
+  var j2 = '<thead><tr><th>确认时间</th><th>门店</th><th>供应商</th><th>商品</th>' +
+    '<th class="num">应收</th><th class="num">实收</th><th class="num">差异</th><th>差异原因</th><th>确认人</th><th></th></tr></thead><tbody>';
+  if (!dv.length) j2 += '<tr><td colspan="10" class="empty">还没有确认记录</td></tr>';
+  dv.forEach(function (a, k) {
+    var dd = Number(a.diff || 0);
+    var dTxt = dd === 0 ? '<span style="color:var(--text2)">0</span>'
+      : '<span class="' + (dd < 0 ? 'diff-neg' : 'diff-pos') + '">' + (dd > 0 ? '+' : '') + nf(dd) + '</span>';
+    var can = recvCanEdit(a);
+    j2 += '<tr>' +
+      '<td style="white-space:nowrap">' + esc(a.ts || '—') + '</td>' +
+      '<td>' + esc(a.store) + '</td>' +
+      '<td>' + esc(a.supplier) + '</td>' +
+      '<td>' + esc(a.product) + '</td>' +
+      '<td class="num">' + nf(a.qtyShould) + ' ' + esc(a.unit || '') + '</td>' +
+      '<td class="num"><b>' + nf(a.qtyGot) + '</b></td>' +
+      '<td class="num">' + dTxt + '</td>' +
+      '<td>' + esc(a.reason || '—') + '</td>' +
+      '<td style="color:var(--text2)">' + esc(a.by || '') + '</td>' +
+      '<td style="white-space:nowrap">' + (can
+        ? '<button class="btn sm" onclick="recvFixPanel(' + k + ',1)">改数量</button> ' +
+          '<button class="btn sm del" onclick="recvVoid(' + k + ')">撤销</button>'
+        : '<span class="hint">隔天 · 需管理员</span>') + '</td></tr>';
+    if (can) {
+      j2 += '<tr id="rvf_' + k + '" style="display:none"><td colspan="10"><div class="recv-diff">' +
+        '<label>实收数量：</label>' +
+        '<input id="rvi_' + k + '" type="number" step="1" value="' + Number(a.qtyGot || 0) + '">' +
+        '<label>差异原因：</label>' +
+        '<input id="rvr_' + k + '" type="text" class="wide" value="' + esc(a.reason || '') + '">' +
+        '<span class="recv-live">应收 <b>' + nf(a.qtyShould) + esc(a.unit || '') + '</b>；差异 = 实收 − 应收</span>' +
+        '<button class="btn sm primary" onclick="recvFixApply(' + k + ')">保存修改</button>' +
+        '<button class="btn sm" onclick="recvFixPanel(' + k + ',0)">取消</button>' +
+        '</div></td></tr>';
+    }
+  });
+  document.getElementById('tblRecvDone').innerHTML = j2 + '</tbody>';
+}
+
+/* ---------- 渲染：台账总览的「入库进度」（仅管理员） ---------- */
+function renderRecvLedger() {
+  var kpiEl = document.getElementById('recvKpis');
+  if (!kpiEl) return;
+  var s = data.recvSummary || { amtShould: 0, amtGot: 0, amtRemain: 0, waitCount: 0, lateCount: 0, waitSites: 0 };
+  kpiEl.innerHTML = [
+    { v: money(s.amtShould), l: '已下订金额（全站）', c: '' },
+    { v: money(s.amtGot), l: '已入库金额', c: (s.amtShould > 0 && s.amtGot >= s.amtShould) ? 'green' : '' },
+    { v: money(s.amtRemain), l: '待收货金额', c: s.amtRemain > 0 ? 'orange' : 'green' },
+    { v: s.waitCount + ' 项 / ' + s.waitSites + ' 站', l: '未收完的明细' + (s.lateCount ? '（超期 ' + s.lateCount + '）' : ''), c: s.lateCount ? 'red' : (s.waitCount ? 'orange' : 'green') }
+  ].map(function (x) { return '<div class="kpi ' + x.c + '"><div class="v">' + x.v + '</div><div class="l">' + x.l + '</div></div>'; }).join('');
+
+  var siteSel = document.getElementById('rlSite'), supSel = document.getElementById('rlSupplier');
+  var scopeSel = document.getElementById('rlScope');
+  var preSite = siteSel ? siteSel.value : '', preSup = supSel ? supSel.value : '';
+  var i, g;
+  if (siteSel) {
+    g = '<option value="">全部服务区</option>';
+    for (i = 0; i < STORE_GROUPS.length; i++) g += '<option value="' + esc(STORE_GROUPS[i].site) + '">' + esc(STORE_GROUPS[i].site) + '</option>';
+    siteSel.innerHTML = g; siteSel.value = preSite || '';
+  }
+  if (supSel) {
+    g = '<option value="">全部供应商</option>';
+    var sps = suppliers();
+    for (i = 0; i < sps.length; i++) g += '<option value="' + esc(sps[i]) + '">' + esc(sps[i]) + '</option>';
+    supSel.innerHTML = g; supSel.value = preSup || '';
+  }
+  var fSite = siteSel ? siteSel.value : '', fSup = supSel ? supSel.value : '';
+  var fScope = (scopeSel && scopeSel.value) ? scopeSel.value : 'wait';
+
+  var rows = (data.recvAll || []).filter(function (x) {
+    if (fSite && siteOfStore(x.store) !== fSite) return false;
+    if (fSup && x.supplier !== fSup) return false;
+    if (fScope === 'wait' && !(x.remain > 0)) return false;
+    return true;
+  }).sort(function (a, b) {
+    if (a.late !== b.late) return a.late ? -1 : 1;
+    return (a.remain > 0 ? 0 : 1) - (b.remain > 0 ? 0 : 1) ||
+      String(a.lastDate).localeCompare(String(b.lastDate)) ||
+      String(a.store).localeCompare(String(b.store));
+  });
+
+  document.getElementById('recvLedgerHint').textContent = rows.length + ' 项';
+  document.getElementById('rlInfo').textContent = '应收合计 ' + money(rows.reduce(function (n, x) { return n + x.amtShould; }, 0)) +
+    ' / 已入库 ' + money(rows.reduce(function (n, x) { return n + x.amtGot; }, 0)) +
+    ' / 待收 ' + money(rows.reduce(function (n, x) { return n + x.amtRemain; }, 0));
+
+  var h = '<thead><tr><th>状态</th><th>服务区</th><th>门店</th><th>供应商</th><th>商品</th>' +
+    '<th class="num">已订</th><th class="num">已收</th><th class="num">待收</th><th>单位</th><th>最近下单</th><th>下单后</th></tr></thead><tbody>';
+  if (!rows.length) {
+    h += '<tr><td colspan="11" class="empty">' + (fScope === 'wait' ? '全部收齐了，没有待收货项' : '暂无记录') + '</td></tr>';
+  }
+  rows.slice(0, 300).forEach(function (x) {
+    var st = x.remain <= 0 ? '<span class="tag ok">已入库</span>'
+      : x.late ? '<span class="tag full">超期未收</span>'
+        : '<span class="tag low">待收货</span>';
+    var days = x.lastDate ? Math.abs(daysLeft(x.lastDate)) : 0;
+    h += '<tr>' +
+      '<td>' + st + '</td>' +
+      '<td>' + esc(siteOfStore(x.store)) + '</td>' +
+      '<td>' + esc(x.store) + '</td>' +
+      '<td>' + esc(x.supplier) + '</td>' +
+      '<td>' + esc(x.product) + (x.hasDiff ? ' <span class="tag full">有过差异</span>' : '') + '</td>' +
+      '<td class="num">' + nf(x.should) + '</td>' +
+      '<td class="num">' + nf(x.got) + '</td>' +
+      '<td class="num"><b>' + nf(x.remain) + '</b></td>' +
+      '<td>' + esc(x.unit || '') + '</td>' +
+      '<td style="white-space:nowrap">' + esc(x.lastDate || '—') + '</td>' +
+      '<td class="num" style="color:' + (x.remain > 0 && x.late ? 'var(--red)' : 'var(--text2)') + '">' + days + ' 天</td></tr>';
+  });
+  document.getElementById('tblRecvLedger').innerHTML = h + '</tbody>';
+}
+
+/* ---------- 绑定收货确认的两个筛选条 ---------- */
+function bindRecv() {
+  var i, e;
+  var a = ['rvSite', 'rvSupplier', 'rvScope'];
+  for (i = 0; i < a.length; i++) {
+    e = document.getElementById(a[i]);
+    if (e) e.addEventListener('change', function () { renderRecv(); });
+  }
+  e = document.getElementById('rvSearch');
+  if (e) e.addEventListener('input', function () { renderRecv(); });
+  var b = ['rlSite', 'rlSupplier', 'rlScope'];
+  for (i = 0; i < b.length; i++) {
+    e = document.getElementById(b[i]);
+    if (e) e.addEventListener('change', function () { renderRecvLedger(); });
+  }
+}
+
 /* ---------- 启动 ---------- */
 function boot() {
   loadCfg(); loadTheme(); applyHashParams(); loadRole(); loadPending(); loadCaps(); loadCats(); loadRecent(); loadCart();
-  bindDashFilters(); bindCapPanel(); bindCatCapPanel(); bindSubmitGuard();
+  loadRecvSent();
+  bindDashFilters(); bindCapPanel(); bindCatCapPanel(); bindSubmitGuard(); bindRecv();
   renderRole();
   var want = isAdmin() ? 'ledger' : 'order';
   try {
