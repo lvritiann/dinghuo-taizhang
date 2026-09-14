@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T06:55:53.379Z",
+  "updatedAt": "2026-09-14T07:47:56.035Z",
   "source": "kdocs",
   "today": "2026-09-14",
   "products": [
@@ -2776,7 +2776,21 @@
       "unit": "根"
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "amount": 759,
+      "date": "2026-09-14",
+      "expireDate": "",
+      "note": "",
+      "price": 15.18,
+      "product": "尚纯（山东新蓝）",
+      "qty": 50,
+      "spec": "",
+      "store": "白河",
+      "supplier": "山东新蓝",
+      "unit": ""
+    }
+  ],
   "productBal": [
     {
       "balQty": 0,
@@ -3306,12 +3320,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -50,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 15.18,
       "product": "尚纯（山东新蓝）",
@@ -3319,8 +3333,8 @@
       "spec": "",
       "supplier": "山东新蓝",
       "unit": "",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 759,
+      "usedQty": 50
     },
     {
       "balQty": 0,
@@ -6744,16 +6758,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": 0,
+      "balAmt": -759,
       "capAmt": 0,
       "full": false,
-      "lastDate": "",
+      "lastDate": "2026-09-14",
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "productCount": 2,
       "supplier": "山东新蓝",
-      "usedAmt": 0
+      "usedAmt": 759
     },
     {
       "balAmt": 0,
@@ -6808,6 +6822,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmu0xxah1shoxy3",
     "wr-test-1789368875",
     "wr-test-1789368765",
     "wr-test-1789368648",
