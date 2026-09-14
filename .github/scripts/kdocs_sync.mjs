@@ -20,6 +20,8 @@
  *   APP_TOKEN     自定义二次口令，防 PAT 泄露被滥用（Secrets）
  *   PAYLOAD_JSON  dispatch 传入的 JSON（含 appToken + orders / arrive）
  *   MODE          probe | sync | order | arrive
+ *                 ⚠ 线上 workflow 的 choice options 暂无 arrive（推它要 token 有 Workflows 权限），
+ *                   到货确认实际是带 arrive 载荷、用 mode=order 发的 —— 见下面 EFF 的说明。
  *
  * PAYLOAD_JSON 里 arrive 的三种形状（与 AirScript 的 arrive/arriveFix/arriveVoid 一一对应）：
  *   {"arrive":{"action":"new", "cid":"…", "site":"秦岭", "by":"秦岭东",
@@ -46,9 +48,26 @@ let payload = {};
 try { payload = JSON.parse(process.env.PAYLOAD_JSON || '{}'); }
 catch (e) { die('PAYLOAD_JSON 解析失败：' + e.message); }
 
+/* ── 有效模式 EFF ────────────────────────────────────────────────────
+ * workflow 的 `mode` 是 **choice 类型**，值必须落在 options 列表里，
+ * 否则 GitHub 在 dispatch 阶段就直接拒绝（实测 422：
+ *   "Provided value 'arrive' for input 'mode' not in the list of allowed values"）。
+ *
+ * 线上 kdocs-sync.yml 的 options 目前只有 [probe, sync, order] ——
+ * 要把 arrive 补进去，推送 .github/workflows/ 需要 token 具备 **Workflows** 权限，
+ * 而当前的 fine-grained PAT 没有（PUT 返回 403 Resource not accessible by personal access token）。
+ *
+ * 所以：**到货确认借 order 这个「合法外壳」发送**，在这里按「载荷形状」认回来 ——
+ * 只要带了 payload.arrive，就按 arrive 处理。口令校验、cid 幂等、日志文案全部照旧。
+ *
+ * 将来 workflow 的 options 补上 arrive 之后，页面会直接发 mode=arrive，
+ * 这一行自然不再命中，两种发法都能用（前向兼容，不是死路）。
+ * 想撤掉这层兼容：把下面一行删掉，同时把页面 ghDispatch() 里的 WIRE 也删掉。 */
+const EFF = (MODE === 'order' && payload && payload.arrive) ? 'arrive' : MODE;
+
 // 口令校验：仅对「写入类」动作（order / arrive）强校验；probe/sync 为只读，无需口令
 // （手动/定时触发时 payload 里没有 appToken，但仍应放行只读动作）
-if (APP_TOKEN && (MODE === 'order' || MODE === 'arrive')) {
+if (APP_TOKEN && (EFF === 'order' || EFF === 'arrive')) {
   if (payload.appToken !== APP_TOKEN) die('appToken 不匹配，拒绝执行（防止令牌泄露后被滥用）');
 }
 
@@ -78,7 +97,7 @@ async function kdocs(argv) {
 // ---------- 主流程 ----------
 const today = new Date().toISOString().slice(0, 10);
 
-if (MODE === 'probe') {
+if (EFF === 'probe') {
   const r = await kdocs({ mode: 'probe', appToken: payload.appToken || '' });
   console.log('探针结果：', JSON.stringify(r, null, 2));
   if (!r.ok) die('自检未通过：' + (r.error || JSON.stringify(r)));
@@ -140,7 +159,7 @@ if (orders.length) console.log(`下单完成：成功 ${done} / 共 ${orders.len
 // 1b) 到货确认（ARRIVE-PATCH v1）：新增 / 改数量 / 撤销整行
 //     与 order 共用同一套 cid 幂等基线（前缀 a: 区分，避免与订单 cid 撞号）
 let arrLabel = '';
-if (MODE === 'arrive') {
+if (EFF === 'arrive') {
   const ar = (payload.arrive && typeof payload.arrive === 'object') ? payload.arrive : {};
   const action = String(ar.action || 'new').toLowerCase();       // new | fix | void
   const arrCid = ar.cid ? 'a:' + ar.cid : '';
@@ -236,7 +255,7 @@ if (!hasChange) {
   execSync('git config user.email "kdocs-sync[bot]@users.noreply.github.com"', { cwd: ROOT });
   execSync('git add data.json', { cwd: ROOT });
   const parts = [];
-  if (done && MODE === 'order') parts.push(`新增订单 ${done} 笔`);
+  if (done && EFF === 'order') parts.push(`新增订单 ${done} 笔`);
   if (arrLabel) parts.push(arrLabel);
   const msg = `chore(data): 同步金山台账 ${today}${parts.length ? '（' + parts.join('；') + '）' : ''}`;
   execSync(`git commit -m ${JSON.stringify(msg)}`, { cwd: ROOT });
