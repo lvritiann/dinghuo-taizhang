@@ -2986,13 +2986,22 @@ function retryPending(i) {
   flushPending();
 }
 
+/* ★ 送货模式（wire mode）：GitHub workflow 的 `mode` 是 choice 类型，值必须落在
+   options 列表里，否则 dispatch 阶段就被拒 —— 实测：
+     Provided value 'arrive' for input 'mode' not in the list of allowed values（HTTP 422）
+   线上 options 目前只有 [probe, sync, order]；补 arrive 要 token 具备 Workflows 权限（当前没有），
+   所以到货确认借用 order 这个「合法外壳」发送，由中转脚本按载荷形状（payload.arrive）认回来。
+   等 workflow 的 options 补上 arrive 之后，把 WIRE_MODE 里这一项删掉即可直发 arrive。 */
+var WIRE_MODE = { arrive: 'order' };
+function wireMode(m) { m = m || 'order'; return WIRE_MODE[m] || m; }
+
 function ghDispatch(payload, mode) {
   // 走 workflow_dispatch：fine-grained PAT 可触发；repository_dispatch 会被 GitHub 403
   var url = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) + '/actions/workflows/kdocs-sync.yml/dispatches';
   return fetch(url, {
     method: 'POST',
     headers: { 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + cfg.pat, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ref: 'main', inputs: { mode: mode || 'order', payload_json: JSON.stringify(Object.assign({ appToken: cfg.appToken || '' }, payload)) } })
+    body: JSON.stringify({ ref: 'main', inputs: { mode: wireMode(mode), payload_json: JSON.stringify(Object.assign({ appToken: cfg.appToken || '' }, payload)) } })
   }).then(function (r) {
     if (r.status === 204) return true;
     return r.text().then(function (t) {
