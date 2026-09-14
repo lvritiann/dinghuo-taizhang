@@ -297,6 +297,15 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
 }
 body.is-admin .role-tag { background: #FBE6DC; color: #A8390A; }
 body:not(.is-admin) .admin-only { display: none !important; }
+/* ★ 可见的管理员入口：以前只有「网址带 #admin」或双击 管理员.bat 才能进后台，
+   太隐蔽 → 常驻一个小按钮，点开输口令即可。登录成功后自动隐藏。 */
+.admin-enter {
+  flex: 0 0 auto; padding: 5px 11px; border-radius: 999px; cursor: pointer;
+  background: transparent; border: 1px solid #DCD8CE; color: var(--text2);
+  font-size: 11.5px; font-weight: 700; white-space: nowrap; font-family: inherit;
+}
+.admin-enter:hover { background: var(--card2); color: var(--text); }
+body.is-admin .admin-enter { display: none !important; }
 
 /* ---------- 视图（标签页内容） ---------- */
 .view { display: none; }
@@ -346,6 +355,7 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
     <button class="tab admin-only" data-view="ledger" onclick="setView('ledger')">台账总览</button>
     <button class="tab admin-only" data-view="admin" onclick="setView('admin')">商品与额度维护</button>
     <span class="tab-spacer"></span>
+    <button class="admin-enter" id="adminEnter" onclick="openAdminLogin()" title="输入管理口令后可查看「台账总览」与「商品与额度维护」">管理员登录</button>
     <span class="role-tag" id="roleTag">油站</span>
   </nav>
 </header>
@@ -1510,8 +1520,8 @@ function renderDash() {
   var chartEl = document.getElementById('chartSup');
   if (chartEl) {
     if (!rows.length || totalCap <= 0) {
-      chartEl.outerHTML = '<div class="empty" id="chartSup">还没设「最高可下订数量」——到下方「额度维护」里逐款填写，' +
-        '这里就会显示每家供应商的额度与剩余余额条形图</div>';
+      chartEl.outerHTML = '<div class="empty" id="chartSup">还没设「最高可下订数量」——点上方标签「商品与额度维护」，' +
+        '在「额度维护」里逐款填写；填好并同步后，这里就会显示每家供应商的额度与剩余余额条形图</div>';
     } else {
       var rowH = 30, H = rows.length * rowH + 16, labW = 96, valW = 86;
       var barX = labW + 8, barW = 640 - barX - valW;
