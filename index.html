@@ -11,6 +11,18 @@
 /* ===== CART-PATCH v1 ===== */
 .add-box { border-top: 1px solid var(--border); margin-top: 14px; padding-top: 14px; }
 .add-h { font-size: 12px; color: var(--text2); margin-bottom: 8px; letter-spacing: .02em; }
+/* ===== ORDER-FILTER-PATCH v1：④ 加商品 前置「品类」筛选 =====
+   咖啡及相关物资 17 款 / 照金百货 25 款都挂在天朗名下，而天朗跨 4 个品类、名下 97 款。
+   没有这个筛选时，照金百货第一项排在第 73 位 —— 用户翻不到，以为「无处可订」。 */
+#odCatFilter { font-weight: 500; }
+/* ④ 加商品 那一行：品类窄、数量更窄，省下的宽度全给「商品」。
+   三列等宽时「商品」只有 269px，最长商品名（295px）会被截；
+   这里给到 486px（1680 视口），比改动前的 409px 还宽，一个都不截。
+   ★ 只在 ≥901px 生效：页面自身的堆叠断点是 @media (max-width:900px){ .form-row{1fr} }，
+     .add-box .form-row 特异性更高，不套 min-width 会把它压掉、窄屏被撑成三列。 */
+@media (min-width: 901px) {
+  .add-box .form-row { grid-template-columns: 210px minmax(180px, 1fr) 110px; }
+}
 .cart { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
 .cart-h { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; }
 .cart-h .hint { margin-left: auto; font-size: 12px; color: var(--text2); font-variant-numeric: tabular-nums; }
@@ -552,8 +564,12 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
     </div>
 
     <div class="add-box">
-      <div class="add-h">④ 加商品 —— 同一家供应商可以连续加多行，最后一起提交</div>
+      <div class="add-h">④ 加商品 —— 商品太多先选「品类」缩小范围（如 咖啡及相关物资 / 照金百货）；同一家供应商可连续加多行，最后一起提交</div>
       <div class="form-row" data-page-node-id="TY7j5uCTpgIWjel6BVpDB1b">
+        <div class="field">
+          <label for="odCatFilter">品类筛选</label>
+          <select id="odCatFilter" onchange="onCatFilterPick()"></select>
+        </div>
         <div class="field" data-page-node-id="zGn6u9GwJnrWlBS0lTzoStb">
           <label for="odProduct" data-page-node-id="a3gO5thncaW6c3dGemC2M2">商品</label>
           <select id="odProduct" onchange="onProductPick()" data-page-node-id="e6ghIQIWaAGTWCocUbPh5p"></select>
@@ -1443,6 +1459,10 @@ function storesOfSite(site) {
 function curSupplier() { var e = document.getElementById('odSupplier'); return e ? e.value : ''; }
 function curSite() { var e = document.getElementById('odStore'); return e ? e.value : ''; }
 function curSide() { var e = document.getElementById('odSide'); return e ? e.value : ''; }
+// ★ ORDER-FILTER-PATCH v1：④ 加商品 的「品类」筛选
+//   只缩「商品」下拉，绝不动「供应商」下拉（动供应商会触发换供应商弹确认，清掉已加清单）。
+function catFilterVal() { var e = document.getElementById('odCatFilter'); return e ? e.value : ''; }
+function catMatch(p) { var cf = catFilterVal(); return !cf || classifyCat(p) === cf; }
 // ★ 台账「门店」列：选了细分 → 具体门店名（秦岭东）；没选 → 服务区名（秦岭）
 function curStore() { return curSide() || curSite(); }
 
@@ -2279,7 +2299,7 @@ function renderForm() {
   if (!supSel.value && sups.length) supSel.value = sups[0];
 
   var pdSel = document.getElementById('odProduct');
-  var goods = productsOf(supSel.value).filter(function (p) { return siteAllowed(p); });
+  var goods = productsOf(supSel.value).filter(function (p) { return siteAllowed(p) && catMatch(p); });
   var curP = pdSel.value;
   pdSel.innerHTML = goods.map(function (p) {
     var b = balOf(supSel.value, p.name);
@@ -2291,8 +2311,24 @@ function renderForm() {
   syncCartWithSuppliers();                       // 清单归属的供应商没了 → 丢弃
   if (cart.length && cartSup && sups.indexOf(cartSup) >= 0) supSel.value = cartSup;  // 恢复上次下单的供应商
 
+  // ★ ORDER-FILTER-PATCH v1：重填「品类」筛选——只列当前供应商在本站确实有货的品类（带款数），
+  //   这样选了品类就绝不会出现空商品列表。选中值若已不适用（换了供应商）则回到「全部品类」。
+  var catSel = document.getElementById('odCatFilter');
+  if (catSel) {
+    var catCur = catSel.value, catVals = [], catOpts = '';
+    CATS.forEach(function (c) {
+      var n = 0;
+      data.products.forEach(function (p) {
+        if (classifyCat(p) === c && p.supplier === supSel.value && siteAllowed(p)) n++;
+      });
+      if (n) { catVals.push(c); catOpts += '<option value="' + esc(c) + '">' + esc(c) + '（' + n + ' 款）</option>'; }
+    });
+    catSel.innerHTML = '<option value="">全部品类</option>' + catOpts;
+    catSel.value = (catCur && catVals.indexOf(catCur) >= 0) ? catCur : '';
+  }
+
   var pdSel2 = document.getElementById('odProduct');   // 供应商可能刚被改回，商品列表要跟上
-  var goods2 = productsOf(supSel.value).filter(function (p) { return siteAllowed(p); });
+  var goods2 = productsOf(supSel.value).filter(function (p) { return siteAllowed(p) && catMatch(p); });
   var curP2 = pdSel2.value;
   pdSel2.innerHTML = goods2.map(function (p) {
     var b2 = balOf(supSel.value, p.name);
@@ -2350,6 +2386,8 @@ function onSupplierPick() {
   refreshAll();
 }
 function onProductPick() { renderFormInfo(); }
+// ★ ORDER-FILTER-PATCH v1：换品类 → 只重算表单（商品下拉跟上），不触发供应商弹确认
+function onCatFilterPick() { renderForm(); }
 function onQtyInput() { renderFormInfo(); }
 function focusProduct(sup, prod) {
   document.getElementById('odSupplier').value = sup;
