@@ -153,6 +153,7 @@ const data = {
   orders: cleanOrders,
   productBal: dump.productBal,
   supplierBal: dump.supplierBal,
+  catCaps: dump.catCaps || [],
   expiring: (dump.expiring || []).filter(o => o && o.supplier && o.product),
   missingSheets: dump.missingSheets || [],
   recentCids: recentCids
@@ -160,7 +161,7 @@ const data = {
 
 const outPath = path.join(ROOT, 'data.json');
 fs.writeFileSync(outPath, JSON.stringify(data, null, 2), 'utf8');
-console.log(`✓ data.json 已更新：商品 ${data.products.length} 款 / 订单 ${data.orders.length} 笔 / 供应商 ${data.supplierBal.length} 家（幂等基线 ${recentCids.length} 条）`);
+console.log(`✓ data.json 已更新：商品 ${data.products.length} 款 / 订单 ${data.orders.length} 笔 / 供应商 ${data.supplierBal.length} 家 / 品类额度 ${(data.catCaps || []).length} 类（幂等基线 ${recentCids.length} 条）`);
 // 4) 提交
 const hasChange = execSync('git status --porcelain data.json', { cwd: ROOT }).toString().trim();
 if (!hasChange) {
