@@ -82,7 +82,7 @@ b, strong { font-weight: 700; }
 /* ---------- 顶栏：全宽通栏 ---------- */
 header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(240,239,235,.86);
+  background: var(--header-bg);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   backdrop-filter: saturate(180%) blur(16px);
   box-shadow: inset 0 -1px 0 var(--border);
@@ -112,10 +112,10 @@ h1 { font-size: 17px; font-weight: 700; letter-spacing: -.015em; white-space: no
   font-family: inherit; letter-spacing: -.005em;
   transition: transform .12s, background .12s, opacity .12s;
 }
-.btn:hover  { background: #EDEBE5; }
+.btn:hover  { background: var(--hover); }
 .btn:active { transform: scale(.97); }
-.btn.primary { background: var(--hero); color: #fff; font-weight: 700; }
-.btn.primary:hover { background: #CE4609; }
+.btn.primary { background: var(--hero); color: var(--on-hero); font-weight: 700; }
+.btn.primary:hover { background: var(--hero-hover); }
 .btn.sm { min-height: 34px; padding: 6px 12px; font-size: 12.5px; }
 .btn.block { width: 100%; }
 .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
@@ -145,7 +145,7 @@ h1 { font-size: 17px; font-weight: 700; letter-spacing: -.015em; white-space: no
 .ico { width: 16px; height: 16px; flex: none; }
 
 /* 今日待办：唯一强调 → 用 HERO 左侧粗标 + 淡底 */
-.today { box-shadow: inset 4px 0 0 var(--hero); background: #FFFBF8; }
+.today { box-shadow: inset 4px 0 0 var(--hero); background: var(--hero-soft); }
 .todo-item { display: flex; align-items: flex-start; gap: 12px; padding: 11px 0; box-shadow: inset 0 -1px 0 var(--border); }
 .todo-item:last-child { box-shadow: none; padding-bottom: 0; }
 .todo-item:first-child { padding-top: 0; }
@@ -188,7 +188,7 @@ input, select {
   background: var(--card2); color: var(--text); font-size: 15px; font-family: inherit;
   min-height: 44px; transition: border-color .12s, background .12s;
 }
-input:focus, select:focus { outline: none; border-color: var(--text); background: #fff; }
+input:focus, select:focus { outline: none; border-color: var(--text); background: var(--card); }
 .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
 
 .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 9px; margin: 14px 0; }
@@ -217,7 +217,7 @@ input:focus, select:focus { outline: none; border-color: var(--text); background
 .sum-line b { color: var(--text); font-weight: 700; }
 .date-row { cursor: pointer; }
 .date-row:hover td { background: var(--card2); }
-.date-row.on td { background: #FBF0E9; }
+.date-row.on td { background: var(--hero-soft2); }
 .date-row .pick { color: var(--hero); font-size: 12px; white-space: nowrap; font-weight: 600; }
 
 /* ---------- 表格：只用极淡横线 ---------- */
@@ -233,9 +233,9 @@ input:focus, select:focus { outline: none; border-color: var(--text); background
 .bar-mini { height: 6px; border-radius: 999px; background: var(--border); overflow: hidden; margin-top: 5px; }
 .bar-mini i { display: block; height: 100%; border-radius: 999px; background: var(--text); }
 .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 700; }
-.tag.full { background: #F7E3E1; color: var(--red); }
-.tag.low  { background: #F6ECDA; color: var(--orange); }
-.tag.ok   { background: #E3EFE8; color: var(--green); }
+.tag.full { background: var(--tag-full-bg); color: var(--red); }
+.tag.low  { background: var(--tag-low-bg); color: var(--orange); }
+.tag.ok   { background: var(--tag-ok-bg); color: var(--green); }
 
 /* ---------- 弹层 / 提示 ---------- */
 .mask { position: fixed; inset: 0; background: rgba(28,28,26,.42); display: none;
@@ -250,7 +250,7 @@ input:focus, select:focus { outline: none; border-color: var(--text); background
 
 #toast {
   position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(16px);
-  background: var(--text); color: #FAFAF8; padding: 12px 20px; border-radius: 999px;
+  background: var(--toast-bg); color: var(--toast-fg); padding: 12px 20px; border-radius: 999px;
   font-size: 13.5px; font-weight: 600; opacity: 0; pointer-events: none;
   transition: opacity .22s, transform .22s; z-index: 200; max-width: 88vw; text-align: center;
 }
@@ -288,20 +288,20 @@ footer { padding-top: 8px; font-size: 11.5px; color: var(--text3); text-align: c
   background: transparent; color: var(--text2); font: inherit; font-size: 13.5px; font-weight: 600;
   cursor: pointer; white-space: nowrap; transition: background .15s, color .15s;
 }
-.tab:hover { background: #EDEBE5; color: var(--text); }
-.tab.on { background: var(--text); color: #FAFAF8; }
+.tab:hover { background: var(--hover); color: var(--text); }
+.tab.on { background: var(--solid-bg); color: var(--solid-fg); }
 .tab-spacer { flex: 1 1 auto; }
 .role-tag {
   flex: 0 0 auto; padding: 5px 11px; border-radius: 999px; background: var(--card2);
   color: var(--text2); font-size: 11.5px; font-weight: 700; white-space: nowrap;
 }
-body.is-admin .role-tag { background: #FBE6DC; color: #A8390A; }
+body.is-admin .role-tag { background: var(--admin-tag-bg); color: var(--admin-tag-fg); }
 body:not(.is-admin) .admin-only { display: none !important; }
 /* ★ 可见的管理员入口：以前只有「网址带 #admin」或双击 管理员.bat 才能进后台，
    太隐蔽 → 常驻一个小按钮，点开输口令即可。登录成功后自动隐藏。 */
 .admin-enter {
   flex: 0 0 auto; padding: 5px 11px; border-radius: 999px; cursor: pointer;
-  background: transparent; border: 1px solid #DCD8CE; color: var(--text2);
+  background: transparent; border: 1px solid var(--border); color: var(--text2);
   font-size: 11.5px; font-weight: 700; white-space: nowrap; font-family: inherit;
 }
 .admin-enter:hover { background: var(--card2); color: var(--text); }
@@ -325,6 +325,154 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
   .tabs { padding-bottom: 9px; }
   .role-tag { display: none; }
 }
+
+/* ===== THEME-PATCH v1 =====
+   双配色：默认「科技」（深空深色），顶栏一键切回原来的「经典」（Mono 浅色）。
+   实现方式＝纯追加：先把原先写死的色值抽成变量，再由 body.theme-tech 覆盖整套变量，
+   因此经典配色的观感与改动前完全一致，不会回归。 */
+:root {
+  --hover:        #EDEBE5;
+  --header-bg:    rgba(240,239,235,.86);
+  --hero-hover:   #CE4609;
+  --on-hero:      #FFFFFF;
+  --hero-soft:    #FFFBF8;
+  --hero-soft2:   #FBF0E9;
+  --solid-bg:     #1C1C1A;
+  --solid-fg:     #FAFAF8;
+  --toast-bg:     #1C1C1A;
+  --toast-fg:     #FAFAF8;
+  --tag-off-bg:   #EFEEE9;
+  --tag-full-bg:  #F7E3E1;
+  --tag-low-bg:   #F6ECDA;
+  --tag-ok-bg:    #E3EFE8;
+  --admin-tag-bg: #FBE6DC;
+  --admin-tag-fg: #A8390A;
+  --bar:          #1C1C1A;
+  --track:        #E3E1D9;
+  /* 图表调色板（只用于图表，不动界面的 Mono 克制） */
+  --c1:#4263EB; --c2:#1098AD; --c3:#0CA678; --c4:#7048E8; --c5:#E03131;
+  --c6:#E8590C; --c7:#D6336C; --c8:#66A80F; --c9:#5C7080;
+}
+
+/* ---------- 科技配色（深色） ---------- */
+body.theme-tech {
+  --bg:      #070B12;
+  --card:    #0E1723;
+  --card2:   #152238;
+  --border:  #1E3354;
+  --text:    #E6F0FF;
+  --text2:   #8AA3C6;
+  --text3:   #5B7599;
+  --accent:  #38BDF8;
+  --hero:    #22D3EE;
+  --red:     #FF6B7A;
+  --orange:  #FFB020;
+  --green:   #34D399;
+  --purple:  #A78BFA;
+  --radius:  18px;
+
+  --hover:        rgba(56,189,248,.14);
+  --header-bg:    rgba(7,11,18,.82);
+  --hero-hover:   #06B6D4;
+  --on-hero:      #04121E;
+  --hero-soft:    rgba(34,211,238,.07);
+  --hero-soft2:   rgba(34,211,238,.12);
+  --solid-bg:     rgba(56,189,248,.16);
+  --solid-fg:     #38BDF8;
+  --toast-bg:     rgba(20,34,56,.96);
+  --toast-fg:     #E6F0FF;
+  --tag-off-bg:   rgba(56,189,248,.10);
+  --tag-full-bg:  rgba(255,107,122,.16);
+  --tag-low-bg:   rgba(255,176,32,.16);
+  --tag-ok-bg:    rgba(52,211,153,.16);
+  --admin-tag-bg: rgba(34,211,238,.18);
+  --admin-tag-fg: #67E8F9;
+  --bar:          #38BDF8;
+  --track:        rgba(56,189,248,.16);
+
+  --c1:#5C7CFA; --c2:#22D3EE; --c3:#2DD4BF; --c4:#9775FA; --c5:#FF6B6B;
+  --c6:#FFA94D; --c7:#F783AC; --c8:#A9E34B; --c9:#94A3B8;
+
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(56,189,248,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,.055) 1px, transparent 1px),
+    radial-gradient(1100px 620px at 8% -12%, rgba(56,189,248,.20), transparent 62%),
+    radial-gradient(880px 520px at 94% 0%, rgba(167,139,250,.16), transparent 64%);
+  background-size: 46px 46px, 46px 46px, auto, auto;
+  background-attachment: fixed, fixed, fixed, fixed;
+}
+body.theme-tech header {
+  background: var(--header-bg);
+  box-shadow: inset 0 -1px 0 var(--border), 0 10px 34px -24px rgba(56,189,248,.9);
+}
+body.theme-tech .card {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(30,48,78,.55), rgba(14,23,35,.92));
+  box-shadow: 0 0 0 1px rgba(56,189,248,.05), 0 18px 40px -26px rgba(56,189,248,.75);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+body.theme-tech .today {
+  background: linear-gradient(180deg, rgba(34,211,238,.11), rgba(34,211,238,.03));
+  box-shadow: inset 4px 0 0 var(--hero);
+}
+body.theme-tech .viz-box, body.theme-tech .kpi, body.theme-tech .cat-card,
+body.theme-tech .info-cell, body.theme-tech .result-banner {
+  background: linear-gradient(180deg, rgba(56,189,248,.10), rgba(56,189,248,.03));
+  border: 1px solid var(--border);
+}
+body.theme-tech .kpi .v { text-shadow: 0 0 24px rgba(56,189,248,.42); }
+body.theme-tech .cat-card.warn { box-shadow: inset 0 0 0 2px var(--orange), 0 0 22px -10px var(--orange); }
+body.theme-tech .cat-card.full { box-shadow: inset 0 0 0 2px var(--red), 0 0 22px -10px var(--red); }
+body.theme-tech .btn { background: rgba(56,189,248,.10); box-shadow: inset 0 0 0 1px rgba(56,189,248,.20); }
+body.theme-tech .btn:hover { background: rgba(56,189,248,.20); }
+body.theme-tech .btn.primary {
+  background: linear-gradient(135deg, #22D3EE, #3B82F6);
+  box-shadow: 0 10px 26px -12px rgba(34,211,238,.85);
+}
+body.theme-tech .btn.primary:hover { background: linear-gradient(135deg, #67E8F9, #60A5FA); }
+body.theme-tech .tab.on { box-shadow: inset 0 0 0 1px rgba(56,189,248,.55); }
+body.theme-tech .admin-enter { border-color: rgba(56,189,248,.32); }
+body.theme-tech input, body.theme-tech select, body.theme-tech .qty-in {
+  background: rgba(9,16,26,.72); border-color: var(--border);
+}
+body.theme-tech input:focus, body.theme-tech select:focus {
+  background: rgba(9,16,26,.96); border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(56,189,248,.16);
+}
+body.theme-tech .modal { background: #0E1723; border: 1px solid var(--border); }
+body.theme-tech .mask { background: rgba(3,7,12,.72); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+body.theme-tech .tbl tbody tr:hover td,
+body.theme-tech .date-row:hover td { background: rgba(56,189,248,.07); }
+body.theme-tech .cart-tbl tr.over td { background: rgba(255,107,122,.10); }
+body.theme-tech .bar-mini i { background: var(--bar); }
+body.theme-tech select.locked { background: rgba(9,16,26,.5); }
+body.theme-tech #toast { border: 1px solid var(--border); }
+
+/* ---------- 图表（手写内联 SVG，零依赖） ---------- */
+.viz-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.viz-box { background: var(--card2); border-radius: 16px; padding: 14px 16px; min-width: 0; overflow-x: auto; }
+.viz-box.wide { grid-column: span 2; }
+@media (max-width: 900px) { .viz-grid { grid-template-columns: 1fr; } .viz-box.wide { grid-column: span 1; } }
+.viz-box .chart-title { margin-bottom: 12px; }
+.viz-box svg.chart { min-width: 280px; }
+.ring-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px; }
+.ring-cell { text-align: center; min-width: 0; }
+svg.ring { display: block; width: 100%; max-width: 82px; height: auto; margin: 0 auto; }
+svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin: 0 auto; }
+.rc-name { font-size: 11.5px; font-weight: 700; margin-top: 3px; }
+.rc-sub { font-size: 10px; color: var(--text2); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.rank-row { display: flex; align-items: center; gap: 8px; font-size: 12px; margin-bottom: 7px; }
+.rank-nm { flex: 0 0 66px; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rank-bar { flex: 1 1 auto; min-width: 0; height: 9px; border-radius: 999px; background: var(--track); overflow: hidden; }
+.rank-bar i { display: block; height: 100%; border-radius: 999px; }
+.rank-v { flex: 0 0 auto; font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.lg-row { display: flex; align-items: center; gap: 7px; font-size: 12px; padding: 3px 0; }
+.lg-dot { width: 9px; height: 9px; border-radius: 3px; flex: none; }
+.lg-v { margin-left: auto; color: var(--text2); font-variant-numeric: tabular-nums; }
+.share-wrap { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.share-donut { flex: 0 0 auto; }
+.share-legend { flex: 1 1 150px; min-width: 140px; }
 </style>
 </head>
 <body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
@@ -347,6 +495,7 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="eJF0aDyVFVxQ9BIr3PcAe2"><circle cx="12" cy="12" r="3" data-page-node-id="noCpaCsXKZffwk9L05jj4R"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" data-page-node-id="dZ4SPVwdoPLhFV3LFsGkBy"/></svg>
         设置
       </button>
+      <button class="btn sm" id="themeBtn" onclick="toggleTheme()" title="在「科技（深色）」与「经典（浅色）」配色之间切换"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>经典</button>
     </div>
   </div>
   <nav class="tabs" id="tabs" data-page-node-id="tabsBar">
@@ -453,6 +602,34 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
     <div class="chart-box" data-page-node-id="catSumBox">
       <div class="chart-title" data-page-node-id="catSumTitle">各品类共用额度余额（数量口径显数量 / 金额口径显金额 · 防定超监管）</div>
       <div class="cat-cards" id="catCards" data-page-node-id="catCards"></div>
+    </div>
+  </div>
+
+  <!-- ★ 数据看板（THEME-PATCH v1）—— 4 张手写内联 SVG 图表，零外部依赖 -->
+  <div class="card" id="vizCard">
+    <div class="card-h">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+      <h2>数据看板</h2>
+      <span class="spacer"></span>
+      <span class="hint">全部站 · 全部供应商（不受下方筛选影响）</span>
+    </div>
+    <div class="viz-grid">
+      <div class="viz-box wide">
+        <div class="chart-title">近 14 天下订金额趋势</div>
+        <div id="chartTrend"></div>
+      </div>
+      <div class="viz-box wide">
+        <div class="chart-title">品类额度占用率（环内 = 已订 / 额度）</div>
+        <div id="chartRings"></div>
+      </div>
+      <div class="viz-box">
+        <div class="chart-title">服务区下订排行</div>
+        <div id="chartSites"></div>
+      </div>
+      <div class="viz-box">
+        <div class="chart-title">供应商金额占比</div>
+        <div id="chartShare"></div>
+      </div>
     </div>
   </div>
 
@@ -1568,6 +1745,222 @@ function sampleData() {
 /* ==========================================================
  * 渲染层（严格单向：只由 refreshAll 调度）
  * ========================================================== */
+/* ===== THEME-PATCH v1 =====
+   双配色（科技 / 经典）+ 4 张图表。图表全部手写内联 SVG，不引任何 CDN / 图表库。 */
+var LS_THEME = 'wb_order_theme_v1';
+var themeName = 'tech';                 // 默认科技配色
+var chartErrors = [];                   // 图表渲染异常（有错也不影响页面其它部分，但要可断言）
+
+var CAT_COLOR = {};
+CATS.forEach(function (c, i) { CAT_COLOR[c] = 'var(--c' + (i + 1) + ')'; });
+function catColorOf(c) { return CAT_COLOR[c] || 'var(--accent)'; }
+
+// body.classList 在部分极简 DOM 桩里没有 toggle —— 兜一层，避免整页初始化挂掉
+function setBodyClass(name, on) {
+  var b = document.body;
+  if (!b || !b.classList) return;
+  if (typeof b.classList.toggle === 'function') b.classList.toggle(name, !!on);
+  else if (on) b.classList.add(name); else b.classList.remove(name);
+}
+var THEME_ICON_SUN = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>';
+var THEME_ICON_SPARK = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg>';
+
+function applyTheme(t) {
+  if (t) themeName = t;
+  setBodyClass('theme-tech', themeName === 'tech');
+  setBodyClass('theme-mono', themeName !== 'tech');
+  var b = document.getElementById('themeBtn');
+  if (b) b.innerHTML = (themeName === 'tech' ? THEME_ICON_SUN + '经典' : THEME_ICON_SPARK + '科技');
+  try { localStorage.setItem(LS_THEME, themeName); } catch (e) {}
+}
+function loadTheme() {
+  try { var s = localStorage.getItem(LS_THEME); if (s === 'tech' || s === 'mono') themeName = s; } catch (e) {}
+  applyTheme();
+}
+function toggleTheme() {
+  applyTheme(themeName === 'tech' ? 'mono' : 'tech');
+  toast(themeName === 'tech' ? '已切换到科技配色' : '已切换到经典配色');
+}
+
+/* ---------- SVG 零件 ---------- */
+function svgText(x, y, t, opt) {
+  opt = opt || {};
+  return '<text x="' + x + '" y="' + y + '"' +
+    (opt.anchor ? ' text-anchor="' + opt.anchor + '"' : '') +
+    (opt.size ? ' font-size="' + opt.size + '"' : '') +
+    (opt.weight ? ' font-weight="' + opt.weight + '"' : '') +
+    ' fill="' + (opt.fill || 'var(--text2)') + '">' + esc(t) + '</text>';
+}
+function ringSvg(pct, size, sw, color, center) {
+  var r = (size - sw) / 2, c = 2 * Math.PI * r;
+  var p = Math.max(0, Math.min(100, Number(pct) || 0));
+  var off = c * (1 - p / 100);
+  var cx = size / 2, cy = size / 2;
+  var txt = (center != null ? String(center) : Math.round(p) + '%');
+  return '<svg class="ring" viewBox="0 0 ' + size + ' ' + size + '">' +
+    '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="var(--track)" stroke-width="' + sw + '"/>' +
+    '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="' + sw +
+      '" stroke-linecap="round" stroke-dasharray="' + c.toFixed(2) + '" stroke-dashoffset="' + off.toFixed(2) +
+      '" transform="rotate(-90 ' + cx + ' ' + cy + ')"/>' +
+    '<text x="' + cx + '" y="' + (cy + size * 0.095) + '" text-anchor="middle" font-size="' + (size * 0.26) +
+      '" font-weight="800" fill="var(--text)" class="num">' + esc(txt) + '</text>' +
+    '</svg>';
+}
+function donutSvg(items, size, sw) {
+  var total = 0; items.forEach(function (x) { total += x.value; });
+  if (total <= 0) return '';
+  var r = (size - sw) / 2, c = 2 * Math.PI * r, acc = 0;
+  var s = '<svg class="donut" viewBox="0 0 ' + size + ' ' + size + '">';
+  items.forEach(function (x) {
+    var len = Math.max(0, c * (x.value / total) - 2);
+    s += '<circle cx="' + (size / 2) + '" cy="' + (size / 2) + '" r="' + r + '" fill="none" stroke="' + x.color +
+      '" stroke-width="' + sw + '" stroke-dasharray="' + len.toFixed(2) + ' ' + (c - len).toFixed(2) +
+      '" stroke-dashoffset="' + (-acc).toFixed(2) + '" transform="rotate(-90 ' + (size / 2) + ' ' + (size / 2) + ')"/>';
+    acc += c * (x.value / total);
+  });
+  return s + '</svg>';
+}
+// 台账「门店」列既可能是服务区名（v5.5 起），也可能是旧的东/西门店名 —— 两种都要能归到服务区
+function siteOfStore(st) {
+  st = String(st == null ? '' : st);
+  for (var i = 0; i < STORE_GROUPS.length; i++) {
+    var g = STORE_GROUPS[i];
+    if (g.site === st) return g.site;
+    for (var j = 0; j < g.stores.length; j++) if (g.stores[j] === st) return g.site;
+  }
+  return st || '未填';
+}
+
+/* ---------- 图表 ① 品类额度占用率 ---------- */
+function renderChartRings() {
+  var el = document.getElementById('chartRings'); if (!el) return;
+  if (!data.catBal.length) { el.innerHTML = '<div class="empty">暂无品类数据</div>'; return; }
+  var h = '<div class="ring-grid">';
+  data.catBal.forEach(function (p) {
+    var pct = p.set ? Math.min(100, p.pct) : 0;
+    var col = p.full ? 'var(--red)' : ((p.low || (p.set && p.pct >= 80)) ? 'var(--orange)' : catColorOf(p.cat));
+    var u = poolUnit(p);
+    h += '<div class="ring-cell">' + ringSvg(pct, 92, 9, col, p.set ? Math.round(p.pct) + '%' : '—') +
+      '<div class="rc-name">' + esc(p.cat) + '</div>' +
+      '<div class="rc-sub">' + (p.set
+        ? fmtPool(p.used, p) + u + ' / ' + fmtPool(p.cap, p) + u
+        : '未设额度') + ' · ' + p.productCount + ' 款</div>' +
+      '</div>';
+  });
+  el.innerHTML = h + '</div>';
+}
+
+/* ---------- 图表 ② 近 N 天下订金额趋势 ---------- */
+function renderChartTrend() {
+  var el = document.getElementById('chartTrend'); if (!el) return;
+  var N = 14, base = todayStr();
+  (data.orders || []).forEach(function (o) { if (o.date && o.date > base) base = o.date; });
+  var days = [], map = {}, i;
+  for (i = N - 1; i >= 0; i--) { var d = addDays(base, -i); days.push(d); map[d] = 0; }
+  var cnt = 0;
+  (data.orders || []).forEach(function (o) {
+    if (map[o.date] === undefined) return;
+    map[o.date] += Number(o.amount || 0); cnt++;
+  });
+  var vals = days.map(function (d) { return map[d]; });
+  var mx = 0; vals.forEach(function (v) { if (v > mx) mx = v; });
+  if (mx <= 0) { el.innerHTML = '<div class="empty">近 ' + N + ' 天（至 ' + esc(base) + '）还没有订单</div>'; return; }
+
+  var W = 640, H = 200, pL = 54, pR = 14, pT = 14, pB = 28;
+  var iw = W - pL - pR, ih = H - pT - pB, step = iw / (N - 1);
+  function X(k) { return pL + k * step; }
+  function Y(v) { return pT + ih - (v / mx) * ih; }
+
+  var s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMinYMin meet">';
+  s += '<defs><linearGradient id="gTrend" x1="0" y1="0" x2="0" y2="1">' +
+       '<stop offset="0" stop-color="var(--c2)" stop-opacity=".42"/>' +
+       '<stop offset="1" stop-color="var(--c2)" stop-opacity="0"/></linearGradient></defs>';
+  var g;
+  for (g = 0; g <= 3; g++) {
+    var gy = Y(mx * g / 3);
+    s += '<line x1="' + pL + '" y1="' + gy.toFixed(1) + '" x2="' + (W - pR) + '" y2="' + gy.toFixed(1) +
+         '" stroke="var(--border)" stroke-dasharray="3 5"/>';
+    s += svgText(pL - 8, gy + 4, money(mx * g / 3), { anchor: 'end', size: 10 });
+  }
+  var line = '', area = '';
+  vals.forEach(function (v, k) {
+    var x = X(k).toFixed(1), y = Y(v).toFixed(1);
+    line += (k ? ' L ' : 'M ') + x + ' ' + y;
+    area += (k ? ' L ' : 'M ') + x + ' ' + y;
+  });
+  area += ' L ' + X(N - 1).toFixed(1) + ' ' + (pT + ih) + ' L ' + X(0).toFixed(1) + ' ' + (pT + ih) + ' Z';
+  s += '<path d="' + area + '" fill="url(#gTrend)"/>';
+  s += '<path d="' + line + '" fill="none" stroke="var(--c2)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>';
+  vals.forEach(function (v, k) {
+    if (v > 0) s += '<circle cx="' + X(k).toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="3.2" fill="var(--c2)"/>';
+  });
+  [0, Math.floor(N / 2), N - 1].forEach(function (k) {
+    s += svgText(X(k), H - 8, days[k].slice(5),
+      { anchor: k === 0 ? 'start' : (k === N - 1 ? 'end' : 'middle'), size: 10 });
+  });
+  s += '</svg>';
+
+  var tot = vals.reduce(function (a, b) { return a + b; }, 0);
+  el.innerHTML = s + '<div class="note" style="margin-top:4px">近 ' + N + ' 天（至 ' + esc(base) + '）共 ' +
+    cnt + ' 笔订单 · 合计 ' + money(tot) + '</div>';
+}
+
+/* ---------- 图表 ③ 服务区下订排行 ---------- */
+function renderChartSites() {
+  var el = document.getElementById('chartSites'); if (!el) return;
+  var agg = {}, ord = [];
+  (data.orders || []).forEach(function (o) {
+    var s = siteOfStore(o.store);
+    if (!(s in agg)) { agg[s] = 0; ord.push(s); }
+    agg[s] += Number(o.amount || 0);
+  });
+  ord = ord.filter(function (s) { return agg[s] > 0; }).sort(function (a, b) { return agg[b] - agg[a]; });
+  if (!ord.length) { el.innerHTML = '<div class="empty">还没有订单</div>'; return; }
+  var mx = agg[ord[0]], h = '';
+  ord.slice(0, 15).forEach(function (s, i) {
+    h += '<div class="rank-row"><span class="rank-nm" title="' + esc(s) + '">' + esc(s) + '</span>' +
+      '<span class="rank-bar"><i style="width:' + Math.max(2, Math.round(agg[s] / mx * 100)) +
+      '%;background:var(--c' + ((i % 9) + 1) + ')"></i></span>' +
+      '<span class="rank-v">' + money(agg[s]) + '</span></div>';
+  });
+  el.innerHTML = h;
+}
+
+/* ---------- 图表 ④ 供应商金额占比 ---------- */
+function renderChartShare() {
+  var el = document.getElementById('chartShare'); if (!el) return;
+  var rows = (data.supplierBal || []).filter(function (r) { return r.usedAmt > 0; })
+    .slice().sort(function (a, b) { return b.usedAmt - a.usedAmt; });
+  if (!rows.length) { el.innerHTML = '<div class="empty">还没有订单</div>'; return; }
+  var items = rows.map(function (r, i) {
+    return { label: r.supplier, value: r.usedAmt, color: 'var(--c' + ((i % 9) + 1) + ')' };
+  });
+  var total = items.reduce(function (s, x) { return s + x.value; }, 0);
+  var h = '<div class="share-wrap"><div class="share-donut">' + donutSvg(items, 140, 20) +
+    '<div class="rc-sub" style="text-align:center">' + money(total) + '</div></div><div class="share-legend">';
+  items.forEach(function (x) {
+    h += '<div class="lg-row"><span class="lg-dot" style="background:' + x.color + '"></span>' + esc(x.label) +
+      '<span class="lg-v">' + Math.round(x.value / total * 100) + '%</span></div>';
+  });
+  el.innerHTML = h + '</div></div>';
+}
+
+/* ---------- 统一入口：装饰性图表绝不拖垮整页 ----------
+   注意 boot() 里 refreshAll() 是在 .then() 里调的，抛异常会被后面的 .catch() 当成
+   「取数失败」并可能回退成示例数据 —— 所以图表必须自己吞掉异常，并留下可断言的痕迹。 */
+function renderCharts() {
+  chartErrors = [];
+  var jobs = [['rings', renderChartRings], ['trend', renderChartTrend],
+              ['sites', renderChartSites], ['share', renderChartShare]];
+  for (var i = 0; i < jobs.length; i++) {
+    try { jobs[i][1](); }
+    catch (e) { chartErrors.push(jobs[i][0] + ': ' + (e && e.message ? e.message : e)); }
+  }
+  if (chartErrors.length && typeof console !== 'undefined' && console.warn) {
+    console.warn('[chart] ' + chartErrors.join(' | '));
+  }
+}
+
 function refreshAll() {
   computeAll();
   renderSync();
@@ -1579,6 +1972,7 @@ function refreshAll() {
   renderFooter();
   renderCap();
   renderCatCap();
+  renderCharts();
 }
 
 function renderSync() {
@@ -1678,9 +2072,9 @@ function renderDash() {
         var y = 8 + i * rowH;
         var wU = Math.max(2, Math.round(r.usedAmt / mx * barW));
         var nm = r.supplier.length > 6 ? r.supplier.slice(0, 6) + '…' : r.supplier;
-        svg += '<text x="' + (labW - 6) + '" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="#6B6B63">' + esc(nm) + '</text>';
-        svg += '<rect x="' + barX + '" y="' + (y + 3) + '" width="' + wU + '" height="14" rx="7" fill="#1C1C1A"/>';
-        svg += '<text class="num" x="632" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="#1C1C1A">' + money(r.usedAmt) + '</text>';
+        svg += '<text x="' + (labW - 6) + '" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="var(--text2)">' + esc(nm) + '</text>';
+        svg += '<rect x="' + barX + '" y="' + (y + 3) + '" width="' + wU + '" height="14" rx="7" fill="var(--bar)"/>';
+        svg += '<text class="num" x="632" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="var(--bar)">' + money(r.usedAmt) + '</text>';
       });
       svg += '</svg>';
       chartEl.outerHTML = svg;
@@ -1694,7 +2088,7 @@ function renderDash() {
     data.catBal.forEach(function (p) {
       var q = poolUnit(p);
       var cls = p.full ? 'full' : (p.pct >= 80 ? 'warn' : '');
-      var col = p.full ? '#B3261E' : (p.pct >= 80 ? '#9C6508' : '#1C1C1A');
+      var col = p.full ? 'var(--red)' : (p.pct >= 80 ? 'var(--orange)' : 'var(--bar)');
       ch += '<div class="cat-card ' + cls + '"><div class="cn">' + esc(p.cat) +
         ' <span style="font-weight:400;color:var(--text2)">' + esc(p.mode) + '口径</span>' +
         (p.local ? ' <span style="color:var(--orange);font-weight:700">本地改</span>' : '') + '</div>' +
@@ -1757,7 +2151,7 @@ function renderDash() {
     var q = poolUnit(pb2);
     var capTxt = (pb2 && pb2.set)
       ? fmtPool(pb2.bal, pb2) + q + ' <span style="font-size:10px;color:var(--text2)">可用</span>'
-      : '<span class="tag" style="background:#EFEEE9;color:#6B6B63">未设</span>';
+      : '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">未设</span>';
     h += '<tr><td style="white-space:nowrap;color:var(--accent)">' + esc(b.cat) + '</td><td>' + esc(b.supplier) + '</td><td>' + esc(b.product) + '</td>' +
       '<td style="color:var(--text2)">' + esc(b.spec) + '</td><td>' + esc(b.unit) + '</td>' +
       '<td class="num">' + money(b.price) + '</td>' +
@@ -2350,8 +2744,8 @@ function renderCatCap() {
   data.catBal.forEach(function (p) {
     var q = poolUnit(p);
     var local = p.local;
-    var st = local ? '<span class="tag" style="background:#EFEEE9;color:#6B6B63">本地改</span>'
-      : (p.set ? '<span class="tag ok">已设</span>' : '<span class="tag" style="background:#EFEEE9;color:#6B6B63">未设</span>');
+    var st = local ? '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">本地改</span>'
+      : (p.set ? '<span class="tag ok">已设</span>' : '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">未设</span>');
     var reset = local ? ' <a href="#" onclick="onCatCapReset(\'' + esc(p.cat) + '\');return false" style="font-size:11px;color:var(--orange)">复原</a>' : '';
     h += '<tr><td style="white-space:nowrap;color:var(--accent)"><b>' + esc(p.cat) + '</b></td>' +
       '<td>' + esc(p.mode) + '<span style="color:var(--text2)">' + (q ? '（' + esc(q) + '）' : '（元）') + '</span></td>' +
@@ -2391,7 +2785,7 @@ function clearCatCaps() { catOverrides = {}; saveCats(); refreshAll(); toast('�
 
 
 
-function refreshDerived() { computeAll(); renderSync(); renderToday(); renderDash(); renderForm(); renderFilters(); renderCatCap(); }
+function refreshDerived() { computeAll(); renderSync(); renderToday(); renderDash(); renderForm(); renderFilters(); renderCatCap(); renderCharts(); }
 
 function renderCap() {
   var catEl = document.getElementById('capCat');
@@ -2440,8 +2834,8 @@ function renderCap() {
     var k = p.supplier + '|' + p.name;
     var ec = effCap(p);
     var local = capOverrides[k] != null;
-    var st = local ? '<span class="tag" style="background:#EFEEE9;color:#6B6B63">本地改</span>'
-      : (ec > 0 ? '<span class="tag ok">已设</span>' : '<span class="tag" style="background:#EFEEE9;color:#6B6B63">未设</span>');
+    var st = local ? '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">本地改</span>'
+      : (ec > 0 ? '<span class="tag ok">已设</span>' : '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">未设</span>');
     var reset = local ? ' <a href="#" onclick="onCapReset(\'' + esc(p.supplier) + '\',\'' + esc(p.name) + '\');return false" style="font-size:11px;color:var(--orange)">复原</a>' : '';
     h += '<tr><td style="white-space:nowrap;color:var(--accent)">' + esc(classifyCat(p)) + '</td>' +
       '<td>' + esc(p.supplier) + '</td><td>' + esc(p.name) + '</td><td>' + esc(p.unit) + '</td>' +
@@ -2461,7 +2855,7 @@ function onCapInput(inp) {
   var tr = inp.parentNode.parentNode, stTd = tr.children[5];
   var sup = inp.getAttribute('data-sup'), nm = inp.getAttribute('data-name');
   var local = capOverrides[sup + '|' + nm] != null;
-  stTd.innerHTML = (local ? '<span class="tag" style="background:#EFEEE9;color:#6B6B63">本地改</span> <a href="#" onclick="onCapReset(\'' + esc(sup) + '\',\'' + esc(nm) + '\');return false" style="font-size:11px;color:var(--orange)">复原</a>' : '<span class="tag" style="background:#EFEEE9;color:#6B6B63">未设</span>');
+  stTd.innerHTML = (local ? '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">本地改</span> <a href="#" onclick="onCapReset(\'' + esc(sup) + '\',\'' + esc(nm) + '\');return false" style="font-size:11px;color:var(--orange)">复原</a>' : '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">未设</span>');
   var ovN = 0; for (var kk in capOverrides) if (capOverrides.hasOwnProperty(kk)) ovN++;
   var he = document.getElementById('capHint'); if (he) he.textContent = ovN ? ('本地已改 ' + ovN + ' 款（尚未回贴台账）') : '网页临时改额度，导出补丁回贴台账后即生效';
 }
@@ -2519,7 +2913,7 @@ function bindSubmitGuard() {
 
 /* ---------- 启动 ---------- */
 function boot() {
-  loadCfg(); applyHashParams(); loadRole(); loadPending(); loadCaps(); loadCats(); loadRecent(); loadCart();
+  loadCfg(); loadTheme(); applyHashParams(); loadRole(); loadPending(); loadCaps(); loadCats(); loadRecent(); loadCart();
   bindDashFilters(); bindCapPanel(); bindCatCapPanel(); bindSubmitGuard();
   renderRole();
   var want = isAdmin() ? 'ledger' : 'order';
