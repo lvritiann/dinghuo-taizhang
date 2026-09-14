@@ -351,7 +351,7 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
   --track:        #E3E1D9;
   /* 图表调色板（只用于图表，不动界面的 Mono 克制） */
   --c1:#4263EB; --c2:#1098AD; --c3:#0CA678; --c4:#7048E8; --c5:#E03131;
-  --c6:#E8590C; --c7:#D6336C; --c8:#66A80F; --c9:#5C7080;
+  --c6:#E8590C; --c7:#D6336C; --c8:#66A80F; --c9:#5C7080; --c10:#8B5E3C;
 }
 
 /* ---------- 科技配色（深色） ---------- */
@@ -391,7 +391,7 @@ body.theme-tech {
   --track:        rgba(56,189,248,.16);
 
   --c1:#5C7CFA; --c2:#22D3EE; --c3:#2DD4BF; --c4:#9775FA; --c5:#FF6B6B;
-  --c6:#FFA94D; --c7:#F783AC; --c8:#A9E34B; --c9:#94A3B8;
+  --c6:#FFA94D; --c7:#F783AC; --c8:#A9E34B; --c9:#94A3B8; --c10:#D9A066;
 
   background-color: var(--bg);
   background-image:
@@ -865,10 +865,14 @@ var dashState = { sup: '', cat: '', status: 'all', q: '', page: 1, size: 20 };
 // 商品细类（八类：润滑油 / 玻璃水 / 尿素 / 燃油宝 / 红牛 / 东鹏 / 冰淇淋 / 便利店零食饮料）
 // 一家供应商会跨多个细类（如河南心连心既供玻璃水又供尿素，杨凌酷凌既供红牛/东鹏/冰淇淋又供其它零食），
 // 故细类按「商品名」逐款判定，而非按供应商归组。
-var CATS = ['润滑油', '玻璃水', '尿素', '燃油宝', '红牛', '东鹏', '冰淇淋', '糖果', '便利店零食饮料'];
+var CATS = ['润滑油', '玻璃水', '尿素', '燃油宝', '红牛', '东鹏', '冰淇淋', '糖果', '便利店零食饮料', '咖啡及相关物资'];
 // 按商品名关键词判定细类（带供应商兜底，保证无关键词时也落入合理大类）
 function classifyCat(p) {
   var s = (p.supplier || '') + '', n = (p.name != null ? p.name : (p.product != null ? p.product : '')) + '';
+  /* ★ COFFEE-PATCH v1：站点限定商品（照金专供的咖啡物资）单独归「咖啡及相关物资」。
+     必须放在最前 —— ①「方形白糖包」含「糖」，否则会被下面的糖果判定吃掉；
+     ② 这批货挂在天朗名下，天朗的兜底（s==='天朗' → 冰淇淋）会把它们当冰淇淋。 */
+  if (p && p.siteOnly) return '咖啡及相关物资';
   if (n.indexOf('尿素') >= 0) return '尿素';
   if (n.indexOf('玻璃水') >= 0) return '玻璃水';
   if (n.indexOf('红牛') >= 0) return '红牛';
@@ -1086,6 +1090,25 @@ var PRODUCTS = [
   ['杨凌酷凌','马赛克 分享装 65克蒟蒻果冻葡萄味1*10*14袋','1*10*14袋','袋',1.6,0,0,''],
   ['杨凌酷凌','马赛克 分享装 65克蒟蒻果冻蜜桃味1*10*14','','袋',1.6,0,0,''],
   ['杨凌酷凌','马赛克分享包果汁软糖菠萝味','','袋',1.5,0,0,''],
+  /* ★ COFFEE-PATCH v1：照金站专供（供应商=天朗）。
+     每行 9 个元素，第 9 个元素 =「限定站点」；只有照金能看到 / 能下单。 */
+  ['天朗','咖啡豆','','袋',129,0,0,'照金专属','照金'],
+  ['天朗','纯牛奶','','箱',125,0,0,'照金专属','照金'],
+  ['天朗','常温椰萃椰乳','','箱',168,0,0,'照金专属','照金'],
+  ['天朗','榛子果酱','','袋',45,0,0,'照金专属','照金'],
+  ['天朗','方形白糖包','','包',18,0,0,'照金专属','照金'],
+  ['天朗','咖啡打包袋','','个',0.55,0,0,'照金专属','照金'],
+  ['天朗','咖啡机清洗片','','片',98,0,0,'照金专属','照金'],
+  ['天朗','牛奶清洗片','','片',98,0,0,'照金专属','照金'],
+  ['天朗','除垢剂','','包',98,0,0,'照金专属','照金'],
+  ['天朗','双淋膜中空纸杯','','个',0.4,0,0,'照金专属','照金'],
+  ['天朗','90口径蝴蝶盖','','个',0.2,0,0,'照金专属','照金'],
+  ['天朗','PET杯','','个',0.2,0,0,'照金专属','照金'],
+  ['天朗','92口径直饮盖','','个',0.1,0,0,'照金专属','照金'],
+  ['天朗','单层粘合杯套','','个',0.1,0,0,'照金专属','照金'],
+  ['天朗','塑包小吸管','','个',0.03,0,0,'照金专属','照金'],
+  ['天朗','餐饮用口罩','','包',28,0,0,'照金专属','照金'],
+  ['天朗','一次性手套','','盒',18,0,0,'照金专属','照金'],
 ];
 
 var data = { products: [], orders: [], productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '', catCaps: [], catBal: [], hasAnyCap: false };   /* CATCH-PATCH v2 */
@@ -1174,8 +1197,14 @@ function computeAll() {
     var cap = catCapOf(c);
     var used = (mode === '数量') ? u.qty : n2(u.amt);
     var bal = n2(cap - used);
+    // ★ COFFEE-PATCH v1：该品类里若有站点限定商品，标出限定站（供面板提示）
+    var smap = {};
+    data.products.forEach(function (p) {
+      if (classifyCat(p) !== c) return;
+      siteOnlyList(p).forEach(function (x) { smap[x] = 1; });
+    });
     return {
-      cat: c, mode: mode, unit: catUnitOf(c),
+      cat: c, mode: mode, unit: catUnitOf(c), sites: Object.keys(smap),
       cap: n2(cap), used: n2(used), bal: bal,
       productCount: u.cnt, orderCount: u.ord,
       local: catOverrides[c] != null,
@@ -1200,6 +1229,22 @@ function suppliers() {
   return s;
 }
 function productsOf(sup) { return data.products.filter(function (p) { return p.supplier === sup; }); }
+/* ===== COFFEE-PATCH v1：站点限定商品 =====
+   商品档案「限定站点」列（第 10 列）留空 → 各服务区都能下订；
+   填了站名（多站用 , / 、 分隔，如「照金」或「照金,华山」）→ 只有这些服务区能下订。
+   这一层管「能不能看到 / 能不能下」，与额度无关；金山端 order 模式有同款硬校验兜底。 */
+function siteOnlyList(p) {
+  var so = String((p && p.siteOnly) || '').trim();
+  if (!so) return [];
+  return so.split(/[,，\/、|;；\s]+/).filter(function (x) { return !!x; });
+}
+function siteAllowed(p, site) {
+  var list = siteOnlyList(p);
+  if (!list.length) return true;                                  // 不限站
+  var cur = String(site == null ? (boundSite || curSite()) : site).trim();
+  if (!cur) return true;                                          // 还没选订货单位（管理员/通用入口）→ 不拦，交给金山端
+  return list.indexOf(cur) >= 0;
+}
 function prodOf(sup, name) {
   for (var i = 0; i < data.products.length; i++) if (data.products[i].supplier === sup && data.products[i].name === name) return data.products[i];
   return null;
@@ -1619,7 +1664,7 @@ function normalize(raw) {
   o.products = o.products.map(function (p) {
     return { supplier: String(p.supplier || ''), name: String(p.name || p.product || ''), spec: String(p.spec || ''),
       unit: String(p.unit || ''), price: Number(p.price || 0), shelf: Math.round(Number(p.shelf || 0)),
-      capQty: Number(p.capQty || 0), note: String(p.note || '') };
+      capQty: Number(p.capQty || 0), note: String(p.note || ''), siteOnly: String(p.siteOnly || '') };
   });
   o.orders = o.orders.map(function (r) {
     var qty = Number(r.qty || 0), price = Number(r.price || 0);
@@ -1721,7 +1766,7 @@ function poolUnit(pool) { return pool && pool.mode === '数量' ? (pool.unit || 
 /* ---------- 示例数据（与 Excel 模板一致，首次打开不空白） ---------- */
 function sampleData() {
   var products = PRODUCTS.map(function (p) {
-    return { supplier: p[0], name: p[1], spec: p[2], unit: p[3], price: p[4], shelf: p[5], capQty: p[6], note: p[7] };
+    return { supplier: p[0], name: p[1], spec: p[2], unit: p[3], price: p[4], shelf: p[5], capQty: p[6], note: p[7], siteOnly: p[8] || '' };
   });
   var sups = []; products.forEach(function (p) { if (sups.indexOf(p.supplier) < 0) sups.push(p.supplier); });
   var orders = [];
@@ -2173,7 +2218,8 @@ function renderForm() {
   CATS.forEach(function (c) {
     var seen = {}, members = [];
     data.products.forEach(function (p) {
-      if (classifyCat(p) === c && !seen[p.supplier]) { seen[p.supplier] = 1; members.push(p.supplier); }
+      // ★ COFFEE-PATCH v1.1：optgroup 也要按站点过滤，否则别的站会多出一个空的「咖啡及相关物资」分组
+      if (classifyCat(p) === c && !seen[p.supplier] && siteAllowed(p)) { seen[p.supplier] = 1; members.push(p.supplier); }
     });
     if (!members.length) return;
     g += '<optgroup label="' + esc(c) + '">' + members.map(function (s) {
@@ -2185,7 +2231,7 @@ function renderForm() {
   if (!supSel.value && sups.length) supSel.value = sups[0];
 
   var pdSel = document.getElementById('odProduct');
-  var goods = productsOf(supSel.value);
+  var goods = productsOf(supSel.value).filter(function (p) { return siteAllowed(p); });
   var curP = pdSel.value;
   pdSel.innerHTML = goods.map(function (p) {
     var b = balOf(supSel.value, p.name);
@@ -2198,7 +2244,7 @@ function renderForm() {
   if (cart.length && cartSup && sups.indexOf(cartSup) >= 0) supSel.value = cartSup;  // 恢复上次下单的供应商
 
   var pdSel2 = document.getElementById('odProduct');   // 供应商可能刚被改回，商品列表要跟上
-  var goods2 = productsOf(supSel.value);
+  var goods2 = productsOf(supSel.value).filter(function (p) { return siteAllowed(p); });
   var curP2 = pdSel2.value;
   pdSel2.innerHTML = goods2.map(function (p) {
     var b2 = balOf(supSel.value, p.name);
@@ -2458,6 +2504,8 @@ function submitOrder() {
     var p = prodOf(sup, l.product);
     if (!p) { hard.push('商品「' + l.product + '」不属于供应商「' + sup + '」'); return; }
     if (!(l.qty > 0)) { hard.push('「' + l.product + '」数量必须大于 0'); return; }
+    // ★ COFFEE-PATCH v1：站点限定商品（防止改 DOM 给别的站下）
+    if (!siteAllowed(p, site)) { hard.push('「' + l.product + '」是站点专供商品，只有 ' + siteOnlyList(p).join(' / ') + ' 能下订（当前订货单位：' + (site || '未选') + '）'); return; }
     // ★ 该品类若设了「共用额度」，逐款 capQty 就不参与校验（由下面的品类池统一判）
     var cat = classifyCat(p), pool = catBalOf(cat);
     var b = balOf(sup, l.product);
@@ -2747,7 +2795,9 @@ function renderCatCap() {
     var st = local ? '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">本地改</span>'
       : (p.set ? '<span class="tag ok">已设</span>' : '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">未设</span>');
     var reset = local ? ' <a href="#" onclick="onCatCapReset(\'' + esc(p.cat) + '\');return false" style="font-size:11px;color:var(--orange)">复原</a>' : '';
-    h += '<tr><td style="white-space:nowrap;color:var(--accent)"><b>' + esc(p.cat) + '</b></td>' +
+    var siteTag = (p.sites && p.sites.length)
+      ? ' <span class="tag low" style="font-size:10.5px">仅 ' + esc(p.sites.join('/')) + '</span>' : '';
+    h += '<tr><td style="white-space:nowrap;color:var(--accent)"><b>' + esc(p.cat) + '</b>' + siteTag + '</td>' +
       '<td>' + esc(p.mode) + '<span style="color:var(--text2)">' + (q ? '（' + esc(q) + '）' : '（元）') + '</span></td>' +
       '<td class="num" style="color:var(--text2)">' + p.productCount + '</td>' +
       '<td class="num"><input class="cap-in" type="number" min="0" step="1" data-cat="' + esc(p.cat) +
