@@ -8,6 +8,40 @@
 <title>供应商订货管理</title>
 <!-- 单文件零依赖：图表与图标全部内联 SVG，不引任何 CDN / 框架 / 字体 -->
 <style>
+/* ===== CART-PATCH v1 ===== */
+.add-box { border-top: 1px solid var(--border); margin-top: 14px; padding-top: 14px; }
+.add-h { font-size: 12px; color: var(--text2); margin-bottom: 8px; letter-spacing: .02em; }
+.cart { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
+.cart-h { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; }
+.cart-h .hint { margin-left: auto; font-size: 12px; color: var(--text2); font-variant-numeric: tabular-nums; }
+.cart-h .btn.sm { padding: 2px 10px; font-size: 11px; }
+.cart-tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+.cart-tbl th { text-align: left; font-weight: 500; color: var(--text2); padding: 4px 6px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.cart-tbl td { padding: 6px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.cart-tbl .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cart-tbl .dim { color: var(--text2); }
+.cart-tbl tr.over td { background: rgba(179, 38, 30, .055); }
+.warn-t { font-size: 10px; color: var(--red); margin-top: 2px; }
+.qty-in { width: 62px; padding: 4px 6px; border: 1px solid var(--border); border-radius: 8px; background: var(--card2); color: var(--text); font: inherit; font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+.cart-tbl .unit { margin-left: 4px; color: var(--text2); font-size: 11px; }
+.btn.sm.del { padding: 2px 8px; font-size: 11px; }
+#odAdd { margin-top: 6px; }
+@media (max-width: 760px) {
+  .cart-h { flex-wrap: wrap; }
+  .cart-h .hint { order: 9; width: 100%; margin-left: 0; }
+  .cart { overflow-x: visible; }
+  /* 窄屏把清单表格改成「堆叠卡片」：商品名一行，数量 + 金额一行，删在最右 */
+  .cart-tbl thead { display: none; }
+  .cart-tbl, .cart-tbl tbody, .cart-tbl tr { display: block; width: 100%; }
+  .cart-tbl tr { position: relative; padding: 10px 50px 10px 0; border-bottom: 1px solid var(--border); }
+  .cart-tbl td { display: inline-block; border: 0; padding: 2px 0; vertical-align: middle; }
+  .cart-tbl td:nth-child(1) { display: block; font-weight: 500; margin-bottom: 4px; }
+  .cart-tbl td.spec-col, .cart-tbl td:nth-child(3) { display: none; }
+  .cart-tbl td:nth-child(4) { margin-right: 12px; }
+  .cart-tbl td:nth-child(5) { font-weight: 600; }
+  .cart-tbl td:nth-child(6) { position: absolute; right: 0; top: 10px; }
+  .qty-in { width: 78px; font-size: 13px; padding: 6px 8px; }
+}
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* ============================================================
@@ -339,29 +373,49 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
     </div>
     <div class="form-row" data-page-node-id="6RocbbZDzRlHvrmVGzLB1O">
       <div class="field" data-page-node-id="YFlHwr8R5LsyjQsnmAIQwd">
-        <label for="odSupplier" data-page-node-id="KID1IEUuTGjbsMwF4iYkTc">供应商</label>
+        <label for="odSupplier" data-page-node-id="KID1IEUuTGjbsMwF4iYkTc">① 供应商</label>
         <select id="odSupplier" onchange="onSupplierPick()" data-page-node-id="q2ORcQd1EQ86wuRTTqjqGB"></select>
       </div>
       <div class="field" data-page-node-id="zGn6u9GwJnrWlBS0lTzoSt">
-        <label for="odProduct" data-page-node-id="a3gO5thncaW6c3dGemC2M2">商品</label>
-        <select id="odProduct" onchange="onProductPick()" data-page-node-id="e6ghIQIWaAGTWCocUbPh5p"></select>
+        <label for="odStore" data-page-node-id="ErSwtwI5nUdBR4RAmv7r9l">② 订货单位</label>
+        <select id="odStore" onchange="onStorePick()" data-page-node-id="GxlFlt8TKWGHhWu9R6XuNf"></select>
       </div>
     </div>
     <div class="form-row" data-page-node-id="TY7j5uCTpgIWjel6BVpDB1">
       <div class="field" data-page-node-id="BG835rwEbRDGbfDpmy3TKG">
-        <label for="odStore" data-page-node-id="ErSwtwI5nUdBR4RAmv7r9l">门店</label>
-        <select id="odStore" data-page-node-id="GxlFlt8TKWGHhWu9R6XuNf"></select>
+        <label for="odSide">③ 细分（可选）</label>
+        <select id="odSide" onchange="onSidePick()"></select>
       </div>
-      <div class="field" data-page-node-id="0eWwhWdKnD2Oq1iWhzZd1c">
-        <label for="odQty" data-page-node-id="PyrNOMGOcc3WHaHEEvWZ4I">下订数量</label>
-        <input type="number" id="odQty" inputmode="numeric" placeholder="0" step="1" min="1" oninput="onQtyInput()" data-page-node-id="u2zlLQfpXNd8yke0WAHfVh">
+      <div class="field" data-page-node-id="tGNzzCxABwcvUtUpbsW0UF">
+        <label for="odDate" data-page-node-id="CXHeWWsI8higjRU7s9nc8t">下订日期</label>
+        <input type="date" id="odDate" onchange="renderCart()" data-page-node-id="5WZtJ6zY8sc2c4wU0aDGhX">
       </div>
     </div>
-    <div class="field" data-page-node-id="tGNzzCxABwcvUtUpbsW0UF">
-      <label for="odDate" data-page-node-id="CXHeWWsI8higjRU7s9nc8t">下订日期</label>
-      <input type="date" id="odDate" data-page-node-id="5WZtJ6zY8sc2c4wU0aDGhX">
+
+    <div class="add-box">
+      <div class="add-h">④ 加商品 —— 同一家供应商可以连续加多行，最后一起提交</div>
+      <div class="form-row" data-page-node-id="TY7j5uCTpgIWjel6BVpDB1b">
+        <div class="field" data-page-node-id="zGn6u9GwJnrWlBS0lTzoStb">
+          <label for="odProduct" data-page-node-id="a3gO5thncaW6c3dGemC2M2">商品</label>
+          <select id="odProduct" onchange="onProductPick()" data-page-node-id="e6ghIQIWaAGTWCocUbPh5p"></select>
+        </div>
+        <div class="field" data-page-node-id="0eWwhWdKnD2Oq1iWhzZd1c">
+          <label for="odQty" data-page-node-id="PyrNOMGOcc3WHaHEEvWZ4I">下订数量</label>
+          <input type="number" id="odQty" inputmode="numeric" placeholder="0" step="1" min="1" oninput="onQtyInput()" data-page-node-id="u2zlLQfpXNd8yke0WAHfVh">
+        </div>
+      </div>
+      <div class="info-grid" id="odInfo" data-page-node-id="dtbPOFQzUQbmMGH09fxADH"></div>
+      <button class="btn block" id="odAdd" onclick="addToCart()">
+        <span id="odAddTxt">加入清单</span>
+      </button>
     </div>
-    <div class="info-grid" id="odInfo" data-page-node-id="dtbPOFQzUQbmMGH09fxADH"></div>
+
+    <div class="cart" id="cartBox">
+      <div class="cart-h"><b>本单清单</b><span class="hint" id="cartHint"></span>
+        <button class="btn sm" id="cartClear" onclick="clearCart()">清空</button></div>
+      <div id="cartList"></div>
+    </div>
+
     <button class="btn primary block" id="odSubmit" onclick="submitOrder()" data-page-node-id="5pR8jIEoGHxbioIzKKl5T3">
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="kAx24T8rWRIgwAphBPLEnR"><line x1="22" y1="2" x2="11" y2="13" data-page-node-id="olGiygt7zcZnT8gGd7a0tP"/><polygon points="22 2 15 22 11 13 2 9 22 2" data-page-node-id="9Zqwq5gKrIzurITJ0iZ0Do"/></svg>
       <span id="odSubmitTxt" data-page-node-id="jfLBwIYtlTf9VFqHJPvlbM">提交下定</span>
@@ -1018,41 +1072,210 @@ function renderRole() {
   applyStoreLock();
 }
 
-/* ---------- 门店锁定 ---------- */
-function applyStoreLock() {
-  var allowed = siteStores();                 // 绑定了站 → 该站的门店数组；否则 null
-  var st = document.getElementById('odStore');
-  if (st) {
-    if (allowed) {
-      var cur = st.value;
-      st.innerHTML = allowed.map(function (s) {
-        return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
-      }).join('');
-      st.value = (allowed.indexOf(cur) >= 0) ? cur : allowed[0];
-      st.classList.add('locked');             // ★ 仍可选东/西，但不给选站外
-      st.disabled = false;
-    } else if (st.classList.contains('locked')) {
-      st.classList.remove('locked');
-      st.innerHTML = STORES.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join('');
+/* ===== CART-PATCH v1 ===== */
+/* 购物车：只累积「商品 + 数量」；供应商 / 订货单位 / 日期是整单的抬头。
+   一个供应商一张 Sheet → 购物车天然只在同一供应商内累积，跨供应商自然拆成两笔单。 */
+var LS_CART = 'wb_order_cart_v1';
+var cart = [];        // [{product, qty}]
+var cartSup = '';     // 清单归属的供应商（用于「换供应商→清空」判断）
+
+function saveCart() {
+  try { localStorage.setItem(LS_CART, JSON.stringify({ sup: cartSup, lines: cart })); } catch (e) {}
+}
+function loadCart() {
+  try {
+    var o = JSON.parse(localStorage.getItem(LS_CART) || 'null');
+    if (o && o.sup && Array.isArray(o.lines)) {
+      cartSup = String(o.sup);
+      cart = o.lines.filter(function (l) { return l && l.product && Number(l.qty) > 0; })
+        .map(function (l) { return { product: String(l.product), qty: Number(l.qty) }; });
+    }
+  } catch (e) { cart = []; cartSup = ''; }
+}
+
+/* ---------- 订货单位（服务区）与细分 ---------- */
+function siteNames() {
+  return STORE_GROUPS.map(function (g) { return g.site; });
+}
+function storesOfSite(site) {
+  for (var i = 0; i < STORE_GROUPS.length; i++) {
+    if (STORE_GROUPS[i].site === site) return STORE_GROUPS[i].stores;
+  }
+  return [];
+}
+function curSupplier() { var e = document.getElementById('odSupplier'); return e ? e.value : ''; }
+function curSite() { var e = document.getElementById('odStore'); return e ? e.value : ''; }
+function curSide() { var e = document.getElementById('odSide'); return e ? e.value : ''; }
+// ★ 台账「门店」列：选了细分 → 具体门店名（秦岭东）；没选 → 服务区名（秦岭）
+function curStore() { return curSide() || curSite(); }
+
+// 明细筛选：选「秦岭」时，把「秦岭东 / 秦岭西」这些旧数据也一并算进来
+function storeMatch(filterVal, storeVal) {
+  if (!filterVal) return true;
+  if (filterVal === storeVal) return true;
+  return storesOfSite(filterVal).indexOf(storeVal) >= 0;
+}
+
+function renderSide() {
+  var el = document.getElementById('odSide');
+  if (!el) return;
+  var cur = el.value, arr = storesOfSite(curSite());
+  el.innerHTML = '<option value="">（整个服务区）</option>' + arr.map(function (s) {
+    return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
+  }).join('');
+  if (arr.indexOf(cur) >= 0) el.value = cur;
+}
+function onStorePick() { renderSide(); renderCart(); }
+function onSidePick() { renderCart(); }
+
+/* ---------- 清单增删改 ---------- */
+function cartTotal() {
+  var s = 0, sup = curSupplier();
+  for (var i = 0; i < cart.length; i++) {
+    var p = prodOf(sup, cart[i].product);
+    if (p) s += cart[i].qty * p.price;
+  }
+  return n2(s);
+}
+function addToCart() {
+  var sup = curSupplier(), el = document.getElementById('odProduct');
+  var p = prodOf(sup, el ? el.value : '');
+  if (!p) { toast('请先选择商品'); return; }
+  var qi = document.getElementById('odQty');
+  var qty = Number(qi ? qi.value : 0);
+  if (!(qty > 0)) { toast('请填写大于 0 的数量'); return; }
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].product === p.name) {            // 同款已在清单里 → 累加，不新增行
+      cart[i].qty += qty;
+      if (qi) qi.value = '';
+      cartSup = sup; saveCart(); renderCart();
+      toast('「' + p.name + '」已在清单中，数量累加为 ' + cart[i].qty + p.unit);
+      return;
     }
   }
+  cart.push({ product: p.name, qty: qty });
+  cartSup = sup;
+  if (qi) qi.value = '';
+  saveCart(); renderCart();
+  toast('已加入清单（' + cart.length + ' 项）');
+}
+function delCart(i) {
+  if (i < 0 || i >= cart.length) return;
+  cart.splice(i, 1);
+  if (!cart.length) cartSup = '';
+  saveCart(); renderCart();
+}
+function setCartQty(i, v) {
+  if (i < 0 || i >= cart.length) return;
+  var q = Number(v);
+  cart[i].qty = (q > 0) ? q : 0;
+  saveCart(); renderCart();
+}
+function clearCart() {
+  if (!cart.length) { toast('清单本来就是空的'); return; }
+  if (!confirm('确定清空这 ' + cart.length + ' 项清单吗？')) return;
+  cart = []; cartSup = '';
+  saveCart(); renderCart();
+  toast('清单已清空');
+}
+
+/* ---------- 渲染清单 + 提交按钮状态 ---------- */
+function renderCart() {
+  var list = document.getElementById('cartList');
+  var hint = document.getElementById('cartHint');
+  var btn = document.getElementById('odSubmit');
+  var txt = document.getElementById('odSubmitTxt');
+  var addBtn = document.getElementById('odAdd');
+  var sup = curSupplier();
+
+  if (list) {
+    if (!cart.length) {
+      list.innerHTML = '<div class="empty">还没加商品。选好商品和数量点「加入清单」往上加；' +
+        '只下一样的话，直接点下面的「提交下定」也行。</div>';
+    } else {
+      var h = '<table class="cart-tbl"><thead><tr><th>商品</th><th class="spec-col">规格</th>' +
+        '<th class="num">单价</th><th class="num">数量</th><th class="num">金额</th><th></th></tr></thead><tbody>';
+      cart.forEach(function (l, i) {
+        var p = prodOf(sup, l.product) || { spec: '', unit: '', price: 0, capQty: 0 };
+        var b = balOf(sup, l.product);
+        var cap = effCap(p);
+        var bal = cap > 0 ? (b ? b.balQty : cap) : null;
+        var over = (bal != null && l.qty > bal);
+        h += '<tr' + (over ? ' class="over"' : '') + '>' +
+          '<td>' + esc(l.product) +
+          (over ? '<div class="warn-t">超出余额 ' + nf(bal) + esc(p.unit) + '</div>' : '') + '</td>' +
+          '<td class="dim spec-col">' + esc(p.spec || '—') + '</td>' +
+          '<td class="num">' + money(p.price) + '</td>' +
+          '<td class="num"><input type="number" class="qty-in" min="1" step="1" value="' + l.qty + '" ' +
+          'oninput="setCartQty(' + i + ', this.value)"><span class="unit">' + esc(p.unit) + '</span></td>' +
+          '<td class="num"><b>' + money(l.qty * p.price) + '</b></td>' +
+          '<td><button class="btn sm del" onclick="delCart(' + i + ')">删</button></td></tr>';
+      });
+      list.innerHTML = h + '</tbody></table>';
+    }
+  }
+
+  if (hint) hint.textContent = cart.length ? cart.length + ' 项 · 合计 ' + money(cartTotal()) : '';
+
+  // 表单里当前这一行是否可直接提交（清单为空时用）
+  var pe = document.getElementById('odProduct'), qe = document.getElementById('odQty');
+  var curP = prodOf(sup, pe ? pe.value : '');
+  var curQ = Number(qe ? qe.value : 0) || 0;
+  var formOk = !!curP && curQ > 0;
+
+  if (addBtn) addBtn.disabled = submitting || !curP || !(curQ > 0);
+
+  if (submitting) {
+    if (btn) btn.disabled = true;
+    if (txt) txt.textContent = '提交中…';
+    return;
+  }
+  var tot = cartTotal();
+  if (btn) btn.disabled = !(cart.length || formOk);
+  if (txt) {
+    if (cart.length) txt.textContent = '提交下定（' + cart.length + ' 项 · ' + money(tot) + '）';
+    else if (formOk) txt.textContent = '提交下定（' + money(n2(curQ * curP.price)) + '）';
+    else txt.textContent = '请先选商品并填数量';
+  }
+}
+
+/* ---------- 启动时恢复清单 ---------- */
+function syncCartWithSuppliers() {
+  if (cart.length && cartSup && suppliers().indexOf(cartSup) < 0) { cart = []; cartSup = ''; saveCart(); }
+}
+
+/* ---------- 订货单位锁定 ---------- */
+function applyStoreLock() {
+  // 绑定了服务区 → 订货单位下拉只有那一个；没绑定（通用.bat / 直开网址）→ 15 个都列
+  var st = document.getElementById('odStore');
+  if (st) {
+    var opts = boundSite ? [boundSite] : siteNames();
+    var cur = st.value;
+    st.innerHTML = opts.map(function (s) {
+      return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
+    }).join('');
+    st.value = (opts.indexOf(cur) >= 0) ? cur : opts[0];
+    st.disabled = false;                       // 不给 disable：站点切换走 URL / 管理员
+    if (boundSite) st.classList.add('locked'); else st.classList.remove('locked');
+  }
+  renderSide();                                // ③ 细分下拉跟着服务区走
+
   var ft = document.getElementById('fStore');
   if (ft) {
-    if (allowed) {
-      var fcur = ft.value;
-      ft.innerHTML = '<option value="">' + esc(boundSite) + '（全部）</option>' + allowed.map(function (s) {
-        return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
-      }).join('');
-      ft.value = (fcur === '' || allowed.indexOf(fcur) >= 0) ? fcur : '';
-      ft.classList.add('locked');
-      ft.disabled = false;
-    } else if (ft.classList.contains('locked')) {
-      ft.classList.remove('locked');
-      ft.disabled = false;
-      ft.innerHTML = '<option value="">全部门店</option>' + STORES.map(function (s) {
-        return '<option value="' + esc(s) + '">' + esc(s) + '</option>';
+    var sites = boundSite ? [boundSite] : siteNames();
+    var fcur = ft.value;
+    var html = '<option value="">' + (boundSite ? esc(boundSite) + '（全部）' : '全部订货单位') + '</option>' +
+      sites.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join('');
+    if (boundSite) {                           // 本服务区下再给「东/西」两个精确项（兼容按门店筛）
+      html += storesOfSite(boundSite).map(function (s) {
+        return '<option value="' + esc(s) + '">' + esc(s) + '（细分）</option>';
       }).join('');
     }
+    ft.innerHTML = html;
+    var all = [''].concat(sites, boundSite ? storesOfSite(boundSite) : []);
+    ft.value = (all.indexOf(fcur) >= 0) ? fcur : '';
+    if (boundSite) ft.classList.add('locked'); else ft.classList.remove('locked');
+    ft.disabled = false;
   }
 }
 
@@ -1128,6 +1351,11 @@ var DUP_WINDOW = 8000;     // 8 秒内完全相同的单视为重复误触
 
 function newCid() { return 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
 function orderKey(sup, store, prod, qty, date) { return [sup, store, prod, qty, date].join('\u0001'); }
+// 整单指纹：同供应商 + 同订货单位 + 同日期 + 同明细（明细排序后拼接，与输入顺序无关）
+function cartKey(sup, store, date, lines) {
+  var parts = lines.map(function (l) { return l.product + '\u0002' + l.qty; }).sort();
+  return [sup, store, date, parts.join('\u0003')].join('\u0001');
+}
 function loadRecent() { try { var s = localStorage.getItem(LS_RECENT); recentSubmits = s ? (JSON.parse(s) || {}) : {}; } catch (e) { recentSubmits = {}; } }
 function saveRecent() { try { localStorage.setItem(LS_RECENT, JSON.stringify(recentSubmits)); } catch (e) {} }
 function markSubmitted(key) { recentSubmits[key] = Date.now(); saveRecent(); }
@@ -1225,10 +1453,26 @@ function renderSync() {
 
 function renderToday() {
   var items = [];
+  // 同一次提交（同 ts + 同供应商 + 同服务区 + 同日期）合成一条，避免一单 5 行显示成 5 条
+  var groups = [], gmap = {};
   pending.forEach(function (p, i) {
-    items.push({ lvl: p.unknown ? 'urgent' : 'warn',
-      t: (p.unknown ? '待核对：' : '待提交：') + p.supplier + ' / ' + p.store + ' / ' + p.product + ' × ' + p.qty,
-      s: '日期 ' + p.date + (p.err ? ' · ' + p.err : ''), b: p.unknown ? '确认重发' : '重试', f: 'retryPending(' + i + ')' });
+    var k = p.ts + '|' + p.supplier + '|' + p.store + '|' + p.date;
+    if (!gmap[k]) { gmap[k] = { first: i, ts: p.ts, supplier: p.supplier, store: p.store, date: p.date, lines: [] }; groups.push(gmap[k]); }
+    gmap[k].lines.push(p);
+  });
+  groups.forEach(function (g) {
+    var un = g.lines.some(function (x) { return x.unknown; });
+    var amt = g.lines.reduce(function (s, x) {
+      var pp = prodOf(x.supplier, x.product);
+      return s + (pp ? x.qty * pp.price : 0);
+    }, 0);
+    var desc = (g.lines.length === 1)
+      ? g.lines[0].product + ' × ' + g.lines[0].qty
+      : g.lines.length + ' 项商品（' + money(amt) + '）';
+    items.push({ lvl: un ? 'urgent' : 'warn',
+      t: (un ? '待核对：' : '待提交：') + g.supplier + ' / ' + g.store + ' / ' + desc,
+      s: '日期 ' + g.date + (g.lines[0].err ? ' · ' + g.lines[0].err : ''),
+      b: un ? '确认重发' : '重试', f: 'retryPending(' + g.first + ')' });
   });
   data.expiring.slice(0, 6).forEach(function (e) {
     var lvl = e.days <= 10 ? 'urgent' : 'warn';
@@ -1402,11 +1646,20 @@ function renderForm() {
   }).join('');
   if (curP && goods.some(function (p) { return p.name === curP; })) pdSel.value = curP;
 
-  var stSel = document.getElementById('odStore');
-  if (!stSel.options.length) {
-    stSel.innerHTML = STORES.map(function (s) { return '<option value="' + esc(s) + '">' + esc(s) + '</option>'; }).join('');
-  }
-  applyStoreLock();   // ★ 绑定门店时锁定门店栏
+  syncCartWithSuppliers();                       // 清单归属的供应商没了 → 丢弃
+  if (cart.length && cartSup && sups.indexOf(cartSup) >= 0) supSel.value = cartSup;  // 恢复上次下单的供应商
+
+  var pdSel2 = document.getElementById('odProduct');   // 供应商可能刚被改回，商品列表要跟上
+  var goods2 = productsOf(supSel.value);
+  var curP2 = pdSel2.value;
+  pdSel2.innerHTML = goods2.map(function (p) {
+    var b2 = balOf(supSel.value, p.name);
+    var tail2 = (effCap(p) > 0 && b2) ? '（余 ' + b2.balQty + p.unit + '）' : '';
+    return '<option value="' + esc(p.name) + '">' + esc(p.name) + tail2 + '</option>';
+  }).join('');
+  if (curP2 && goods2.some(function (p) { return p.name === curP2; })) pdSel2.value = curP2;
+
+  applyStoreLock();   // ★ 订货单位（服务区）+ 细分
   if (!document.getElementById('odDate').value) document.getElementById('odDate').value = todayStr();
   renderFormInfo();
 }
@@ -1417,9 +1670,7 @@ function renderFormInfo() {
   var p = prodOf(sup, nm);
   var b = balOf(sup, nm);
   var box = document.getElementById('odInfo');
-  var btn = document.getElementById('odSubmit');
-  var txt = document.getElementById('odSubmitTxt');
-  if (!p) { box.innerHTML = ''; btn.disabled = true; txt.textContent = '请先维护商品档案'; return; }
+  if (!p) { box.innerHTML = ''; renderCart(); return; }
   var qty = Number(document.getElementById('odQty').value) || 0;
   var amt = n2(qty * p.price);
   var hasCap = effCap(p) > 0;                       // capQty<=0 视为「额度未设 / 不限制」
@@ -1440,14 +1691,22 @@ function renderFormInfo() {
     '<div class="info-cell"><div class="k">预计到期</div><div class="v" style="font-size:12px">' + esc(exp) + '</div></div>' +
     '<div class="info-cell"><div class="k">保质期</div><div class="v" style="font-size:13px">' + (p.shelf ? p.shelf + ' 天' : '—') + '</div></div>' +
     '<div class="info-cell"><div class="k">累计已订</div><div class="v" style="font-size:13px">' + nf(b ? b.usedQty : 0) + ' ' + esc(p.unit) + '</div></div>';
-  btn.disabled = submitting || qty <= 0 || (over && !allowForce);
-  txt.textContent = submitting ? '提交中…'
-    : over ? '超出额度 ' + Math.abs(after) + p.unit + (allowForce ? '（强制提交）' : '，无法提交')
-    : '提交下定（' + money(amt) + '）';
+  renderCart();   // ★ 按钮文案/禁用态统一由 renderCart 管（清单为空时算当前这一行）
 }
 
-var allowForce = false;
-function onSupplierPick() { refreshAll(); }
+// 换供应商 → 清单作废（一个供应商一张台账 Sheet，混着加没意义）
+function onSupplierPick() {
+  var sup = curSupplier();
+  if (cart.length && cartSup && cartSup !== sup) {
+    if (!confirm('换成「' + sup + '」会清空已加的 ' + cart.length + ' 项清单，确定吗？')) {
+      var e = document.getElementById('odSupplier');
+      if (e) e.value = cartSup;          // 取消 → 把下拉还原
+      return;
+    }
+    cart = []; cartSup = ''; saveCart();
+  }
+  refreshAll();
+}
 function onProductPick() { renderFormInfo(); }
 function onQtyInput() { renderFormInfo(); }
 function focusProduct(sup, prod) {
@@ -1468,7 +1727,7 @@ function renderFilters() {
     if (cur && (arr.indexOf(cur) >= 0)) el.value = cur;
   }
   fill('fSupplier', sups, '全部供应商');
-  fill('fStore', STORES, '全部门店');
+  fill('fStore', siteNames(), '全部订货单位');
   var fs = document.getElementById('fSupplier').value;
   var goods = fs ? productsOf(fs).map(function (p) { return p.name; }) : data.products.map(function (p) { return p.name; });
   fill('fProduct', goods, '全部商品');
@@ -1491,13 +1750,14 @@ function renderDetail() {
   var fp = document.getElementById('fProduct').value;
   var fd = Number(document.getElementById('fDays').value) || 0;
   var from = (!fdate && fd) ? addDays(todayStr(), -fd) : '';
-  var scope = siteStores();                 // ★ 绑定了站：明细只看本站门店
+  var scope = siteStores();                 // ★ 绑定了服务区：明细只看本服务区
 
   function match(o, withDate) {
-    if (scope && scope.indexOf(o.store) < 0) return false;
+    // 新单记「服务区名」（秦岭），旧单记门店名（秦岭东）→ 两种都要算在本服务区里
+    if (scope && scope.indexOf(o.store) < 0 && o.store !== boundSite) return false;
     if (fs && o.supplier !== fs) return false;
     if (withDate && fdate && o.date !== fdate) return false;
-    if (fst && o.store !== fst) return false;
+    if (fst && !storeMatch(fst, o.store)) return false;
     if (fp && o.product !== fp) return false;
     if (from && o.date < from) return false;
     return true;
@@ -1613,44 +1873,90 @@ function renderFooter() {
 function submitOrder() {
   // ★ 防连按：上一批还在发送中，直接忽略后续点击（回车连敲 / 移动端双击同理）
   if (submitting) { toast('正在提交中，请稍候…'); return; }
-  var sup = document.getElementById('odSupplier').value;
-  var prod = document.getElementById('odProduct').value;
-  var store = document.getElementById('odStore').value;
-  var scope = siteStores();
-  if (scope && scope.indexOf(store) < 0) {   // ★ 站点绑定：只允许本站门店（防改 DOM 换站）
-    toast('门店只能选 ' + scope.join(' / '));
+
+  var sup = curSupplier();
+  var site = curSite();
+  var side = curSide();
+
+  // ★ 订货单位绑定：只允许本服务区（防改 DOM 换服务区）
+  if (!isAdmin() && boundSite && site !== boundSite) {
+    toast('订货单位只能选 ' + boundSite);
     return;
   }
-  var qty = Number(document.getElementById('odQty').value);
+  if (site && !isAdmin() && storesOfSite(site).length === 0) {
+    toast('订货单位「' + site + '」不在名单里');
+    return;
+  }
+  if (side && storesOfSite(site).indexOf(side) < 0) {
+    toast('细分只能选 ' + (storesOfSite(site).join(' / ') || '本服务区内的门店'));
+    return;
+  }
+
   var date = document.getElementById('odDate').value || todayStr();
-  var p = prodOf(sup, prod);
-  if (!p) { toast('请先选择商品'); return; }
-  if (!(qty > 0)) { toast('请填写大于 0 的数量'); return; }
-  var b = balOf(sup, prod);
-  var hasCap = effCap(p) > 0;
-  var bal = hasCap ? (b ? b.balQty : effCap(p)) : null;
-  var amt = n2(qty * p.price);
-  // 供应商金额额度（派生自各商品 capQty×price，用于余额监管、防定超）
+  var pe = document.getElementById('odProduct'), qe = document.getElementById('odQty');
+  var curName = pe ? pe.value : '', curQty = Number(qe ? qe.value : 0) || 0;
+
+  // 清单 + 表单里那一行（没点「加入清单」直接提交的，一并算上，避免漏下）
+  var lines = cart.map(function (l) { return { product: l.product, qty: l.qty }; });
+  if (curName && curQty > 0 && !lines.some(function (l) { return l.product === curName; })) {
+    lines.push({ product: curName, qty: curQty });
+  }
+  if (!lines.length) { toast('请先选商品、填数量（或加入清单）'); return; }
+
+  // ── 逐行校验（商品存在 / 数量 / 商品额度）────────────────
+  var items = [], hard = [], soft = [], totalAmt = 0;
+  lines.forEach(function (l) {
+    var p = prodOf(sup, l.product);
+    if (!p) { hard.push('商品「' + l.product + '」不属于供应商「' + sup + '」'); return; }
+    if (!(l.qty > 0)) { hard.push('「' + l.product + '」数量必须大于 0'); return; }
+    var b = balOf(sup, l.product);
+    var cap = effCap(p), bal = cap > 0 ? (b ? b.balQty : cap) : null;
+    if (bal != null && l.qty > bal) {
+      soft.push('「' + l.product + '」超额度：本行 ' + l.qty + p.unit + '，余额仅 ' + nf(bal) + p.unit);
+    }
+    var amt = n2(l.qty * p.price);
+    totalAmt += amt;
+    items.push({ product: l.product, qty: l.qty, unit: p.unit, price: p.price, amt: amt });
+  });
+  if (hard.length) { toast(hard[0]); return; }
+
+  // ── 供应商金额额度：按整单合计看 ─────────────────────────
   var sb = null;
-  for (var i = 0; i < data.supplierBal.length; i++) if (data.supplierBal[i].supplier === sup) { sb = data.supplierBal[i]; break; }
-  var overProduct = hasCap && qty > bal;
-  var overAmt = false, amtBal = null;
-  if (sb && sb.capAmt > 0) { amtBal = sb.capAmt - sb.usedAmt; if (amt > amtBal) overAmt = true; }
+  for (var i = 0; i < data.supplierBal.length; i++) {
+    if (data.supplierBal[i].supplier === sup) { sb = data.supplierBal[i]; break; }
+  }
+  var amtBal = null;
+  if (sb && sb.capAmt > 0) {
+    amtBal = sb.capAmt - sb.usedAmt;
+    if (totalAmt > amtBal) {
+      soft.push('供应商「' + sup + '」金额剩余 ' + money(amtBal) + '（已订 ' + money(sb.usedAmt) +
+        ' / 额度 ' + money(sb.capAmt) + '），本单 ' + items.length + ' 项合计 ' + money(totalAmt));
+    }
+  }
   var force = false;
-  if (overProduct || overAmt) {
-    var msg = '即将超出额度，确认强制下订吗？（强制会在金山表里记为超订）\n';
-    if (overProduct) msg += '· 商品「' + prod + '」剩余 ' + bal + p.unit + '（已订 ' + nf(b ? b.usedQty : 0) + '/' + nf(effCap(p)) + '）\n';
-    if (overAmt) msg += '· 供应商「' + sup + '」金额剩余 ' + money(amtBal) + '（已订 ' + money(sb.usedAmt) + '/额度 ' + money(sb.capAmt) + '）\n本单 ' + qty + p.unit + ' = ' + money(amt);
+  if (soft.length) {
+    var msg = '即将超出额度，确认按「强制下订」提交吗？（会在金山表里记为超订）\n\n· ' + soft.join('\n· ');
     force = confirm(msg);
     if (!force) return;
   }
-  // ★ 防误触重复：同门店 + 同商品 + 同数量 + 同日期，8 秒内再次提交直接忽略
-  var fkey = orderKey(sup, store, prod, qty, date);
-  if (isRecentDup(fkey)) { toast('刚刚已提交过这一单，已忽略重复提交'); return; }
+
+  // ── 整单防误触：同供应商 + 同订货单位 + 同日期 + 同明细，8 秒内重复直接忽略 ──
+  var fkey = cartKey(sup, curStore(), date, items);
+  if (isRecentDup(fkey)) { toast('刚刚已提交过一模一样的清单，已忽略重复提交'); return; }
   markSubmitted(fkey);
-  pending.push({ cid: newCid(), supplier: sup, store: store, product: prod, qty: qty, date: date, note: '', force: force, ts: Date.now(), err: '', sent: false, unknown: false });
+
+  // ── 入队：一个商品一笔（各自带唯一 cid，云端按 cid 幂等），同批只派发一次 workflow ──
+  var store = curStore(), ts = Date.now();
+  items.forEach(function (it) {
+    pending.push({
+      cid: newCid(), supplier: sup, store: store, product: it.product, qty: it.qty,
+      date: date, note: '', force: force, ts: ts, err: '', sent: false, unknown: false
+    });
+  });
   savePending();
-  document.getElementById('odQty').value = '';
+
+  cart = []; cartSup = ''; saveCart();
+  if (qe) qe.value = '';
   renderFormInfo();
   refreshAll();
   flushPending();
@@ -1682,7 +1988,7 @@ function flushPending() {
     pending = pending.filter(function (p) { return !ids[p.cid]; });    // 只清这一批，发送期间新增的保留
     savePending(); submitting = false; setSubmitBusy(false);
     syncState = 'ok'; refreshAll();
-    toast('已提交，约 30 秒后自动更新…');
+    toast('已提交 ' + batch.length + ' 项，约 30 秒后自动更新…');
     pollUpdate();
     if (pending.length) setTimeout(flushPending, 400);                 // 期间又下了新单，接着发
   }).catch(function (e) {
@@ -1694,8 +2000,14 @@ function flushPending() {
 }
 function retryPending(i) {
   var p = pending[i]; if (!p) return;
-  p.sent = false; p.unknown = false; p.err = '';
-  pending = [p]; savePending();
+  // 同一次提交的整组一起重试（同 ts + 同供应商 + 同服务区 + 同日期）；
+  // ★ 不重写 pending 数组 —— 否则会顺手丢掉队列里其它的单
+  pending.forEach(function (x) {
+    if (x.ts === p.ts && x.supplier === p.supplier && x.store === p.store && x.date === p.date) {
+      x.sent = false; x.unknown = false; x.err = '';
+    }
+  });
+  savePending();
   flushPending();
 }
 
@@ -1958,7 +2270,7 @@ function bindSubmitGuard() {
 
 /* ---------- 启动 ---------- */
 function boot() {
-  loadCfg(); applyHashParams(); loadRole(); loadPending(); loadCaps(); loadRecent();
+  loadCfg(); applyHashParams(); loadRole(); loadPending(); loadCaps(); loadRecent(); loadCart();
   bindDashFilters(); bindCapPanel(); bindSubmitGuard();
   renderRole();
   var want = isAdmin() ? 'ledger' : 'order';
