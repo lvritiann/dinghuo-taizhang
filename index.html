@@ -441,17 +441,17 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
   <div class="card" data-page-node-id="FdEJkxgp0NSe2CyTjmgNWn">
     <div class="card-h" data-page-node-id="5yiW0MipCNLehsACviensy">
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="atggOogcTMnJG06Kd2AxxK"><line x1="18" y1="20" x2="18" y2="10" data-page-node-id="LvNXbWSP4UsB5Ch2paWE6v"/><line x1="12" y1="20" x2="12" y2="4" data-page-node-id="5Wcl2yqksDm2B4Wb1gEiHf"/><line x1="6" y1="20" x2="6" y2="14" data-page-node-id="xR9tGDE0rFd6LZ9wpr1nKU"/></svg>
-      <h2 data-page-node-id="nqyMxS8p3D88YKlVmEIBbJ">供应商余额仪表盘</h2>
+      <h2 data-page-node-id="nqyMxS8p3D88YKlVmEIBbJ">供应商已下订金额</h2>
       <span class="spacer" data-page-node-id="lJu8rJO7PCJaFvxFHiAjzv"></span>
       <span class="hint" id="dashHint" data-page-node-id="W7wM9hcCKpySo1sbH80gaV"></span>
     </div>
     <div class="kpis" id="kpis" data-page-node-id="Ly29JaJi46hPuB5fQoXy8x"></div>
     <div class="chart-box" data-page-node-id="GCh5r7pIdrVyO2s3RsvauX">
-      <div class="chart-title" data-page-node-id="bMuafoBld7O60GkKQEWWGi">各供应商已下订 / 金额余额（元）</div>
+      <div class="chart-title" data-page-node-id="bMuafoBld7O60GkKQEWWGi">各供应商已下订金额（元）</div>
       <svg class="chart" id="chartSup" viewBox="0 0 640 60" preserveAspectRatio="xMinYMin meet" data-page-node-id="I4gAPN1TzK928Wv6OqOeEi"></svg>
     </div>
     <div class="chart-box" data-page-node-id="catSumBox">
-      <div class="chart-title" data-page-node-id="catSumTitle">各大类余额（金额 · 防定超监管）</div>
+      <div class="chart-title" data-page-node-id="catSumTitle">各品类共用额度余额（数量口径显数量 / 金额口径显金额 · 防定超监管）</div>
       <div class="cat-cards" id="catCards" data-page-node-id="catCards"></div>
     </div>
   </div>
@@ -462,18 +462,18 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
   <div class="card" data-page-node-id="prodBalCard">
     <div class="card-h" data-page-node-id="prodBalH">
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="pbIco"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="4" width="3" height="14"/></svg>
-      <h2 data-page-node-id="prodBalTitle">商品数量余额（按商品 · 同单位可比）</h2>
+      <h2 data-page-node-id="prodBalTitle">各商品已订明细</h2>
       <span class="spacer" data-page-node-id="prodBalSp"></span>
-      <span class="hint" data-page-node-id="prodBalHint">数量跨商品不可加，所以按商品逐款看</span>
+      <span class="hint" data-page-node-id="prodBalHint">额度与余额按品类共用 —— 看上方「各品类共用额度余额」；这里看每款订了多少</span>
     </div>
     <div class="dash-filters" id="dashFilters">
       <select id="dashCat"></select>
       <select id="dashSup"></select>
       <select id="dashStatus">
         <option value="all">全部状态</option>
-        <option value="warn">仅看需关注</option>
-        <option value="ok">仅看充足</option>
-        <option value="nocap">仅看未设额度</option>
+        <option value="warn">仅看品类将尽/用尽</option>
+        <option value="ok">仅看品类充足</option>
+        <option value="nocap">仅看品类未设额度</option>
       </select>
       <input id="dashSearch" type="search" placeholder="搜索商品名" />
       <span class="hint" id="dashPageInfo"></span>
@@ -504,11 +504,29 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
     <div class="note" id="keyHashBox" style="display:none;word-break:break-all"></div>
   </div>
 
-  <!-- ④ 额度维护（网页临时改额度 + 导出补丁回贴台账） -->
+  <!-- ④ 品类共用额度（一个品类一个额度，9 行填完即可） -->
+  <div class="card" data-page-node-id="catCapCard">
+    <div class="card-h" data-page-node-id="catCapH">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"/><path d="M5 7v14h14V7"/><path d="M9 11h6"/></svg>
+      <h2>① 品类共用额度</h2>
+      <span class="spacer"></span>
+      <span class="hint" id="catCapHint"></span>
+    </div>
+    <div class="note">一个品类填<b>一个</b>额度，该品类下所有商品共用。<br>
+      <b>数量口径</b>（该类商品单位一致，如玻璃水都是「桶」）按件数填；<b>金额口径</b>（单位不一致，如冰淇淋有 件/支/袋）按钱填 —— 口径由页面自动判定。</div>
+    <div class="tbl-wrap"><table class="tbl" id="tblCatCap"></table></div>
+    <div class="note">填好后点「导出补丁」→ 把 CSV 内容贴到金山《品类额度》表 → 回页面点顶栏「同步」即全局生效。</div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:12px">
+      <button id="catCapExport" class="btn sm">导出补丁</button>
+      <button id="catCapClear" class="btn sm">清空本地修改</button>
+    </div>
+  </div>
+
+  <!-- ⑤ 单品额度（可选 · 品类未设额度时兜底） -->
   <div class="card" data-page-node-id="capPanelCard">
     <div class="card-h" data-page-node-id="capPanelH">
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="capIco"><path d="M3 3h18v4H3z" data-page-node-id="ca1"/><path d="M5 7v14h14V7" data-page-node-id="ca2"/><path d="M9 11h6" data-page-node-id="ca3"/></svg>
-      <h2 data-page-node-id="capTitle">额度维护（最高可下订数量）</h2>
+      <h2 data-page-node-id="capTitle">② 单品额度（可选 · 仅在品类未设额度时生效）</h2>
       <span class="spacer" data-page-node-id="capSp"></span>
       <span class="hint" id="capHint" data-page-node-id="capHint"></span>
     </div>
@@ -670,7 +688,7 @@ var dashState = { sup: '', cat: '', status: 'all', q: '', page: 1, size: 20 };
 // 商品细类（八类：润滑油 / 玻璃水 / 尿素 / 燃油宝 / 红牛 / 东鹏 / 冰淇淋 / 便利店零食饮料）
 // 一家供应商会跨多个细类（如河南心连心既供玻璃水又供尿素，杨凌酷凌既供红牛/东鹏/冰淇淋又供其它零食），
 // 故细类按「商品名」逐款判定，而非按供应商归组。
-var CATS = ['润滑油', '玻璃水', '尿素', '燃油宝', '红牛', '东鹏', '冰淇淋', '便利店零食饮料'];
+var CATS = ['润滑油', '玻璃水', '尿素', '燃油宝', '红牛', '东鹏', '冰淇淋', '糖果', '便利店零食饮料'];
 // 按商品名关键词判定细类（带供应商兜底，保证无关键词时也落入合理大类）
 function classifyCat(p) {
   var s = (p.supplier || '') + '', n = (p.name != null ? p.name : (p.product != null ? p.product : '')) + '';
@@ -678,10 +696,21 @@ function classifyCat(p) {
   if (n.indexOf('玻璃水') >= 0) return '玻璃水';
   if (n.indexOf('红牛') >= 0) return '红牛';
   if (n.indexOf('东鹏') >= 0) return '东鹏';
+  // ★ 糖果必须先于冰淇淋判定：先把「焦糖」剥掉（那是口味，不是糖），再认糖
+  var nc = n.replace(/焦糖/g, '');
+  var CANDY = ['软糖', '橡皮糖', '泡泡糖', '瑞士糖', '棉花糖', '棒棒糖', '硬糖',
+    '奶糖', '奶片糖', '奶酪糖', '石头糖', '彩豆', '糖'];
+  for (var qi = 0; qi < CANDY.length; qi++) if (nc.indexOf(CANDY[qi]) >= 0) return '糖果';
+  if (n.indexOf('笑喔喔') >= 0) return '糖果';   // 品牌兜底：笑喔喔什锦味/水蜜桃味/葡萄味 名字里没「糖」
   var ICE = ['冰工厂', '冰片', '冰棍', '老冰棍', '冰激凌', '冰淇淋', '雪糕', '雪棒', '脆筒', '千层雪', '绿舌头', '火炬', '小布丁', '小雪生', '巧乐兹', '梦龙', '和路雪', '奥雪', '宏宝莱', '天冰', '甄稀', '三色心香', '奶糕', '苦咖啡', '心情', '奶昔雪糕', '随变', '大随变', '绿色心情', '玉米棒', '哈蜜瓜脆筒', '姜撞奶脆筒', '流心', '奶提子'];
   for (var i = 0; i < ICE.length; i++) if (n.indexOf(ICE[i]) >= 0) return '冰淇淋';
   if (n.indexOf('机油') >= 0 || n.indexOf('润滑油') >= 0) return '润滑油';
   if (n.indexOf('燃油宝') >= 0) return '燃油宝';
+  if (n.indexOf('速力奥') >= 0) return '便利店零食饮料';   // 天朗的饮料，不是冰淇淋
+  // ★ 天朗供的货，除「速力奥」和「润滑油」外全是冰淇淋类。
+  //   关键词没覆盖到的：伊利奶皮子酸奶味、小叮当 100g、雀巢-8次方（甜橙乳酸菌/青提/香草巧克力）
+  //   注：润滑油/机油的关键词判定在本行之前，速力奥在上行先被拦掉，所以这条兜底安全。
+  if (s === '天朗') return '冰淇淋';
   if (s === '天朗尚品') return '润滑油';
   if (s === '靖其贸易') return '燃油宝';
   if (s === '山东新蓝') return '尿素';
@@ -882,7 +911,7 @@ var PRODUCTS = [
   ['杨凌酷凌','马赛克分享包果汁软糖菠萝味','','袋',1.5,0,0,''],
 ];
 
-var data = { products: [], orders: [], productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '' };
+var data = { products: [], orders: [], productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '', catCaps: [], catBal: [], hasAnyCap: false };   /* CATCH-PATCH v2 */
 // 预填默认值：油站打开页面即自带仓库信息+口令，只需补一个 fine-grained PAT 即可下单（见设置面板）
 // 页面里不放任何密钥：桌面 bat 通过 URL 片段一次性注入（#pat=…），存入本机 localStorage 后抹掉地址栏
 var cfg  = { owner: 'lvritiann', repo: 'dinghuo-taizhang', pat: '', appToken: 'cg8RIFAwDMA-vQVfV9hUXb4iHDqGpFS4' };
@@ -953,6 +982,36 @@ function computeAll() {
       low: ps.some(function (x) { return x.low; })
     };
   });
+  // ── 品类共用额度池 ──────────────────────────────────────
+  var cAgg = {};
+  data.productBal.forEach(function (x) {
+    if (!cAgg[x.cat]) cAgg[x.cat] = { qty: 0, amt: 0, cnt: 0, ord: 0 };
+    cAgg[x.cat].qty += x.usedQty;
+    cAgg[x.cat].amt += x.usedAmt;
+    cAgg[x.cat].cnt++;
+    cAgg[x.cat].ord += x.orderCount;
+  });
+  data.catBal = CATS.map(function (c) {
+    var u = cAgg[c] || { qty: 0, amt: 0, cnt: 0, ord: 0 };
+    var mode = catModeOf(c);
+    var cap = catCapOf(c);
+    var used = (mode === '数量') ? u.qty : n2(u.amt);
+    var bal = n2(cap - used);
+    return {
+      cat: c, mode: mode, unit: catUnitOf(c),
+      cap: n2(cap), used: n2(used), bal: bal,
+      productCount: u.cnt, orderCount: u.ord,
+      local: catOverrides[c] != null,
+      set: cap > 0,
+      pct: cap > 0 ? Math.round(used / cap * 1000) / 10 : 0,
+      full: cap > 0 && used >= cap,
+      low: cap > 0 && bal > 0 && bal <= cap * 0.1
+    };
+  });
+  // 有没有设过任何额度（品类级或单品级）—— 都没设时页面给引导提示，而不是画空图
+  data.hasAnyCap = data.catBal.some(function (x) { return x.set; }) ||
+    data.productBal.some(function (x) { return effCap({ supplier: x.supplier, name: x.product }) > 0; });
+
   data.expiring = data.orders.filter(function (o) { return o.expireDate; })
     .map(function (o) { var d = daysLeft(o.expireDate); return { supplier: o.supplier, store: o.store, product: o.product, unit: o.unit, qty: o.qty, expireDate: o.expireDate, days: d, status: statusOf(d) }; })
     .filter(function (o) { return o.days !== null && o.days <= 30; })
@@ -1394,6 +1453,10 @@ function normalize(raw) {
   })
   // 防御：丢掉没有供应商/商品名的残行（例如表格里的「合计」小计行被误读成订单）
   .filter(function (r) { return r.supplier && r.product; });
+  // ★ 品类共用额度（来自金山《品类额度》表；缺列/空表时为 []，页面按「未设」处理）
+  o.catCaps = (Array.isArray(o.catCaps) ? o.catCaps : []).map(function (c) {
+    return { cat: String(c.cat || '').trim(), cap: Number(c.cap || 0), mode: String(c.mode || '').trim() };
+  }).filter(function (c) { return c.cat; });
   return o;
 }
 
@@ -1412,6 +1475,71 @@ function setCap(sup, name, v) {
   else capOverrides[k] = Number(v);
   saveCaps();
 }
+
+/* ===== CATCH-PATCH v1 ===== */
+/* 品类共用额度：一个品类一个额度，该品类下所有商品共享（不再逐款设）。
+   口径自动判定 —— 品类内单位一致且非空 → 「数量」；跨单位 → 「金额」（数量加不起来）。
+   额度来自金山《品类额度》表（catCaps）；本地改的先落 catOverrides，导出补丁回贴后才全局生效。 */
+var LS_CAT = 'wb_order_catcap_v1';
+var catOverrides = {};        // { 品类: 数字 }
+
+function loadCats() { try { var s = localStorage.getItem(LS_CAT); if (s) catOverrides = JSON.parse(s) || {}; } catch (e) {} }
+function saveCats() { try { localStorage.setItem(LS_CAT, JSON.stringify(catOverrides)); } catch (e) {} }
+
+// 品类内所有商品用到的单位（去重、去空）
+function catUnits(c) {
+  var seen = {}, out = [];
+  data.products.forEach(function (p) {
+    if (classifyCat(p) !== c) return;
+    var u = String(p.unit == null ? '' : p.unit).trim();
+    if (u && !seen[u]) { seen[u] = 1; out.push(u); }
+  });
+  return out;
+}
+// 口径：品类内「每一款」都填了单位、且单位完全一致 → 数量；否则（含任一款缺单位）→ 金额
+// CATCH-PATCH v4：从严 —— 只要有商品没填单位，就不能拿数量相加
+function catModeOf(c) {
+  var first = null, ok = true, n = 0;
+  data.products.forEach(function (p) {
+    if (classifyCat(p) !== c) return;
+    n++;
+    var u = String(p.unit == null ? '' : p.unit).trim();
+    if (!u) { ok = false; return; }
+    if (first == null) first = u;
+    else if (first !== u) ok = false;
+  });
+  return (ok && n > 0) ? '数量' : '金额';
+}
+function catUnitOf(c) {
+  var us = catUnits(c);
+  return (catModeOf(c) === '数量' && us.length === 1) ? us[0] : '元';
+}
+
+// 台账里设的额度（本地覆盖优先）
+function catCapOf(c) {
+  if (catOverrides[c] != null) return Number(catOverrides[c]);
+  var cc = data.catCaps || [];
+  for (var i = 0; i < cc.length; i++) if (cc[i] && cc[i].cat === c) return Number(cc[i].cap || 0);
+  return 0;
+}
+function setCatCap(c, v) {
+  if (v === '' || v == null || isNaN(Number(v))) delete catOverrides[c];
+  else catOverrides[c] = Number(v);
+  saveCats();
+}
+function catBalArr() { return data.catBal || []; }
+function catBalOf(c) {
+  var a = catBalArr();
+  for (var i = 0; i < a.length; i++) if (a[i].cat === c) return a[i];
+  return null;
+}
+// 统一显示：数量口径 → 1,234 桶；金额口径 → ¥1,234.00
+function fmtPool(v, modeOrPool) {
+  var m = (modeOrPool && modeOrPool.mode) ? modeOrPool.mode : modeOrPool;
+  if (m === '数量') return nf(n2(v));
+  return money(v);
+}
+function poolUnit(pool) { return pool && pool.mode === '数量' ? (pool.unit || '') : ''; }
 
 /* ---------- 示例数据（与 Excel 模板一致，首次打开不空白） ---------- */
 function sampleData() {
@@ -1450,6 +1578,7 @@ function refreshAll() {
   renderDetail();
   renderFooter();
   renderCap();
+  renderCatCap();
 }
 
 function renderSync() {
@@ -1503,39 +1632,55 @@ function renderToday() {
 }
 
 function renderDash() {
-  var cap = 0, used = 0, lowCnt = 0, fullCnt = 0;
-  data.supplierBal.forEach(function (s) { cap += s.capAmt; used += s.usedAmt; });
-  data.productBal.forEach(function (b) { if (b.low) lowCnt++; if (b.full) fullCnt++; });
+  // KPI 以「品类共用额度」为准：数量口径的品类折成金额再加总，才能和金额口径的加在一起
+  var cap = 0, used = 0, setCnt = 0, fullCnt = 0, lowCnt = 0;
+  var priceOfCat = {};
+  data.productBal.forEach(function (x) {
+    if (!priceOfCat[x.cat]) priceOfCat[x.cat] = [];
+    priceOfCat[x.cat].push(x.price);
+  });
+  function catPrice(c) {                    // 该品类的代表单价（取中位，用于数量→金额折算）
+    var a = (priceOfCat[c] || []).slice().sort(function (x, y) { return x - y; });
+    return a.length ? a[Math.floor(a.length / 2)] : 0;
+  }
+  data.catBal.forEach(function (p) {
+    var k = (p.mode === '数量') ? catPrice(p.cat) : 1;   // 数量口径 → 按代表单价折成钱
+    cap += p.cap * k; used += p.used * k;
+    if (p.set) setCnt++;
+    if (p.full) fullCnt++;
+    else if (p.low) lowCnt++;
+  });
+  var noCap = setCnt === 0;
   document.getElementById('kpis').innerHTML = [
     { v: money(cap), l: '可下订总额度', c: 'accent' },
     { v: money(used), l: '已下订金额', c: '' },
     { v: money(cap - used), l: '金额余额', c: (cap - used) < cap * 0.15 ? 'orange' : 'green' },
-    { v: fullCnt + ' 款', l: '额度已用尽商品', c: fullCnt ? 'red' : '' }
+    { v: fullCnt + ' 类' + (lowCnt ? ' / ' + lowCnt + ' 将尽' : ''), l: '额度用尽品类', c: fullCnt ? 'red' : '' }
   ].map(function (k) { return '<div class="kpi ' + k.c + '"><div class="v">' + k.v + '</div><div class="l">' + k.l + '</div></div>'; }).join('');
-  document.getElementById('dashHint').textContent = '供应商 ' + data.supplierBal.length + ' 家 / 商品 ' + data.productBal.length + ' 款 / 订单 ' + data.orders.length + ' 笔';
+  document.getElementById('dashHint').textContent = '品类 ' + data.catBal.length + ' 类（已设额度 ' + setCnt + ' 类） / 供应商 ' +
+    data.supplierBal.length + ' 家 / 商品 ' + data.productBal.length + ' 款 / 订单 ' + data.orders.length + ' 笔';
 
-  // 供应商金额余额条形图（没额度可画时给空状态，而不是画一张空图）
-  var rows = data.supplierBal.slice().sort(function (a, b) { return b.capAmt - a.capAmt; });
-  var totalCap = 0; rows.forEach(function (r) { totalCap += r.capAmt; });
+  // 供应商已下订金额条形图 —— CATCH-PATCH v3
+  // 额度已改为「品类共用」，供应商级不再有独立额度（capAmt 由逐款 capQty 推导，早已不适用），
+  // 所以这里只画「已下订金额」这一个真实存在的量，不再是空图。
+  var rows = data.supplierBal.slice().sort(function (a, b) { return b.usedAmt - a.usedAmt; });
   var chartEl = document.getElementById('chartSup');
   if (chartEl) {
-    if (!rows.length || totalCap <= 0) {
-      chartEl.outerHTML = '<div class="empty" id="chartSup">还没设「最高可下订数量」——点上方标签「商品与额度维护」，' +
-        '在「额度维护」里逐款填写；填好并同步后，这里就会显示每家供应商的额度与剩余余额条形图</div>';
+    var _totUsed = 0; rows.forEach(function (r) { _totUsed += r.usedAmt; });
+    if (!rows.length || _totUsed <= 0) {   /* CATCH-PATCH v4：全 0 时给空态，不画一排小竖条 */
+      chartEl.outerHTML = '<div class="empty" id="chartSup">还没有订单 —— 下过单之后，这里会显示每家供应商的已下订金额。</div>';
     } else {
       var rowH = 30, H = rows.length * rowH + 16, labW = 96, valW = 86;
       var barX = labW + 8, barW = 640 - barX - valW;
-      var mx = 1; rows.forEach(function (r) { mx = Math.max(mx, r.capAmt); });
+      var mx = 1; rows.forEach(function (r) { mx = Math.max(mx, r.usedAmt); });
       var svg = '<svg class="chart" id="chartSup" viewBox="0 0 640 ' + H + '" preserveAspectRatio="xMinYMin meet">';
       rows.forEach(function (r, i) {
         var y = 8 + i * rowH;
-        var wCap = Math.max(2, Math.round(r.capAmt / mx * barW));
-        var wU = Math.max(0, Math.round(r.usedAmt / mx * barW));
+        var wU = Math.max(2, Math.round(r.usedAmt / mx * barW));
         var nm = r.supplier.length > 6 ? r.supplier.slice(0, 6) + '…' : r.supplier;
         svg += '<text x="' + (labW - 6) + '" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="#6B6B63">' + esc(nm) + '</text>';
-        svg += '<rect x="' + barX + '" y="' + (y + 3) + '" width="' + wCap + '" height="14" rx="7" fill="#E9E7E0"/>';
-        svg += '<rect x="' + barX + '" y="' + (y + 3) + '" width="' + wU + '" height="14" rx="7" fill="' + (r.full ? '#B3261E' : r.pct >= 80 ? '#9C6508' : '#1C1C1A') + '"/>';
-        svg += '<text class="num" x="632" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="#1C1C1A">' + money(r.balAmt) + '</text>';
+        svg += '<rect x="' + barX + '" y="' + (y + 3) + '" width="' + wU + '" height="14" rx="7" fill="#1C1C1A"/>';
+        svg += '<text class="num" x="632" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="#1C1C1A">' + money(r.usedAmt) + '</text>';
       });
       svg += '</svg>';
       chartEl.outerHTML = svg;
@@ -1546,24 +1691,21 @@ function renderDash() {
   var catEl2 = document.getElementById('catCards');
   if (catEl2) {
     var ch = '';
-    CATS.forEach(function (c) {
-      var cap = 0, used = 0, full = 0, low = 0;
-      data.productBal.forEach(function (x) {
-        if (x.cat !== c) return;
-        cap += x.capQty * x.price; used += x.usedQty * x.price;
-        if (x.full) full++; if (x.low) low++;
-      });
-      var pct = cap > 0 ? Math.round(used / cap * 1000) / 10 : 0;
-      var cls = cap > 0 && used >= cap ? 'full' : cap > 0 && pct >= 80 ? 'warn' : '';
-      var col = cap > 0 && used >= cap ? '#B3261E' : pct >= 80 ? '#9C6508' : '#1C1C1A';
-      ch += '<div class="cat-card ' + cls + '"><div class="cn">' + esc(c) + '</div>' +
-        '<div class="cv">' + money(cap - used) + '</div>' +
-        '<div class="cs">余额 · 已订 ' + money(used) + ' / 额度 ' + (cap > 0 ? money(cap) : '未设') + '</div>' +
-        '<div class="bar-mini"><i style="width:' + Math.min(100, pct) + '%;background:' + col + '"></i></div>' +
+    data.catBal.forEach(function (p) {
+      var q = poolUnit(p);
+      var cls = p.full ? 'full' : (p.pct >= 80 ? 'warn' : '');
+      var col = p.full ? '#B3261E' : (p.pct >= 80 ? '#9C6508' : '#1C1C1A');
+      ch += '<div class="cat-card ' + cls + '"><div class="cn">' + esc(p.cat) +
+        ' <span style="font-weight:400;color:var(--text2)">' + esc(p.mode) + '口径</span>' +
+        (p.local ? ' <span style="color:var(--orange);font-weight:700">本地改</span>' : '') + '</div>' +
+        '<div class="cv">' + fmtPool(p.bal, p) + '<span style="font-size:12px;font-weight:600;color:var(--text2)">' + esc(q) + '</span></div>' +
+        '<div class="cs">余额 · 已订 ' + fmtPool(p.used, p) + q + ' / 额度 ' +
+        (p.set ? fmtPool(p.cap, p) + q : '未设') + '</div>' +
+        '<div class="bar-mini"><i style="width:' + Math.min(100, p.pct) + '%;background:' + col + '"></i></div>' +
         '<div style="font-size:10px;color:var(--text2);margin-top:3px">' +
-        (cap <= 0 ? '未设额度'
-          : (pct + '% · ' + (full ? '<span style="color:var(--red)">' + full + '款用尽</span> '
-              : (low ? '<span style="color:var(--orange)">' + low + '款将尽</span>' : '充足')))) + '</div></div>';
+        (p.set ? (p.pct + '% · ' + (p.full ? '<span style="color:var(--red)">用尽</span>'
+          : (p.low ? '<span style="color:var(--orange)">将尽</span>' : '充足')) + ' · ' + p.productCount + ' 款共用')
+          : '未设额度 · ' + p.productCount + ' 款共用') + '</div></div>';
     });
     catEl2.innerHTML = ch;
   }
@@ -1589,9 +1731,10 @@ function renderDash() {
   var list = data.productBal.filter(function (b) {
     if (ds.cat && b.cat !== ds.cat) return false;
     if (ds.sup && b.supplier !== ds.sup) return false;
-    if (ds.status === 'warn' && !(b.full || b.low)) return false;
-    if (ds.status === 'ok' && (b.full || b.low || b.capQty <= 0)) return false;
-    if (ds.status === 'nocap' && b.capQty > 0) return false;
+    var pb2 = catBalOf(b.cat);
+    if (ds.status === 'warn' && !(pb2 && (pb2.full || pb2.low))) return false;
+    if (ds.status === 'ok' && !(pb2 && pb2.set && !pb2.full && !pb2.low)) return false;
+    if (ds.status === 'nocap' && pb2 && pb2.set) return false;
     if (ds.q && b.product.indexOf(ds.q) < 0) return false;
     return true;
   });
@@ -1604,23 +1747,24 @@ function renderDash() {
   var piEl = document.getElementById('dashPageInfo');
   if (piEl) piEl.textContent = '共 ' + total + ' 款 · 第 ' + ds.page + '/' + pages + ' 页' + (total ? ' · 显示 ' + (start + 1) + '-' + Math.min(start + size, total) : '');
 
-  var h = '<thead><tr><th>大类</th><th>供应商</th><th>商品</th><th>规格</th><th>单位</th><th class="num">单价</th>' +
-    '<th class="num">最高可订</th><th class="num">已订</th><th class="num">余额</th><th style="width:90px">使用率</th><th>状态</th></tr></thead><tbody>';
+  var h = '<thead><tr><th>品类</th><th>供应商</th><th>商品</th><th>规格</th><th>单位</th><th class="num">单价</th>' +
+    '<th class="num">已订数量</th><th class="num">已订金额</th><th class="num">订单数</th><th>本类额度</th></tr></thead><tbody>';
   if (!pageRows.length) {
-    h += '<tr><td colspan="11" style="text-align:center;color:var(--text2);padding:18px">没有匹配的商品</td></tr>';
+    h += '<tr><td colspan="10" style="text-align:center;color:var(--text2);padding:18px">没有匹配的商品</td></tr>';
   }
   pageRows.forEach(function (b) {
-    var col = b.full ? '#B3261E' : b.pct >= 80 ? '#9C6508' : '#1C1C1A';
-    var noCap = b.capQty <= 0;
+    var pb2 = catBalOf(b.cat);
+    var q = poolUnit(pb2);
+    var capTxt = (pb2 && pb2.set)
+      ? fmtPool(pb2.bal, pb2) + q + ' <span style="font-size:10px;color:var(--text2)">可用</span>'
+      : '<span class="tag" style="background:#EFEEE9;color:#6B6B63">未设</span>';
     h += '<tr><td style="white-space:nowrap;color:var(--accent)">' + esc(b.cat) + '</td><td>' + esc(b.supplier) + '</td><td>' + esc(b.product) + '</td>' +
       '<td style="color:var(--text2)">' + esc(b.spec) + '</td><td>' + esc(b.unit) + '</td>' +
       '<td class="num">' + money(b.price) + '</td>' +
-      '<td class="num">' + (noCap ? '<span style="color:var(--text2)">未设</span>' : nf(b.capQty)) + '</td>' +
-      '<td class="num">' + nf(b.usedQty) + '</td>' +
-      '<td class="num"><b style="color:' + (noCap ? 'var(--text2)' : b.balQty <= 0 ? 'var(--red)' : 'var(--green)') + '">' + (noCap ? '—' : nf(b.balQty)) + '</b></td>' +
-      '<td><div class="bar-mini"><i style="width:' + Math.min(100, b.pct) + '%;background:' + col + '"></i></div>' +
-      '<div style="font-size:10px;color:var(--text2);margin-top:2px">' + (noCap ? '—' : b.pct + '%') + '</div></td>' +
-      '<td>' + (noCap ? '<span class="tag" style="background:#EFEEE9;color:#6B6B63">未设</span>' : b.full ? '<span class="tag full">用尽</span>' : b.low ? '<span class="tag low">将尽</span>' : '<span class="tag ok">充足</span>') + '</td></tr>';
+      '<td class="num"><b>' + nf(b.usedQty) + '</b> <span style="color:var(--text2);font-size:10px">' + esc(b.unit) + '</span></td>' +
+      '<td class="num">' + money(b.usedAmt) + '</td>' +
+      '<td class="num">' + nf(b.orderCount) + '</td>' +
+      '<td>' + capTxt + '</td></tr>';
   });
   document.getElementById('tblProduct').innerHTML = h + '</tbody>';
 }
@@ -1915,28 +2059,62 @@ function submitOrder() {
 
   // ── 逐行校验（商品存在 / 数量 / 商品额度）────────────────
   var items = [], hard = [], soft = [], totalAmt = 0;
+  var seenCat = {};
   lines.forEach(function (l) {
     var p = prodOf(sup, l.product);
     if (!p) { hard.push('商品「' + l.product + '」不属于供应商「' + sup + '」'); return; }
     if (!(l.qty > 0)) { hard.push('「' + l.product + '」数量必须大于 0'); return; }
+    // ★ 该品类若设了「共用额度」，逐款 capQty 就不参与校验（由下面的品类池统一判）
+    var cat = classifyCat(p), pool = catBalOf(cat);
     var b = balOf(sup, l.product);
-    var cap = effCap(p), bal = cap > 0 ? (b ? b.balQty : cap) : null;
-    if (bal != null && l.qty > bal) {
-      soft.push('「' + l.product + '」超额度：本行 ' + l.qty + p.unit + '，余额仅 ' + nf(bal) + p.unit);
+    if (!(pool && pool.set)) {
+      var cap = effCap(p), bal = cap > 0 ? (b ? b.balQty : cap) : null;
+      if (bal != null && l.qty > bal) {
+        soft.push('「' + l.product + '」超单品额度：本行 ' + l.qty + p.unit + '，余额仅 ' + nf(bal) + p.unit);
+      }
     }
+    if (!seenCat[cat]) seenCat[cat] = { qty: 0, amt: 0 };
     var amt = n2(l.qty * p.price);
+    seenCat[cat].qty += l.qty;
+    seenCat[cat].amt += amt;
     totalAmt += amt;
-    items.push({ product: l.product, qty: l.qty, unit: p.unit, price: p.price, amt: amt });
+    items.push({ product: l.product, qty: l.qty, unit: p.unit, price: p.price, amt: amt, cat: cat });
   });
   if (hard.length) { toast(hard[0]); return; }
+
+  // ── 品类共用额度：同一品类的行先合计，再跟该品类的池子比 ──
+  for (var cc in seenCat) {
+    if (!seenCat.hasOwnProperty(cc)) continue;
+    var pool2 = catBalOf(cc);
+    if (!pool2 || !pool2.set) continue;
+    var add = (pool2.mode === '数量') ? seenCat[cc].qty : n2(seenCat[cc].amt);
+    if (add > pool2.bal) {
+      var u2 = poolUnit(pool2);
+      soft.push('品类「' + cc + '」共用额度不够：额度 ' + fmtPool(pool2.cap, pool2) + u2 +
+        '，已订 ' + fmtPool(pool2.used, pool2) + u2 + '，余额 ' + fmtPool(pool2.bal, pool2) + u2 +
+        '，本单该品类 ' + fmtPool(add, pool2) + u2 + '（' + pool2.mode + '口径）');
+    }
+  }
 
   // ── 供应商金额额度：按整单合计看 ─────────────────────────
   var sb = null;
   for (var i = 0; i < data.supplierBal.length; i++) {
     if (data.supplierBal[i].supplier === sup) { sb = data.supplierBal[i]; break; }
   }
+  // ★ CATCH-PATCH v3：额度已收敛到「品类共用」这一层。
+  //   供应商级 capAmt 是由逐款 capQty 推导的旧层，设了品类额度后它会变成幽灵额度、误拦正常订单，
+  //   所以：只要该供应商有任一品类设了共用额度，就不再按供应商金额额度拦（逐款 capQty 仍在上一段兜底）。
+  var supHasCatCap = false;
+  for (var ci2 = 0; ci2 < data.catBal.length; ci2++) {
+    if (!data.catBal[ci2].set) continue;
+    for (var pi2 = 0; pi2 < data.productBal.length; pi2++) {
+      var b2 = data.productBal[pi2];
+      if (b2.supplier === sup && b2.cat === data.catBal[ci2].cat) { supHasCatCap = true; break; }
+    }
+    if (supHasCatCap) break;
+  }
   var amtBal = null;
-  if (sb && sb.capAmt > 0) {
+  if (sb && sb.capAmt > 0 && !supHasCatCap) {
     amtBal = sb.capAmt - sb.usedAmt;
     if (totalAmt > amtBal) {
       soft.push('供应商「' + sup + '」金额剩余 ' + money(amtBal) + '（已订 ' + money(sb.usedAmt) +
@@ -2159,7 +2337,61 @@ function bindDashFilters() {
 /* ---------- 额度维护面板（本地覆盖层 + 导出补丁回贴台账） ---------- */
 var capState = { cat: '', sup: '', status: 'all', q: '', page: 1, size: 20 };
 
-function refreshDerived() { computeAll(); renderSync(); renderToday(); renderDash(); renderForm(); renderFilters(); }
+/* ---------- ① 品类共用额度面板（9 行） ---------- */
+function renderCatCap() {
+  var t = document.getElementById('tblCatCap');
+  if (!t) return;
+  var ovN = 0; for (var k in catOverrides) if (catOverrides.hasOwnProperty(k)) ovN++;
+  var he = document.getElementById('catCapHint');
+  if (he) he.textContent = ovN ? ('本地已改 ' + ovN + ' 类（尚未回贴台账）') : '一个品类一个额度；口径自动判定';
+
+  var h = '<thead><tr><th>品类</th><th>口径</th><th>商品数</th><th class="num">额度</th>' +
+    '<th class="num">已订</th><th class="num">余额</th><th>状态</th></tr></thead><tbody>';
+  data.catBal.forEach(function (p) {
+    var q = poolUnit(p);
+    var local = p.local;
+    var st = local ? '<span class="tag" style="background:#EFEEE9;color:#6B6B63">本地改</span>'
+      : (p.set ? '<span class="tag ok">已设</span>' : '<span class="tag" style="background:#EFEEE9;color:#6B6B63">未设</span>');
+    var reset = local ? ' <a href="#" onclick="onCatCapReset(\'' + esc(p.cat) + '\');return false" style="font-size:11px;color:var(--orange)">复原</a>' : '';
+    h += '<tr><td style="white-space:nowrap;color:var(--accent)"><b>' + esc(p.cat) + '</b></td>' +
+      '<td>' + esc(p.mode) + '<span style="color:var(--text2)">' + (q ? '（' + esc(q) + '）' : '（元）') + '</span></td>' +
+      '<td class="num" style="color:var(--text2)">' + p.productCount + '</td>' +
+      '<td class="num"><input class="cap-in" type="number" min="0" step="1" data-cat="' + esc(p.cat) +
+        '" value="' + (local ? esc(catOverrides[p.cat]) : (p.set ? esc(p.cap) : '')) +
+        '" placeholder="0" onchange="onCatCapInput(this)" /></td>' +
+      '<td class="num">' + (p.set ? fmtPool(p.used, p) + q : '—') + '</td>' +
+      '<td class="num"><b style="color:' + (!p.set ? 'var(--text2)' : p.bal <= 0 ? 'var(--red)' : 'var(--green)') + '">' +
+        (p.set ? fmtPool(p.bal, p) + q : '—') + '</b></td>' +
+      '<td>' + st + reset + '</td></tr>';
+  });
+  t.innerHTML = h + '</tbody>';
+}
+function onCatCapInput(inp) {
+  setCatCap(inp.getAttribute('data-cat'), inp.value.trim());
+  refreshDerived();     // refreshDerived 已含 renderCatCap；9 行重渲染很便宜，且「余额/状态」立刻跟上
+}
+function onCatCapReset(c) { setCatCap(c, ''); refreshAll(); }
+function exportCatCaps() {
+  var n = 0, rows = [];
+  data.catBal.forEach(function (p) {
+    if (catOverrides[p.cat] == null) return;
+    rows.push(p.cat + ',' + catOverrides[p.cat] + ',' + p.mode);
+    n++;
+  });
+  if (!n) { toast('没有本地改过的品类额度可导出'); return; }
+  var csv = '\ufeff' + '品类,额度,口径\n' + rows.join('\n');
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '品类额度补丁_' + todayStr().replace(/-/g, '') + '.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  toast('已导出 ' + n + ' 条品类额度 → 贴到金山《品类额度》表后点「同步」');
+}
+function clearCatCaps() { catOverrides = {}; saveCats(); refreshAll(); toast('已清空本地品类额度，恢复台账值'); }
+
+
+
+function refreshDerived() { computeAll(); renderSync(); renderToday(); renderDash(); renderForm(); renderFilters(); renderCatCap(); }
 
 function renderCap() {
   var catEl = document.getElementById('capCat');
@@ -2253,6 +2485,13 @@ function exportCaps() {
 }
 function clearCaps() { capOverrides = {}; saveCaps(); refreshAll(); toast('已清空本地覆盖，恢复台账额度'); }
 
+function bindCatCapPanel() {
+  var ex = document.getElementById('catCapExport');
+  var cl = document.getElementById('catCapClear');
+  if (ex) ex.addEventListener('click', exportCatCaps);
+  if (cl) cl.addEventListener('click', clearCatCaps);
+}
+
 function bindCapPanel() {
   var cat = document.getElementById('capCat');
   var sup = document.getElementById('capSup');
@@ -2280,8 +2519,8 @@ function bindSubmitGuard() {
 
 /* ---------- 启动 ---------- */
 function boot() {
-  loadCfg(); applyHashParams(); loadRole(); loadPending(); loadCaps(); loadRecent(); loadCart();
-  bindDashFilters(); bindCapPanel(); bindSubmitGuard();
+  loadCfg(); applyHashParams(); loadRole(); loadPending(); loadCaps(); loadCats(); loadRecent(); loadCart();
+  bindDashFilters(); bindCapPanel(); bindCatCapPanel(); bindSubmitGuard();
   renderRole();
   var want = isAdmin() ? 'ledger' : 'order';
   try {
