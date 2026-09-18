@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-18T09:56:41.199Z",
+  "updatedAt": "2026-09-18T12:18:19.978Z",
   "source": "kdocs",
   "today": "2026-09-18",
   "products": [
@@ -2774,6 +2774,54 @@
       "spec": "1*75g",
       "supplier": "天朗",
       "unit": "根"
+    },
+    {
+      "capQty": 0,
+      "cat": "",
+      "name": "玻璃水0#",
+      "note": "待定价",
+      "price": 0,
+      "shelf": 0,
+      "siteOnly": "",
+      "spec": "2L",
+      "supplier": "天易蓝",
+      "unit": "桶"
+    },
+    {
+      "capQty": 0,
+      "cat": "",
+      "name": "玻璃水-20#",
+      "note": "待定价",
+      "price": 0,
+      "shelf": 0,
+      "siteOnly": "",
+      "spec": "2L",
+      "supplier": "天易蓝",
+      "unit": "桶"
+    },
+    {
+      "capQty": 0,
+      "cat": "",
+      "name": "尿素PE",
+      "note": "待定价",
+      "price": 0,
+      "shelf": 0,
+      "siteOnly": "",
+      "spec": "",
+      "supplier": "天易蓝",
+      "unit": ""
+    },
+    {
+      "capQty": 0,
+      "cat": "",
+      "name": "尿素PET",
+      "note": "待定价",
+      "price": 0,
+      "shelf": 0,
+      "siteOnly": "",
+      "spec": "",
+      "supplier": "天易蓝",
+      "unit": ""
     }
   ],
   "orders": [
@@ -6718,6 +6766,74 @@
       "unit": "根",
       "usedAmt": 0,
       "usedQty": 0
+    },
+    {
+      "balQty": 0,
+      "capAmt": 0,
+      "capQty": 0,
+      "full": false,
+      "low": false,
+      "orderCount": 0,
+      "pct": 0,
+      "price": 0,
+      "product": "玻璃水0#",
+      "shelf": 0,
+      "spec": "2L",
+      "supplier": "天易蓝",
+      "unit": "桶",
+      "usedAmt": 0,
+      "usedQty": 0
+    },
+    {
+      "balQty": 0,
+      "capAmt": 0,
+      "capQty": 0,
+      "full": false,
+      "low": false,
+      "orderCount": 0,
+      "pct": 0,
+      "price": 0,
+      "product": "玻璃水-20#",
+      "shelf": 0,
+      "spec": "2L",
+      "supplier": "天易蓝",
+      "unit": "桶",
+      "usedAmt": 0,
+      "usedQty": 0
+    },
+    {
+      "balQty": 0,
+      "capAmt": 0,
+      "capQty": 0,
+      "full": false,
+      "low": false,
+      "orderCount": 0,
+      "pct": 0,
+      "price": 0,
+      "product": "尿素PE",
+      "shelf": 0,
+      "spec": "",
+      "supplier": "天易蓝",
+      "unit": "",
+      "usedAmt": 0,
+      "usedQty": 0
+    },
+    {
+      "balQty": 0,
+      "capAmt": 0,
+      "capQty": 0,
+      "full": false,
+      "low": false,
+      "orderCount": 0,
+      "pct": 0,
+      "price": 0,
+      "product": "尿素PET",
+      "shelf": 0,
+      "spec": "",
+      "supplier": "天易蓝",
+      "unit": "",
+      "usedAmt": 0,
+      "usedQty": 0
     }
   ],
   "supplierBal": [
@@ -6816,12 +6932,26 @@
       "productCount": 94,
       "supplier": "杨凌酷凌",
       "usedAmt": 0
+    },
+    {
+      "balAmt": 0,
+      "capAmt": 0,
+      "full": false,
+      "lastDate": "",
+      "low": false,
+      "orderCount": 0,
+      "pct": 0,
+      "productCount": 4,
+      "supplier": "天易蓝",
+      "usedAmt": 0
     }
   ],
   "catCaps": [],
   "arrivals": [],
   "expiring": [],
-  "missingSheets": [],
+  "missingSheets": [
+    "天易蓝"
+  ],
   "recentCids": [
     "cmu0xxah1shoxy3",
     "wr-test-1789368875",
