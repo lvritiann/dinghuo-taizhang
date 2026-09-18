@@ -1064,6 +1064,17 @@ var dashState = { sup: '', cat: '', status: 'all', q: '', page: 1, size: 20 };
 // 一家供应商会跨多个细类（如河南心连心既供玻璃水又供尿素，杨凌酷凌既供红牛/东鹏/冰淇淋又供其它零食），
 // 故细类按「商品名」逐款判定，而非按供应商归组。
 var CATS = ['润滑油', '玻璃水', '尿素', '燃油宝', '红牛', '东鹏', '冰淇淋', '糖果', '便利店零食饮料', '咖啡及相关物资', '照金百货'];
+/* ★ TYL-PATCH v6 标段口径本地兜底
+   ── 标段（= 品类）的额度口径**以金山《品类额度》C 列为准**，这是权威源。
+      但金山那份数据来自 AirScript 的 dump，而 AirScript 需要人工重贴才生效。
+      在「改了脚本还没重贴」的窗口期，线上仍跑旧脚本（catCaps 被 cap>0 过滤掉），
+      页面读不到口径 → 玻璃水会回落成「数量」→ 用户填 100000 被当成 10 万桶。
+   ── 所以这里对**用户已明确表态过的**标段做本地兜底，优先级低于金山 C 列：
+      金山 C 列 > LOCAL_CAT_MODE > 旧推断 catModeAuto()。
+      用户在表里一填，本地兜底就自动让位，不会成为第二套真相。
+   ── 只兜底用户明说过的两个标段，其余交给表（否则表就形同虚设了）：
+      「尿素额度是 25 万，就从尿素的额度里头扣。玻璃水是 10 万，就从玻璃水的额度里头扣」 */
+var LOCAL_CAT_MODE = { '玻璃水': '金额', '尿素': '金额' };
 // 按商品名关键词判定细类（带供应商兜底，保证无关键词时也落入合理大类）
 function classifyCat(p) {
   var s = (p.supplier || '') + '', n = (p.name != null ? p.name : (p.product != null ? p.product : '')) + '';
@@ -2079,6 +2090,8 @@ function catModeOf(c) {
     if (m.indexOf('数量') >= 0) return '数量';
     if (m.indexOf('金额') >= 0) return '金额';
   }
+  var lm = LOCAL_CAT_MODE[c];
+  if (lm === '数量' || lm === '金额') return lm;   // ★ TYL-PATCH v6：金山没给口径时用本地兜底
   return catModeAuto(c);
 }
 function catUnitOf(c) {
