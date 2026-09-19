@@ -209,11 +209,63 @@ h1 { font-size: 17px; font-weight: 700; letter-spacing: -.015em; white-space: no
 .cat-card.full { box-shadow: inset 0 0 0 2px var(--red); }
 .cap-in { width: 96px; padding: 5px 8px; font-size: 13px; }
 
+/* ---------- ★ LEDGER-PATCH v1：台账总览版面协调 ----------
+   ★ 必须写在 .kpis / .cat-cards 基础规则【之后】—— 同权重下后来者胜，
+     否则这里的 display:flex 会被上面的 display:grid 覆盖（KPI 卡宽了、品类卡还是 grid）。 */
+/* ① KPI 收窄：4 格 324px → 与品类卡同列宽，避免「大格子装小数字」 */
+@media (min-width: 901px) {
+  .ledger-stack .kpis { display: flex; flex-wrap: wrap; }
+  .ledger-stack .kpis > .kpi { flex: 1 1 156px; min-width: 148px; padding: 12px 14px; }
+  .ledger-stack .kpis > .kpi .v { font-size: 23px; }
+}
+/* ② 品类卡：flex 铺满，末行不留半格空洞（与下定视图 info-grid 同法） */
+@media (min-width: 901px) {
+  .ledger-stack .cat-cards { display: flex; flex-wrap: wrap; }
+  .ledger-stack .cat-cards > .cat-card { flex: 1 1 196px; min-width: 176px; }
+}
+/* ③ 空态瘦身：不再让一张空卡占 116px 高 */
+.ledger-stack .empty { padding: 10px 0; }
+.viz-box .empty, .chart-box .empty { padding: 8px 0; font-size: 12px; }
+/* ④ 图表区：空态时整卡塌缩，不留大片空白 */
+.viz-box.blank { padding: 12px 16px; }
+.viz-box.blank .chart-title { margin-bottom: 0; }
+
 /* ---------- 图表区 ---------- */
 .chart-box { margin-top: 20px; overflow-x: auto; }
 .chart-title { font-size: 12px; font-weight: 700; color: var(--text3);
   text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
 svg.chart { display: block; width: 100%; height: auto; min-width: 420px; }
+
+/* ★ LIEFLAT-PATCH v1：窄屏不压扁 —— 刻度图靠 min-width 触发横向滚动
+   （390px 视口下如果 let width:100%，刻度会被压成 286px 宽、1px 高，完全读不出）
+   横向滚动由父级 .viz-box{overflow-x:auto} / .chart-box{overflow-x:auto} 承担，
+   页面本体仍无横向溢出（这条已由全断点扫描验证）。
+   ★ 注意特异性和顺序：下面任何地方都【不准】再出现 .viz-box svg.chart{min-width:小值}
+   这类特异性(0,2,1)的规则 —— 它会盖掉这里(0,1,1)的 560px，把刻度图重新压扁。 */
+@media (max-width: 900px) {
+  svg.chart { min-width: 560px; }
+  /* ★★ 「全空态」短句图例外：这种图 viewBox 又宽又矮（640×72），内容本来就是
+     几行居中的纯文字，强行 560px 只会让它横着滚、右半句被甩出视口。
+     → 唯一正确的做法是让它按容器宽度自适应（width:100% + 低 min-width），
+     文字靠 viewBox 缩放落在卡片里，0 滚动、0 越界。 */
+  svg.chart.lf-empty { min-width: 0; width: 100%; }
+}
+
+/* ---------- ★ LIEFLAT-PATCH v1：图表入场动画（lieflat 语法） ----------
+   快进快停（cubic-bezier(.2,.7,.3,1.3)），不弹跳；必须带 prefers-reduced-motion 降级。
+   只用于台账页的 4 张图，不给功能元素加动效。 */
+@keyframes lf-pop  { from { transform: scale(0); } to { transform: none; } }
+@keyframes lf-fade { from { opacity: 0; } }
+@keyframes lf-draw { to { stroke-dashoffset: 0; } }
+svg.chart .lf-pop  { transform-box: fill-box; transform-origin: center;
+                     animation: lf-pop .5s cubic-bezier(.2,.7,.3,1.3) both; }
+svg.chart .lf-fade { animation: lf-fade .9s ease both; }
+svg.chart .lf-draw { stroke-dasharray: 1; stroke-dashoffset: 1;
+                     animation: lf-draw 1.1s cubic-bezier(.4,0,.2,1) both; }
+@media (prefers-reduced-motion: reduce) {
+  svg.chart .lf-pop, svg.chart .lf-fade { animation: none; }
+  svg.chart .lf-draw { animation: none; stroke-dasharray: none; stroke-dashoffset: 0; }
+}
 
 /* ---------- 表单 ---------- */
 .field { margin-bottom: 12px; }
@@ -605,7 +657,10 @@ body.theme-tech #toast { border: 1px solid var(--border); }
 .viz-box.wide { grid-column: span 2; }
 @media (max-width: 900px) { .viz-grid { grid-template-columns: 1fr; } .viz-box.wide { grid-column: span 1; } }
 .viz-box .chart-title { margin-bottom: 12px; }
-.viz-box svg.chart { min-width: 280px; }
+/* ★ 这里刻意【不】再写 .viz-box svg.chart{min-width:280px} ——
+   它特异性(0,2,1)高于上方 @media(max-width:900px) 里的 svg.chart(0,1,1)，
+   会在窄屏把刻度图重新压回 286px、刻度全糊。窄屏下限交给那条媒体查询的 560px，
+   更宽的档位由 svg.chart 基础规则(420px)与 width:100% 接管。 */
 .ring-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px; }
 .ring-cell { text-align: center; min-width: 0; }
 svg.ring { display: block; width: 100%; max-width: 82px; height: auto; margin: 0 auto; }
@@ -926,7 +981,7 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
   </section>
 
   <section class="view admin-only" data-view="ledger" data-page-node-id="viewLedger">
-    <div class="view-stack">
+    <div class="view-stack ledger-stack">
   <!-- 供应商余额仪表盘 -->
   <div class="card" data-page-node-id="FdEJkxgp0NSe2CyTjmgNWn">
     <div class="card-h" data-page-node-id="5yiW0MipCNLehsACviensy">
@@ -2436,6 +2491,9 @@ function svgText(x, y, t, opt) {
     (opt.anchor ? ' text-anchor="' + opt.anchor + '"' : '') +
     (opt.size ? ' font-size="' + opt.size + '"' : '') +
     (opt.weight ? ' font-weight="' + opt.weight + '"' : '') +
+    (opt.spacing ? ' letter-spacing="' + opt.spacing + '"' : '') +
+    (opt.style ? ' style="' + opt.style + '"' : '') +
+    (opt.cls ? ' class="' + opt.cls + '"' : '') +
     ' fill="' + (opt.fill || 'var(--text2)') + '">' + esc(t) + '</text>';
 }
 function ringSvg(pct, size, sw, color, center) {
@@ -2479,22 +2537,99 @@ function siteOfStore(st) {
 }
 
 /* ---------- 图表 ① 品类额度占用率 ---------- */
+/* ★ LIEFLAT-PATCH v1 · F5 Tick Rows（横向刻度行，1 tick = 1% 占用率）
+   语法取自 basics-gallery.html「C1 · tick rows」：
+   - 一行一个标段，左侧名 + 一条导轨 + N 根刻度发丝（1 根 = 1 个百分点）
+   - 刻度高度/透明度用确定性抖动（不用 Math.random，刷新长一样）
+   - 每 5 根落一个点标（做 20% / 40% … 的读数锚）
+   - 行尾大数 = 实际占用率（不是金额），下方一行小字写额度/余额真实口径
+   未设额度的标段画一圈虚线空槽，明示「这一格没数据」，不拿 0% 冒充。 */
+function tickRowsSvg(rows) {
+  /* ★ 全空态短路（LIEFLAT-PATCH v1）：11 个标段一个额度都没设时，
+     画 11 行虚线空槽毫无信息量（读者只会看到一片「未设额度」）。
+     直接塌缩成一句话 + 行动指引，把高度从 ~500px 压到 ~90px。 */
+  var noCapN = rows.filter(function (r) { return !r.set; }).length;
+  if (noCapN === rows.length) {
+    /* ★ 全空态短路：11 个标段全未设额度时画 11 行虚线空槽毫无信息量 → 塌缩成一句话 + 行动指引。
+       这块是唯一的「宽而矮」型图（viewBox 640×72），且内容是居中的纯文字，所以：
+       ① 打上 .lf-empty 类，窄屏不吃 560px 的 min-width（否则整句横着滚、右半截出视口）；
+       ② 文案一行不超过 ~24 个汉字，保证缩到 390px 宽时仍读得全。 */
+    return '<svg class="chart lf-empty" viewBox="0 0 640 72" preserveAspectRatio="xMidYMid meet">' +
+      svgText(320, 22, '11 个标段都还没有设额度', { anchor: 'middle', size: 14, weight: 800, fill: 'var(--text)' }) +
+      svgText(320, 43, '到「商品与额度维护」页填《品类额度》B 列（单位：元）',
+        { anchor: 'middle', size: 11, fill: 'var(--text2)' }) +
+      svgText(320, 59, '之后这里会画成百分比刻度表，1 根刻度 = 1%。',
+        { anchor: 'middle', size: 11, fill: 'var(--text2)' }) +
+      '</svg>';
+  }
+  var W = 640, X0 = 118, PX = 4.0, trackW = PX * 100;
+  /* ★ 行高（LIEFLAT-PATCH v1）：已设额度 34px，未设额度 22px。
+     原来 44px 会把「标段名」和下面的「额度 / 剩」拉成两行孤立文字（中间空 20px），
+     tick rows 的读法应该是「名字+副行 = 一个条目」，所以收到 34px：
+     基线 y+4（名字/百分比）→ y+17（副行），行间留 3px 呼吸。 */
+  var rowH = rows.map(function (r) { return r.set ? 34 : 22; });
+  var totalH = rowH.reduce(function (a, b) { return a + b; }, 0);
+  var H = totalH + 34;
+  var s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMinYMin meet">';
+  var yCur = 18;
+  rows.forEach(function (r, i) {
+    var y = yCur; yCur += rowH[i];
+    // 标段名（左，右对齐）
+    s += svgText(X0 - 12, y + 4, r.cat, { anchor: 'end', size: 10, weight: 700, fill: 'var(--text2)' });
+    // 导轨
+    s += '<line x1="' + X0 + '" y1="' + (y + 9) + '" x2="' + (X0 + trackW) + '" y2="' + (y + 9) +
+         '" stroke="var(--border)" stroke-width=".7"/>';
+    if (!r.set) {
+      // 未设额度：虚线空槽（明示「这一格没数据」，不拿 0% 冒充）
+      s += '<line x1="' + X0 + '" y1="' + (y + 9) + '" x2="' + (X0 + trackW) + '" y2="' + (y + 9) +
+           '" stroke="var(--text3)" stroke-width=".8" stroke-dasharray="2 4"/>';
+      s += svgText(X0 + 6, y + 4, '未设额度', { size: 9, fill: 'var(--text3)' });
+      s += svgText(X0 + trackW + 10, y + 4, '—', { size: 11, weight: 800, fill: 'var(--text3)' });
+    } else {
+      var n = Math.min(100, Math.round(r.pct));
+      for (var k = 0; k < n; k++) {
+        var x = X0 + k * PX + PX / 2;
+        var hh = 9 + ((k * 7919 + i * 104729) % 1000) / 1000 * 6;   // 确定性抖动
+        var op = (0.5 + ((k * 6151 + i * 3571) % 1000) / 1000 * 0.45).toFixed(2);
+        s += '<line x1="' + x.toFixed(1) + '" y1="' + (y + 9) + '" x2="' + x.toFixed(1) + '" y2="' + (y + 9 - hh).toFixed(1) +
+             '" stroke="' + r.color + '" stroke-width="1" opacity="' + op + '" class="lf-fade" style="animation-delay:' +
+             (i * 0.05 + k * 0.006).toFixed(3) + 's"/>';
+        if (k % 5 === 4) {
+          s += '<circle cx="' + x.toFixed(1) + '" cy="' + (y + 13) + '" r=".8" fill="var(--text3)" opacity=".8"/>';
+        }
+      }
+      // 行尾大数
+      s += svgText(X0 + trackW + 10, y + 4, n + '%', { size: 13, weight: 800, fill: r.color });
+      // 副行：额度 / 余额 —— 紧贴主行（y+17 而非 y+20），与名字构成一个条目
+      s += svgText(X0 - 12, y + 17, r.sub, { anchor: 'end', size: 8.5, fill: 'var(--text3)' });
+    }
+  });
+  s += svgText(W / 2, H - 5, 'ONE TICK = ONE PERCENT · DOT MARKS EVERY FIFTH · RIGHT NUMBER IS USAGE',
+    { anchor: 'middle', size: 8, fill: 'var(--text3)', spacing: '.1em' });
+  return s + '</svg>';
+}
+
 function renderChartRings() {
   var el = document.getElementById('chartRings'); if (!el) return;
   if (!data.catBal.length) { el.innerHTML = '<div class="empty">暂无品类数据</div>'; return; }
-  var h = '<div class="ring-grid">';
-  data.catBal.forEach(function (p) {
-    var pct = p.set ? Math.min(100, p.pct) : 0;
-    var col = p.full ? 'var(--red)' : ((p.low || (p.set && p.pct >= 80)) ? 'var(--orange)' : catColorOf(p.cat));
+  // 已设额度的排前（按占用率降序），未设额度的沉底，避免「未设」插在中间打断读数
+  var rows = data.catBal.slice().sort(function (a, b) {
+    if (!!b.set !== !!a.set) return b.set ? 1 : -1;
+    return (b.set ? b.pct : 0) - (a.set ? a.pct : 0);
+  }).map(function (p) {
     var u = poolUnit(p);
-    h += '<div class="ring-cell">' + ringSvg(pct, 92, 9, col, p.set ? Math.round(p.pct) + '%' : '—') +
-      '<div class="rc-name">' + esc(p.cat) + '</div>' +
-      '<div class="rc-sub">' + (p.set
-        ? fmtPool(p.used, p) + u + ' / ' + fmtPool(p.cap, p) + u
-        : '未设额度') + ' · ' + p.productCount + ' 款</div>' +
-      '</div>';
+    var full = !!p.full, low = !!p.low || (p.set && p.pct >= 80);
+    return {
+      cat: p.cat, set: !!p.set, pct: p.set ? Math.min(100, p.pct) : 0,
+      /* ★ 色彩纪律（Lieflat 第六点五节「类目 > 6 退回灰阶」）：
+         11 个标段不配 11 个色相。颜色只承载「风险」这一个真实维度：
+         用尽=红、将尽=橙、正常=主文本色、未设额度=虚线空槽（不参与着色）。 */
+      color: full ? 'var(--red)' : (low ? 'var(--orange)' : 'var(--text)'),
+      sub: p.set ? (fmtPool(p.cap, p) + u + ' 额度 / 剩 ' + fmtPool(p.cap - p.used, p) + u)
+                 : (p.productCount + ' 款共用')
+    };
   });
-  el.innerHTML = h + '</div>';
+  el.innerHTML = tickRowsSvg(rows);
 }
 
 /* ---------- 图表 ② 近 N 天下订金额趋势 ---------- */
@@ -2513,46 +2648,79 @@ function renderChartTrend() {
   var mx = 0; vals.forEach(function (v) { if (v > mx) mx = v; });
   if (mx <= 0) { el.innerHTML = '<div class="empty">近 ' + N + ' 天（至 ' + esc(base) + '）还没有订单</div>'; return; }
 
-  var W = 640, H = 200, pL = 54, pR = 14, pT = 14, pB = 28;
-  var iw = W - pL - pR, ih = H - pT - pB, step = iw / (N - 1);
-  function X(k) { return pL + k * step; }
-  function Y(v) { return pT + ih - (v / mx) * ih; }
+  /* ★ LIEFLAT-PATCH v1 · F2 Hairline Line（发丝折线 + 日历地板 + 逐日圆点）
+     语法取自 lieflat-charts/templates/basics-gallery.html「B2 · hairline line」：
+     - 每天一根「日历地板」发丝（无论有没有下单），没单的日子也在场
+     - 折线 1px 发丝，不是 2.2px 粗线
+     - 逐日圆点，峰顶两点放大标数 + paint-order 光晕
+     - 底部一行全大写注记，说明单位契约
+     颜色仍走页面 CSS 变量（--text / --border / --text3），双配色自动适配。 */
+  var pad = 8, W = 640;
+  var NN = N, step = (W - pad * 2 - 46) / (NN - 1);
+  var baseY = 168, H = 210;                    // H 比 baseY 多 42px：装得下轴标签(18) + 注记(4)
+  function mapY(v) { return baseY - 22 - (v / mx) * (baseY - 22 - 26); }
 
   var s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMinYMin meet">';
-  s += '<defs><linearGradient id="gTrend" x1="0" y1="0" x2="0" y2="1">' +
-       '<stop offset="0" stop-color="var(--c2)" stop-opacity=".42"/>' +
-       '<stop offset="1" stop-color="var(--c2)" stop-opacity="0"/></linearGradient></defs>';
-  var g;
-  for (g = 0; g <= 3; g++) {
-    var gy = Y(mx * g / 3);
-    s += '<line x1="' + pL + '" y1="' + gy.toFixed(1) + '" x2="' + (W - pR) + '" y2="' + gy.toFixed(1) +
-         '" stroke="var(--border)" stroke-dasharray="3 5"/>';
-    s += svgText(pL - 8, gy + 4, money(mx * g / 3), { anchor: 'end', size: 10 });
+  // 日历地板：每天一根小发丝，多空都画 —— 让「这天没单」也看得见
+  for (var d = 0; d < NN; d++) {
+    var xd = (pad + 46 + d * step).toFixed(1);
+    s += '<line x1="' + xd + '" y1="' + baseY + '" x2="' + xd + '" y2="' + (baseY + 7) +
+         '" stroke="var(--border)" stroke-width=".7"/>';
   }
-  var line = '', area = '';
+  s += '<line x1="' + (pad + 40) + '" y1="' + baseY + '" x2="' + (W - pad) + '" y2="' + baseY +
+       '" stroke="var(--border)" stroke-width=".9"/>';
+  // 横向参考线（3 档）
+  for (var g = 0; g <= 2; g++) {
+    var gy = mapY(mx * g / 2);
+    s += '<line x1="' + (pad + 40) + '" y1="' + gy.toFixed(1) + '" x2="' + (W - pad) + '" y2="' + gy.toFixed(1) +
+         '" stroke="var(--border)" stroke-width=".6" stroke-dasharray="2 5" opacity=".7"/>';
+    s += svgText(pad + 34, gy + 3.5, money(mx * g / 2), { anchor: 'end', size: 9, fill: 'var(--text3)' });
+  }
+  // 峰顶两点（间距 ≥4 天）
+  var topIdx = [];
+  vals.map(function (v, k) { return k; }).sort(function (a, b) { return vals[b] - vals[a]; })
+    .forEach(function (k) {
+      if (topIdx.length >= 2) return;
+      var ok = true;
+      for (var q = 0; q < topIdx.length; q++) if (Math.abs(topIdx[q] - k) < 4) ok = false;
+      if (ok) topIdx.push(k);
+    });
+  // 发丝折线
+  var pts = vals.map(function (v, k) { return (pad + 46 + k * step).toFixed(1) + ' ' + mapY(v).toFixed(1); }).join(' L ');
+  s += '<path d="M' + pts + '" fill="none" stroke="var(--text)" stroke-width="1.1" ' +
+       'stroke-linejoin="round" stroke-linecap="round" pathLength="1" class="lf-draw"/>';
+  // 逐日圆点：峰顶放大，零值空心
   vals.forEach(function (v, k) {
-    var x = X(k).toFixed(1), y = Y(v).toFixed(1);
-    line += (k ? ' L ' : 'M ') + x + ' ' + y;
-    area += (k ? ' L ' : 'M ') + x + ' ' + y;
+    var big = topIdx.indexOf(k) >= 0, cx = (pad + 46 + k * step).toFixed(1), cy = mapY(v).toFixed(1);
+    var dl = 'style="animation-delay:' + (0.18 + k * 0.028).toFixed(2) + 's"';
+    if (v <= 0) {
+      s += '<circle cx="' + cx + '" cy="' + cy + '" r="1.6" fill="none" stroke="var(--text3)" stroke-width=".9" class="lf-fade" ' + dl + '/>';
+    } else {
+      s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (big ? 4 : 2) + '" fill="var(--text)" class="lf-pop" ' + dl + '/>';
+    }
+    if (big) {
+      s += svgText(+cx, +cy - 9, money(v), { anchor: 'middle', size: 9.5, weight: 800,
+        style: 'paint-order:stroke;stroke:var(--card);stroke-width:3px', cls: 'lf-fade' });
+    }
   });
-  area += ' L ' + X(N - 1).toFixed(1) + ' ' + (pT + ih) + ' L ' + X(0).toFixed(1) + ' ' + (pT + ih) + ' Z';
-  s += '<path d="' + area + '" fill="url(#gTrend)"/>';
-  s += '<path d="' + line + '" fill="none" stroke="var(--c2)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>';
-  vals.forEach(function (v, k) {
-    if (v > 0) s += '<circle cx="' + X(k).toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="3.2" fill="var(--c2)"/>';
+  // 时间轴：首 / 中 / 末（放在地板线下方，注记再往下 —— 两者不叠）
+  [0, Math.floor(NN / 2), NN - 1].forEach(function (k) {
+    s += svgText(pad + 46 + k * step, baseY + 18, days[k].slice(5),
+      { anchor: k === 0 ? 'start' : (k === NN - 1 ? 'end' : 'middle'), size: 9, fill: 'var(--text3)' });
   });
-  [0, Math.floor(N / 2), N - 1].forEach(function (k) {
-    s += svgText(X(k), H - 8, days[k].slice(5),
-      { anchor: k === 0 ? 'start' : (k === N - 1 ? 'end' : 'middle'), size: 10 });
-  });
+  s += svgText(W / 2, H - 4, 'ONE DOT = ONE DAY · HOLLOW = NO ORDERS', { anchor: 'middle', size: 8, fill: 'var(--text3)', spacing: '.12em' });
   s += '</svg>';
 
   var tot = vals.reduce(function (a, b) { return a + b; }, 0);
+  var actDays = vals.filter(function (v) { return v > 0; }).length;
   el.innerHTML = s + '<div class="note" style="margin-top:4px">近 ' + N + ' 天（至 ' + esc(base) + '）共 ' +
-    cnt + ' 笔订单 · 合计 ' + money(tot) + '</div>';
+    cnt + ' 笔 · 合计 ' + money(tot) + ' · 有单 ' + actDays + '/' + N + ' 天</div>';
 }
 
 /* ---------- 图表 ③ 服务区下订排行 ---------- */
+/* ★ LIEFLAT-PATCH v1 · F5 Tick Rows（绝对额版）
+   与图表 ① 同一语法族但不同编码：这里 1 tick = 5% 的「榜首额度」，
+   刻度在行内是等差长度，行尾写真实金额。榜首 = 满格，读者可按格数估出其余各站。 */
 function renderChartSites() {
   var el = document.getElementById('chartSites'); if (!el) return;
   var agg = {}, ord = [];
@@ -2563,14 +2731,43 @@ function renderChartSites() {
   });
   ord = ord.filter(function (s) { return agg[s] > 0; }).sort(function (a, b) { return agg[b] - agg[a]; });
   if (!ord.length) { el.innerHTML = '<div class="empty">还没有订单</div>'; return; }
-  var mx = agg[ord[0]], h = '';
-  ord.slice(0, 15).forEach(function (s, i) {
-    h += '<div class="rank-row"><span class="rank-nm" title="' + esc(s) + '">' + esc(s) + '</span>' +
-      '<span class="rank-bar"><i style="width:' + Math.max(2, Math.round(agg[s] / mx * 100)) +
-      '%;background:var(--c' + ((i % 9) + 1) + ')"></i></span>' +
-      '<span class="rank-v">' + money(agg[s]) + '</span></div>';
+
+  var list = ord.slice(0, 8);
+  var mx = agg[list[0]];
+  /* ★ 刻度基准与分辨率（LIEFLAT-PATCH v1 调优）：
+     - 基准取 mx（= 榜首值），保证「长度 ∝ 金额」的契约成立
+     - 满格 40 根（原来 20 根）：值域偏窄时（如各站都在 1.1~1.8 万）
+       20 根会让相邻两站只差 1~2 根、分辨不出来；40 根把分辨率翻倍
+     - PX 相应收小，整行宽度不变 */
+  var bars = 40;                                   // 满格 = 40 根刻度（1 根 = 榜首的 2.5%）
+  var PX = 2.6, X0 = 96, rowH = 34, W = 640, H = list.length * rowH + 40;
+  var s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMinYMin meet">';
+  list.forEach(function (name, i) {
+    var y = 24 + i * rowH;
+    var n = Math.max(1, Math.round(agg[name] / mx * bars));
+    /* ★ 色彩纪律（Lieflat 第六点五节「类目 > 6 退回灰阶」）：
+       8 行不该用 8 个色相 —— 颜色必须连接真实维度，否则只是装饰。
+       这里走「灰阶 + 榜首强调」：第 1 名主文本色（最黑/最亮 = 最重要），其余用 --text3。 */
+    var tone = (i === 0) ? 'var(--text)' : 'var(--text3)';
+    s += svgText(X0 - 10, y + 4, name, { anchor: 'end', size: 10, weight: 700,
+      fill: i === 0 ? 'var(--text)' : 'var(--text2)' });
+    s += '<line x1="' + X0 + '" y1="' + (y + 9) + '" x2="' + (X0 + bars * PX) + '" y2="' + (y + 9) +
+         '" stroke="var(--border)" stroke-width=".7"/>';
+    for (var k = 0; k < n; k++) {
+      var x = X0 + k * PX + PX / 2;
+      var hh = 9 + ((k * 7919 + i * 104729) % 1000) / 1000 * 6;
+      var op = (0.55 + ((k * 6151 + i * 3571) % 1000) / 1000 * 0.45).toFixed(2);
+      s += '<line x1="' + x.toFixed(1) + '" y1="' + (y + 9) + '" x2="' + x.toFixed(1) + '" y2="' + (y + 9 - hh).toFixed(1) +
+           '" stroke="' + tone + '" stroke-width="1" opacity="' + op + '" class="lf-fade" style="animation-delay:' +
+           (i * 0.05 + k * 0.004).toFixed(3) + 's"/>';
+      if (k % 5 === 4) s += '<circle cx="' + x.toFixed(1) + '" cy="' + (y + 13) + '" r=".8" fill="var(--text3)" opacity=".8"/>';
+    }
+    s += svgText(X0 + bars * PX + 10, y + 4, money(agg[name]), { size: 11, weight: 800, fill: tone });
   });
-  el.innerHTML = h;
+  s += svgText(W / 2, H - 6, 'ONE TICK = 2.5% OF THE LEADING SERVICE AREA · DOT MARKS EVERY FIFTH · TOP ' + list.length + ' SHOWN',
+    { anchor: 'middle', size: 8, fill: 'var(--text3)', spacing: '.1em' });
+  el.innerHTML = s + '</svg>' + (ord.length > list.length
+    ? '<div class="note" style="margin-top:4px">共 ' + ord.length + ' 个服务区有单，这里显示前 ' + list.length + ' 名。</div>' : '');
 }
 
 /* ---------- 图表 ④ 供应商金额占比 ---------- */
@@ -2579,22 +2776,94 @@ function renderChartShare() {
   var rows = (data.supplierBal || []).filter(function (r) { return r.usedAmt > 0; })
     .slice().sort(function (a, b) { return b.usedAmt - a.usedAmt; });
   if (!rows.length) { el.innerHTML = '<div class="empty">还没有订单</div>'; return; }
-  var items = rows.map(function (r, i) {
-    return { label: r.supplier, value: r.usedAmt, color: 'var(--c' + ((i % 9) + 1) + ')' };
+
+  /* ★ LIEFLAT-PATCH v1 · F4 Tick Donut（1 tick = 1%）
+     语法取自 basics-gallery.html「B4 · tick donut」：
+     - 100 根发丝绕成整圈表盘，1 根 = 1%，段间用灰阶 ladder 区分
+     - 每 10 根在内圈落一个点标
+     - 段标签外置 + 虚线引线，中心只放总数与单位说明
+     ★ 供应商可达 9 家 > 6 段上限 → 前 5 名独立成段，其余合并为「其他」（Lieflat 长尾规则）。 */
+  var MAXSEG = 5;
+  var head = rows.slice(0, MAXSEG);
+  var tailSum = rows.slice(MAXSEG).reduce(function (a, r) { return a + r.usedAmt; }, 0);
+  var total = rows.reduce(function (a, r) { return a + r.usedAmt; }, 0);
+  if (total <= 0) { el.innerHTML = '<div class="empty">还没有订单</div>'; return; }
+
+  /* ★ 灰阶 ladder（Lieflat 第二节「明度即数据」）：
+     段按金额降序，用「主文本色 → 逐级变浅」的 5 级 ladder，最后一段（其他）用最浅。
+     不用色相区分 —— 供应商之间没有「类别」语义，只有大小语义。 */
+  var shades = ['var(--text)', 'var(--text)', 'var(--text2)', 'var(--text2)', 'var(--text3)', 'var(--text3)']; 
+  var segs = head.map(function (r, i) {
+    return { label: r.supplier, pct: r.usedAmt / total * 100, amt: r.usedAmt, color: shades[i] || 'var(--text3)' };
   });
-  var total = items.reduce(function (s, x) { return s + x.value; }, 0);
-  var h = '<div class="share-wrap"><div class="share-donut">' + donutSvg(items, 140, 20) +
-    '<div class="rc-sub" style="text-align:center">' + money(total) + '</div></div><div class="share-legend">';
-  items.forEach(function (x) {
-    h += '<div class="lg-row"><span class="lg-dot" style="background:' + x.color + '"></span>' + esc(x.label) +
-      '<span class="lg-v">' + Math.round(x.value / total * 100) + '%</span></div>';
+  // 首段加粗一点点，做「最大供应商」的视线落点（Lieflat「强调色只给一个主角」）
+  if (segs.length) segs[0].hero = true;
+  if (tailSum > 0) segs.push({ label: '其他 ' + (rows.length - MAXSEG) + ' 家', pct: tailSum / total * 100, amt: tailSum, color: 'var(--text3)' });
+
+  // 按 1% = 1 根分配，最后一段吃掉四舍五入的零头，总和恒为 100
+  var counts = [], acc = 0;
+  segs.forEach(function (sg, i) {
+    var n = (i === segs.length - 1) ? (100 - acc) : Math.round(sg.pct);
+    n = Math.max(0, n); counts.push(n); acc += n;
   });
-  el.innerHTML = h + '</div></div>';
+
+  /* ★ 环形居中 + 留白（LIEFLAT-PATCH v1 修溢出）：
+     原来 cx=196 / W=640，右侧空了 444px，左侧标签却顶到 x≈0 被裁。
+     改为「圆心居中、左右各留 150px 给标签」，并把 R0 收小一档。 */
+  var W = 640, H = 272, cx = 320, cy = 132, R0 = 58, D2Rr = Math.PI / 180;
+  function pol(rr, deg) { return [cx + rr * Math.cos(deg * D2Rr), cy + rr * Math.sin(deg * D2Rr)]; }
+  var svg = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMinYMin meet">';
+  var k0 = 0;
+  segs.forEach(function (sg, si) {
+    var n = counts[si];
+    for (var k = 0; k < n; k++) {
+      var idx = k0 + k, a = idx * 3.6 - 90;
+      var len = 11 + ((idx * 7919 + si * 104729) % 1000) / 1000 * 6;
+      var p1 = pol(R0, a), p2 = pol(R0 + len, a);
+      svg += '<line x1="' + p1[0].toFixed(1) + '" y1="' + p1[1].toFixed(1) + '" x2="' + p2[0].toFixed(1) + '" y2="' + p2[1].toFixed(1) +
+             '" stroke="' + sg.color + '" stroke-width="1.1"/>';
+      if (idx % 10 === 0) {
+        var d0 = pol(R0 - 5, a);
+        svg += '<circle cx="' + d0[0].toFixed(1) + '" cy="' + d0[1].toFixed(1) + '" r=".9" fill="var(--text3)" opacity=".8"/>';
+      }
+    }
+    if (n > 0) {
+      // 引线 + 外置标签：半径收在 R0+34 / R0+52，保证 640 宽度内左右各留 ~150px 装文字
+      var mid = (k0 + n / 2) * 3.6 - 90;
+      var l1 = pol(R0 + 22, mid), l2 = pol(R0 + 40, mid);
+      svg += '<line x1="' + l1[0].toFixed(1) + '" y1="' + l1[1].toFixed(1) + '" x2="' + l2[0].toFixed(1) + '" y2="' + l2[1].toFixed(1) +
+             '" stroke="var(--border)" stroke-width=".7" stroke-dasharray="1 3"/>';
+      var cosv = Math.cos(mid * D2Rr);
+      var anc = cosv > 0.3 ? 'start' : (cosv < -0.3 ? 'end' : 'middle');
+      svg += svgText(l2[0].toFixed(1), (l2[1] + 3).toFixed(1),
+        sg.label + ' · ' + Math.round(sg.pct) + '%',
+        { anchor: anc, size: 9, weight: 800, fill: sg.color,
+          style: 'paint-order:stroke;stroke:var(--card);stroke-width:3px' });
+    }
+    k0 += n;
+  });
+  svg += svgText(cx, cy - 2, money(total), { anchor: 'middle', size: 19, weight: 800, fill: 'var(--text)' });
+  svg += svgText(cx, cy + 15, 'TICKS · ONE = 1%', { anchor: 'middle', size: 8, fill: 'var(--text3)', spacing: '.1em' });
+  svg += svgText(W / 2, H - 6, 'TWELVE O’CLOCK IS ZERO · DOT MARKS EVERY TENTH · READS CLOCKWISE',
+    { anchor: 'middle', size: 8, fill: 'var(--text3)', spacing: '.1em' });
+  el.innerHTML = svg + '</svg>';
 }
 
 /* ---------- 统一入口：装饰性图表绝不拖垮整页 ----------
    注意 boot() 里 refreshAll() 是在 .then() 里调的，抛异常会被后面的 .catch() 当成
    「取数失败」并可能回退成示例数据 —— 所以图表必须自己吞掉异常，并留下可断言的痕迹。 */
+/* ★ LEDGER-PATCH v1：空态图表卡自动塌缩 —— 把「整卡只有一行灰字」的空白收掉。
+   判据：该 viz-box 里除 .chart-title 外没有实质内容（svg / 图表类名 / 列表行）。
+   ★ LIEFLAT-PATCH v1 后四张图统一为内联 SVG，所以主判据是 `svg.chart`。 */
+function collapseEmptyViz() {
+  var boxes = document.querySelectorAll('.viz-box');
+  for (var i = 0; i < boxes.length; i++) {
+    var b = boxes[i];
+    var rich = b.querySelector('svg.chart, .ring-grid, .rank-row, .share-wrap');
+    if (rich) b.classList.remove('blank'); else b.classList.add('blank');
+  }
+}
+
 function renderCharts() {
   chartErrors = [];
   var jobs = [['rings', renderChartRings], ['trend', renderChartTrend],
@@ -2603,6 +2872,7 @@ function renderCharts() {
     try { jobs[i][1](); }
     catch (e) { chartErrors.push(jobs[i][0] + ': ' + (e && e.message ? e.message : e)); }
   }
+  try { collapseEmptyViz(); } catch (e2) {}
   if (chartErrors.length && typeof console !== 'undefined' && console.warn) {
     console.warn('[chart] ' + chartErrors.join(' | '));
   }
