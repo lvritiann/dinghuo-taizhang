@@ -199,6 +199,14 @@ h1 { font-size: 17px; font-weight: 700; letter-spacing: -.015em; white-space: no
 .kpi.red .v { color: var(--red); } .kpi.orange .v { color: var(--orange); }
 .kpi.green .v { color: var(--green); } .kpi.accent .v { color: var(--text); }
 
+/* ★ LEDGER-PATCH v2（对齐）：原 grid-template-columns: repeat(auto-fill, minmax(196px,1fr))
+   有个致命副作用 —— 11 张卡在 1440 视口排成 6+5：第一行 6 张各 213px、第二行 5 张各 257px。
+   同样大小的卡片两行不同宽 → 用户看到的就是「对不齐 / 参差」。
+   ★ 根因：auto-fill 的轨道数由「容器宽 / 最小值」决定，多出来的余量只摊给【已排下的轨道】，
+     换行后每行的轨道数不同 → 每行卡宽就不同。Grid 无法「按行各自等分」。
+   → 正解是 flex：每行在 flex 容器里各自换行、各自把余量摊给本行（与 v5.14 修 info-grid 同法）。
+   ★ 桌面端已由下方 @media(min-width:901px) 的 LEDGER-PATCH v1 早期规则接管为 flex；
+     这里保留 grid 作为「媒体查询失效时」的兜底，窄屏统一走 flex。 */
 .cat-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); gap: 10px; margin-bottom: 14px; }
 .cat-card { background: var(--card2); border-radius: 16px; padding: 14px 16px; }
 .cat-card .cn { font-size: 12px; font-weight: 700; color: var(--text2); letter-spacing: .01em; }
@@ -212,16 +220,31 @@ h1 { font-size: 17px; font-weight: 700; letter-spacing: -.015em; white-space: no
 /* ---------- ★ LEDGER-PATCH v1：台账总览版面协调 ----------
    ★ 必须写在 .kpis / .cat-cards 基础规则【之后】—— 同权重下后来者胜，
      否则这里的 display:flex 会被上面的 display:grid 覆盖（KPI 卡宽了、品类卡还是 grid）。 */
-/* ① KPI 收窄：4 格 324px → 与品类卡同列宽，避免「大格子装小数字」 */
+/* ① KPI：同「品类卡」口径 —— flex-grow:0 保证逐张等宽，行内余量居中收口。
+   （原来 flex:1 1 156px 会让 4 张的行各 +Npx、3 张的行各 +Mpx，行间不等宽 —— 
+     1440 下恰好两组都排 4 张才没暴露；窗口一窄就会出现「上一行比下一行宽」。）
+   ★ 这里 flex-basis 取 240px：1440 容器 1326 减 3×10 间隙 = 1296 / 4 = 324 才是原视觉，
+     1920 下也稳定 4 列 —— 比原来的 156px 更接近既有的 324 观感，且绝不拉伸。 */
 @media (min-width: 901px) {
-  .ledger-stack .kpis { display: flex; flex-wrap: wrap; }
-  .ledger-stack .kpis > .kpi { flex: 1 1 156px; min-width: 148px; padding: 12px 14px; }
+  .ledger-stack .kpis { display: flex; flex-wrap: wrap; justify-content: center; }
+  .ledger-stack .kpis > .kpi { flex: 0 1 240px; min-width: 0; padding: 12px 14px; }
   .ledger-stack .kpis > .kpi .v { font-size: 23px; }
 }
-/* ② 品类卡：flex 铺满，末行不留半格空洞（与下定视图 info-grid 同法） */
+/* ② 品类卡：等宽收口，末行不留半格空洞（与下定视图 info-grid 同法）
+   ★ LEDGER-PATCH v2 的两版教训（都实测过，别再走回头路）：
+     ① 原先 grid-template-columns: repeat(auto-fill, minmax(196px,1fr))：
+        11 张卡在 1440 排成 6+5 → 第一行 6 张各 213px、第二行 5 张各 257px。
+        **同样大小的卡片两行不同宽** → 用户看到的就是「模块对不齐 / 参差」。
+     ② 改成 flex: 1 1 196px 后仍然 213 / 257 —— flex-grow:1 会把每行余量摊给本行，
+        6 张的行每张 +17px、5 张的行每张 +61px，**行间依旧不等宽**。
+   → 最终正解：flex-grow: 0。卡宽恒为 196px（= flex-basis），行内余量交给
+     justify-content:center 居中收口。这样：
+       · 所有卡**逐张等宽等高**（不再参差）；
+       · 每行能塞几张就几张，末行不满时**居中**、右左两侧对称留白（不再是「右空一大块」）；
+       · 不做拉伸，卡片不会被撑成「小内容 + 超宽壳」。 */
 @media (min-width: 901px) {
-  .ledger-stack .cat-cards { display: flex; flex-wrap: wrap; }
-  .ledger-stack .cat-cards > .cat-card { flex: 1 1 196px; min-width: 176px; }
+  .ledger-stack .cat-cards { display: flex; flex-wrap: wrap; justify-content: center; }
+  .ledger-stack .cat-cards > .cat-card { flex: 0 1 196px; min-width: 0; }
 }
 /* ③ 空态瘦身：不再让一张空卡占 116px 高 */
 .ledger-stack .empty { padding: 10px 0; }
@@ -652,21 +675,37 @@ body.theme-tech select.locked { background: rgba(9,16,26,.5); }
 body.theme-tech #toast { border: 1px solid var(--border); }
 
 /* ---------- 图表（手写内联 SVG，零依赖） ---------- */
-.viz-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.viz-box { background: var(--card2); border-radius: 16px; padding: 14px 16px; min-width: 0; overflow-x: auto; }
-.viz-box.wide { grid-column: span 2; }
-@media (max-width: 900px) { .viz-grid { grid-template-columns: 1fr; } .viz-box.wide { grid-column: span 1; } }
+/* ★ LEDGER-PATCH v2（数据看板 · 末行收口）
+   ── 病因：5 张图 = 2 张整行(.wide) + 3 张半宽。双列下必然排成
+        整行 / 整行 / 半·半 / 半(孤)  → 末行只 1 格、右半 670px 全空。
+        用户说的「页面还留着空白」，主要就是这一块。
+   ── 为什么不能简单粗暴地「末格占整行(grid-column:1/-1)」：
+        画布写死 640（v5.16 定下的「画布宽 ≈ 容器宽」纪律），
+        拉到 1326 就是 2.07 倍拉伸，等于把上一版的修复又推倒。
+   ── 为什么不能用 3 列塞下 3 张半宽图：1326 三列每格仅 432px，
+        432/640 = 0.675 → 10px 字被压到 6.8px，刻度图直接糊掉。
+   ── 正解：改用 flex 换行 + justify-content:center。
+        .wide 用 flex-basis:100%（整行独占），半宽用 flex-basis:calc(50% - 7px)。
+        这样 5 张依次排：整行 / 整行 / 半+半 / 半 —— 末行那张【居中收口】，
+        左右对称留白 ≈ 328px，视觉上是个「居中收尾」而不是「右边空一大块」。
+        ★ 宽度全部由 flex-basis 定死，不做 flex-grow → 图表容器宽仍恒为 656
+          （1440 双列口径），与 v5.16 的画布比 1.02 完全一致，零回退。 */
+.viz-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+.viz-box { background: var(--card2); border-radius: 16px; padding: 14px 16px; min-width: 0; overflow-x: auto;
+  flex: 0 1 calc(50% - 7px); }
+.viz-box.wide { flex-basis: 100%; }
 .viz-box .chart-title { margin-bottom: 12px; }
-/* ★ LIEFLAT-PATCH v3：供应商金额图在「单列区间」必须继续占整行（.wide 的效果），
-   但它的网格伙伴（服务区排行 / 供应商金额占比）要留在半宽成对排列 ——
-   所以不能直接把它标成 .wide（那样 901px 断点下手动加 class 会让「服务区排行」孤零零半宽）。
-   实测的坑：>900px 网格已塌成 1 列，半宽格只有 ~405px，
-   而 640 画布需要 ≥600px 满格轨道 → 不占整行就会压到 420px（比值 0.66、字号 10px）。
-   ★ 上界取 1239 与页面 .split 两栏断点对齐，全程比值随视口在 1.02~1.73 之间连续变化、无跳变。
-     （曾试过在 1150~1239 再切回半宽换更准的比值，但那会在 1150px 处
-      让图宽从 1023px 腰斩到 488px —— 用户 resize 窗口时会看到「图突然缩一半」，
-      比「整体稍宽」难看得多。宁可单调，不要跳变。） */
-@media (max-width: 1239px) { #vizCard .viz-grid > [data-page-node-id="vizBoxSup"] { grid-column: 1 / -1; } }
+/* ★ LEDGER-PATCH v2：viz-grid 由 grid 改 flex 后，原来的 grid-column:span/1/-1 全部失效，
+   窄屏「单列区间」改用 flex-basis 表达：
+     ≤900px：半宽图 flex-basis:100% → 全塌成单列（等价于原来的 grid-template-columns:1fr）
+     901~1239px：供应商金额图独占整行（等价于 v3 原来那条 grid-column:1/-1），
+                 其余半宽图仍两两配对 —— 保住它 640 画布不被压到 405px。 */
+@media (max-width: 900px) {
+  .viz-box, .viz-box.wide { flex-basis: 100%; }
+}
+@media (min-width: 901px) and (max-width: 1239px) {
+  #vizCard .viz-grid > [data-page-node-id="vizBoxSup"] { flex-basis: 100%; }
+}
 /* ★ 这里刻意【不】再写 .viz-box svg.chart{min-width:280px} ——
    它特异性(0,2,1)高于上方 @media(max-width:900px) 里的 svg.chart(0,1,1)，
    会在窄屏把刻度图重新压回 286px、刻度全糊。窄屏下限交给那条媒体查询的 560px，
@@ -1032,16 +1071,22 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
         <div class="chart-title">服务区下订排行</div>
         <div id="chartSites"></div>
       </div>
-      <div class="viz-box">
-        <div class="chart-title">供应商金额占比</div>
-        <div id="chartShare"></div>
-      </div>
-      <!-- ★ LIEFLAT-PATCH v3：供应商已下订金额（tick rows）—— 第 5 格
-           入网格是为了让「画布宽 640 ≈ 容器宽」。网格列宽实测 656(1440) / 884(1920)，
-           比值 1.02 / 1.38，都在同量级；若留在整卡满宽（1178→1326→1782）就必然 2 倍级拉伸。 -->
+      <!-- ★ LEDGER-PATCH v2（对齐）：把「各供应商已下订金额」提到第 4 格、「供应商金额占比」放第 5 格。
+           改动前顺序是（排行 / 占比 / 供应商金额）：5 张图在双列区间排成 整行·整行·半·半·半，
+           第 2、3 行各只 1 格配对 → 末行右半 670px 全空（用户说的「页面还留着空白」）。
+           改动后顺序（排行 / 供应商金额 / 占比）→ 第 2 行两枚半宽格配满、第 3 行两枚半宽格配满，
+           整张网格 0 空洞、底部齐平、左右两条边线连续到顶。
+           ★ 为什么不直接把末格设 grid-column:1/-1 占满整行 ——
+             该图画布写死 640（v5.16「画布宽 ≈ 容器宽」纪律），拉成 1326 会退回 2 倍拉伸。
+           ★ 交换后供应商图落在【第 3 格】，在 ≥900 全区间都落在第 1 列（656 轨道），
+             与原先列位置一致、画布比不变；900~1239 单列区间仍由上方 @media 占整行。 -->
       <div class="viz-box" data-page-node-id="vizBoxSup">
         <div class="chart-title">各供应商已下订金额（元）</div>
         <svg class="chart" id="chartSup" viewBox="0 0 640 340" preserveAspectRatio="xMinYMin meet" data-page-node-id="I4gAPN1TzK928Wv6OqOeEi"></svg>
+      </div>
+      <div class="viz-box">
+        <div class="chart-title">供应商金额占比</div>
+        <div id="chartShare"></div>
       </div>
     </div>
   </div>
