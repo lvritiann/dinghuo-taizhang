@@ -336,6 +336,18 @@ select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/
   }
   .tabs { padding-bottom: 9px; }
   .role-tag { display: none; }
+
+  /* ★ POOL-PATCH v1.1：手机上「额度」比「加入清单」重要 ——
+     吸底提交按钮会压住信息区，用户先看到按钮、后看到余额，等于没提示。
+     ① 信息格改成 auto-fit 更窄（一行能排 3 个），把标段余额顶上去；
+     ② 给提交按钮上方留出安全间距，避免遮住最后一行信息格。 */
+  .info-grid { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 7px; margin: 10px 0 12px; }
+  .info-cell { padding: 8px 9px; border-radius: 11px; }
+  .info-cell .k { font-size: 10px; }
+  .info-cell .v { font-size: 14px; }
+  /* 关键额度格加一道左侧竖条，扫一眼就能找到 */
+  .info-cell.pool-key { border-left: 3px solid var(--accent); }
+  #cartBox { margin-bottom: 46px; }
 }
 
 /* ===== THEME-PATCH v1 =====
@@ -601,6 +613,36 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
   #tblRecvLedger th:nth-child(9) { width: 32px; }   /* 单位 */
   /* ARRIVE-PATCH v1.6.1：钉宽合计 236，商品列在 320 宽下得 84px */
   #tblRecvLedger .tag { font-size: 10px; padding: 1px 4px; line-height: 1.2; white-space: normal; }
+
+  /* ── ORDER-CONFIRM-PATCH v1：手机端「订单明细」表（10 列）──
+     同一个病、同一个修法（见上方 ARRIVE-PATCH v1.5 的长注释）：
+     10 列在 390px 下 auto 布局会把每列压到 min-content（中文＝一个字宽），
+     实测商品列只剩 67px、行高被撑起来。
+     藏掉 日期/规格/单价/到期（手机上「金额」比「单价」有用，「到期」已有颜色提示），
+     留 供应商|门店|商品|数量|单位|金额，再 fixed + 钉宽把余量全给商品列。
+     ★ 用 #tblOrders 限定，不动全站 .tbl。 */
+  #tblOrders th:nth-child(1), #tblOrders td:nth-child(1),      /* 日期（表格上方已按日汇总） */
+  #tblOrders th:nth-child(5), #tblOrders td:nth-child(5),      /* 规格 */
+  #tblOrders th:nth-child(8), #tblOrders td:nth-child(8),      /* 单价 */
+  #tblOrders th:nth-child(10), #tblOrders td:nth-child(10) {   /* 到期 */
+    display: none;
+  }
+  #tblOrders { table-layout: fixed; width: 100%; font-size: 11.5px; }
+  #tblOrders th {
+    padding: 7px 4px; font-size: 10.5px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  #tblOrders td {
+    padding: 7px 4px; vertical-align: middle;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  #tblOrders td:nth-child(4) { white-space: normal; word-break: break-word; }  /* 商品列吃余量 */
+  #tblOrders th:nth-child(2) { width: 52px; }   /* 供应商 */
+  #tblOrders th:nth-child(3) { width: 48px; }   /* 门店 */
+  #tblOrders th:nth-child(6) { width: 34px; }   /* 数量 */
+  #tblOrders th:nth-child(7) { width: 28px; }   /* 单位 */
+  #tblOrders th:nth-child(9) { width: 62px; }   /* 金额 */
+  /* 钉宽合计 224；390 视口下商品列约得 100px+ */
 }
 </style>
 </head>
@@ -1553,11 +1595,41 @@ function productsOf(sup) { return data.products.filter(function (p) { return p.s
 /* ===== COFFEE-PATCH v1：站点限定商品 =====
    商品档案「限定站点」列（第 10 列）留空 → 各服务区都能下订；
    填了站名（多站用 , / 、 分隔，如「照金」或「照金,华山」）→ 只有这些服务区能下订。
-   这一层管「能不能看到 / 能不能下」，与额度无关；金山端 order 模式有同款硬校验兜底。 */
+   这一层管「能不能看到 / 能不能下」，与额度无关；金山端 order 模式有同款硬校验兜底。
+
+   ★★ SITEONLY-PATCH v2（2026-09-19，修一个「谁都下不了单」的线上 bug）★★
+   问题：用户把 J 列当「备注栏」用了（原话：「天朗尚品最近没给他订货，因为他送货太慢，
+   但他的商品我也得录进去，所以就录进这个栏目了」）——
+     行 14–31  天朗尚品 18 款壳牌 J 列 = 「进价多变,202512:84.46/202601:84.46/…」
+     行 208–232 天朗   25 款照金百货 J 列 = 「照金专属」
+     行 233–236 天易蓝  4 款        J 列 = 「待定价」
+   旧逻辑拿 `/` 当分隔符拆 token，再把 token 原样当站名比 → 一个都对不上 →
+   siteAllowed() 恒 false → 这 47 款全被判「站点专供」、**任何服务区都下不了单**，
+   而报错文案还写成「只有 进价多变 / 202512:84.46 能下订」，用户根本看不懂。
+
+   修法（两道，缺一不可）：
+     ① 拆分出的 token 必须**真的是 15 个服务区名之一**才算数（白名单过滤）。
+        垃圾 token 不再参与判定 —— 这是根治，无需用户改表。
+     ② 旧写法把「照金专属」「照金店」当限定站，用户自然会这么写 → 兼容一次：
+        token 里**含**服务区名也算（「照金专属」→ 照金）。
+     两道都过不了 → 该格视为「不是站点限定」，商品对所有站开放。
+   ⚠ 与金山端 AirScript 的 siteAllowed 是同一套口径，改这里必须同步改脚本。 */
 function siteOnlyList(p) {
   var so = String((p && p.siteOnly) || '').trim();
   if (!so) return [];
-  return so.split(/[,，\/、|;；\s]+/).filter(function (x) { return !!x; });
+  var toks = so.split(/[,，\/、|;；\s]+/).filter(function (x) { return !!x; });
+  var out = [];
+  for (var i = 0; i < toks.length; i++) {
+    var t = toks[i];
+    if (SITES.indexOf(t) >= 0) {                       // ① 白名单精确命中
+      if (out.indexOf(t) < 0) out.push(t);
+      continue;
+    }
+    for (var j = 0; j < SITES.length; j++) {           // ② 旧写法兼容：「照金专属」→ 照金
+      if (t.indexOf(SITES[j]) >= 0) { if (out.indexOf(SITES[j]) < 0) out.push(SITES[j]); break; }
+    }
+  }
+  return out;                                          // ★ 认不出站名就返回 [] → 不限站
 }
 function siteAllowed(p, site) {
   var list = siteOnlyList(p);
@@ -1709,6 +1781,9 @@ function loadCart() {
 function siteNames() {
   return STORE_GROUPS.map(function (g) { return g.site; });
 }
+/* ★ SITEONLY-PATCH v2：15 个服务区名的扁平白名单（站点限定判定用）。
+   —— 必须与 STORE_GROUPS 同源，禁止另写一份字面量，否则以后加站会漏。 */
+var SITES = siteNames();
 function storesOfSite(site) {
   for (var i = 0; i < STORE_GROUPS.length; i++) {
     if (STORE_GROUPS[i].site === site) return STORE_GROUPS[i].stores;
@@ -2664,13 +2739,51 @@ function renderFormInfo() {
   var after = (hasCap && bal != null) ? bal - qty : null;
   var exp = p.shelf ? addDays(document.getElementById('odDate').value || todayStr(), p.shelf) : '—';
   var over = after != null && after < 0;
+
+  /* ★★ POOL-PATCH v1（2026-09-19）：把「标段共用额度余额」摆到下单表单里。
+     额度是按【标段】扣的（见《品类额度》表 C 列口径），不是按单品 —— 
+     但以前下单时只显示单品余额，标段池要翻到「台账总览」才看得见。
+     用户下玻璃水/尿素这类金额口径的标段时，无法当场判断这一单会不会顶穿额度。
+     这 3 格补上：本标段额度 / 已用 / 余额（+ 本单占用后的余额）。 */
+  var catPool = catBalOf(classifyCat(p)), poolCells = '';
+  if (catPool && catPool.set) {
+    var pMode = catPool.mode, pU = poolUnit(catPool);
+    var pAdd = (pMode === '数量') ? qty : amt;
+    var pAfter = n2(catPool.bal - pAdd);
+    var pOver = pAdd > catPool.bal;
+    poolCells =
+      '<div class="info-cell"><div class="k">所属标段</div><div class="v" style="font-size:12px">' +
+        esc(catPool.cat) + '（' + esc(pMode) + '口径）</div></div>' +
+      '<div class="info-cell"><div class="k">标段额度 / 已用</div><div class="v" style="font-size:12px">' +
+        fmtPool(catPool.cap, catPool) + pU + ' / ' + fmtPool(catPool.used, catPool) + pU + '</div></div>' +
+      '<div class="info-cell pool-key"><div class="k">标段余额</div><div class="v ' +
+        (catPool.bal <= 0 ? 'r' : (catPool.low ? 'o' : 'g')) + '">' +
+        fmtPool(catPool.bal, catPool) + pU + '</div></div>' +
+      '<div class="info-cell pool-key"><div class="k">本单占用后</div><div class="v ' + (pOver ? 'r' : 'g') + '">' +
+        fmtPool(pAfter, catPool) + pU + (pOver ? '（超）' : '') + '</div></div>';
+  } else if (catPool) {
+    // 该标段还没设额度 —— 明说，别让用户以为「没额度就不用管」
+    poolCells = '<div class="info-cell"><div class="k">所属标段</div><div class="v" style="font-size:12px">' +
+      esc(catPool.cat) + '（' + esc(catPool.mode) + '口径 · 未设额度）</div></div>';
+  }
+
+  /* ★ PRICE-PATCH v1（2026-09-19）：单价为 0 时要喊出来。
+     天易蓝 4 款现在「待定价」，price=0 → 本单金额恒 ¥0、标段余额扣不动，
+     不提示的话用户会以为「下单成功但金额没算」是系统坏了。 */
+  var noPrice = !(Number(p.price) > 0);
+
   box.innerHTML =
+    (noPrice ? '<div class="info-cell" style="grid-column:1/-1;background:rgba(214,69,42,.12)">' +
+      '<div class="k" style="color:var(--red)">⚠ 这款商品还没定价</div>' +
+      '<div class="v" style="font-size:12px;font-weight:500">单价 ¥0 → 下单不会产生金额，标段额度也扣不动。' +
+      '请联系管理员在《商品档案》里补齐单价（天易蓝 4 款现为「待定价」）。</div></div>' : '') +
     '<div class="info-cell"><div class="k">规格</div><div class="v" style="font-size:12px">' + esc(p.spec || '—') + '</div></div>' +
     '<div class="info-cell"><div class="k">单位 / 单价</div><div class="v" style="font-size:13px">' + esc(p.unit) + ' · ' + money(p.price) + '</div></div>' +
+    poolCells +
     (hasCap
       ? '<div class="info-cell"><div class="k">当前余额</div><div class="v ' + (bal <= 0 ? 'r' : bal <= effCap(p) * 0.1 ? 'o' : 'g') + '">' + nf(bal) + ' ' + esc(p.unit) + '</div></div>'
       : '<div class="info-cell"><div class="k">额度上限</div><div class="v" style="font-size:12px;color:var(--text2)">未设置（不限制）</div></div>') +
-    '<div class="info-cell"><div class="k">本次金额</div><div class="v">' + money(amt) + '</div></div>' +
+    '<div class="info-cell"><div class="k">本次金额</div><div class="v' + (noPrice ? ' r' : '') + '">' + money(amt) + '</div></div>' +
     (hasCap
       ? '<div class="info-cell"><div class="k">下订后余额</div><div class="v ' + (over ? 'r' : 'g') + '">' + nf(after) + ' ' + esc(p.unit) + '</div></div>'
       : '') +
@@ -2959,18 +3072,45 @@ function submitOrder() {
   }
   var force = false;
   if (soft.length) {
-    var msg = '即将超出额度，确认按「强制下订」提交吗？（会在金山表里记为超订）\n\n· ' + soft.join('\n· ');
+    /* ★ ORDER-CONFIRM-PATCH v1（2026-09-19）：原版只有「即将超出额度，确认吗？」+
+       一串软提示，用户看到的是「额度 100000 元，已订 …，本单 …」这种长句，
+       点确认时其实没看清自己这单到底是什么。
+       现在把「本单摘要」顶到最前面：订货单位 / 供应商 / 明细行 / 合计，
+       再列超额度原因 —— 用户至少知道自己正在强下什么。 */
+    var sumLines = items.map(function (it) {
+      return '    · ' + it.product + '  ' + nf(it.qty) + (it.unit || '') + '  ' + money(it.amt);
+    }).join('\n');
+    /* ★ ORDER-CONFIRM-PATCH v1.1：订货单位以前直接读 `store`，而 store=curStore()
+       在页面刚加载、applyStoreLock() 还没填下拉时是空串 →
+       确认框里出现「订货单位：（未选）」，用户当场就懵。
+       这里改成「store 为空就回落到 site」，再空才写「未选」。 */
+    var storeLabel = store || site || '（未选）';
+    var msg = '⚠ 这一单会超出额度，确认按「强制下订」提交吗？\n' +
+      '（提交后会在金山表里记为超订，管理员能看到）\n\n' +
+      '【本单摘要】\n' +
+      '  订货单位：' + storeLabel + '\n' +
+      '  供 应 商：' + sup + '\n' +
+      '  下订日期：' + date + '\n' +
+      '  明    细：' + items.length + ' 行 / 合计 ' + money(totalAmt) + '\n' +
+      sumLines + '\n\n' +
+      '【为什么需要强下】\n' +
+      soft.map(function (s) { return '  · ' + s; }).join('\n') + '\n\n' +
+      '点「确定」= 强制提交；点「取消」= 回上一页去改数量。';
     force = confirm(msg);
     if (!force) return;
   }
 
   // ── 整单防误触：同供应商 + 同订货单位 + 同日期 + 同明细，8 秒内重复直接忽略 ──
-  var fkey = cartKey(sup, curStore(), date, items);
+  /* ★ ORDER-CONFIRM-PATCH v1：store 必须在指纹与摘要之前就定好。
+     旧版把 `var store = curStore()` 写在下面 5 行处 —— var 有提升，值却要到那里才赋，
+     所以这里读到的 store 是 undefined，整单指纹退化成「日期+明细」，
+     跨站同明细的单会被误判成重复。移到前面，指纹与摘要都拿到真值。 */
+  var store = curStore(), ts = Date.now();
+  var fkey = cartKey(sup, store, date, items);
   if (isRecentDup(fkey)) { toast('刚刚已提交过一模一样的清单，已忽略重复提交'); return; }
   markSubmitted(fkey);
 
   // ── 入队：一个商品一笔（各自带唯一 cid，云端按 cid 幂等），同批只派发一次 workflow ──
-  var store = curStore(), ts = Date.now();
   items.forEach(function (it) {
     pending.push({
       cid: newCid(), supplier: sup, store: store, product: it.product, qty: it.qty,
@@ -3007,12 +3147,16 @@ function flushPending() {
   syncState = 'busy'; refreshAll();
   ghDispatch({ orders: batch.map(function (p) {
     return { cid: p.cid, supplier: p.supplier, store: p.store, product: p.product, qty: p.qty, date: p.date, note: p.note, force: !!p.force };
-  }) }).then(function () {
+  })   }).then(function () {
     var ids = {}; batch.forEach(function (p) { ids[p.cid] = 1; });
     pending = pending.filter(function (p) { return !ids[p.cid]; });    // 只清这一批，发送期间新增的保留
     savePending(); submitting = false; setSubmitBusy(false);
     syncState = 'ok'; refreshAll();
-    toast('已提交 ' + batch.length + ' 项，约 30 秒后自动更新…');
+    /* ★ ORDER-CONFIRM-PATCH v1：原话只有「已提交 N 项，约 30 秒后自动更新…」——
+       用户不知道第 2 步该干什么。这单到底进金山没有？货到了谁点？
+       这里把「下一跳」讲清楚：货到了要去【收货确认】点一下才算入库。 */
+    toast('已提交 ' + batch.length + ' 项，正在写入金山（约 30 秒）。' +
+      '货到后请到【收货确认】点一下才算入库。');
     pollUpdate();
     if (pending.length) setTimeout(flushPending, 400);                 // 期间又下了新单，接着发
   }).catch(function (e) {
