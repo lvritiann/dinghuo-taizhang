@@ -23,6 +23,16 @@
 @media (min-width: 901px) {
   .add-box .form-row { grid-template-columns: 210px minmax(180px, 1fr) 110px; }
 }
+/* ===== LAYOUT-PATCH v1：把表单栅格从 auto-fit 改为「显式列数」=====
+   旧版 .form-row 是 repeat(auto-fit, minmax(180px,1fr))，字段数少于列数时
+   会留下一串 **0px 幽灵列**（实测「①供应商/②订货单位」那行算成 `411px 411px 0px 0px`）。
+   幽灵列不吃宽度，但会让 gap 多出一格，并且字段宽度随视口「漂移」（411→515→…）。
+   这里按「每行有几个字段」显式钉死，宽度稳定、不再有空列。
+   ★ 一律套在 min-width:901px 内，避免压掉 900px 的单列堆叠断点。 */
+@media (min-width: 901px) {
+  .form-row.two   { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .form-row.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 .cart { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 14px; }
 .cart-h { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; }
 .cart-h .hint { margin-left: auto; font-size: 12px; color: var(--text2); font-variant-numeric: tabular-nums; }
@@ -38,6 +48,12 @@
 .cart-tbl .unit { margin-left: 4px; color: var(--text2); font-size: 11px; }
 .btn.sm.del { padding: 2px 8px; font-size: 11px; }
 #odAdd { margin-top: 6px; }
+/* ★ LAYOUT-PATCH v1：「加入清单」不再拉满整行（旧版 880px 满行，视觉上像主操作，抢了
+   「提交下定」的重点）。改为「占满可用宽度但留出右侧余量」——宽屏下按钮靠右收在表单右端，
+   与最后一列（下订数量）对齐；窄屏仍是整行（拇指好点）。 */
+@media (min-width: 901px) {
+  #odAdd { width: auto; min-width: 200px; display: block; margin-left: auto; margin-right: 0; }
+}
 @media (max-width: 760px) {
   .cart-h { flex-wrap: wrap; }
   .cart-h .hint { order: 9; width: 100%; margin-left: 0; }
@@ -167,6 +183,13 @@ h1 { font-size: 17px; font-weight: 700; letter-spacing: -.015em; white-space: no
 .todo-item.urgent .todo-t { color: var(--red); }
 .todo-item.warn   .todo-t { color: var(--orange); }
 .empty { font-size: 13px; color: var(--text2); padding: 18px 0; text-align: center; }
+.empty-sub { font-size: 11.5px; color: var(--text3); display: inline-block; margin-top: 5px; }
+/* ★ LAYOUT-PATCH v1：左栏「今天要处理」空态——卡内垂直居中，不再顶在上沿显空 */
+@media (min-width: 1240px) {
+  .col-main > .today { min-height: 128px; display: flex; flex-direction: column; }
+  .col-main > .today #todayList { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; }
+  .col-main > .today .empty { padding: 6px 0; }
+}
 
 /* ---------- KPI / 汇总卡 ---------- */
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
@@ -204,10 +227,62 @@ input:focus, select:focus { outline: none; border-color: var(--text); background
 .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
 
 .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: 9px; margin: 14px 0; }
-.info-cell { background: var(--card2); border-radius: 14px; padding: 10px 12px; }
+/* ★ LAYOUT-PATCH v1：信息格改用 flex —— 彻底解决「末行排不满 / 右侧留空洞」。
+   ★ 为什么不用 grid：格子数在 8~12 之间浮动（标段额度 / 单品额度 / 未定价警告都会增减），
+     grid 的固定列数总有某种情形排不满 —— 旧版 5 列时 8 格排「5+3」、11 格排「5+5+1」，
+     末行右侧永远缺一块。grid 也做不到「末行均分余数」（CSS 无此能力）。
+   ★ flex 的做法：每格基准宽 176px、可伸可缩（grow=1 shrink=1 basis=176）自然换行，
+     **末行剩几格就自动拉伸铺满整行** —— 任何格数都不留空洞。
+     min-width 保证不被压太窄，避免超大屏一格变形。 */
+@media (min-width: 901px) {
+  .info-grid { display: flex; flex-wrap: wrap; }
+  .info-grid > .info-cell { flex: 1 1 176px; min-width: 152px; }
+  /* 未定价警告那格原用 grid 语法 grid-column:1/-1 独占整行 → flex 下换成整行 */
+  .info-grid > .info-cell[style*="grid-column"] { flex: 1 1 100%; }
+}
+.info-cell { background: var(--card2); border-radius: 14px; padding: 10px 12px;
+             display: flex; flex-direction: column; justify-content: center; min-height: 62px; }
 .info-cell .k { font-size: 10.5px; color: var(--text2); font-weight: 500; }
 .info-cell .v { font-size: 15px; font-weight: 700; margin-top: 3px; }
 .info-cell .v.g { color: var(--green); } .info-cell .v.o { color: var(--orange); } .info-cell .v.r { color: var(--red); }
+
+/* ---------- ★ LAYOUT-PATCH v1：「怎么下单」帮助卡 ---------- */
+.howto { display: flex; flex-direction: column; gap: 12px; }
+/* 宽屏：步骤之间加细分隔线，读起来更像清单 */
+@media (min-width: 1240px) {
+  .split-help .howto { gap: 0; }
+  .split-help .howto-step { padding: 8px 0; }
+  .split-help .howto-step + .howto-step { box-shadow: inset 0 1px 0 var(--border); }
+}
+.howto-step { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.6; color: var(--text2); }
+.howto-step .howto-t { min-width: 0; flex: 1 1 auto; }
+.howto-step b { color: var(--text); font-weight: 650; }
+.howto-n {
+  flex: 0 0 20px; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--card2); color: var(--text2);
+  font-size: 11px; font-weight: 700; line-height: 20px; text-align: center;
+  margin-top: 1px;
+}
+/* 窄屏：帮助卡挪到最后（先干活），只微调上边距 */
+@media (max-width: 1239px) { .split-help { margin-top: 4px; } }
+
+/* ---------- ★ LAYOUT-PATCH v1：「本区已订概况」卡 ---------- */
+.side-total { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px;
+              padding-bottom: 12px; margin-bottom: 12px; box-shadow: inset 0 -1px 0 var(--border); }
+.side-total .st-l { font-size: 11.5px; color: var(--text2); font-weight: 600; }
+.side-total .st-v { font-size: 21px; font-weight: 800; letter-spacing: -.03em; }
+.side-total .st-c { margin-left: auto; font-size: 11px; color: var(--text3); font-variant-numeric: tabular-nums; }
+.side-list { display: flex; flex-direction: column; gap: 10px; }
+.side-row { min-width: 0; }
+.side-row .sr-h { display: flex; align-items: baseline; gap: 8px; font-size: 12.5px; }
+.side-row .sr-h b { font-weight: 650; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.side-row .sr-amt { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.side-row .sr-b { display: flex; gap: 8px; font-size: 11px; color: var(--text2); margin-top: 3px; font-variant-numeric: tabular-nums; }
+.side-row .sr-left { margin-left: auto; }
+.side-row .sr-left.near { color: var(--orange); font-weight: 700; }
+.side-row .sr-left.full { color: var(--red); font-weight: 700; }
+.sr-bar { height: 4px; border-radius: 999px; background: var(--card2); margin-top: 6px; overflow: hidden; }
+.sr-bar > i { display: block; height: 100%; border-radius: 999px; background: var(--accent); opacity: .75; }
 
 /* ---------- 筛选条 ---------- */
 .filters { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 12px; align-items: center; }
@@ -323,7 +398,58 @@ body.is-admin .admin-enter { display: none !important; }
 .view { display: none; }
 .view.on { display: block; }
 .view-stack { display: flex; flex-direction: column; gap: clamp(14px, 1.2vw, 20px); }
+/* ★ LAYOUT-PATCH v1（2026-09-19）—— 宽度对齐 + 反「窄长条」
+   旧版 .narrow 硬锁 880px，而下定之外的 4 个视图都是满宽：
+   切标签页时页面忽宽忽窄（1440 下 880 vs 1440，1920 下留白 520+520），
+   这是「比例不协调」的主因。改为【中屏温和收窄、宽屏放宽】：
+   - ≥1100px：放开到 1080 —— 不再是「一根窄条」
+   - ≥1240px：升到 1280，并由 .narrow.split 切成【左干活 / 右辅助】两栏
+
+   ★★ 陷阱（本版踩到的）：.narrow 在窄屏是 `display:contents`（拍平两栏用的），
+     而 `display:contents` 的元素**不生成盒子 → max-width / margin:auto 全部失效**。
+     于是 1000~1239px 区间「收窄」完全不生效，卡片撑到 1180px、左右只剩 30px 留白。
+     修法：把收窄真正作用到**卡片**上（卡片始终生成盒子），容器只做拍平。
+     用 `.narrow > .card`（拍平后卡片成为 .view-stack 的直属子元素，此选择器照样命中）。 */
 .narrow { width: 100%; max-width: 880px; margin: 0 auto; }
+@media (min-width: 1100px) { .narrow { max-width: 1080px; } }
+@media (min-width: 1240px) { .narrow { max-width: 1280px; } }
+
+/* ★ LAYOUT-PATCH v1：窄屏拍平时的收窄（作用在卡片上 —— 容器 contents 后 max-width 无效）。
+   只对「未走两栏」的区间生效（<1240），且排除 .view-stack 之外视图的卡片（那些本来就满宽）。
+   ★ 必须用 @media (max-width:1239px) 框住，否则会和上面的两栏规则打架。 */
+@media (max-width: 1239px) {
+  .narrow > .card,
+  .narrow > .col-main > .card,
+  .narrow > .col-side > .card { max-width: 880px; margin-left: auto; margin-right: auto; width: 100%; }
+}
+@media (min-width: 1100px) and (max-width: 1239px) {
+  .narrow > .card,
+  .narrow > .col-main > .card,
+  .narrow > .col-side > .card { max-width: 1000px; }
+}
+
+/* ★ LAYOUT-PATCH v1：宽屏两栏（仅下定视图用 .split 标记，其余视图零影响）
+   左栏 = 干活（今天要处理 + 下单表单 + 本单清单），右栏 = 辅助（已订概况 + 怎么下单）
+   窄屏两层容器 display:contents 拍平 → 回到「卡片按 DOM 顺序单列」（旧行为）。
+   ★ 注意：必须套在 @media (min-width:1240px) 里，否则会压掉 900px 断点。 */
+@media (min-width: 1240px) {
+  .narrow.split { display: flex; flex-direction: row; align-items: flex-start;
+                  gap: clamp(16px, 1.4vw, 22px); }
+  .narrow.split > .col-main { flex: 1 1 0; min-width: 0;
+                              display: flex; flex-direction: column; gap: clamp(14px, 1.2vw, 20px); }
+  .narrow.split > .col-side { flex: 0 0 clamp(300px, 26vw, 372px); min-width: 0;
+                              display: flex; flex-direction: column; gap: clamp(14px, 1.2vw, 20px);
+                              /* ★ 右栏吸附：左栏比右栏长（971 vs 483）时，滚动左栏右栏跟随，
+                                 不会在中途留下一大片「右半边空白」。顶距 = 头部高度 + 一点余量。 */
+                              position: sticky; top: 14px; align-self: flex-start;
+                              max-height: calc(100vh - 28px); overflow-y: auto; }
+  /* 右栏极窄时不出滚动条（内容一般放得下，真放不下才滚） */
+  .narrow.split > .col-side::-webkit-scrollbar { width: 0; }
+}
+/* 窄屏：拍平两栏，卡片回归单列（严格旧行为） */
+@media (max-width: 1239px) {
+  .narrow.split, .narrow.split > .col-main, .narrow.split > .col-side { display: contents; }
+}
 
 /* 门店锁定后的只读感 */
 select.locked { background: var(--card2); }   /* 站内限定：仍可切换东/西 */
@@ -684,8 +810,16 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
 <div class="wrap" data-page-node-id="LQQUmm8s5CkNGoR21EHioR">
 
   <section class="view on" data-view="order" data-page-node-id="viewOrder">
-    <div class="view-stack narrow">
-  <!-- ① 今天要处理 -->
+  <!-- ★ LAYOUT-PATCH v1：宽屏两栏（≥1240px）。窄屏两层 display:contents 拍平 → 严格回到旧单列。
+       左栏 = 干活（② 按供应商下定），右栏 = 辅助（① 今天要处理 + ③ 当前设定）。
+       注意 DOM 顺序：左栏在前，所以窄屏拍平后「按供应商下定」会排在「今天要处理」前面 ——
+       若要保持窄屏「先看提醒再干活」，把下面的 col-main / col-side 两个 div 互换即可。 -->
+  <div class="view-stack narrow split">
+
+  <!-- ========== 左栏：干活 ========== -->
+  <div class="col-main">
+
+  <!-- ① 今天要处理（窄屏排最前＝先看提醒再下单；宽屏留在左栏顶部） -->
   <div class="card today" data-page-node-id="VEWHdL4DW0gnRlzM0owhVR">
     <div class="card-h" data-page-node-id="O1oAOuZJDhfyBYV5Y1P8qx">
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="QQeWTd8koSgoZlTJ6rkgyG"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" data-page-node-id="AH2SaqvNhmUVW4RgxctB2g"/><line x1="12" y1="9" x2="12" y2="13" data-page-node-id="EX9EH2kDSdEN8aZEsCvUkZ"/><line x1="12" y1="17" x2="12.01" y2="17" data-page-node-id="29ZE6FuGHTHfAeXasnINks"/></svg>
@@ -702,7 +836,7 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="byasb7v96qMYjkxtzdmaGL"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" data-page-node-id="Wvb4RZr5oo9PqBdxyK88vn"/><line x1="3" y1="6" x2="21" y2="6" data-page-node-id="xiBRXvmA6LXhhUTykEVowY"/><path d="M16 10a4 4 0 0 1-8 0" data-page-node-id="bJtc3qLZ2t9O2ziOT5mJXs"/></svg>
       <h2 data-page-node-id="qBlsD1DyqyN6kNCJoMDvoP">按供应商下定</h2>
     </div>
-    <div class="form-row" data-page-node-id="6RocbbZDzRlHvrmVGzLB1O">
+    <div class="form-row two" data-page-node-id="6RocbbZDzRlHvrmVGzLB1O">
       <div class="field" data-page-node-id="YFlHwr8R5LsyjQsnmAIQwd">
         <label for="odSupplier" data-page-node-id="KID1IEUuTGjbsMwF4iYkTc">① 供应商</label>
         <select id="odSupplier" onchange="onSupplierPick()" data-page-node-id="q2ORcQd1EQ86wuRTTqjqGB"></select>
@@ -712,7 +846,7 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
         <select id="odStore" onchange="onStorePick()" data-page-node-id="GxlFlt8TKWGHhWu9R6XuNf"></select>
       </div>
     </div>
-    <div class="form-row" data-page-node-id="TY7j5uCTpgIWjel6BVpDB1">
+    <div class="form-row two" data-page-node-id="TY7j5uCTpgIWjel6BVpDB1">
       <div class="field" data-page-node-id="BG835rwEbRDGbfDpmy3TKG">
         <label for="odSide">③ 细分（可选）</label>
         <select id="odSide" onchange="onSidePick()"></select>
@@ -756,6 +890,37 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
       <span id="odSubmitTxt" data-page-node-id="jfLBwIYtlTf9VFqHJPvlbM">提交下定</span>
     </button>
   </div>
+  </div><!-- /col-main -->
+
+  <!-- ========== 右栏：辅助（宽屏才有栏位，窄屏拍平回单列） ========== -->
+  <div class="col-side">
+
+  <!-- ③ 本区已订概况（跟随「订货单位」实时变化，把右栏高度撑起来） -->
+  <div class="card" id="sideStatCard">
+    <div class="card-h">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 3 5-7"/></svg>
+      <h2>本区已订概况</h2>
+      <span class="spacer"></span>
+      <span class="hint" id="sideStatHint"></span>
+    </div>
+    <div id="sideStat"></div>
+  </div>
+
+  <!-- ③ 怎么下单（静态帮助卡，宽屏专属；窄屏靠 .split-help 也保留，不藏） -->
+  <div class="card split-help">
+    <div class="card-h">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <h2>怎么下单</h2>
+    </div>
+    <div class="howto">
+      <div class="howto-step"><span class="howto-n">1</span><span class="howto-t">选<b>供应商</b>、<b>订货单位</b>、<b>下订日期</b>。下单只会记到这一个服务区名下。</span></div>
+      <div class="howto-step"><span class="howto-n">2</span><span class="howto-t">④ 加商品：<b>先选品类再选商品</b>。商品多时用「品类筛选」缩小范围，同一家可连加多行。</span></div>
+      <div class="howto-step"><span class="howto-n">3</span><span class="howto-t">填数量前先看 <b>「标段余额」</b>。余额按标段扣、与供应商无关；金额口径看 ¥，数量口径看单位。</span></div>
+      <div class="howto-step"><span class="howto-n">4</span><span class="howto-t"><b>下单只是「订」</b>；货到后要到 <b>【收货确认】</b> 点一下才算入库。</span></div>
+    </div>
+  </div>
+
+  </div><!-- /col-side -->
 
     </div>
   </section>
@@ -1816,8 +1981,8 @@ function renderSide() {
   }).join('');
   if (arr.indexOf(cur) >= 0) el.value = cur;
 }
-function onStorePick() { renderSide(); renderCart(); }
-function onSidePick() { renderCart(); }
+function onStorePick() { renderSide(); renderCart(); renderSideStat(); }
+function onSidePick() { renderCart(); renderSideStat(); }
 
 /* ---------- 清单增删改 ---------- */
 function cartTotal() {
@@ -2447,6 +2612,7 @@ function refreshAll() {
   computeAll();
   renderSync();
   renderToday();
+  renderSideStat();
   renderDash();
   renderForm();
   renderFilters();
@@ -2466,6 +2632,52 @@ function renderSync() {
   if (syncState === 'err') { txt.textContent = '读取失败，用本地数据'; return; }
   if (data.source === '示例数据') { txt.textContent = '示例数据（未连接金山）'; return; }
   txt.textContent = '已同步 ' + (data.updatedAt ? data.updatedAt.slice(5, 16).replace('T', ' ') : '—');
+}
+
+/* ★ LAYOUT-PATCH v1：右栏「本区已订概况」——
+   宽屏两栏后右栏偏空（左 818px / 右 455px），这块把右侧补上有用信息：
+   当前订货单位下，各【标段】已订了多少、还剩多少（口径按标段，与供应商无关）。
+   只统计当前 curStore() 的单，跟随 ② 订货单位 实时变化。 */
+function renderSideStat() {
+  var box = document.getElementById('sideStat');
+  if (!box) return;
+  var store = curStore(), hint = document.getElementById('sideStatHint');
+  if (hint) hint.textContent = store || '（未选定货单位）';
+  if (!store) { box.innerHTML = '<div class="empty">先选「② 订货单位」</div>'; return; }
+  // 当前单位下、按标段聚合已订金额/数量
+  var byCat = {};
+  (data.orders || []).forEach(function (o) {
+    if (!storeMatch(store, o.store)) return;
+    var p = prodOf(o.supplier, o.product);
+    var cat = p ? classifyCat(p) : (o.cat || '其他');
+    if (!byCat[cat]) byCat[cat] = { cat: cat, amt: 0, cnt: 0 };
+    byCat[cat].amt += Number(o.amount) || (Number(o.price) || 0) * (Number(o.qty) || 0);
+    byCat[cat].cnt += 1;
+  });
+  var rows = Object.keys(byCat).map(function (k) { return byCat[k]; })
+    .sort(function (a, b) { return b.amt - a.amt; }).slice(0, 6);
+
+  if (!rows.length) {
+    box.innerHTML = '<div class="empty">本区还没有下过单<br><span class="empty-sub">用左边的「④ 加商品」开始第一单。</span></div>';
+    return;
+  }
+  var total = Object.keys(byCat).reduce(function (s, k) { return s + byCat[k].amt; }, 0);
+  var out = '<div class="side-total"><span class="st-l">本区累计已订</span><span class="st-v">' + money(total) +
+            '</span><span class="st-c">' + (Object.keys(byCat).length) + ' 个标段 / ' +
+            Object.keys(byCat).reduce(function (s, k) { return s + byCat[k].cnt; }, 0) + ' 笔</span></div>';
+  out += '<div class="side-list">' + rows.map(function (r) {
+    var pool = catBalOf(r.cat);
+    var cap = (pool && pool.set) ? fmtPool(pool.cap, pool) + poolUnit(pool) : '未设额度';
+    var left = (pool && pool.set) ? fmtPool(pool.bal, pool) + poolUnit(pool) : '—';
+    var pct = (pool && pool.set && pool.cap > 0) ? Math.min(100, pool.used / pool.cap * 100) : 0;
+    var lvl = pct >= 100 ? 'full' : pct >= 80 ? 'near' : '';
+    return '<div class="side-row">' +
+      '<div class="sr-h"><b>' + esc(r.cat) + '</b><span class="sr-amt">' + money(r.amt) + '</span></div>' +
+      '<div class="sr-b"><span>额度 ' + esc(cap) + '</span><span class="sr-left ' + lvl + '">剩 ' + esc(left) + '</span></div>' +
+      (pct > 0 ? '<div class="sr-bar"><i style="width:' + pct.toFixed(1) + '%"></i></div>' : '') +
+      '</div>';
+  }).join('') + '</div>';
+  box.innerHTML = out;
 }
 
 function renderToday() {
@@ -2518,7 +2730,7 @@ function renderToday() {
   document.getElementById('todayList').innerHTML = items.length ? items.map(function (it) {
     return '<div class="todo-item ' + it.lvl + '"><div class="todo-main"><div class="todo-t">' + esc(it.t) + '</div>' +
       '<div class="todo-s">' + esc(it.s) + '</div></div><button class="btn sm" onclick="' + it.f + '">' + it.b + '</button></div>';
-  }).join('') : '<div class="empty">暂无需要处理的事项</div>';
+  }).join('') : '<div class="empty">暂无需要处理的事项<br><span class="empty-sub">没有待收货的单，可以直接在左边下单。</span></div>';
 }
 
 function renderDash() {
