@@ -657,6 +657,16 @@ body.theme-tech #toast { border: 1px solid var(--border); }
 .viz-box.wide { grid-column: span 2; }
 @media (max-width: 900px) { .viz-grid { grid-template-columns: 1fr; } .viz-box.wide { grid-column: span 1; } }
 .viz-box .chart-title { margin-bottom: 12px; }
+/* ★ LIEFLAT-PATCH v3：供应商金额图在「单列区间」必须继续占整行（.wide 的效果），
+   但它的网格伙伴（服务区排行 / 供应商金额占比）要留在半宽成对排列 ——
+   所以不能直接把它标成 .wide（那样 901px 断点下手动加 class 会让「服务区排行」孤零零半宽）。
+   实测的坑：>900px 网格已塌成 1 列，半宽格只有 ~405px，
+   而 640 画布需要 ≥600px 满格轨道 → 不占整行就会压到 420px（比值 0.66、字号 10px）。
+   ★ 上界取 1239 与页面 .split 两栏断点对齐，全程比值随视口在 1.02~1.73 之间连续变化、无跳变。
+     （曾试过在 1150~1239 再切回半宽换更准的比值，但那会在 1150px 处
+      让图宽从 1023px 腰斩到 488px —— 用户 resize 窗口时会看到「图突然缩一半」，
+      比「整体稍宽」难看得多。宁可单调，不要跳变。） */
+@media (max-width: 1239px) { #vizCard .viz-grid > [data-page-node-id="vizBoxSup"] { grid-column: 1 / -1; } }
 /* ★ 这里刻意【不】再写 .viz-box svg.chart{min-width:280px} ——
    它特异性(0,2,1)高于上方 @media(max-width:900px) 里的 svg.chart(0,1,1)，
    会在窄屏把刻度图重新压回 286px、刻度全糊。窄屏下限交给那条媒体查询的 560px，
@@ -991,15 +1001,15 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
       <span class="hint" id="dashHint" data-page-node-id="W7wM9hcCKpySo1sbH80gaV"></span>
     </div>
     <div class="kpis" id="kpis" data-page-node-id="Ly29JaJi46hPuB5fQoXy8x"></div>
-    <div class="chart-box" data-page-node-id="GCh5r7pIdrVyO2s3RsvauX">
-      <div class="chart-title" data-page-node-id="bMuafoBld7O60GkKQEWWGi">各供应商已下订金额（元）</div>
-      <svg class="chart" id="chartSup" viewBox="0 0 640 60" preserveAspectRatio="xMinYMin meet" data-page-node-id="I4gAPN1TzK928Wv6OqOeEi"></svg>
-    </div>
     <div class="chart-box" data-page-node-id="catSumBox">
       <div class="chart-title" data-page-node-id="catSumTitle">各品类共用额度余额（数量口径显数量 / 金额口径显金额 · 防定超监管）</div>
       <div class="cat-cards" id="catCards" data-page-node-id="catCards"></div>
     </div>
   </div>
+
+  <!-- ★ LIEFLAT-PATCH v3：供应商金额图并入下方「数据看板」的 viz-grid 末尾
+       （原来它是这里一个整卡满宽的 .chart-box，容器宽随视口 1178→1326→1782 变化，
+        而画布宽写死 → 必有一个视口出现 2 倍级拉伸。并入网格后列宽 656/884，口径与另外三张图统一。） -->
 
   <!-- ★ 数据看板（THEME-PATCH v1）—— 4 张手写内联 SVG 图表，零外部依赖 -->
   <div class="card" id="vizCard">
@@ -1025,6 +1035,13 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
       <div class="viz-box">
         <div class="chart-title">供应商金额占比</div>
         <div id="chartShare"></div>
+      </div>
+      <!-- ★ LIEFLAT-PATCH v3：供应商已下订金额（tick rows）—— 第 5 格
+           入网格是为了让「画布宽 640 ≈ 容器宽」。网格列宽实测 656(1440) / 884(1920)，
+           比值 1.02 / 1.38，都在同量级；若留在整卡满宽（1178→1326→1782）就必然 2 倍级拉伸。 -->
+      <div class="viz-box" data-page-node-id="vizBoxSup">
+        <div class="chart-title">各供应商已下订金额（元）</div>
+        <svg class="chart" id="chartSup" viewBox="0 0 640 340" preserveAspectRatio="xMinYMin meet" data-page-node-id="I4gAPN1TzK928Wv6OqOeEi"></svg>
       </div>
     </div>
   </div>
@@ -3032,30 +3049,88 @@ function renderDash() {
   document.getElementById('dashHint').textContent = '品类 ' + data.catBal.length + ' 类（已设额度 ' + setCnt + ' 类） / 供应商 ' +
     data.supplierBal.length + ' 家 / 商品 ' + data.productBal.length + ' 款 / 订单 ' + data.orders.length + ' 笔';
 
-  // 供应商已下订金额条形图 —— CATCH-PATCH v3
-  // 额度已改为「品类共用」，供应商级不再有独立额度（capAmt 由逐款 capQty 推导，早已不适用），
-  // 所以这里只画「已下订金额」这一个真实存在的量，不再是空图。
+  // 供应商已下订金额 —— ★ LIEFLAT-PATCH v3：F5 Tick Rows（与「服务区下订排行」同语法）
+  // 额度已改为「品类共用」，供应商级不再有独立额度，所以这里只画「已下订金额」这一个真实存在的量。
+  /* ★ v3 修掉的是「画布宽 ≠ 容器宽」这个根因（v1 实心条 / v2 是半步修法）：
+     v1 = 普通 <rect> 填充条，viewBox 写死 640 → 在整卡满宽容器里被拉伸 2.07 倍，
+          柱子 932×29px（宽高比 32:1）像胖胶囊，后 4 家退化成 4~8px 碎渣。
+     v2 = 换成 tick rows + 把画布提到 1300。几何对了（1440 下 1.02×），
+          但 1300 这个值【只在 1440 视口正确】—— 容器宽其实是 1280→1178 / 1440→1326 /
+          1920→1782 线性变化的，1920 下又变成 1.37× 拉伸、390 下压成 0.43× 字变糊。
+     v3 = 承认「画布宽不可能写死」，改为让这张图【回到 viz-grid 里占一个格】：
+          svg.chart 是 width:100%，格宽 656/884 → 比值 1.02/1.38，与隔壁三张图同口径。
+          ← 这是唯一能在所有断点都自洽的做法。 */
   var rows = data.supplierBal.slice().sort(function (a, b) { return b.usedAmt - a.usedAmt; });
   var chartEl = document.getElementById('chartSup');
   if (chartEl) {
     var _totUsed = 0; rows.forEach(function (r) { _totUsed += r.usedAmt; });
-    if (!rows.length || _totUsed <= 0) {   /* CATCH-PATCH v4：全 0 时给空态，不画一排小竖条 */
+    if (!rows.length || _totUsed <= 0) {
       chartEl.outerHTML = '<div class="empty" id="chartSup">还没有订单 —— 下过单之后，这里会显示每家供应商的已下订金额。</div>';
     } else {
-      var rowH = 30, H = rows.length * rowH + 16, labW = 96, valW = 86;
-      var barX = labW + 8, barW = 640 - barX - valW;
-      var mx = 1; rows.forEach(function (r) { mx = Math.max(mx, r.usedAmt); });
-      var svg = '<svg class="chart" id="chartSup" viewBox="0 0 640 ' + H + '" preserveAspectRatio="xMinYMin meet">';
-      rows.forEach(function (r, i) {
-        var y = 8 + i * rowH;
-        var wU = Math.max(2, Math.round(r.usedAmt / mx * barW));
-        var nm = r.supplier.length > 6 ? r.supplier.slice(0, 6) + '…' : r.supplier;
-        svg += '<text x="' + (labW - 6) + '" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="var(--text2)">' + esc(nm) + '</text>';
-        svg += '<rect x="' + barX + '" y="' + (y + 3) + '" width="' + wU + '" height="14" rx="7" fill="var(--bar)"/>';
-        svg += '<text class="num" x="632" y="' + (y + 14) + '" text-anchor="end" font-size="11" fill="var(--bar)">' + money(r.usedAmt) + '</text>';
+      var list = rows.filter(function (r) { return r.usedAmt > 0; });
+      var zeroN = rows.length - list.length;
+      var mxU = list[0].usedAmt;                       // = 榜首值，保证「长度 ∝ 金额」
+      /* ★★ 满格 40 根（1 根 = 榜首 2.5%）：值域被榜首主宰时（¥1,652 占 56%），
+         20 根会让 ¥15 / ¥12 只剩 1~2px 退化成碎渣；40 根把它们抬到 ≥1 根可辨。 */
+      var UBAR = 40;
+      /* ★★★ 画布宽度一律用 640 —— v3 更正了 v2 的一个错误判断。
+         v2 曾把 UW 写成 1300 并注释「本图容器 ≈1326px，画布要匹配」，
+         那个前提【只在 1440 视口成立】。实测四个视口的容器宽：
+             1280 → 1178 ｜ 1440 → 1326 ｜ 1920 → 1782 ｜ 390 → 320（min-width 顶到 560）
+         容器宽是【跟随视口线性变化】的，任何写死的 UW 都只在某一个视口是对的：
+             写 640 → 1920 下拉伸 2.73 倍（文字放大成巨字）
+             写 1300 → 1280 下压扁 0.91、1920 下拉伸 1.37（还是不准）
+         而 svg.chart 是 width:100% → 渲染宽恒等于容器宽。
+         ★ 正解是「让画布宽 = 容器宽」，即让这张图【回到 viz-grid 里占一个格】。
+           网格列宽 656(1440) / 884(1920) 与 640 的比值只有
+            1440→1.02 ｜ 1920→1.38 ｜ 1280→0.86 —— 都在「同一量级」，
+           不会出现 2.7 倍那种灾难性放大，与旁边三张图口径完全一致。
+           这段逻辑已连带改 HTML（把 chart-box 换成 viz-box + viz-grid）与 CSS
+           （chart-box 回归普通 div）。详见 LIEFLAT-PATCH v3 注释块。 */
+      var UW = 640, UX0 = 118, UVALW = 76;
+      /* ★ 刻度间距由画布宽度反算（不能写死）：导轨要一直铺到数值列左边的留白。
+         pitch = (画布 − 标签列 − 数值列 − 右留白) / 40 根 → 轨道恒铺满画布。 */
+      var UPX = (UW - UX0 - UVALW - 6) / UBAR;
+      var UROW = 30;
+      /* ★ 行数上限（v3 新增）：网格格宽只有 640 画布，若将来供应商增到十几家，
+         行会一直往下长、单格高度失控（隔壁三张图也都在半宽格里，没这个问题是因为
+         它们的行数是「固定 15 站 / 固定品类数」）。这里封到 12 行 + 尾注汇总其余。 */
+      var MAXROW = 12;
+      var shown = list.slice(0, MAXROW);
+      var restN = list.length - shown.length;
+      var restAmt = 0; for (var ri = MAXROW; ri < list.length; ri++) restAmt += list[ri].usedAmt;
+      var UH = shown.length * UROW + 40;
+      var us = '<svg class="chart" id="chartSup" viewBox="0 0 ' + UW + ' ' + UH + '" preserveAspectRatio="xMinYMin meet">';
+      shown.forEach(function (r, i) {
+        var y = 24 + i * UROW;
+        var n = Math.max(1, Math.round(r.usedAmt / mxU * UBAR));
+        /* ★ 色彩纪律：9 家供应商退回灰阶 + 榜首强调（颜色不承载维度时就不该有颜色） */
+        var tone = (i === 0) ? 'var(--text)' : 'var(--text3)';
+        us += svgText(UX0 - 10, y + 4, r.supplier, { anchor: 'end', size: 10, weight: 700,
+          fill: i === 0 ? 'var(--text)' : 'var(--text2)' });
+        us += '<line x1="' + UX0 + '" y1="' + (y + 9) + '" x2="' + (UX0 + UBAR * UPX).toFixed(1) + '" y2="' + (y + 9) +
+              '" stroke="var(--border)" stroke-width=".7"/>';
+        for (var k = 0; k < n; k++) {
+          var x = UX0 + k * UPX + UPX / 2;
+          var hh = 9 + ((k * 7919 + i * 104729) % 1000) / 1000 * 6;   // 确定性抖动
+          var op = (0.55 + ((k * 6151 + i * 3571) % 1000) / 1000 * 0.45).toFixed(2);
+          us += '<line x1="' + x.toFixed(1) + '" y1="' + (y + 9) + '" x2="' + x.toFixed(1) + '" y2="' + (y + 9 - hh).toFixed(1) +
+                '" stroke="' + tone + '" stroke-width="1" opacity="' + op + '" class="lf-fade" style="animation-delay:' +
+                (i * 0.05 + k * 0.004).toFixed(3) + 's"/>';
+          if (k % 5 === 4) us += '<circle cx="' + x.toFixed(1) + '" cy="' + (y + 13) + '" r=".8" fill="var(--text3)" opacity=".8"/>';
+        }
+        us += svgText(UW - UVALW - 2, y + 4, money(r.usedAmt), { anchor: 'end', size: 11, weight: 800, fill: tone });
       });
-      svg += '</svg>';
-      chartEl.outerHTML = svg;
+      us += svgText(UW / 2, UH - 6, 'ONE TICK = 2.5% OF THE LEADING SUPPLIER · DOT MARKS EVERY FIFTH · ' +
+        list.length + ' ACTIVE',
+        { anchor: 'middle', size: 8, fill: 'var(--text3)', spacing: '.1em' });
+      us += '</svg>';
+      /* ★ 尾注：把「没单的」和「因超过 12 行没画出来的」都交代清楚，不留悬空。 */
+      var tail = [];
+      if (restN > 0) tail.push('另有 ' + restN + ' 家合计 ' + money(restAmt) + ' 未在上图展开。');
+      if (zeroN > 0) tail.push(zeroN + ' 家本期没有订单。');
+      if (tail.length) us += '<div class="note" style="margin-top:4px">' + tail.join(' ') + '</div>';
+      if (chartEl) chartEl.outerHTML = us;
     }
   }
 
