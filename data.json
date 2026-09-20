@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-09-20T02:36:54.119Z",
+  "updatedAt": "2026-09-20T08:07:58.265Z",
   "source": "kdocs",
   "today": "2026-09-20",
   "products": [
     {
       "capQty": 0,
       "cat": "",
-      "name": "心连心",
+      "name": "心连心尿素",
       "note": "",
       "price": 14.8,
       "shelf": 0,
@@ -2849,7 +2849,7 @@
       "orderCount": 0,
       "pct": 0,
       "price": 14.8,
-      "product": "心连心",
+      "product": "心连心尿素",
       "shelf": 0,
       "spec": "",
       "supplier": "河南心连心",
