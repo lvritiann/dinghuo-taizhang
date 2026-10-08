@@ -675,36 +675,35 @@ body.theme-tech select.locked { background: rgba(9,16,26,.5); }
 body.theme-tech #toast { border: 1px solid var(--border); }
 
 /* ---------- 图表（手写内联 SVG，零依赖） ---------- */
-/* ★ LEDGER-PATCH v2（数据看板 · 末行收口）
-   ── 病因：5 张图 = 2 张整行(.wide) + 3 张半宽。双列下必然排成
-        整行 / 整行 / 半·半 / 半(孤)  → 末行只 1 格、右半 670px 全空。
-        用户说的「页面还留着空白」，主要就是这一块。
+/* ★ LEDGER-PATCH v2（数据看板 · 末行收口）→ v5.18 修订：5 张图【全部半宽】
+   ── v2 旧布局：2 张整行(.wide) + 3 张半宽。整行图容器 1326(1440)/1782(1920)
+        对 640 画布 = 2.02/2.73 倍灾难性拉伸 —— v5.16 画布纪律的唯一残留硬伤。
    ── 为什么不能简单粗暴地「末格占整行(grid-column:1/-1)」：
         画布写死 640（v5.16 定下的「画布宽 ≈ 容器宽」纪律），
         拉到 1326 就是 2.07 倍拉伸，等于把上一版的修复又推倒。
    ── 为什么不能用 3 列塞下 3 张半宽图：1326 三列每格仅 432px，
         432/640 = 0.675 → 10px 字被压到 6.8px，刻度图直接糊掉。
-   ── 正解：改用 flex 换行 + justify-content:center。
-        .wide 用 flex-basis:100%（整行独占），半宽用 flex-basis:calc(50% - 7px)。
-        这样 5 张依次排：整行 / 整行 / 半+半 / 半 —— 末行那张【居中收口】，
-        左右对称留白 ≈ 328px，视觉上是个「居中收尾」而不是「右边空一大块」。
-        ★ 宽度全部由 flex-basis 定死，不做 flex-grow → 图表容器宽仍恒为 656
-          （1440 双列口径），与 v5.16 的画布比 1.02 完全一致，零回退。 */
+   ── 正解：flex 换行 + justify-content:center + 5 张统一半宽
+        flex-basis:calc(50% - 7px)。DOM 序 trend/rings/sites/sup/share →
+        ≥1240 排成 trend+rings / sites+sup / share(居中收口)，
+        比值 1.02(1440) / 1.38(1920)，与 v5.16 口径完全一致，零回退。
+        ★ 宽度全部由 flex-basis 定死，不做 flex-grow → 各行卡宽逐张一致，
+          末行孤格居中收口（v5.17「同类卡等宽」纪律在图表区的延续）。 */
 .viz-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 .viz-box { background: var(--card2); border-radius: 16px; padding: 14px 16px; min-width: 0; overflow-x: auto;
   flex: 0 1 calc(50% - 7px); }
-.viz-box.wide { flex-basis: 100%; }
 .viz-box .chart-title { margin-bottom: 12px; }
 /* ★ LEDGER-PATCH v2：viz-grid 由 grid 改 flex 后，原来的 grid-column:span/1/-1 全部失效，
    窄屏「单列区间」改用 flex-basis 表达：
      ≤900px：半宽图 flex-basis:100% → 全塌成单列（等价于原来的 grid-template-columns:1fr）
-     901~1239px：供应商金额图独占整行（等价于 v3 原来那条 grid-column:1/-1），
-                 其余半宽图仍两两配对 —— 保住它 640 画布不被压到 405px。 */
+     901~1239px：半宽格仅 386~556px、svg 被 min-width:420 顶住 → 比值 0.66~0.87 小字带，
+                 故【全部】占整行（v5.18 起不再是 sup 特例），比值 1.23~1.76，
+                 与改前 sup 在该区间的口径一致；≤900 行为不变（min-width:560 横滚）。 */
 @media (max-width: 900px) {
-  .viz-box, .viz-box.wide { flex-basis: 100%; }
+  .viz-box { flex-basis: 100%; }
 }
 @media (min-width: 901px) and (max-width: 1239px) {
-  #vizCard .viz-grid > [data-page-node-id="vizBoxSup"] { flex-basis: 100%; }
+  #vizCard .viz-grid > .viz-box { flex-basis: 100%; }
 }
 /* ★ 这里刻意【不】再写 .viz-box svg.chart{min-width:280px} ——
    它特异性(0,2,1)高于上方 @media(max-width:900px) 里的 svg.chart(0,1,1)，
@@ -1059,11 +1058,11 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
       <span class="hint">全部站 · 全部供应商（不受下方筛选影响）</span>
     </div>
     <div class="viz-grid">
-      <div class="viz-box wide">
+      <div class="viz-box">
         <div class="chart-title">近 14 天下订金额趋势</div>
         <div id="chartTrend"></div>
       </div>
-      <div class="viz-box wide">
+      <div class="viz-box">
         <div class="chart-title">品类额度占用率（环内 = 已订 / 额度）</div>
         <div id="chartRings"></div>
       </div>
@@ -1078,8 +1077,9 @@ svg.donut { display: block; width: 100%; max-width: 140px; height: auto; margin:
            整张网格 0 空洞、底部齐平、左右两条边线连续到顶。
            ★ 为什么不直接把末格设 grid-column:1/-1 占满整行 ——
              该图画布写死 640（v5.16「画布宽 ≈ 容器宽」纪律），拉成 1326 会退回 2 倍拉伸。
-           ★ 交换后供应商图落在【第 3 格】，在 ≥900 全区间都落在第 1 列（656 轨道），
-             与原先列位置一致、画布比不变；900~1239 单列区间仍由上方 @media 占整行。 -->
+           ★ v5.18：5 张图全部半宽（两个 .wide 已除），DOM 序 trend/rings/sites/sup/share →
+             ≥1240 自然排成 trend+rings / sites+sup / share(居中收口)，正是本节定的配对；
+             901~1239 单列区间由上方 @media 【全部】占整行（不再只是本格特例）。 -->
       <div class="viz-box" data-page-node-id="vizBoxSup">
         <div class="chart-title">各供应商已下订金额（元）</div>
         <svg class="chart" id="chartSup" viewBox="0 0 640 340" preserveAspectRatio="xMinYMin meet" data-page-node-id="I4gAPN1TzK928Wv6OqOeEi"></svg>
@@ -2624,7 +2624,10 @@ function tickRowsSvg(rows) {
         { anchor: 'middle', size: 11, fill: 'var(--text2)' }) +
       '</svg>';
   }
-  var W = 640, X0 = 118, PX = 4.0, trackW = PX * 100;
+  /* ★ 刻度图统一几何（v5.18）：三张刻度图共用「轨止 546 / 数值列 start@556 / 右缘 8」。
+     PX 由画布反算 = (546 − X0) / 100 = 4.28（原写死 4.0 → 轨止 518，右侧 82px 死白）。
+     数值 x = X0 + trackW + 10 = 556，无需另写。 */
+  var W = 640, X0 = 118, PX = (546 - X0) / 100, trackW = PX * 100;
   /* ★ 行高（LIEFLAT-PATCH v1）：已设额度 34px，未设额度 22px。
      原来 44px 会把「标段名」和下面的「额度 / 剩」拉成两行孤立文字（中间空 20px），
      tick rows 的读法应该是「名字+副行 = 一个条目」，所以收到 34px：
@@ -2800,9 +2803,10 @@ function renderChartSites() {
      - 基准取 mx（= 榜首值），保证「长度 ∝ 金额」的契约成立
      - 满格 40 根（原来 20 根）：值域偏窄时（如各站都在 1.1~1.8 万）
        20 根会让相邻两站只差 1~2 根、分辨不出来；40 根把分辨率翻倍
-     - PX 相应收小，整行宽度不变 */
+     - ★ 刻度图统一几何（v5.18）：轨止 546 / 数值列 start@556。原 PX 写死 2.6
+       → 轨止仅 200，右 58%（~380px）全空、内容挤在左 40%；PX 由画布反算 = 11.25 */
   var bars = 40;                                   // 满格 = 40 根刻度（1 根 = 榜首的 2.5%）
-  var PX = 2.6, X0 = 96, rowH = 34, W = 640, H = list.length * rowH + 40;
+  var X0 = 96, PX = (546 - X0) / bars, rowH = 34, W = 640, H = list.length * rowH + 40;
   var s = '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMinYMin meet">';
   list.forEach(function (name, i) {
     var y = 24 + i * rowH;
@@ -3132,10 +3136,12 @@ function renderDash() {
            不会出现 2.7 倍那种灾难性放大，与旁边三张图口径完全一致。
            这段逻辑已连带改 HTML（把 chart-box 换成 viz-box + viz-grid）与 CSS
            （chart-box 回归普通 div）。详见 LIEFLAT-PATCH v3 注释块。 */
-      var UW = 640, UX0 = 118, UVALW = 76;
+      var UW = 640, UX0 = 118, UVALW = 76, UVALX = 556;
       /* ★ 刻度间距由画布宽度反算（不能写死）：导轨要一直铺到数值列左边的留白。
-         pitch = (画布 − 标签列 − 数值列 − 右留白) / 40 根 → 轨道恒铺满画布。 */
-      var UPX = (UW - UX0 - UVALW - 6) / UBAR;
+         pitch = (数值列 X − 间隙 10 − 标签列) / 40 根 → 轨止恒为 546，右缘 = UW−556−76 = 8。
+         ★ 刻度图统一几何（v5.18）：数值列改 start 锚定 @556（原 end 锚定 @562
+           = UW−UVALW−2 —— 长数值左伸会压到轨止 558 相触，且 562→640 留 78px 死白）。 */
+      var UPX = (UVALX - 10 - UX0) / UBAR;
       var UROW = 30;
       /* ★ 行数上限（v3 新增）：网格格宽只有 640 画布，若将来供应商增到十几家，
          行会一直往下长、单格高度失控（隔壁三张图也都在半宽格里，没这个问题是因为
@@ -3164,7 +3170,7 @@ function renderDash() {
                 (i * 0.05 + k * 0.004).toFixed(3) + 's"/>';
           if (k % 5 === 4) us += '<circle cx="' + x.toFixed(1) + '" cy="' + (y + 13) + '" r=".8" fill="var(--text3)" opacity=".8"/>';
         }
-        us += svgText(UW - UVALW - 2, y + 4, money(r.usedAmt), { anchor: 'end', size: 11, weight: 800, fill: tone });
+        us += svgText(UVALX, y + 4, money(r.usedAmt), { size: 11, weight: 800, fill: tone });
       });
       us += svgText(UW / 2, UH - 6, 'ONE TICK = 2.5% OF THE LEADING SUPPLIER · DOT MARKS EVERY FIFTH · ' +
         list.length + ' ACTIVE',
