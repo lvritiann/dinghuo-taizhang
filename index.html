@@ -976,6 +976,14 @@ body.theme-tech .splash {
   margin: 0 0 34px; font-size: 14px; color: var(--text2);
   animation: rise .7s .16s cubic-bezier(.2,.7,.2,1) both;
 }
+.splash-sub .en {
+  color: var(--splash-accent); font-weight: 600; letter-spacing: .14em;
+  font-variant-numeric: tabular-nums;
+}
+.splash-sub > span { white-space: nowrap; }  /* 每个「中文+英文」词组整体不拆行，换行只落在 · 处 */
+.splash-foot .en {
+  color: var(--text2); font-weight: 500; letter-spacing: .18em;
+}
 @keyframes rise {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: none; }
@@ -1008,13 +1016,6 @@ body.theme-tech .splash {
   border-radius: 5px; padding: 2px 7px; margin: 0 3px;
 }
 
-.splash-skip {
-  margin-top: 22px; display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12.5px; color: var(--text3); cursor: pointer; user-select: none;
-  animation: rise .7s .34s cubic-bezier(.2,.7,.2,1) both;
-}
-.splash-skip input { accent-color: var(--splash-accent); width: 14px; height: 14px; cursor: pointer; }
-
 .splash-foot {
   position: absolute; bottom: 22px; left: 0; right: 0; text-align: center;
   font-size: 11px; color: var(--text3); letter-spacing: .1em;
@@ -1044,12 +1045,11 @@ body.theme-tech .splash {
       </svg>
     </div>
     <h1 class="splash-title" data-page-node-id="splashTitle">高速延长供应商<span class="accent">订货</span>管理</h1>
-    <p class="splash-sub" data-page-node-id="splashSub">15 座服务区 · 实时额度 · 到货入库 · 一站式订货</p>
+    <p class="splash-sub" data-page-node-id="splashSub"><span>实时额度 <span class="en">REALTIME</span></span> · <span>到货入库 <span class="en">ARRIVAL</span></span> · <span>一站式订货 <span class="en">ONE-STOP</span></span></p>
     <button class="splash-enter" id="splashEnter" data-page-node-id="splashEnter">进入系统</button>
     <div class="splash-hint" data-page-node-id="splashHint">按 <kbd>Enter</kbd> 也可进入</div>
-    <label class="splash-skip" data-page-node-id="splashSkip"><input type="checkbox" id="splashSkipChk"> 下次不再显示开场</label>
   </div>
-  <div class="splash-foot" data-page-node-id="splashFoot">高速公路服务区 · 非油业务订货系统</div>
+  <div class="splash-foot" data-page-node-id="splashFoot">非油订货系统 · <span class="en">DESIGNED BY LIU LONGWEI</span></div>
 </div>
 
 <header data-page-node-id="rKiviHOZJMYxu1Vl9jjdOc">
@@ -4692,9 +4692,8 @@ function bindRecv() {
 /* ============================================================
  * v5.19 开启页（Splash）逻辑
  * ============================================================ */
-var LS_SPLASH_SKIP = 'wb_splash_skip_v1';
 function splashSkipped() {
-  try { if (localStorage.getItem(LS_SPLASH_SKIP) === '1') return true; } catch (e) {}
+  // 开场页默认全员显示；仅 ?nosplash=1（截图/调试）时跳过
   try { if (/(?:[?&])nosplash=1(?:&|$)/.test(location.search || '')) return true; } catch (e) {}
   return false;
 }
@@ -4727,10 +4726,6 @@ function initSplash() {
     var entered = false;
     function enter() {
       if (entered) return; entered = true;
-      try {
-        var chk = document.getElementById('splashSkipChk');
-        if (chk && chk.checked) localStorage.setItem(LS_SPLASH_SKIP, '1');
-      } catch (e) {}
       el.classList.add('hide');
       setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 600);
     }
