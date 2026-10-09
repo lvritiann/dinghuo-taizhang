@@ -1067,6 +1067,8 @@ body.theme-tech .splash {
 .filter-dash { color: var(--text3); font-size: 13px; padding: 0 2px; }
 .filter-lbl { color: var(--text2); font-size: 13px; font-weight: 600; white-space: nowrap; }
 .filters input[type="date"] { cursor: pointer; }
+.filters input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; padding: 3px; margin-left: 2px; opacity: .85; }
+.filters input[type="date"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
 </style>
 </head>
 <body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
@@ -1176,7 +1178,7 @@ body.theme-tech .splash {
       </div>
       <div class="field" data-page-node-id="tGNzzCxABwcvUtUpbsW0UF">
         <label for="odDate" data-page-node-id="CXHeWWsI8higjRU7s9nc8t">下订日期</label>
-        <input type="date" id="odDate" onchange="renderCart()" data-page-node-id="5WZtJ6zY8sc2c4wU0aDGhX">
+        <input type="date" id="odDate" onchange="renderCart()" onclick="pickDateUI(this)" data-page-node-id="5WZtJ6zY8sc2c4wU0aDGhX">
       </div>
     </div>
 
@@ -1455,11 +1457,11 @@ body.theme-tech .splash {
     </div>
     <div class="filters">
       <span class="filter-lbl">时间段</span>
-      <input type="date" id="fDateFrom" onchange="refreshAll()" aria-label="起始日期（含）">
+      <input type="date" id="fDateFrom" onchange="refreshAll()" onclick="pickDateUI(this)" aria-label="起始日期（含）">
       <span class="filter-dash">至</span>
-      <input type="date" id="fDateTo" onchange="refreshAll()" aria-label="结束日期（含）">
+      <input type="date" id="fDateTo" onchange="refreshAll()" onclick="pickDateUI(this)" aria-label="结束日期（含）">
       <span class="filter-lbl">或单日</span>
-      <input type="date" id="fDate" onchange="refreshAll()" aria-label="精确某天">
+      <input type="date" id="fDate" onchange="refreshAll()" onclick="pickDateUI(this)" aria-label="精确某天">
     </div>
     <div id="detBanner"></div>
     <div class="sum-line" id="detSum"></div>
@@ -3692,6 +3694,12 @@ function toggleSupFilter(btn) {
   var i = supFilter.indexOf(s);
   if (i >= 0) supFilter.splice(i, 1); else supFilter.push(s);
   refreshAll();
+}
+
+// ★ v5.21 日期框：点击任意处直接弹出系统日历（不必去点右侧小图标、不必手输）
+function pickDateUI(el) {
+  if (!el) return;
+  try { if (typeof el.showPicker === 'function') { el.showPicker(); return; } } catch (e) {}
 }
 
 // 数量按单位分列汇总（箱/桶/提不可直接相加）
