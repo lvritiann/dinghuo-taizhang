@@ -938,6 +938,28 @@ body.theme-tech .splash {
   100% { opacity: 0; transform: translateY(-58vh) translateX(calc(var(--dx, 14px) * -1)) scale(.65); }
 }
 
+/* 流星（shooting star）：亮头 + 渐隐拖尾，从左上向右下划过 */
+.splash-stars { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.splash-star {
+  position: absolute; width: 130px; height: 2px; border-radius: 999px;
+  background: linear-gradient(90deg, #FFFFFF, var(--splash-accent) 55%, transparent);
+  box-shadow: 0 0 8px var(--splash-accent), 0 0 2px #fff;
+  opacity: 0; transform-origin: left center;
+  animation: shoot var(--sdur, 2.4s) ease-out var(--sdelay, 0s) infinite;
+}
+.splash-star::before {  /* 头部更亮的小点 */
+  content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 4px; height: 4px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 10px var(--splash-accent), 0 0 3px #fff;
+}
+@keyframes shoot {
+  0%   { opacity: 0; transform: rotate(-35deg) translateX(0); }
+  4%   { opacity: 1; }
+  55%  { opacity: 1; transform: rotate(-35deg) translateX(240px); }
+  62%  { opacity: 0; transform: rotate(-35deg) translateX(280px); }
+  100% { opacity: 0; transform: rotate(-35deg) translateX(300px); }
+}
+
 /* 中心内容 */
 .splash-core {
   position: relative; z-index: 2;
@@ -1043,6 +1065,8 @@ body.theme-tech .splash {
   background: var(--hero); color: var(--on-hero); border-color: transparent;
 }
 .filter-dash { color: var(--text3); font-size: 13px; padding: 0 2px; }
+.filter-lbl { color: var(--text2); font-size: 13px; font-weight: 600; white-space: nowrap; }
+.filters input[type="date"] { cursor: pointer; }
 </style>
 </head>
 <body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
@@ -1050,6 +1074,7 @@ body.theme-tech .splash {
 <!-- ===== v5.19 开启页（Splash）===== -->
 <div class="splash" id="splash" data-page-node-id="splashRoot">
   <div class="splash-particles" id="splashParticles" aria-hidden="true"></div>
+  <div class="splash-stars" id="splashStars" aria-hidden="true"></div>
   <div class="splash-core">
     <div class="splash-badge" data-page-node-id="splashBadge">
       <span class="halo" aria-hidden="true"></span>
@@ -1429,10 +1454,12 @@ body.theme-tech .splash {
       </select>
     </div>
     <div class="filters">
-      <input type="date" id="fDateFrom" onchange="refreshAll()" title="起始日期（含）">
+      <span class="filter-lbl">时间段</span>
+      <input type="date" id="fDateFrom" onchange="refreshAll()" aria-label="起始日期（含）">
       <span class="filter-dash">至</span>
-      <input type="date" id="fDateTo" onchange="refreshAll()" title="结束日期（含）">
-      <input type="date" id="fDate" onchange="refreshAll()" title="精确某天（点下方日期行快速填）">
+      <input type="date" id="fDateTo" onchange="refreshAll()" aria-label="结束日期（含）">
+      <span class="filter-lbl">或单日</span>
+      <input type="date" id="fDate" onchange="refreshAll()" aria-label="精确某天">
     </div>
     <div id="detBanner"></div>
     <div class="sum-line" id="detSum"></div>
@@ -3167,7 +3194,7 @@ function renderSync() {
   var dot = document.getElementById('syncDot'), txt = document.getElementById('syncTxt');
   dot.className = 'sync-dot' + (syncState === 'busy' ? ' busy' : syncState === 'ok' ? ' ok' : syncState === 'err' ? ' err' : '');
   if (syncState === 'busy') { txt.textContent = '同步中…'; return; }
-  if (syncState === 'err') { txt.textContent = '读取失败，用本地数据'; return; }
+  if (syncState === 'err') { txt.textContent = '读取失败，点「同步」重试'; return; }
   if (data.source === '示例数据') { txt.textContent = '示例数据（未连接金山）'; return; }
   txt.textContent = '已同步 ' + (data.updatedAt ? data.updatedAt.slice(5, 16).replace('T', ' ') : '—');
 }
@@ -4790,6 +4817,21 @@ function initSplash() {
       }
     }
 
+    // 流星（shooting star）：手机 2 颗 / 桌面 4 颗，随机位置与节奏
+    var ss = document.getElementById('splashStars');
+    if (ss) {
+      var SN = (typeof window !== 'undefined' && window.innerWidth < 600) ? 2 : 4;
+      for (var k = 0; k < SN; k++) {
+        var st = document.createElement('span');
+        st.className = 'splash-star';
+        st.style.left = (5 + Math.random() * 55).toFixed(1) + '%';
+        st.style.top = (3 + Math.random() * 28).toFixed(1) + '%';
+        st.style.setProperty('--sdur', (2 + Math.random() * 2.5).toFixed(1) + 's');
+        st.style.setProperty('--sdelay', (Math.random() * 6).toFixed(1) + 's');
+        ss.appendChild(st);
+      }
+    }
+
     var entered = false;
     function enter() {
       if (entered) return; entered = true;
@@ -4818,18 +4860,29 @@ function boot() {
   if (hashWantAdmin) { if (isAdmin()) setView('ledger'); else openAdminLogin(); }
   var hasLocal = loadLocal();
   syncState = 'busy'; refreshAll();
-  fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
-    .then(function (o) {
-      data = normalize(o); data.source = o.source || 'kdocs'; saveLocal();
-      syncState = 'ok'; refreshAll();
-      // ★ 只自动补发「确定没发出去」的单；结果未知（unknown）的必须人工确认，防重复写入
-      if (pending.some(function (p) { return !p.sent && !p.unknown; })) flushPending();
-    })
-    .catch(function () {
-      if (!hasLocal) { data = normalize(sampleData()); data.source = '示例数据'; saveLocal(); }
-      syncState = 'err'; refreshAll();
-    });
+  // ★ 加载失败自动重试：手机/弱网下 GitHub Pages 偶发一次拉不到，最多试 3 次再降级本地
+  var attempts = 0;
+  function loadData() {
+    fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+      .then(function (o) {
+        data = normalize(o); data.source = o.source || 'kdocs'; saveLocal();
+        syncState = 'ok'; refreshAll();
+        // ★ 只自动补发「确定没发出去」的单；结果未知（unknown）的必须人工确认，防重复写入
+        if (pending.some(function (p) { return !p.sent && !p.unknown; })) flushPending();
+      })
+      .catch(function () {
+        /* ★ 先立即降级（页面/测试桩马上有数据可用），再安排后台重试；重试成功会覆盖为线上数据。
+           不能「先重试后降级」——vm 测试桩的 setTimeout 是空操作，重试永远不会跑，示例数据就写不进去。 */
+        attempts++;
+        if (attempts === 1) {
+          if (!hasLocal) { data = normalize(sampleData()); data.source = '示例数据'; saveLocal(); }
+          syncState = 'err'; refreshAll();
+        }
+        if (attempts < 3) setTimeout(loadData, attempts * 1500);
+      });
+  }
+  loadData();
 }
 
 document.addEventListener('DOMContentLoaded', function () { boot(); });
