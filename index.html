@@ -1028,6 +1028,21 @@ body.theme-tech .splash {
   .splash-badge { width: 76px; height: 76px; margin-bottom: 20px; }
   .splash-enter { padding: 13px 40px; }
 }
+
+/* ============================================================
+   v5.20 订单明细：供应商多选 chips + 自定义起止日期区间
+   ============================================================ */
+.sup-chips { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+.sup-chips .chip {
+  padding: 6px 13px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  background: var(--card2); color: var(--text2); border: 1px solid var(--border);
+  cursor: pointer; user-select: none; transition: background .12s, color .12s, border-color .12s, transform .12s;
+}
+.sup-chips .chip:active { transform: scale(.96); }
+.sup-chips .chip.on {
+  background: var(--hero); color: var(--on-hero); border-color: transparent;
+}
+.filter-dash { color: var(--text3); font-size: 13px; padding: 0 2px; }
 </style>
 </head>
 <body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
@@ -1399,10 +1414,11 @@ body.theme-tech .splash {
       <span class="spacer" data-page-node-id="03qoB4da2DgNRSr8YCRkFv"></span>
       <span class="hint" id="detHint" data-page-node-id="oIFU2EAwhJqg8SyBS2udvx"></span>
     </div>
-    <div class="filter-tip">选「供应商 + 订货日期」→ 下方横幅直接告诉你那天那家订了多少笔。点「按订货日期汇总」里的一行可快速切换日期。</div>
+    <div class="filter-tip">点选供应商（可多选）＋ 选起止日期或精确某天 → 下方直接汇总笔数 / 数量 / 金额。点「按订货日期汇总」里的一行可快速切某天。</div>
     <div class="filters">
-      <select id="fSupplier" onchange="refreshAll()"></select>
-      <input type="date" id="fDate" onchange="refreshAll()" title="订货日期">
+      <div class="sup-chips" id="fSupChips" title="点选可多选供应商"></div>
+    </div>
+    <div class="filters">
       <select id="fStore" onchange="refreshAll()"></select>
       <select id="fProduct" onchange="refreshAll()"></select>
       <select id="fDays" onchange="refreshAll()">
@@ -1411,6 +1427,12 @@ body.theme-tech .splash {
         <option value="30">近 30 天</option>
         <option value="90">近 90 天</option>
       </select>
+    </div>
+    <div class="filters">
+      <input type="date" id="fDateFrom" onchange="refreshAll()" title="起始日期（含）">
+      <span class="filter-dash">至</span>
+      <input type="date" id="fDateTo" onchange="refreshAll()" title="结束日期（含）">
+      <input type="date" id="fDate" onchange="refreshAll()" title="精确某天（点下方日期行快速填）">
     </div>
     <div id="detBanner"></div>
     <div class="sum-line" id="detSum"></div>
@@ -3607,6 +3629,8 @@ function focusProduct(sup, prod) {
   document.getElementById('odQty').scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+var supFilter = [];   // ★ v5.20 订单明细：选中的供应商（多选）
+
 function renderFilters() {
   var sups = suppliers();
   function fill(id, arr, all) {
@@ -3615,12 +3639,32 @@ function renderFilters() {
     el.innerHTML = '<option value="">' + all + '</option>' + arr.map(function (x) { return '<option value="' + esc(x) + '">' + esc(x) + '</option>'; }).join('');
     if (cur && (arr.indexOf(cur) >= 0)) el.value = cur;
   }
-  fill('fSupplier', sups, '全部供应商');
+  // 供应商多选 chips
+  var sc = document.getElementById('fSupChips');
+  if (sc) {
+    sc.innerHTML = sups.length
+      ? sups.map(function (s) { return '<button type="button" class="chip' + (supFilter.indexOf(s) >= 0 ? ' on' : '') + '" data-sup="' + esc(s) + '" onclick="toggleSupFilter(this)">' + esc(s) + '</button>'; }).join('')
+      : '<span class="hint">暂无供应商</span>';
+  }
   fill('fStore', siteNames(), '全部订货单位');
-  var fs = document.getElementById('fSupplier').value;
-  var goods = fs ? productsOf(fs).map(function (p) { return p.name; }) : data.products.map(function (p) { return p.name; });
+  // 商品下拉：选了供应商 → 只看这几家的商品（并集）；没选 → 全部
+  var goods;
+  if (supFilter.length) {
+    var gset = {};
+    supFilter.forEach(function (s) { productsOf(s).forEach(function (p) { gset[p.name] = 1; }); });
+    goods = Object.keys(gset);
+  } else {
+    goods = data.products.map(function (p) { return p.name; });
+  }
   fill('fProduct', goods, '全部商品');
   applyStoreLock();   // ★ fill 会重建门店下拉，这里再锁一次
+}
+
+function toggleSupFilter(btn) {
+  var s = btn.getAttribute('data-sup');
+  var i = supFilter.indexOf(s);
+  if (i >= 0) supFilter.splice(i, 1); else supFilter.push(s);
+  refreshAll();
 }
 
 // 数量按单位分列汇总（箱/桶/提不可直接相加）
@@ -3633,22 +3677,31 @@ function qtyText(list) {
 }
 
 function renderDetail() {
-  var fs = document.getElementById('fSupplier').value;
   var fdate = document.getElementById('fDate').value;
+  var ffrom = document.getElementById('fDateFrom').value;
+  var fto = document.getElementById('fDateTo').value;
   var fst = document.getElementById('fStore').value;
   var fp = document.getElementById('fProduct').value;
   var fd = Number(document.getElementById('fDays').value) || 0;
-  var from = (!fdate && fd) ? addDays(todayStr(), -fd) : '';
+  var from = (!fdate && !ffrom && !fto && fd) ? addDays(todayStr(), -fd) : '';
   var scope = siteStores();                 // ★ 绑定了服务区：明细只看本服务区
+  var fs = supFilter.slice();               // 选中供应商（多选）
+  var singleSup = fs.length === 1 ? fs[0] : '';
 
   function match(o, withDate) {
     // 新单记「服务区名」（秦岭），旧单记门店名（秦岭东）→ 两种都要算在本服务区里
     if (scope && scope.indexOf(o.store) < 0 && o.store !== boundSite) return false;
-    if (fs && o.supplier !== fs) return false;
-    if (withDate && fdate && o.date !== fdate) return false;
+    if (fs.length && fs.indexOf(o.supplier) < 0) return false;
+    if (withDate) {
+      if (fdate) { if (o.date !== fdate) return false; }                 // 精确单日优先
+      else {
+        if (ffrom && o.date < ffrom) return false;                       // 起始（含）
+        if (fto && o.date > fto) return false;                           // 结束（含）
+        if (!ffrom && !fto && from && o.date < from) return false;       // 近 N 天
+      }
+    }
     if (fst && !storeMatch(fst, o.store)) return false;
     if (fp && o.product !== fp) return false;
-    if (from && o.date < from) return false;
     return true;
   }
   var list = data.orders.filter(function (o) { return match(o, true); })
@@ -3660,22 +3713,29 @@ function renderDetail() {
   var nStore = Object.keys(stores).length, nGood = Object.keys(goods).length;
   document.getElementById('detHint').textContent = list.length + ' 笔';
 
-  // 结果横幅：直接回答「某供应商某天订了多少笔」
+  // 结果横幅：直接回答「某几家供应商某段时间订了多少笔」
   var banner = document.getElementById('detBanner');
-  if (fs && fdate) {
+  function dTxt() {
+    if (fdate) return fdate;
+    if (ffrom || fto) return (ffrom || '最早') + ' 至 ' + (fto || '今天');
+    return '';
+  }
+  var dd = dTxt();
+  var supLabel = fs.length ? (fs.length === 1 ? fs[0] : fs.join('、') + ' 等 ' + fs.length + ' 家') : '';
+  if (supLabel && dd) {
     banner.innerHTML = '<div class="result-banner' + (list.length ? '' : ' none') + '">' +
-      '<div class="rb-main">' + esc(fs) + ' 在 ' + esc(fdate) + ' 共 <b>' + list.length + '</b> 笔订货订单</div>' +
+      '<div class="rb-main">' + esc(supLabel) + ' 在 <b>' + esc(dd) + '</b> 共 <b>' + list.length + '</b> 笔订货订单</div>' +
       '<div class="rb-sub">' + (list.length
         ? '数量 ' + esc(qtyText(list)) + ' · 金额 ' + money(ta) + ' · 覆盖 ' + nStore + ' 座门店 · ' + nGood + ' 款商品'
-        : '该供应商在这一天没有下订记录') + '</div></div>';
-  } else if (fs) {
-    banner.innerHTML = '<div class="result-banner"><div class="rb-main">' + esc(fs) + ' 累计 <b>' + list.length + '</b> 笔订货订单</div>' +
+        : '该条件下没有下订记录') + '</div></div>';
+  } else if (supLabel) {
+    banner.innerHTML = '<div class="result-banner"><div class="rb-main">' + esc(supLabel) + ' 累计 <b>' + list.length + '</b> 笔订货订单</div>' +
       '<div class="rb-sub">数量 ' + esc(qtyText(list)) + ' · 金额 ' + money(ta) + ' · 覆盖 ' + nStore + ' 座门店 · ' + nGood + ' 款商品' +
-      '<br>再选一个「订货日期」就能只看当天</div></div>';
-  } else if (fdate) {
-    banner.innerHTML = '<div class="result-banner"><div class="rb-main">' + esc(fdate) + ' 全站共 <b>' + list.length + '</b> 笔订货订单</div>' +
+      '<br>再选「起止日期」或「精确某天」就能只看某段时间</div></div>';
+  } else if (dd) {
+    banner.innerHTML = '<div class="result-banner"><div class="rb-main">' + esc(dd) + ' 全站共 <b>' + list.length + '</b> 笔订货订单</div>' +
       '<div class="rb-sub">数量 ' + esc(qtyText(list)) + ' · 金额 ' + money(ta) + ' · 涉及 ' + nStore + ' 座门店' +
-      '<br>再选「供应商」可只看某一家</div></div>';
+      '<br>再点选供应商可只看某几家</div></div>';
   } else {
     banner.innerHTML = '';
   }
@@ -3742,8 +3802,10 @@ function pickDate(d) {
 }
 
 function resetFilters() {
-  document.getElementById('fSupplier').value = '';
+  supFilter = [];
   document.getElementById('fDate').value = '';
+  document.getElementById('fDateFrom').value = '';
+  document.getElementById('fDateTo').value = '';
   document.getElementById('fStore').value = '';
   document.getElementById('fProduct').value = '';
   document.getElementById('fDays').value = '0';
