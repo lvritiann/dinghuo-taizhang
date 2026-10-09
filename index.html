@@ -938,26 +938,26 @@ body.theme-tech .splash {
   100% { opacity: 0; transform: translateY(-58vh) translateX(calc(var(--dx, 14px) * -1)) scale(.65); }
 }
 
-/* 流星（shooting star）：亮头 + 渐隐拖尾，从左上向右下划过 */
+/* 流星（shooting star）：亮头在前 + 渐隐拖尾，从左上划向右下 */
 .splash-stars { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .splash-star {
   position: absolute; width: 130px; height: 2px; border-radius: 999px;
-  background: linear-gradient(90deg, #FFFFFF, var(--splash-accent) 55%, transparent);
+  background: linear-gradient(90deg, transparent, var(--splash-accent) 45%, #FFFFFF);
   box-shadow: 0 0 8px var(--splash-accent), 0 0 2px #fff;
   opacity: 0; transform-origin: left center;
   animation: shoot var(--sdur, 2.4s) ease-out var(--sdelay, 0s) infinite;
 }
-.splash-star::before {  /* 头部更亮的小点 */
-  content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+.splash-star::before {  /* 头部亮点的位置＝飞行方向前端（右端） */
+  content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
   width: 4px; height: 4px; border-radius: 50%;
   background: #fff; box-shadow: 0 0 10px var(--splash-accent), 0 0 3px #fff;
 }
 @keyframes shoot {
-  0%   { opacity: 0; transform: rotate(-35deg) translateX(0); }
+  0%   { opacity: 0; transform: rotate(35deg) translateX(0); }
   4%   { opacity: 1; }
-  55%  { opacity: 1; transform: rotate(-35deg) translateX(240px); }
-  62%  { opacity: 0; transform: rotate(-35deg) translateX(280px); }
-  100% { opacity: 0; transform: rotate(-35deg) translateX(300px); }
+  55%  { opacity: 1; transform: rotate(35deg) translateX(240px); }
+  62%  { opacity: 0; transform: rotate(35deg) translateX(280px); }
+  100% { opacity: 0; transform: rotate(35deg) translateX(300px); }
 }
 
 /* 中心内容 */
