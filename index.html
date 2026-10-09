@@ -228,7 +228,7 @@ a.btn { text-decoration: none; }   /* 顶栏「金山台账」用 <a> 复用按�
      1920 下也稳定 4 列 —— 比原来的 156px 更接近既有的 324 观感，且绝不拉伸。 */
 @media (min-width: 901px) {
   .ledger-stack .kpis { display: flex; flex-wrap: wrap; justify-content: center; }
-  .ledger-stack .kpis > .kpi { flex: 0 1 240px; min-width: 0; padding: 12px 14px; }
+  .ledger-stack .kpis > .kpi { flex: 1 1 240px; min-width: 0; padding: 12px 14px; }
   .ledger-stack .kpis > .kpi .v { font-size: 23px; }
 }
 /* ② 品类卡：等宽收口，末行不留半格空洞（与下定视图 info-grid 同法）
@@ -1117,6 +1117,44 @@ body.theme-tech .tab.on { box-shadow: 0 4px 14px -6px rgba(34,211,238,.55); }
 .wrap::after { content: "非油订货系统 · DESIGNED BY LIU LONGWEI";
   display: block; text-align: center; padding: 26px 0 4px;
   font-size: 10.5px; letter-spacing: .12em; color: var(--text3); }
+/* ============================================================
+   v5.24 悬浮式卡片 + 尺寸对齐
+   ① KPI 等宽：入库进度 KPI 行与顶部 KPI 行对齐（原顶部 flex-grow:0 卡 240px、
+      入库进度走 grid 撑 324px，同页两行宽窄不一）
+   ② 卡片垂直间距：ledger 的「各商品明细 / 入库进度」两张卡在 .view-stack 之外，
+      没有 gap 会紧贴上一张 → 统一补间距
+   ③ 悬浮式阴影：主卡柔和多层阴影「离地」、内卡(子组件)补边框+轻阴影不再呆板
+   ============================================================ */
+/* ② 卡片垂直间距 */
+.view > .card { margin-top: clamp(14px, 1.2vw, 20px); }
+/* ① KPI 等宽对齐 */
+@media (min-width: 901px) {
+  #recvLedgerCard .kpis { display: flex; flex-wrap: wrap; justify-content: center; }
+  #recvLedgerCard .kpis > .kpi { flex: 1 1 240px; min-width: 0; padding: 12px 14px; }
+  #recvLedgerCard .kpis > .kpi .v { font-size: 23px; }
+}
+/* ③ 悬浮式阴影 —— 主卡 */
+.card {
+  box-shadow: 0 1px 2px rgba(28,28,26,.05), 0 8px 16px -6px rgba(28,28,26,.08), 0 20px 40px -12px rgba(28,28,26,.10);
+}
+.today {
+  box-shadow: inset 4px 0 0 var(--hero), 0 8px 16px -6px rgba(28,28,26,.08), 0 20px 40px -12px rgba(28,28,26,.10);
+}
+/* ③ 悬浮式阴影 —— 内卡/子组件（浅色） */
+.kpi, .cat-card, .info-cell {
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(28,28,26,.04), 0 4px 12px -4px rgba(28,28,26,.08);
+}
+.viz-box { border: 1px solid var(--border); }  /* overflow-x:auto 会裁掉阴影，只补边框 */
+.result-banner {
+  border: 1px solid var(--border);
+  box-shadow: inset 3px 0 0 var(--hero), 0 1px 2px rgba(28,28,26,.04), 0 4px 12px -4px rgba(28,28,26,.08);
+}
+/* ③ 悬浮式阴影 —— 内卡/子组件（深色）：补青色微光，与主卡发光同语系 */
+body.theme-tech .kpi, body.theme-tech .cat-card, body.theme-tech .info-cell,
+body.theme-tech .viz-box {
+  box-shadow: 0 10px 24px -14px rgba(56,189,248,.40);
+}
 </style>
 </head>
 <body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
