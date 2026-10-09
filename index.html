@@ -486,23 +486,11 @@ body.is-admin .admin-enter { display: none !important; }
      于是 1000~1239px 区间「收窄」完全不生效，卡片撑到 1180px、左右只剩 30px 留白。
      修法：把收窄真正作用到**卡片**上（卡片始终生成盒子），容器只做拍平。
      用 `.narrow > .card`（拍平后卡片成为 .view-stack 的直属子元素，此选择器照样命中）。 */
-.narrow { width: 100%; max-width: 880px; margin: 0 auto; }
-@media (min-width: 1100px) { .narrow { max-width: 1080px; } }
-@media (min-width: 1240px) { .narrow { max-width: 1280px; } }
-
-/* ★ LAYOUT-PATCH v1：窄屏拍平时的收窄（作用在卡片上 —— 容器 contents 后 max-width 无效）。
-   只对「未走两栏」的区间生效（<1240），且排除 .view-stack 之外视图的卡片（那些本来就满宽）。
-   ★ 必须用 @media (max-width:1239px) 框住，否则会和上面的两栏规则打架。 */
-@media (max-width: 1239px) {
-  .narrow > .card,
-  .narrow > .col-main > .card,
-  .narrow > .col-side > .card { max-width: 880px; margin-left: auto; margin-right: auto; width: 100%; }
-}
-@media (min-width: 1100px) and (max-width: 1239px) {
-  .narrow > .card,
-  .narrow > .col-main > .card,
-  .narrow > .col-side > .card { max-width: 1000px; }
-}
+.narrow { width: 100%; max-width: none; margin: 0; }
+/* ★ ORDER-FULLWIDTH v1（v5.22）：下定视图改为满宽，与订单明细/台账等其余视图一致。
+   移除原 LAYOUT-PATCH v1 的 880/1080/1280 收窄与卡片 max-width 收窄——
+   「切标签页忽宽忽窄」彻底消除（现在所有视图都满宽）。
+   满宽后左栏表单行限宽见文末 @media(min-width:1240px) 的 .form-row 规则，避免字段被拉超宽。 */
 
 /* ★ LAYOUT-PATCH v1：宽屏两栏（仅下定视图用 .split 标记，其余视图零影响）
    左栏 = 干活（今天要处理 + 下单表单 + 本单清单），右栏 = 辅助（已订概况 + 怎么下单）
@@ -1069,6 +1057,22 @@ body.theme-tech .splash {
 .filters input[type="date"] { cursor: pointer; }
 .filters input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; padding: 3px; margin-left: 2px; opacity: .85; }
 .filters input[type="date"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+
+/* ============================================================
+   v5.22 下定页美化：满宽 + 卡片层次 + 卡头图标底座 + 焦点光圈
+   浅色(Mono)补细边框/柔和阴影；深色(tech)已由 body.theme-tech .card 接管，不受影响。
+   ============================================================ */
+/* ① 卡片层次：浅色主题补细边框 + 柔和阴影（深色特异性更高，自动接管，不影响） */
+.card { border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(28,28,26,.04), 0 12px 32px -22px rgba(28,28,26,.20); }
+.today { box-shadow: inset 4px 0 0 var(--hero), 0 1px 2px rgba(28,28,26,.04); }
+/* ② 卡头图标：淡底圆角底座，标题区更有层次（只作用卡头第一级图标，顶栏按钮不受影响） */
+.card-h > .ico { width: 30px; height: 30px; padding: 7px; background: var(--card2); border-radius: 9px; flex: none; }
+/* ③ 表单焦点：浅色也加 hero 色光圈，选中更醒目（深色由 theme-tech 覆盖） */
+input:focus, select:focus { border-color: var(--hero); box-shadow: 0 0 0 3px rgba(232,80,15,.14); }
+/* ④ 满宽后：左栏表单行限宽，避免 2 个字段在超宽屏被拉成 700px+ */
+@media (min-width: 1240px) {
+  .narrow.split > .col-main .form-row { max-width: 720px; }
+}
 </style>
 </head>
 <body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
