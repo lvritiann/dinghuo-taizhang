@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T07:19:11.274Z",
+  "updatedAt": "2026-10-10T07:22:33.679Z",
   "source": "kdocs",
   "today": "2026-10-10",
   "products": [
@@ -1069,7 +1069,7 @@
       "siteOnly": "",
       "spec": "1*24",
       "supplier": "天天",
-      "unit": "瓶"
+      "unit": "箱"
     },
     {
       "capQty": 0,
@@ -1081,7 +1081,7 @@
       "siteOnly": "",
       "spec": "1*24",
       "supplier": "天天",
-      "unit": "瓶"
+      "unit": "箱"
     },
     {
       "capQty": 0,
@@ -4429,7 +4429,7 @@
       "shelf": 0,
       "spec": "1*24",
       "supplier": "天天",
-      "unit": "瓶",
+      "unit": "箱",
       "usedAmt": 0,
       "usedQty": 0
     },
@@ -4446,7 +4446,7 @@
       "shelf": 0,
       "spec": "1*24",
       "supplier": "天天",
-      "unit": "瓶",
+      "unit": "箱",
       "usedAmt": 0,
       "usedQty": 0
     },
