@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T10:07:49.399Z",
+  "updatedAt": "2026-10-10T10:42:04.924Z",
   "source": "kdocs",
   "today": "2026-10-10",
   "products": [
@@ -3062,19 +3062,6 @@
       "unit": "桶"
     },
     {
-      "amount": 3005.8,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 15.029,
-      "product": "尿素PE",
-      "qty": 200,
-      "spec": "",
-      "store": "秦岭东",
-      "supplier": "天易蓝",
-      "unit": "桶"
-    },
-    {
       "amount": 6011.6,
       "date": "2026-10-10",
       "expireDate": "",
@@ -3099,32 +3086,6 @@
       "store": "天汉水城",
       "supplier": "天易蓝",
       "unit": "箱"
-    },
-    {
-      "amount": 180.8,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 3.616,
-      "product": "玻璃水-20#",
-      "qty": 50,
-      "spec": "2L",
-      "store": "韩城",
-      "supplier": "天易蓝",
-      "unit": "箱"
-    },
-    {
-      "amount": 2203.5,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 14.69,
-      "product": "尿素PET",
-      "qty": 150,
-      "spec": "",
-      "store": "韩城",
-      "supplier": "天易蓝",
-      "unit": "桶"
     },
     {
       "amount": 180.8,
@@ -7065,12 +7026,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -740,
+      "balQty": -690,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 4,
+      "orderCount": 3,
       "pct": 0,
       "price": 3.616,
       "product": "玻璃水-20#",
@@ -7078,16 +7039,16 @@
       "spec": "2L",
       "supplier": "天易蓝",
       "unit": "箱",
-      "usedAmt": 2675.84,
-      "usedQty": 740
+      "usedAmt": 2495.04,
+      "usedQty": 690
     },
     {
-      "balQty": -1600,
+      "balQty": -1400,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 5,
+      "orderCount": 4,
       "pct": 0,
       "price": 15.029,
       "product": "尿素PE",
@@ -7095,16 +7056,16 @@
       "spec": "",
       "supplier": "天易蓝",
       "unit": "桶",
-      "usedAmt": 24046.4,
-      "usedQty": 1600
+      "usedAmt": 21040.6,
+      "usedQty": 1400
     },
     {
-      "balQty": -1000,
+      "balQty": -850,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 4,
+      "orderCount": 3,
       "pct": 0,
       "price": 14.69,
       "product": "尿素PET",
@@ -7112,8 +7073,8 @@
       "spec": "",
       "supplier": "天易蓝",
       "unit": "桶",
-      "usedAmt": 14690,
-      "usedQty": 1000
+      "usedAmt": 12486.5,
+      "usedQty": 850
     }
   ],
   "supplierBal": [
@@ -7214,16 +7175,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -41412.24,
+      "balAmt": -36022.14,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-10",
       "low": false,
-      "orderCount": 13,
+      "orderCount": 10,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 41412.24
+      "usedAmt": 36022.14
     }
   ],
   "catCaps": [
