@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T08:02:50.267Z",
+  "updatedAt": "2026-10-10T08:04:17.620Z",
   "source": "kdocs",
   "today": "2026-10-10",
   "products": [
@@ -2828,119 +2828,15 @@
       "unit": "桶"
     },
     {
-      "amount": 958.24,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 119.78,
-      "product": "壳牌喜力HX5 +10W40",
-      "qty": 8,
-      "spec": "4L",
-      "store": "天汉水城",
-      "supplier": "天朗尚品",
-      "unit": "桶"
-    },
-    {
-      "amount": 375.16,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 93.79,
-      "product": "壳牌劲霸 R4 15W40",
-      "qty": 4,
-      "spec": "4L",
-      "store": "天汉水城",
-      "supplier": "天朗尚品",
-      "unit": "桶"
-    },
-    {
-      "amount": 375.16,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 93.79,
-      "product": "壳牌劲霸 R4 15W50",
-      "qty": 4,
-      "spec": "4L",
-      "store": "天汉水城",
-      "supplier": "天朗尚品",
-      "unit": "桶"
-    },
-    {
-      "amount": 741.28,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 92.66,
-      "product": "壳牌劲霸 R3 15W40",
-      "qty": 8,
-      "spec": "4L",
-      "store": "天汉水城",
-      "supplier": "天朗尚品",
-      "unit": "桶"
-    },
-    {
-      "amount": 741.28,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 92.66,
-      "product": "壳牌劲霸 R3 15W50",
-      "qty": 8,
-      "spec": "4L",
-      "store": "天汉水城",
-      "supplier": "天朗尚品",
-      "unit": "桶"
-    },
-    {
-      "amount": 180.8,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 45.2,
-      "product": "壳牌防冻液-红色 -45℃",
-      "qty": 4,
-      "spec": "4KG",
-      "store": "天汉水城",
-      "supplier": "天朗尚品",
-      "unit": "桶"
-    },
-    {
-      "amount": 723.2,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 45.2,
-      "product": "壳牌防冻液-绿色 -45℃",
-      "qty": 16,
-      "spec": "4KG",
-      "store": "天汉水城",
-      "supplier": "天朗尚品",
-      "unit": "桶"
-    },
-    {
-      "amount": 5736,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 4.78,
-      "product": "红牛维生素功能饮料（天天）",
-      "qty": 1200,
-      "spec": "1*24",
-      "store": "白河",
-      "supplier": "天天",
-      "unit": "箱"
-    },
-    {
-      "amount": 1761.6,
+      "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
       "note": "",
       "price": 3.67,
       "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
-      "qty": 480,
+      "qty": 20,
       "spec": "1*24",
-      "store": "白河",
+      "store": "天汉水城",
       "supplier": "天天",
       "unit": "箱"
     },
@@ -3032,123 +2928,6 @@
       "qty": 200,
       "spec": "",
       "store": "秦岭东",
-      "supplier": "天易蓝",
-      "unit": "桶"
-    },
-    {
-      "amount": 5876,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 14.69,
-      "product": "尿素PET",
-      "qty": 400,
-      "spec": "",
-      "store": "白河",
-      "supplier": "天易蓝",
-      "unit": "桶"
-    },
-    {
-      "amount": 2603.52,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 3.616,
-      "product": "玻璃水-20#",
-      "qty": 720,
-      "spec": "2L",
-      "store": "宁陕东",
-      "supplier": "天易蓝",
-      "unit": "箱"
-    },
-    {
-      "amount": 8814,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 14.69,
-      "product": "尿素PET",
-      "qty": 600,
-      "spec": "",
-      "store": "宁陕东",
-      "supplier": "天易蓝",
-      "unit": "桶"
-    },
-    {
-      "amount": 2603.52,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 3.616,
-      "product": "玻璃水-20#",
-      "qty": 720,
-      "spec": "2L",
-      "store": "宁陕西",
-      "supplier": "天易蓝",
-      "unit": "箱"
-    },
-    {
-      "amount": 8814,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 14.69,
-      "product": "尿素PET",
-      "qty": 600,
-      "spec": "",
-      "store": "宁陕东",
-      "supplier": "天易蓝",
-      "unit": "桶"
-    },
-    {
-      "amount": 2938,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 14.69,
-      "product": "尿素PET",
-      "qty": 200,
-      "spec": "",
-      "store": "南沙",
-      "supplier": "天易蓝",
-      "unit": "桶"
-    },
-    {
-      "amount": 2938,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 14.69,
-      "product": "尿素PET",
-      "qty": 200,
-      "spec": "",
-      "store": "南沙",
-      "supplier": "天易蓝",
-      "unit": "桶"
-    },
-    {
-      "amount": 144.64,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 3.616,
-      "product": "玻璃水-20#",
-      "qty": 40,
-      "spec": "2L",
-      "store": "天汉水城",
-      "supplier": "天易蓝",
-      "unit": "箱"
-    },
-    {
-      "amount": 6011.6,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 15.029,
-      "product": "尿素PE",
-      "qty": 400,
-      "spec": "",
-      "store": "天汉水城",
       "supplier": "天易蓝",
       "unit": "桶"
     }
@@ -3359,12 +3138,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -8,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 92.66,
       "product": "壳牌劲霸 R3 15W40",
@@ -3372,16 +3151,16 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 741.28,
-      "usedQty": 8
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
-      "balQty": -8,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 92.66,
       "product": "壳牌劲霸 R3 15W50",
@@ -3389,8 +3168,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 741.28,
-      "usedQty": 8
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
       "balQty": 0,
@@ -3410,12 +3189,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -4,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 93.79,
       "product": "壳牌劲霸 R4 15W40",
@@ -3423,16 +3202,16 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 375.16,
-      "usedQty": 4
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
-      "balQty": -4,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 93.79,
       "product": "壳牌劲霸 R4 15W50",
@@ -3440,8 +3219,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 375.16,
-      "usedQty": 4
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
       "balQty": 0,
@@ -3461,12 +3240,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -8,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 119.78,
       "product": "壳牌喜力HX5 +10W40",
@@ -3474,8 +3253,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 958.24,
-      "usedQty": 8
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
       "balQty": -8,
@@ -3631,12 +3410,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -4,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 45.2,
       "product": "壳牌防冻液-红色 -45℃",
@@ -3644,16 +3423,16 @@
       "spec": "4KG",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 180.8,
-      "usedQty": 4
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
-      "balQty": -24,
+      "balQty": -8,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 2,
+      "orderCount": 1,
       "pct": 0,
       "price": 45.2,
       "product": "壳牌防冻液-绿色 -45℃",
@@ -3661,8 +3440,8 @@
       "spec": "4KG",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 1084.8,
-      "usedQty": 24
+      "usedAmt": 361.6,
+      "usedQty": 8
     },
     {
       "balQty": 0,
@@ -4651,7 +4430,7 @@
       "usedQty": 0
     },
     {
-      "balQty": -480,
+      "balQty": -20,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
@@ -4664,16 +4443,16 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 1761.6,
-      "usedQty": 480
+      "usedAmt": 73.4,
+      "usedQty": 20
     },
     {
-      "balQty": -1200,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
@@ -4681,8 +4460,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 5736,
-      "usedQty": 1200
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
       "balQty": 0,
@@ -7065,12 +6844,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -2080,
+      "balQty": -600,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 4,
+      "orderCount": 1,
       "pct": 0,
       "price": 3.616,
       "product": "玻璃水-20#",
@@ -7078,16 +6857,16 @@
       "spec": "2L",
       "supplier": "天易蓝",
       "unit": "箱",
-      "usedAmt": 7521.28,
-      "usedQty": 2080
+      "usedAmt": 2169.6,
+      "usedQty": 600
     },
     {
-      "balQty": -1600,
+      "balQty": -1200,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 5,
+      "orderCount": 4,
       "pct": 0,
       "price": 15.029,
       "product": "尿素PE",
@@ -7095,16 +6874,16 @@
       "spec": "",
       "supplier": "天易蓝",
       "unit": "桶",
-      "usedAmt": 24046.4,
-      "usedQty": 1600
+      "usedAmt": 18034.8,
+      "usedQty": 1200
     },
     {
-      "balQty": -2700,
+      "balQty": -700,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 7,
+      "orderCount": 2,
       "pct": 0,
       "price": 14.69,
       "product": "尿素PET",
@@ -7112,8 +6891,8 @@
       "spec": "",
       "supplier": "天易蓝",
       "unit": "桶",
-      "usedAmt": 39663,
-      "usedQty": 2700
+      "usedAmt": 10283,
+      "usedQty": 700
     }
   ],
   "supplierBal": [
@@ -7142,16 +6921,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -5414.96,
+      "balAmt": -1319.84,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-10",
       "low": false,
-      "orderCount": 9,
+      "orderCount": 2,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 5414.96
+      "usedAmt": 1319.84
     },
     {
       "balAmt": 0,
@@ -7178,16 +6957,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -7497.6,
+      "balAmt": -73.4,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-10",
       "low": false,
-      "orderCount": 2,
+      "orderCount": 1,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 7497.6
+      "usedAmt": 73.4
     },
     {
       "balAmt": 0,
@@ -7214,16 +6993,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -71230.68,
+      "balAmt": -30487.4,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-10",
       "low": false,
-      "orderCount": 16,
+      "orderCount": 7,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 71230.68
+      "usedAmt": 30487.4
     }
   ],
   "catCaps": [
@@ -7298,6 +7077,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmv23w3bhoa9l2t",
     "cmv23u7agivu5f5",
     "cmv23u7agbpm06t",
     "cmv23rtvzhm2lbt",
