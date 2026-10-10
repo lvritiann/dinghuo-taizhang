@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T07:13:04.722Z",
+  "updatedAt": "2026-10-10T07:17:12.687Z",
   "source": "kdocs",
   "today": "2026-10-10",
   "products": [
@@ -2785,7 +2785,7 @@
       "siteOnly": "",
       "spec": "",
       "supplier": "天易蓝",
-      "unit": ""
+      "unit": "桶"
     },
     {
       "capQty": 0,
@@ -2797,7 +2797,7 @@
       "siteOnly": "",
       "spec": "",
       "supplier": "天易蓝",
-      "unit": ""
+      "unit": "桶"
     }
   ],
   "orders": [
@@ -2878,6 +2878,32 @@
       "store": "富平",
       "supplier": "天易蓝",
       "unit": ""
+    },
+    {
+      "amount": 3005.8,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 15.029,
+      "product": "尿素PE",
+      "qty": 200,
+      "spec": "",
+      "store": "秦岭东",
+      "supplier": "天易蓝",
+      "unit": "桶"
+    },
+    {
+      "amount": 2169.6,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 3.616,
+      "product": "玻璃水-20#",
+      "qty": 600,
+      "spec": "2L",
+      "store": "秦岭东",
+      "supplier": "天易蓝",
+      "unit": "桶"
     }
   ],
   "productBal": [
@@ -6792,12 +6818,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -600,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 3.616,
       "product": "玻璃水-20#",
@@ -6805,25 +6831,25 @@
       "spec": "2L",
       "supplier": "天易蓝",
       "unit": "桶",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 2169.6,
+      "usedQty": 600
     },
     {
-      "balQty": -800,
+      "balQty": -1000,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 2,
+      "orderCount": 3,
       "pct": 0,
       "price": 15.029,
       "product": "尿素PE",
       "shelf": 0,
       "spec": "",
       "supplier": "天易蓝",
-      "unit": "",
-      "usedAmt": 12023.2,
-      "usedQty": 800
+      "unit": "桶",
+      "usedAmt": 15029,
+      "usedQty": 1000
     },
     {
       "balQty": -700,
@@ -6838,7 +6864,7 @@
       "shelf": 0,
       "spec": "",
       "supplier": "天易蓝",
-      "unit": "",
+      "unit": "桶",
       "usedAmt": 10283,
       "usedQty": 700
     }
@@ -6941,16 +6967,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -22306.2,
+      "balAmt": -27481.6,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-10",
       "low": false,
-      "orderCount": 4,
+      "orderCount": 6,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 22306.2
+      "usedAmt": 27481.6
     }
   ],
   "catCaps": [
@@ -7025,6 +7051,8 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmv229xiwy7mv13",
+    "cmv229xiwm1po3t",
     "cmv224khbvgntso",
     "cmv21z6oeswyuuw",
     "cmv21z6oeu0rys3",
