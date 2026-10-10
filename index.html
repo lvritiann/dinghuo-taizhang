@@ -1119,6 +1119,7 @@ body.theme-tech .tab.on { box-shadow: 0 4px 14px -6px rgba(34,211,238,.55); }
   font-size: 10.5px; letter-spacing: .12em; color: var(--text3); }
 /* ============================================================
    v5.24 悬浮式卡片 + 尺寸对齐
+   v5.25 防重复写入金山：同日指纹确认 + dupOk + AirScript 内容级查重（DUP-GUARD v1）
    ① KPI 等宽：入库进度 KPI 行与顶部 KPI 行对齐（原顶部 flex-grow:0 卡 240px、
       入库进度走 grid 撑 324px，同页两行宽窄不一）
    ② 卡片垂直间距：ledger 的「各商品明细 / 入库进度」两张卡在 .view-stack 之外，
@@ -1212,6 +1213,7 @@ body.theme-tech .viz-box {
     <button class="tab on" data-view="order" onclick="setView('order')">下定</button>
     <button class="tab" data-view="orders" onclick="setView('orders')">订单明细</button>
     <button class="tab" data-view="recv" onclick="setView('recv')">收货确认<span class="tdot" id="recvDot"></span></button>
+    <button class="tab" data-view="tobacco" onclick="setView('tobacco')">烟草订货</button>
     <button class="tab admin-only" data-view="ledger" onclick="setView('ledger')">台账总览</button>
     <button class="tab admin-only" data-view="admin" onclick="setView('admin')">商品与额度维护</button>
     <span class="tab-spacer"></span>
@@ -1604,6 +1606,52 @@ body.theme-tech .viz-box {
     </div>
   </section>
 
+  <section class="view" data-view="tobacco" data-page-node-id="viewTobacco">
+    <div class="view-stack">
+      <div class="card">
+        <div class="card-h">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          <h2>导入烟草订货明细</h2>
+          <span class="spacer"></span>
+          <span class="hint">烟草只上传数据，不参与订货 · 单价按品名自动匹配字典</span>
+        </div>
+        <div class="form-row two">
+          <div class="field">
+            <label>订货日期</label>
+            <input type="date" id="tobDate" onclick="pickDateUI(this)">
+          </div>
+          <div class="field">
+            <label>订货单位（服务区）</label>
+            <select id="tobStore"></select>
+          </div>
+        </div>
+        <div class="field">
+          <label>粘贴明细（从 Excel 复制「品名 + 数量」两列，每行一条）</label>
+          <textarea id="tobPaste" rows="6" placeholder="芙蓉王(硬)&#9;10&#10;玉溪(软)&#9;5" style="width:100%;min-height:120px;padding:10px 13px;border:1px solid var(--border);border-radius:12px;background:var(--card2);color:var(--text);font-family:inherit;font-size:14px;box-sizing:border-box;"></textarea>
+        </div>
+        <div class="field">
+          <label>或上传 CSV 文件（另存为 .csv 后选择）</label>
+          <input type="file" id="tobFile" accept=".csv,.txt,.tsv" onchange="tobReadFile(this)">
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn" onclick="tobParse()">解析预览</button>
+          <button class="btn primary" onclick="tobSubmit()">导入到金山</button>
+        </div>
+        <div id="tobPreview" style="margin-top:12px;"></div>
+      </div>
+      <div class="card">
+        <div class="card-h">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 5-6.5"/></svg>
+          <h2>烟草订货明细</h2>
+          <span class="spacer"></span>
+          <span class="hint" id="tobHint"></span>
+        </div>
+        <div class="kpis" id="tobKpis"></div>
+        <div class="tbl-wrap"><table class="tbl" id="tobTable"></table></div>
+      </div>
+    </div>
+  </section>
+
   <footer data-page-node-id="yB3ZSBohfeddG3mHC3oaxF">
     数据源：金山在线表格《供应商订货台账》 → GitHub Actions → data.json<br data-page-node-id="OLaHTae59yL75PGE62S9mf">
     <span id="footMeta" data-page-node-id="QXeEUOf8RDwTv2Pa2rJTwB"></span>
@@ -1691,6 +1739,10 @@ var STORE_GROUPS = [
   { site: '略阳',     stores: ['略阳东', '略阳西'] },
   { site: '天汉水城', stores: ['天汉水城东', '天汉水城西'] }
 ];
+
+/* TOBACCO-PATCH v1：烟草商品字典（品名 → 进货成本单价，元），导入时按品名匹配 */
+var TOBACCO_DICT = {"芙蓉王(硬)":21.84,"芙蓉王(硬细支)":22.5,"好猫(猴王磨砂)":10.6,"好猫(金猴王)":7.1,"好猫(细支长乐)":13.99,"好猫(长乐)":12.19,"黄鹤楼(软蓝)":16.43,"黄鹤楼（视窗）":30,"玉溪(软)":20.14,"云烟(紫)":11.45,"云烟(细支云龙)":12.93,"延安(软)":6.15,"白沙（开心就好）":17.5,"白沙（硬天天向上细支）":12.93,"白沙(硬新精品二代)":9.7,"冬虫夏草（双中支）":33.92,"芙蓉王（沁爽细支）":26.3,"贵烟(萃)":15.8,"贵烟（红中支）":26.3,"贵烟(跨越)":20.14,"好猫(细支长乐吉祥)":22.5,"红塔山(硬经典100)":9.7,"黄果树（长征）":6.15,"黄鹤楼(天下名楼)":13.99,"黄鹤楼(硬蓝)":17.5,"黄鹤楼(硬峡谷情细支)":26.3,"黄鹤楼(硬峡谷柔情)":26.3,"黄金叶（大成细支）":26.3,"黄金叶(金满堂)":9.33,"黄金叶(乐途)":12.19,"黄金叶(商鼎)":17.5,"黄山(红方印细支)":17.5,"黄山（徽商新概念细支）":33.92,"黄山（小红方印）":18.55,"黄山(新制皖烟)":12.19,"黄山（印象一品）":7.1,"娇子(X)":9.7,"娇子(格调细支)":12.93,"金圣（青瓷中支）":17.5,"金圣（滕王阁·紫光）":12.93,"兰州（黑中支）":26.3,"兰州（桥）":18.55,"兰州(细支珍品)":15.8,"兰州(硬如意)":9.33,"兰州(硬珍品)":15.5,"利群(江南韵)":22.5,"利群（软长嘴）":31.8,"利群(西湖恋)":20.14,"利群(新版)":14.31,"利群（阳光尊种支）":33.92,"利群(硬)":22.9,"龙凤呈祥（遇见）":12.93,"龙烟（呈祥）":12.93,"牡丹（红中支）":17.5,"牡丹（篮彩细支）":26.3,"牡丹(软)":12.19,"南京（大观园爆冰）":26.3,"南京(十二钗薄荷)":18.87,"南京(炫赫门)":15.5,"七匹狼（锋芒）":15.8,"七匹狼(纯境)":14.31,"人民大会堂 （硬红细支)":13.99,"双喜(硬经典1906)":15.05,"苏烟（软金砂）":38.16,"苏烟(五星红杉树)":18.87,"泰山（青秀）":12.19,"泰山(心悦)":13.99,"泰山（颜悦）":16.75,"天子（千里江山细支）":26.3,"万宝路（硬冰爵2.0）":22.5,"万宝路（硬金3.0）":20.14,"延安(中支红韵)":20.14,"玉溪（细支）":26.3,"云烟（福）":10.71,"云烟（软珍品）":20.67,"云烟（中支云龙）":17.5,"云烟(硬苁蓉)":11.45,"长白山（777）":12.19,"长白山（蓝尚）":15.8,"真龙(凌云)":12.19,"真龙(美人香草)":16.75,"紫气东来(吉祥天下)":20.14,"钻石（细支荷花）":36.04,"钻石(荷花)":27.56,"白沙（硬细支和天下）":72.08,"芙蓉王（品悦细支）":22.5,"芙蓉王(硬中支)":26.3,"好猫(细支招财猫)":22.5,"好猫(长安印象)":26.3,"好猫(长乐九美)":17.5,"好猫(招财猫1600)":15.8,"黄鹤楼（硬平安）":72.08,"黄鹤楼(硬奇景)":23.85,"娇子(宽窄醇香中支)":20.25,"娇子（宽窄好运细支）":22.5,"娇子（宽窄锦上细支）":26.3,"娇子（五粮浓香中支）":42.4,"南京(十二钗烤烟)":24.38,"南京(雨花石)":45.58,"双喜(勿忘我)":17.5,"天子（C位）":20.14,"天子(金)":16.75,"天子(中支)":20.14,"延安(红韵)":22.5,"延安（细支圣地河谷）":26.3,"中华（金双中）":51,"中华（金中支）":67.84,"中华(软)":58.3,"中华（双中支）":42.4,"中华（细支）":42.4,"中华(硬)":38.16};
+
 
 function siteStores() {   // 当前绑定站的允许门店；未绑定 / 管理员 → null（不限制）
   if (!boundSite || isAdmin()) return null;
@@ -2025,7 +2077,7 @@ PRODUCTS.forEach(function (p) { if (p[8]) LOCAL_SITE[p[0] + '|' + p[1]] = p[8]; 
 var LOCAL_CAT = {};
 PRODUCTS.forEach(function (p) { if (p[9]) LOCAL_CAT[p[0] + '|' + p[1]] = p[9]; });
 
-var data = { products: [], orders: [], productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '', catCaps: [], catBal: [], hasAnyCap: false };   /* CATCH-PATCH v2 */
+var data = { products: [], orders: [], tobacco: [], productBal: [], supplierBal: [], expiring: [], updatedAt: '', source: '', catCaps: [], catBal: [], hasAnyCap: false };   /* CATCH-PATCH v2 */
 // 预填默认值：油站打开页面即自带仓库信息+口令，只需补一个 fine-grained PAT 即可下单（见设置面板）
 // 页面里不放任何密钥：桌面 bat 通过 URL 片段一次性注入（#pat=…），存入本机 localStorage 后抹掉地址栏
 var cfg  = { owner: 'lvritiann', repo: 'dinghuo-taizhang', pat: '', appToken: 'cg8RIFAwDMA-vQVfV9hUXb4iHDqGpFS4' };
@@ -2651,12 +2703,19 @@ function cartKey(sup, store, date, lines) {
 function loadRecent() { try { var s = localStorage.getItem(LS_RECENT); recentSubmits = s ? (JSON.parse(s) || {}) : {}; } catch (e) { recentSubmits = {}; } }
 function saveRecent() { try { localStorage.setItem(LS_RECENT, JSON.stringify(recentSubmits)); } catch (e) {} }
 function markSubmitted(key) { recentSubmits[key] = Date.now(); saveRecent(); }
-function isRecentDup(key) {
+/* ★ DUP-GUARD v1（2026-10-10）：「反复提交重复写入金山」修复 —— 客户端第一道。
+ *   旧逻辑 8 秒后指纹就作废，油站隔十几秒再点一次 = 全新 cid，
+ *   服务端 cid 幂等（只认 cid）完全拦不住 → 金山写两遍。
+ *   现在三档：8 秒内 = window（静默忽略，防双击）；
+ *            8 秒~当天 = today（弹确认，防手滑）；
+ *            确认后本单带 dupOk=true，AirScript 看到才放行一模一样的单。 */
+function dupState(key) {
   var ts = recentSubmits[key];
-  if (!ts) return false;
-  if (Date.now() - ts > DUP_WINDOW) { delete recentSubmits[key]; saveRecent(); return false; }
-  return true;
+  if (!ts) return 'none';
+  if (new Date(ts).toDateString() !== new Date().toDateString()) { delete recentSubmits[key]; saveRecent(); return 'none'; }
+  return (Date.now() - ts > DUP_WINDOW) ? 'today' : 'window';
 }
+function isRecentDup(key) { var s = dupState(key); return s === 'window' || s === 'today'; }
 
 function normalize(raw) {
   var o = raw || {};
@@ -2697,8 +2756,138 @@ function normalize(raw) {
   })
   // 防御：没有供应商/商品名的残行一律丢掉（与订单同口径）
   .filter(function (a) { return a.supplier && a.product && a.row > 1; });
+  /* TOBACCO-PATCH v1：烟草订货明细（7 列读回：日期/门店/品名/单位/数量/单价/金额）*/
+  o.tobacco = (Array.isArray(o.tobacco) ? o.tobacco : []).map(function (t) {
+    var q = Number(t.qty || 0), p = Number(t.price || 0);
+    return { date: String(t.date || ''), store: String(t.store || ''), product: String(t.product || ''),
+      unit: String(t.unit || '条'), qty: q, price: p, amount: Number(t.amount || (Math.round(q * p * 100) / 100)) };
+  }).filter(function (t) { return t.store && t.product && t.qty > 0; });
   return o;
 }
+
+/* ===== TOBACCO-PATCH v1：烟草订货（只导入数据，不参与订货/额度/到货）===== */
+var tobParsed = [];       // 解析后的明细 [{product, qty, price, amount, warn}]
+
+function tobStores() {
+  if (!isAdmin() && boundSite) return [boundSite];
+  return STORE_GROUPS.map(function (g) { return g.site; });
+}
+function tobStore() { var e = document.getElementById('tobStore'); return e ? e.value : ''; }
+
+function tobReadFile(inp) {
+  var f = inp.files && inp.files[0];
+  if (!f) return;
+  var fr = new FileReader();
+  fr.onload = function () { document.getElementById('tobPaste').value = String(fr.result || ''); };
+  fr.readAsText(f, 'utf-8');
+}
+
+function tobParse() {
+  var txt = (document.getElementById('tobPaste').value || '').trim();
+  if (!txt) { toast('请先粘贴明细或上传 CSV'); return; }
+  var store = tobStore();
+  if (!store) { toast('请先选订货单位'); return; }
+  var lines = txt.split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+  var items = [];
+  lines.forEach(function (ln) {
+    if (/品名|商品|数量|订货|合计|序号|名称|条码/.test(ln)) return;   // 表头/合计行跳过
+    var cols = ln.split(/[\t,，;；|]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+    var name = '', qty = 0;
+    cols.forEach(function (c) {
+      if (/^-?\d+(\.\d+)?$/.test(c)) { if (!qty) qty = Number(c); }
+      else if (!name) name = c;
+    });
+    if (!name) return;
+    var price = Number(TOBACCO_DICT[name] || 0);
+    var amount = Math.round(qty * price * 100) / 100;
+    items.push({ product: name, qty: qty, price: price, amount: amount, warn: !(price > 0) });
+  });
+  tobParsed = items;
+  renderTobPreview();
+  toast('解析到 ' + items.length + ' 行，确认后点「导入到金山」');
+}
+
+function renderTobPreview() {
+  var el = document.getElementById('tobPreview');
+  if (!el) return;
+  if (!tobParsed.length) { el.innerHTML = ''; return; }
+  var noPrice = tobParsed.filter(function (i) { return i.warn; });
+  var totalAmt = tobParsed.reduce(function (a, b) { return a + b.amount; }, 0);
+  var html = '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>品名</th><th>数量(条)</th><th>单价(元)</th><th>金额(元)</th></tr></thead><tbody>';
+  tobParsed.forEach(function (i) {
+    html += '<tr' + (i.warn ? ' style="color:var(--red)"' : '') + '><td>' + esc(i.product) + '</td><td>' + i.qty + '</td><td>' + (i.warn ? '未匹配' : i.price) + '</td><td>' + money(i.amount) + '</td></tr>';
+  });
+  html += '</tbody></table></div>';
+  html += '<div style="margin-top:8px;font-size:13px;">共 ' + tobParsed.length + ' 行，合计 <b>' + money(totalAmt) + '</b>' +
+    (noPrice.length ? '，<span style="color:var(--red)">' + noPrice.length + ' 行品名未匹配字典（不计金额，不导入）</span>' : '') + '</div>';
+  el.innerHTML = html;
+}
+
+function tobSubmit() {
+  if (!tobParsed.length) { toast('请先解析明细'); return; }
+  var store = tobStore();
+  if (!store) { toast('请先选订货单位'); return; }
+  var date = document.getElementById('tobDate').value || todayStr();
+  var bad = tobParsed.filter(function (i) { return i.warn || !(i.qty > 0); });
+  var ok = tobParsed.filter(function (i) { return !i.warn && i.qty > 0; });
+  if (!ok.length) { toast('没有可导入的行（品名未匹配字典或数量为 0）'); return; }
+  var msg = '即将把 ' + ok.length + ' 行烟草订货导入「' + store + '」（' + date + '）。\n\n' +
+    (bad.length ? '有 ' + bad.length + ' 行未匹配/无数量会被跳过：\n' + bad.map(function (i) { return '  · ' + i.product; }).join('\n') + '\n\n' : '') +
+    '点「确定」继续导入。';
+  if (!confirm(msg)) return;
+
+  if (!cfg.owner || !cfg.repo || !cfg.pat) { toast('未配置 GitHub，无法导入'); return; }
+  var cid = newCid();
+  ghDispatch({ tobacco: { cid: cid, site: store, items: ok.map(function (i) {
+    return { store: store, product: i.product, qty: i.qty, price: i.price, date: date };
+  }) } }, 'tobacco').then(function () {
+    toast('已提交 ' + ok.length + ' 行，约 30 秒后自动更新');
+    tobParsed = []; document.getElementById('tobPaste').value = ''; renderTobPreview();
+    pollUpdate();
+  }).catch(function (e) {
+    toast('导入失败：' + e.message);
+  });
+}
+
+function renderTobacco() {
+  var sel = document.getElementById('tobStore');
+  if (sel) {
+    var sites = tobStores(), cur = sel.value;
+    sel.innerHTML = sites.map(function (s) { return '<option value="' + s + '">' + s + '</option>'; }).join('');
+    if (sites.indexOf(cur) >= 0) sel.value = cur;
+    else if (sites.length) sel.value = sites[0];
+  }
+  var kpis = document.getElementById('tobKpis'), tbl = document.getElementById('tobTable');
+  var hint = document.getElementById('tobHint');
+  if (!kpis && !tbl && !hint) return;
+  var list = (data.tobacco || []).filter(function (t) {
+    if (isAdmin()) return true;
+    return boundSite ? (siteOfStore(t.store) === boundSite) : true;
+  });
+  if (kpis) {
+    var totalQty = 0, totalAmt = 0, byStore = {};
+    list.forEach(function (t) { totalQty += t.qty; totalAmt += t.amount; byStore[t.store] = (byStore[t.store] || 0) + 1; });
+    var stores = Object.keys(byStore).length;
+    kpis.innerHTML = [
+      { v: list.length, l: '明细行数', c: '' },
+      { v: nf(totalQty), l: '订货总量（条）', c: 'accent' },
+      { v: money(totalAmt), l: '订货总金额', c: '' },
+      { v: stores + ' 站', l: '覆盖门店数', c: '' }
+    ].map(function (k) { return '<div class="kpi ' + k.c + '"><div class="v">' + k.v + '</div><div class="l">' + k.l + '</div></div>'; }).join('');
+  }
+  if (hint) hint.textContent = (isAdmin() ? '全部服务区' : (boundSite || '本店')) + ' · 共 ' + list.length + ' 行';
+  if (tbl) {
+    var rows = list.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); }).slice(0, 300);
+    var html = '<thead><tr><th>日期</th><th>门店</th><th>品名</th><th>数量</th><th>单价</th><th>金额</th></tr></thead><tbody>';
+    if (!rows.length) html += '<tr><td colspan="6" class="empty">还没有烟草订货明细 —— 在上方粘贴 Excel 数据导入</td></tr>';
+    rows.forEach(function (t) {
+      html += '<tr><td>' + (t.date || '') + '</td><td>' + esc(t.store) + '</td><td>' + esc(t.product) + '</td><td>' + t.qty + '</td><td>' + t.price + '</td><td>' + money(t.amount) + '</td></tr>';
+    });
+    html += '</tbody>';
+    tbl.innerHTML = html;
+  }
+}
+
 
 /* ---------- 额度本地覆盖层（网页临时改额度，导出补丁回贴台账后由 _gen 重新生成 data.json 生效） ---------- */
 var LS_CAP = 'wb_order_cap_v1';
@@ -3278,6 +3467,7 @@ function refreshAll() {
   renderRecv();
   renderRecvLedger();
   renderCharts();
+  renderTobacco();
 }
 
 function renderSync() {
@@ -4080,14 +4270,21 @@ function submitOrder() {
      跨站同明细的单会被误判成重复。移到前面，指纹与摘要都拿到真值。 */
   var store = curStore(), ts = Date.now();
   var fkey = cartKey(sup, store, date, items);
-  if (isRecentDup(fkey)) { toast('刚刚已提交过一模一样的清单，已忽略重复提交'); return; }
+  var dupSt = dupState(fkey);
+  if (dupSt === 'window') { toast('刚刚已提交过一模一样的清单，已忽略重复提交'); return; }
+  /* ★ DUP-GUARD v1：8 秒外的同日重复不再静默放行 —— 先问一句。
+     取消 = 误触拦截（推荐）；确定 = 真实补单，本单带 dupOk 让金山放行。 */
+  if (dupSt === 'today' && !confirm('今天已经提交过一模一样的清单。\n\n' +
+      '· 误触 / 重复提交 → 点「取消」\n' +
+      '· 确实要再订一遍同样的货 → 点「确定」')) return;
+  var dupOk = (dupSt === 'today');
   markSubmitted(fkey);
 
   // ── 入队：一个商品一笔（各自带唯一 cid，云端按 cid 幂等），同批只派发一次 workflow ──
   items.forEach(function (it) {
     pending.push({
       cid: newCid(), supplier: sup, store: store, product: it.product, qty: it.qty,
-      date: date, note: '', force: force, ts: ts, err: '', sent: false, unknown: false
+      date: date, note: '', force: force, dupOk: dupOk, ts: ts, err: '', sent: false, unknown: false
     });
   });
   savePending();
@@ -4119,7 +4316,7 @@ function flushPending() {
   savePending();
   syncState = 'busy'; refreshAll();
   ghDispatch({ orders: batch.map(function (p) {
-    return { cid: p.cid, supplier: p.supplier, store: p.store, product: p.product, qty: p.qty, date: p.date, note: p.note, force: !!p.force };
+    return { cid: p.cid, supplier: p.supplier, store: p.store, product: p.product, qty: p.qty, date: p.date, note: p.note, force: !!p.force, dupOk: !!p.dupOk };
   })   }).then(function () {
     var ids = {}; batch.forEach(function (p) { ids[p.cid] = 1; });
     pending = pending.filter(function (p) { return !ids[p.cid]; });    // 只清这一批，发送期间新增的保留
@@ -4158,7 +4355,7 @@ function retryPending(i) {
    线上 options 目前只有 [probe, sync, order]；补 arrive 要 token 具备 Workflows 权限（当前没有），
    所以到货确认借用 order 这个「合法外壳」发送，由中转脚本按载荷形状（payload.arrive）认回来。
    等 workflow 的 options 补上 arrive 之后，把 WIRE_MODE 里这一项删掉即可直发 arrive。 */
-var WIRE_MODE = { arrive: 'order' };
+var WIRE_MODE = { arrive: 'order', tobacco: 'order' };
 function wireMode(m) { m = m || 'order'; return WIRE_MODE[m] || m; }
 
 function ghDispatch(payload, mode) {
