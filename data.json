@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T07:00:38.201Z",
+  "updatedAt": "2026-10-10T07:06:10.956Z",
   "source": "kdocs",
   "today": "2026-10-10",
   "products": [
@@ -2800,7 +2800,21 @@
       "unit": ""
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "amount": 4407,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 14.69,
+      "product": "尿素PET",
+      "qty": 300,
+      "spec": "",
+      "store": "洋县",
+      "supplier": "天易蓝",
+      "unit": ""
+    }
+  ],
   "productBal": [
     {
       "balQty": 0,
@@ -6747,12 +6761,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -300,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 14.69,
       "product": "尿素PET",
@@ -6760,8 +6774,8 @@
       "spec": "",
       "supplier": "天易蓝",
       "unit": "",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 4407,
+      "usedQty": 300
     }
   ],
   "supplierBal": [
@@ -6862,16 +6876,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": 0,
+      "balAmt": -4407,
       "capAmt": 0,
       "full": false,
-      "lastDate": "",
+      "lastDate": "2026-10-10",
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 0
+      "usedAmt": 4407
     }
   ],
   "catCaps": [
@@ -6942,27 +6956,11 @@
       "note": "单位：袋/包/个/瓶/桶/盒/根；照金专供"
     }
   ],
-  "arrivals": [
-    {
-      "by": "管理员/秦岭",
-      "diff": 0,
-      "note": "",
-      "product": "尚纯（山东新蓝）",
-      "qtyGot": 50,
-      "qtyShould": 50,
-      "reason": "",
-      "row": 2,
-      "site": "白河",
-      "spec": "",
-      "store": "白河",
-      "supplier": "山东新蓝",
-      "ts": "2026-10-10 14:47",
-      "unit": ""
-    }
-  ],
+  "arrivals": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmv21vptr3g7s9v",
     "a:cmv217bwo0kyane",
     "cmu0xxah1shoxy3",
     "wr-test-1789368875",
