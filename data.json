@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T06:47:14.093Z",
+  "updatedAt": "2026-10-10T06:53:07.533Z",
   "source": "kdocs",
   "today": "2026-10-10",
   "products": [
@@ -1077,18 +1077,6 @@
       "name": "红牛维生素功能饮料（天天）",
       "note": "",
       "price": 4.78,
-      "shelf": 0,
-      "siteOnly": "",
-      "spec": "1*24",
-      "supplier": "天天",
-      "unit": "瓶"
-    },
-    {
-      "capQty": 0,
-      "cat": "",
-      "name": "红牛维生素功能饮料（杨凌酷凌）",
-      "note": "",
-      "price": 4.62,
       "shelf": 0,
       "siteOnly": "",
       "spec": "1*24",
@@ -2812,21 +2800,7 @@
       "unit": ""
     }
   ],
-  "orders": [
-    {
-      "amount": 759,
-      "date": "2026-09-14",
-      "expireDate": "",
-      "note": "",
-      "price": 15.18,
-      "product": "尚纯（山东新蓝）",
-      "qty": 50,
-      "spec": "",
-      "store": "白河",
-      "supplier": "山东新蓝",
-      "unit": ""
-    }
-  ],
+  "orders": [],
   "productBal": [
     {
       "balQty": 0,
@@ -3356,12 +3330,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -50,
+      "balQty": 0,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "price": 15.18,
       "product": "尚纯（山东新蓝）",
@@ -3369,8 +3343,8 @@
       "spec": "",
       "supplier": "山东新蓝",
       "unit": "",
-      "usedAmt": 759,
-      "usedQty": 50
+      "usedAmt": 0,
+      "usedQty": 0
     },
     {
       "balQty": 0,
@@ -4351,23 +4325,6 @@
       "pct": 0,
       "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
-      "shelf": 0,
-      "spec": "1*24",
-      "supplier": "天天",
-      "unit": "瓶",
-      "usedAmt": 0,
-      "usedQty": 0
-    },
-    {
-      "balQty": 0,
-      "capAmt": 0,
-      "capQty": 0,
-      "full": false,
-      "low": false,
-      "orderCount": 0,
-      "pct": 0,
-      "price": 4.62,
-      "product": "红牛维生素功能饮料（杨凌酷凌）",
       "shelf": 0,
       "spec": "1*24",
       "supplier": "天天",
@@ -6845,16 +6802,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -759,
+      "balAmt": 0,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-09-14",
+      "lastDate": "",
       "low": false,
-      "orderCount": 1,
+      "orderCount": 0,
       "pct": 0,
       "productCount": 2,
       "supplier": "山东新蓝",
-      "usedAmt": 759
+      "usedAmt": 0
     },
     {
       "balAmt": 0,
@@ -6876,7 +6833,7 @@
       "low": false,
       "orderCount": 0,
       "pct": 0,
-      "productCount": 3,
+      "productCount": 2,
       "supplier": "天天",
       "usedAmt": 0
     },
