@@ -2760,7 +2760,8 @@ function normalize(raw) {
   o.tobacco = (Array.isArray(o.tobacco) ? o.tobacco : []).map(function (t) {
     var q = Number(t.qty || 0), p = Number(t.price || 0);
     return { date: String(t.date || ''), store: String(t.store || ''), product: String(t.product || ''),
-      unit: String(t.unit || '条'), qty: q, price: p, amount: Number(t.amount || (Math.round(q * p * 100) / 100)) };
+      spec: String(t.spec || ''), unit: String(t.unit || '条'), qty: q, price: p,
+      amount: Number(t.amount || (Math.round(q * p * 100) / 100)), expireDate: String(t.expireDate || ''), note: String(t.note || '') };
   }).filter(function (t) { return t.store && t.product && t.qty > 0; });
   return o;
 }
