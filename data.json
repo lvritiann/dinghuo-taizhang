@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T08:38:36.167Z",
+  "updatedAt": "2026-10-10T08:42:20.071Z",
   "source": "kdocs",
   "today": "2026-10-10",
   "products": [
@@ -2854,6 +2854,97 @@
       "unit": "桶"
     },
     {
+      "amount": 958.24,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 119.78,
+      "product": "壳牌喜力HX5 +10W40",
+      "qty": 8,
+      "spec": "4L",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 375.16,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 93.79,
+      "product": "壳牌劲霸 R4 15W40",
+      "qty": 4,
+      "spec": "4L",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 375.16,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 93.79,
+      "product": "壳牌劲霸 R4 15W50",
+      "qty": 4,
+      "spec": "4L",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 741.28,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 92.66,
+      "product": "壳牌劲霸 R3 15W40",
+      "qty": 8,
+      "spec": "4L",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 741.28,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 92.66,
+      "product": "壳牌劲霸 R3 15W50",
+      "qty": 8,
+      "spec": "4L",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 180.8,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 45.2,
+      "product": "壳牌防冻液-红色 -45℃",
+      "qty": 4,
+      "spec": "4KG",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 723.2,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 45.2,
+      "product": "壳牌防冻液-绿色 -45℃",
+      "qty": 16,
+      "spec": "4KG",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -3268,12 +3359,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -8,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 92.66,
       "product": "壳牌劲霸 R3 15W40",
@@ -3281,16 +3372,16 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 741.28,
+      "usedQty": 8
     },
     {
-      "balQty": 0,
+      "balQty": -8,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 92.66,
       "product": "壳牌劲霸 R3 15W50",
@@ -3298,8 +3389,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 741.28,
+      "usedQty": 8
     },
     {
       "balQty": 0,
@@ -3319,12 +3410,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -4,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 93.79,
       "product": "壳牌劲霸 R4 15W40",
@@ -3332,16 +3423,16 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 375.16,
+      "usedQty": 4
     },
     {
-      "balQty": 0,
+      "balQty": -4,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 93.79,
       "product": "壳牌劲霸 R4 15W50",
@@ -3349,8 +3440,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 375.16,
+      "usedQty": 4
     },
     {
       "balQty": 0,
@@ -3370,12 +3461,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -8,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 119.78,
       "product": "壳牌喜力HX5 +10W40",
@@ -3383,8 +3474,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 958.24,
+      "usedQty": 8
     },
     {
       "balQty": -8,
@@ -3540,24 +3631,7 @@
       "usedQty": 0
     },
     {
-      "balQty": -4,
-      "capAmt": 0,
-      "capQty": 0,
-      "full": false,
-      "low": false,
-      "orderCount": 1,
-      "pct": 0,
-      "price": 45.2,
-      "product": "壳牌防冻液-红色 -45℃",
-      "shelf": 0,
-      "spec": "4KG",
-      "supplier": "天朗尚品",
-      "unit": "桶",
-      "usedAmt": 180.8,
-      "usedQty": 4
-    },
-    {
-      "balQty": -12,
+      "balQty": -8,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
@@ -3565,13 +3639,30 @@
       "orderCount": 2,
       "pct": 0,
       "price": 45.2,
+      "product": "壳牌防冻液-红色 -45℃",
+      "shelf": 0,
+      "spec": "4KG",
+      "supplier": "天朗尚品",
+      "unit": "桶",
+      "usedAmt": 361.6,
+      "usedQty": 8
+    },
+    {
+      "balQty": -28,
+      "capAmt": 0,
+      "capQty": 0,
+      "full": false,
+      "low": false,
+      "orderCount": 3,
+      "pct": 0,
+      "price": 45.2,
       "product": "壳牌防冻液-绿色 -45℃",
       "shelf": 0,
       "spec": "4KG",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 542.4,
-      "usedQty": 12
+      "usedAmt": 1265.6,
+      "usedQty": 28
     },
     {
       "balQty": 0,
@@ -7051,16 +7142,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -1681.44,
+      "balAmt": -5776.56,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-10",
       "low": false,
-      "orderCount": 4,
+      "orderCount": 11,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 1681.44
+      "usedAmt": 5776.56
     },
     {
       "balAmt": 0,
