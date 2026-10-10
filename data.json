@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T08:33:09.087Z",
+  "updatedAt": "2026-10-10T08:35:23.428Z",
   "source": "kdocs",
   "today": "2026-10-10",
   "products": [
@@ -2982,6 +2982,32 @@
       "store": "天汉水城",
       "supplier": "天易蓝",
       "unit": "箱"
+    },
+    {
+      "amount": 180.8,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 3.616,
+      "product": "玻璃水-20#",
+      "qty": 50,
+      "spec": "2L",
+      "store": "韩城",
+      "supplier": "天易蓝",
+      "unit": "箱"
+    },
+    {
+      "amount": 2203.5,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "",
+      "price": 14.69,
+      "product": "尿素PET",
+      "qty": 150,
+      "spec": "",
+      "store": "韩城",
+      "supplier": "天易蓝",
+      "unit": "桶"
     }
   ],
   "productBal": [
@@ -6896,12 +6922,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -640,
+      "balQty": -690,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 2,
+      "orderCount": 3,
       "pct": 0,
       "price": 3.616,
       "product": "玻璃水-20#",
@@ -6909,8 +6935,8 @@
       "spec": "2L",
       "supplier": "天易蓝",
       "unit": "箱",
-      "usedAmt": 2314.24,
-      "usedQty": 640
+      "usedAmt": 2495.04,
+      "usedQty": 690
     },
     {
       "balQty": -1600,
@@ -6930,12 +6956,12 @@
       "usedQty": 1600
     },
     {
-      "balQty": -700,
+      "balQty": -850,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 2,
+      "orderCount": 3,
       "pct": 0,
       "price": 14.69,
       "product": "尿素PET",
@@ -6943,8 +6969,8 @@
       "spec": "",
       "supplier": "天易蓝",
       "unit": "桶",
-      "usedAmt": 10283,
-      "usedQty": 700
+      "usedAmt": 12486.5,
+      "usedQty": 850
     }
   ],
   "supplierBal": [
@@ -7045,16 +7071,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -36643.64,
+      "balAmt": -39027.94,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-10",
       "low": false,
-      "orderCount": 9,
+      "orderCount": 11,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 36643.64
+      "usedAmt": 39027.94
     }
   ],
   "catCaps": [
@@ -7129,6 +7155,8 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmv252h1qcojh19",
+    "cmv252h1qsvc2f2",
     "cmv24zjdyot96ws",
     "cmv24zjdyl206q9",
     "cmv24tsamuipudx",
