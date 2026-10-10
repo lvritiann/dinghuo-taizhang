@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T08:42:20.071Z",
+  "updatedAt": "2026-10-10T10:02:52.927Z",
   "source": "kdocs",
   "today": "2026-10-10",
   "products": [
@@ -2943,6 +2943,19 @@
       "store": "天汉水城",
       "supplier": "天朗尚品",
       "unit": "桶"
+    },
+    {
+      "amount": 0.03,
+      "date": "2026-10-10",
+      "expireDate": "",
+      "note": "写入自检-可删",
+      "price": 0.03,
+      "product": "塑包小吸管",
+      "qty": 1,
+      "spec": "",
+      "store": "秦岭",
+      "supplier": "天朗",
+      "unit": "个"
     },
     {
       "amount": 73.4,
@@ -6572,12 +6585,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -1,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 0.03,
       "product": "塑包小吸管",
@@ -6585,8 +6598,8 @@
       "spec": "",
       "supplier": "天朗",
       "unit": "个",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 0.03,
+      "usedQty": 1
     },
     {
       "balQty": 0,
@@ -7166,16 +7179,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": 0,
+      "balAmt": -0.03,
       "capAmt": 0,
       "full": false,
-      "lastDate": "",
+      "lastDate": "2026-10-10",
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "productCount": 97,
       "supplier": "天朗",
-      "usedAmt": 0
+      "usedAmt": 0.03
     },
     {
       "balAmt": -1835,
@@ -7295,9 +7308,11 @@
     }
   ],
   "arrivals": [],
+  "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "dup-live-mv286ytl",
     "cmv256l52tkbpq2",
     "cmv2569zwng8i45",
     "cmv2540yjw5lm6d",
