@@ -63,11 +63,12 @@ catch (e) { die('PAYLOAD_JSON 解析失败：' + e.message); }
  * 将来 workflow 的 options 补上 arrive 之后，页面会直接发 mode=arrive，
  * 这一行自然不再命中，两种发法都能用（前向兼容，不是死路）。
  * 想撤掉这层兼容：把下面一行删掉，同时把页面 ghDispatch() 里的 WIRE 也删掉。 */
-const EFF = (MODE === 'order' && payload && payload.arrive) ? 'arrive' : MODE;
+const EFF = (MODE === 'order' && payload && payload.tobacco) ? 'tobacco'
+         : (MODE === 'order' && payload && payload.arrive) ? 'arrive' : MODE;
 
-// 口令校验：仅对「写入类」动作（order / arrive）强校验；probe/sync 为只读，无需口令
+// 口令校验：仅对「写入类」动作（order / arrive / tobacco）强校验；probe/sync 为只读，无需口令
 // （手动/定时触发时 payload 里没有 appToken，但仍应放行只读动作）
-if (APP_TOKEN && (EFF === 'order' || EFF === 'arrive')) {
+if (APP_TOKEN && (EFF === 'order' || EFF === 'arrive' || EFF === 'tobacco')) {
   if (payload.appToken !== APP_TOKEN) die('appToken 不匹配，拒绝执行（防止令牌泄露后被滥用）');
 }
 
@@ -127,7 +128,7 @@ for (const o of rawOrders) {
 }
 if (dupSkipped) console.log(`· 幂等跳过 ${dupSkipped} 笔重复提交（cid 已在历史记录中）`);
 
-let done = 0, amountSum = 0, failed = [];
+let done = 0, amountSum = 0, failed = [], dupSkipped2 = 0;   // dupSkipped2 = 内容级重复（金山已拒写第二遍）
 const writtenCids = [];
 for (const o of orders) {
   if (!o || !o.supplier || !o.product || !o.store || !(Number(o.qty) > 0)) {
@@ -140,9 +141,14 @@ for (const o of orders) {
       supplier: o.supplier, store: o.store, product: o.product,
       qty: Number(o.qty), date: o.date || today,
       expireDate: o.expireDate || '', note: o.note || '',
-      force: !!o.force,
+      force: !!o.force, dupOk: !!o.dupOk,
       appToken: payload.appToken || '', today
     });
+    if (r && r.dup) {                                       // ★ DUP-GUARD v1：金山判定内容重复，没写第二行
+      dupSkipped2++;
+      console.log(`  ↷ 内容重复已跳过：${o.supplier} / ${o.store} / ${o.product} × ${o.qty}（${r.message || '重复订单'}）`);
+      continue;
+    }
     if (r && r.ok) {
       done++; amountSum += Number(r.amount || 0);
       if (o.cid) writtenCids.push(o.cid);
@@ -210,6 +216,30 @@ if (EFF === 'arrive') {
   }
 }
 
+// 1c) 烟草订货导入（TOBACCO-PATCH v1）：借 order 外壳 + payload.tobacco 认回
+//     与 order 共用 cid 幂等基线（前缀 t: 区分），一次导入一批明细只写一次
+let tobLabel = '';
+if (EFF === 'tobacco') {
+  const tb = (payload.tobacco && typeof payload.tobacco === 'object') ? payload.tobacco : {};
+  const tbCid = tb.cid ? 't:' + tb.cid : '';
+
+  if (tbCid && seenCids.has(tbCid)) {
+    console.log(`· 幂等跳过：这批烟草订货（cid ${tb.cid}）已经导入过，不重复写入`);
+  } else {
+    const items = Array.isArray(tb.items) ? tb.items : [];
+    if (!items.length) die('tobacco 缺少 items（烟草订货明细）');
+    const r = await kdocs({ mode: 'tobacco', items: items, appToken: payload.appToken || '', today });
+    if (r && r.ok) {
+      const n = (r.wrote || []).length;
+      console.log(`· 烟草订货导入完成：写入 ${n} 行`);
+      if (tbCid && n) writtenCids.push(tbCid);
+      tobLabel = `导入烟草订货 ${n} 行`;
+    } else {
+      failed.push('烟草订货导入失败：' + ((r && r.error) || JSON.stringify(r)));
+    }
+  }
+}
+
 // 2) 拉全量
 const dump = await kdocs({ mode: 'dump', appToken: payload.appToken || '', today });
 if (!dump.ok) die('dump 失败：' + (dump.error || JSON.stringify(dump)));
@@ -238,6 +268,7 @@ const data = {
   supplierBal: dump.supplierBal,
   catCaps: dump.catCaps || [],
   arrivals: cleanArrivals,
+  tobacco: Array.isArray(dump.tobacco) ? dump.tobacco : [],
   expiring: (dump.expiring || []).filter(o => o && o.supplier && o.product),
   missingSheets: dump.missingSheets || [],
   recentCids: recentCids
@@ -257,6 +288,9 @@ if (!hasChange) {
   const parts = [];
   if (done && EFF === 'order') parts.push(`新增订单 ${done} 笔`);
   if (arrLabel) parts.push(arrLabel);
+  if (dupSkipped2) parts.push('重复提交跳过 ' + dupSkipped2 + ' 笔');
+  if (tobLabel) parts.push(tobLabel);
+  if (dupSkipped2) parts.push('重复提交跳过 ' + dupSkipped2 + ' 笔');
   const msg = `chore(data): 同步金山台账 ${today}${parts.length ? '（' + parts.join('；') + '）' : ''}`;
   execSync(`git commit -m ${JSON.stringify(msg)}`, { cwd: ROOT });
   execSync('git push', { cwd: ROOT });
