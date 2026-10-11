@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T00:31:41.111Z",
+  "updatedAt": "2026-10-11T00:32:02.379Z",
   "source": "kdocs",
   "today": "2026-10-11",
   "products": [
@@ -3010,6 +3010,19 @@
       "unit": "箱"
     },
     {
+      "amount": 5736,
+      "date": "2026-10-11",
+      "expireDate": "",
+      "note": "",
+      "price": 4.78,
+      "product": "红牛维生素功能饮料（天天）",
+      "qty": 1200,
+      "spec": "1*24",
+      "store": "白河",
+      "supplier": "天天",
+      "unit": "箱"
+    },
+    {
       "amount": 4407,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4681,12 +4694,12 @@
       "usedQty": 980
     },
     {
-      "balQty": -20,
+      "balQty": -1220,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 2,
       "pct": 0,
       "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
@@ -4694,8 +4707,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 95.6,
-      "usedQty": 20
+      "usedAmt": 5831.6,
+      "usedQty": 1220
     },
     {
       "balQty": 0,
@@ -7191,16 +7204,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -3692.2,
+      "balAmt": -9428.2,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-11",
       "low": false,
-      "orderCount": 5,
+      "orderCount": 6,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 3692.2
+      "usedAmt": 9428.2
     },
     {
       "balAmt": 0,
@@ -7312,6 +7325,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmv338rmf0p8ltf",
     "cmv338be8sxsrxo",
     "cmv31m5nolicjry",
     "cmv31a32lkas97a",
