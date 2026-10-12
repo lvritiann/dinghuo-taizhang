@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-10-11T22:11:24.584Z",
+  "updatedAt": "2026-10-12T01:09:05.671Z",
   "source": "kdocs",
-  "today": "2026-10-11",
+  "today": "2026-10-12",
   "products": [
     {
       "capQty": 0,
@@ -2997,32 +2997,6 @@
       "unit": "箱"
     },
     {
-      "amount": 1761.6,
-      "date": "2026-10-11",
-      "expireDate": "",
-      "note": "",
-      "price": 3.67,
-      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
-      "qty": 480,
-      "spec": "1*24",
-      "store": "白河",
-      "supplier": "天天",
-      "unit": "箱"
-    },
-    {
-      "amount": 5736,
-      "date": "2026-10-11",
-      "expireDate": "",
-      "note": "",
-      "price": 4.78,
-      "product": "红牛维生素功能饮料（天天）",
-      "qty": 1200,
-      "spec": "1*24",
-      "store": "白河",
-      "supplier": "天天",
-      "unit": "箱"
-    },
-    {
       "amount": 73.4,
       "date": "2026-10-11",
       "expireDate": "",
@@ -3045,6 +3019,19 @@
       "qty": 50,
       "spec": "1*24",
       "store": "白河",
+      "supplier": "天天",
+      "unit": "箱"
+    },
+    {
+      "amount": 73.4,
+      "date": "2026-10-12",
+      "expireDate": "",
+      "note": "",
+      "price": 3.67,
+      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
+      "qty": 20,
+      "spec": "1*24",
+      "store": "韩城",
       "supplier": "天天",
       "unit": "箱"
     },
@@ -4703,7 +4690,7 @@
       "usedQty": 0
     },
     {
-      "balQty": -1000,
+      "balQty": -540,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
@@ -4716,16 +4703,16 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 3670,
-      "usedQty": 1000
+      "usedAmt": 1981.8,
+      "usedQty": 540
     },
     {
-      "balQty": -1270,
+      "balQty": -70,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 3,
+      "orderCount": 2,
       "pct": 0,
       "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
@@ -4733,8 +4720,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 6070.6,
-      "usedQty": 1270
+      "usedAmt": 334.6,
+      "usedQty": 70
     },
     {
       "balQty": 0,
@@ -7230,16 +7217,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -9740.6,
+      "balAmt": -2316.4,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-10-11",
+      "lastDate": "2026-10-12",
       "low": false,
-      "orderCount": 8,
+      "orderCount": 7,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 9740.6
+      "usedAmt": 2316.4
     },
     {
       "balAmt": 0,
@@ -7351,6 +7338,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmv4k08au7v8wvd",
     "cmv3c1qjq0o6ozx",
     "cmv3c1ce7pamwyy",
     "cmv338rmf0p8ltf",
