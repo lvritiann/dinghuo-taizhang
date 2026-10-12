@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T01:27:45.749Z",
+  "updatedAt": "2026-10-12T07:44:43.780Z",
   "source": "kdocs",
   "today": "2026-10-12",
   "products": [
@@ -2958,32 +2958,6 @@
       "unit": "箱"
     },
     {
-      "amount": 880.8,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 3.67,
-      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
-      "qty": 240,
-      "spec": "1*24",
-      "store": "韩城东",
-      "supplier": "天天",
-      "unit": "箱"
-    },
-    {
-      "amount": 880.8,
-      "date": "2026-10-10",
-      "expireDate": "",
-      "note": "",
-      "price": 3.67,
-      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
-      "qty": 240,
-      "spec": "1*24",
-      "store": "韩城西",
-      "supplier": "天天",
-      "unit": "箱"
-    },
-    {
       "amount": 95.6,
       "date": "2026-10-11",
       "expireDate": "",
@@ -4703,12 +4677,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -540,
+      "balQty": -60,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 5,
+      "orderCount": 3,
       "pct": 0,
       "price": 3.67,
       "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
@@ -4716,8 +4690,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 1981.8,
-      "usedQty": 540
+      "usedAmt": 220.2,
+      "usedQty": 60
     },
     {
       "balQty": -70,
@@ -7230,16 +7204,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -2316.4,
+      "balAmt": -554.8,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-12",
       "low": false,
-      "orderCount": 7,
+      "orderCount": 5,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 2316.4
+      "usedAmt": 554.8
     },
     {
       "balAmt": 0,
