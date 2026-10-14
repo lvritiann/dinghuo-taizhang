@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T06:49:36.700Z",
+  "updatedAt": "2026-10-14T07:51:06.104Z",
   "source": "kdocs",
   "today": "2026-10-14",
   "products": [
@@ -7443,6 +7443,22 @@
       "qtyShould": 4,
       "reason": "",
       "row": 5,
+      "site": "天汉水城",
+      "spec": "4L",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "ts": "2026-10-14 14:48",
+      "unit": "桶"
+    },
+    {
+      "by": "天汉水城",
+      "diff": 0,
+      "note": "",
+      "product": "壳牌喜力HX5 +10W40",
+      "qtyGot": 8,
+      "qtyShould": 8,
+      "reason": "",
+      "row": 6,
       "site": "天汉水城",
       "spec": "4L",
       "store": "天汉水城",
