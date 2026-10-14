@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T06:48:46.132Z",
+  "updatedAt": "2026-10-14T06:49:21.227Z",
   "source": "kdocs",
   "today": "2026-10-14",
   "products": [
@@ -7417,12 +7417,29 @@
       "supplier": "天朗尚品",
       "ts": "2026-10-14 14:48",
       "unit": "桶"
+    },
+    {
+      "by": "天汉水城",
+      "diff": 0,
+      "note": "",
+      "product": "壳牌劲霸 R3 15W40",
+      "qtyGot": 8,
+      "qtyShould": 8,
+      "reason": "",
+      "row": 4,
+      "site": "天汉水城",
+      "spec": "4L",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "ts": "2026-10-14 14:48",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmv7r1hvgmo3kup",
     "a:cmv7r0nbr1vcbsw",
     "a:cmv7r0a7suweqw0",
     "cmv6doet1edut7s",
