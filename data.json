@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-14T02:01:53.376Z",
+  "updatedAt": "2026-10-14T06:48:24.326Z",
   "source": "kdocs",
   "today": "2026-10-14",
   "products": [
@@ -7385,11 +7385,29 @@
       "note": "单位：袋/包/个/瓶/桶/盒/根；照金专供"
     }
   ],
-  "arrivals": [],
+  "arrivals": [
+    {
+      "by": "天汉水城",
+      "diff": 0,
+      "note": "",
+      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
+      "qtyGot": 20,
+      "qtyShould": 20,
+      "reason": "",
+      "row": 2,
+      "site": "天汉水城",
+      "spec": "1*24",
+      "store": "天汉水城",
+      "supplier": "天天",
+      "ts": "2026-10-14 14:48",
+      "unit": "箱"
+    }
+  ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmv7r0a7suweqw0",
     "cmv6doet1edut7s",
     "cmv6dnqcga32niv",
     "cmv6cez5o62tloq",
