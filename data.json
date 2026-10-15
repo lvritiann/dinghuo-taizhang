@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T01:56:37.291Z",
+  "updatedAt": "2026-10-15T03:17:26.739Z",
   "source": "kdocs",
   "today": "2026-10-15",
   "products": [
@@ -7497,12 +7497,29 @@
       "supplier": "天朗尚品",
       "ts": "2026-10-15 09:56",
       "unit": "桶"
+    },
+    {
+      "by": "韩城",
+      "diff": -5,
+      "note": "",
+      "product": "玻璃水-20#",
+      "qtyGot": 45,
+      "qtyShould": 50,
+      "reason": "少收5箱",
+      "row": 9,
+      "site": "韩城",
+      "spec": "2L",
+      "store": "韩城",
+      "supplier": "天易蓝",
+      "ts": "2026-10-15 11:16",
+      "unit": "箱"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmv8ywsxxk4asjr",
     "a:cmv8w0x05gmwhkl",
     "a:cmv8w0iibld2khu",
     "a:cmv7r1vdrttr1e4",
