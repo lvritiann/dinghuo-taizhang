@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T01:56:21.376Z",
+  "updatedAt": "2026-10-15T01:56:37.291Z",
   "source": "kdocs",
   "today": "2026-10-15",
   "products": [
@@ -7481,12 +7481,29 @@
       "supplier": "天易蓝",
       "ts": "2026-10-15 09:56",
       "unit": "桶"
+    },
+    {
+      "by": "韩城",
+      "diff": 0,
+      "note": "",
+      "product": "壳牌防冻液-绿色 -45℃",
+      "qtyGot": 4,
+      "qtyShould": 4,
+      "reason": "",
+      "row": 8,
+      "site": "韩城",
+      "spec": "4KG",
+      "store": "韩城",
+      "supplier": "天朗尚品",
+      "ts": "2026-10-15 09:56",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmv8w0x05gmwhkl",
     "a:cmv8w0iibld2khu",
     "a:cmv7r1vdrttr1e4",
     "a:cmv7r1hvgmo3kup",
