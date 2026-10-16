@@ -244,6 +244,25 @@ if (EFF === 'tobacco') {
 const dump = await kdocs({ mode: 'dump', appToken: payload.appToken || '', today });
 if (!dump.ok) die('dump 失败：' + (dump.error || JSON.stringify(dump)));
 
+// 2.5) 金小存桥接：把「各站实时库存 + 近30/90天销量」并入 data.json，供订货时参考
+// ★ 设计原则：这是**增强**不是**依赖**。金小存取不到（没配 JXC_TOKEN / 网络抖动 / 对照表缺失）
+//   一律只打印一行提示并继续，绝不能把订货主流程搞挂。
+let jxc = { ok: false, reason: '未启用' };
+try {
+  const mapsPath = path.join(ROOT, '_link_maps.json');
+  if (process.env.JXC_TOKEN && fs.existsSync(mapsPath)) {
+    const { pullJxcStats } = await import('./jxc_bridge.mjs');
+    jxc = await pullJxcStats(process.env.JXC_TOKEN, mapsPath);
+    console.log(jxc.ok
+      ? `· 金小存桥接成功：库存格子 ${jxc.meta.cellsWithStock} 个 / 销量格子 ${jxc.meta.cellsWithSales} 个（流水最新 ${jxc.meta.latestFlowDate}）`
+      : `· 金小存桥接未生效：${jxc.reason}`);
+  } else {
+    console.log('· 金小存桥接跳过：' + (!process.env.JXC_TOKEN ? '未配置 Secret JXC_TOKEN' : '缺少对照表 _link_maps.json'));
+  }
+} catch (e) {
+  console.log('· 金小存桥接异常（不影响订货同步）：' + ((e && e.message) || e));
+}
+
 // 3) 生成 data.json
 // ★ 防御：丢掉没有供应商/商品名的残行 —— 老版式表格里那行「合计」小计
 //   会被 AirScript 当成一条订单读回来（日期=合计、商品为空、数量 0），
@@ -271,7 +290,9 @@ const data = {
   tobacco: Array.isArray(dump.tobacco) ? dump.tobacco : [],
   expiring: (dump.expiring || []).filter(o => o && o.supplier && o.product),
   missingSheets: dump.missingSheets || [],
-  recentCids: recentCids
+  recentCids: recentCids,
+  // 金小存桥接数据：stats[门店][商品名] = {stock 库存, stockAmt 库存金额, sales30, sales90, code 条码, skuId}
+  jxc: jxc.ok ? { stats: jxc.stats, meta: jxc.meta } : { stats: {}, meta: { ok: false, reason: jxc.reason } }
 };
 
 const outPath = path.join(ROOT, 'data.json');

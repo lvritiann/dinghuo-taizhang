@@ -48,6 +48,10 @@ jobs:
           KDOCS_WEBHOOK: ${{ secrets.KDOCS_WEBHOOK }}
           KDOCS_TOKEN:   ${{ secrets.KDOCS_TOKEN }}
           APP_TOKEN:     ${{ secrets.APP_TOKEN }}
+          # 金小存（进销存）WPS token —— 用于把各站实时库存/销量并进 data.json。
+          # 与上面的 KDOCS_TOKEN 不是同一个：那个是订货自己的 AirScript-Token。
+          # 不配也能正常跑，只是页面上看不到库存参考。
+          JXC_TOKEN:     ${{ secrets.JXC_TOKEN }}
           # dispatch 走 client_payload；手动/定时走空（sync 模式）
           PAYLOAD_JSON:  ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload) || github.event.inputs.payload_json || '{}' }}
           MODE:          ${{ github.event_name == 'repository_dispatch' && 'order' || github.event.inputs.mode || 'sync' }}
