@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T03:43:38.665Z",
+  "updatedAt": "2026-10-16T08:23:03.499Z",
   "source": "kdocs",
   "today": "2026-10-16",
   "products": [
@@ -7555,12 +7555,29 @@
       "supplier": "天朗尚品",
       "ts": "2026-10-15 11:17",
       "unit": "桶"
+    },
+    {
+      "by": "照金",
+      "diff": 0,
+      "note": "",
+      "product": "尿素PET",
+      "qtyGot": 100,
+      "qtyShould": 100,
+      "reason": "",
+      "row": 11,
+      "site": "照金",
+      "spec": "",
+      "store": "照金",
+      "supplier": "天易蓝",
+      "ts": "2026-10-16 16:23",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmvap9ngz58jpcz",
     "cmvadsiks9hi1xb",
     "cmvadsiksa3hfcs",
     "a:cmv8ywsxxk4asjr",
