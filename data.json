@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-10-15T23:59:13.726Z",
+  "updatedAt": "2026-10-16T03:01:45.744Z",
   "source": "kdocs",
-  "today": "2026-10-15",
+  "today": "2026-10-16",
   "products": [
     {
       "capQty": 0,
@@ -3010,6 +3010,32 @@
       "unit": "箱"
     },
     {
+      "amount": 1440,
+      "date": "2026-10-16",
+      "expireDate": "",
+      "note": "",
+      "price": 18,
+      "product": "30元枸杞槟榔/包",
+      "qty": 80,
+      "spec": "",
+      "store": "南沙",
+      "supplier": "鑫湘缘",
+      "unit": "包"
+    },
+    {
+      "amount": 720,
+      "date": "2026-10-16",
+      "expireDate": "",
+      "note": "",
+      "price": 12,
+      "product": "20元枸杞槟榔/包",
+      "qty": 60,
+      "spec": "",
+      "store": "南沙",
+      "supplier": "鑫湘缘",
+      "unit": "包"
+    },
+    {
       "amount": 4407,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4776,12 +4802,12 @@
       "usedQty": 70
     },
     {
-      "balQty": 0,
+      "balQty": -60,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 12,
       "product": "20元枸杞槟榔/包",
@@ -4789,16 +4815,16 @@
       "spec": "",
       "supplier": "鑫湘缘",
       "unit": "包",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 720,
+      "usedQty": 60
     },
     {
-      "balQty": 0,
+      "balQty": -80,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 18,
       "product": "30元枸杞槟榔/包",
@@ -4806,8 +4832,8 @@
       "spec": "",
       "supplier": "鑫湘缘",
       "unit": "包",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 1440,
+      "usedQty": 80
     },
     {
       "balQty": 0,
@@ -7281,16 +7307,16 @@
       "usedAmt": 554.8
     },
     {
-      "balAmt": 0,
+      "balAmt": -2160,
       "capAmt": 0,
       "full": false,
-      "lastDate": "",
+      "lastDate": "2026-10-16",
       "low": false,
-      "orderCount": 0,
+      "orderCount": 2,
       "pct": 0,
       "productCount": 3,
       "supplier": "鑫湘缘",
-      "usedAmt": 0
+      "usedAmt": 2160
     },
     {
       "balAmt": 0,
@@ -7535,6 +7561,8 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmvadsiks9hi1xb",
+    "cmvadsiksa3hfcs",
     "a:cmv8ywsxxk4asjr",
     "a:cmv8w0x05gmwhkl",
     "a:cmv8w0iibld2khu",
