@@ -254,7 +254,9 @@ try {
     const { pullJxcStats } = await import('./jxc_bridge.mjs');
     jxc = await pullJxcStats(process.env.JXC_TOKEN, mapsPath);
     console.log(jxc.ok
-      ? `· 金小存桥接成功：库存格子 ${jxc.meta.cellsWithStock} 个 / 销量格子 ${jxc.meta.cellsWithSales} 个（流水最新 ${jxc.meta.latestFlowDate}）`
+      ? `· 金小存桥接成功：${jxc.meta.jxcSites} 个站点 × ${jxc.meta.mappedProducts} 款对照商品，` +
+        `有库存 ${jxc.meta.cellsWithStock} 格 / 有销量 ${jxc.meta.cellsWithSales} 格（流水最新 ${jxc.meta.latestFlowDate}）` +
+        ((jxc.meta.unmatchedSites && jxc.meta.unmatchedSites.length) ? `；未命中站点：${jxc.meta.unmatchedSites.join('、')}` : '')
       : `· 金小存桥接未生效：${jxc.reason}`);
   } else {
     console.log('· 金小存桥接跳过：' + (!process.env.JXC_TOKEN ? '未配置 Secret JXC_TOKEN' : '缺少对照表 _link_maps.json'));
@@ -292,7 +294,9 @@ const data = {
   missingSheets: dump.missingSheets || [],
   recentCids: recentCids,
   // 金小存桥接数据：stats[门店][商品名] = {stock 库存, stockAmt 库存金额, sales30, sales90, code 条码, skuId}
-  jxc: jxc.ok ? { stats: jxc.stats, meta: jxc.meta } : { stats: {}, meta: { ok: false, reason: jxc.reason } }
+  jxc: jxc.ok
+    ? { stats: jxc.stats, siteMap: jxc.siteMap, codes: jxc.codes, meta: jxc.meta }
+    : { stats: {}, siteMap: {}, codes: {}, meta: { ok: false, reason: jxc.reason } }
 };
 
 const outPath = path.join(ROOT, 'data.json');

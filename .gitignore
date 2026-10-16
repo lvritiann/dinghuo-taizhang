@@ -1,3 +1,7 @@
 index.html.bak-v513
+index.html.bak.*
 _*.js
 _*.png
+# 桥接取数/体检的临时产物（可用 _gen_jxc_test.js 重新生成，不入库）
+_online_data.json
+_jxc_new.json

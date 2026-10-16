@@ -322,6 +322,15 @@ input:focus, select:focus { outline: none; border-color: var(--text); background
 .info-cell .v { font-size: 15px; font-weight: 700; margin-top: 3px; }
 .info-cell .v.g { color: var(--green); } .info-cell .v.o { color: var(--orange); } .info-cell .v.r { color: var(--red); }
 
+/* ---------- ★ JXC-PATCH v1（2026-10-16）：金小存「库存 / 销量」格 ----------
+   打通订货工具 ↔ 金小存进销存后新增的格子。左侧绿竖条 + 「⇄」前缀，
+   和既有的「标段额度」格（蓝竖条）在视觉上区分开：蓝=额度口径，绿=进销存实况。 */
+.info-cell.jxc-key { border-left: 3px solid var(--green); }
+.info-cell.jxc-key .k::before { content: '⇄ '; opacity: .8; }
+.info-cell.jxc-key .v small { font-size: 10.5px; font-weight: 500; color: var(--text2); }
+.jxc-src { font-size: 10.5px; color: var(--text2); margin: -8px 0 12px; }
+.jxc-src b { color: var(--text); font-weight: 600; }
+
 /* ---------- ★ LAYOUT-PATCH v1：「怎么下单」帮助卡 ---------- */
 .howto { display: flex; flex-direction: column; gap: 12px; }
 /* 宽屏：步骤之间加细分隔线，读起来更像清单 */
@@ -1288,6 +1297,8 @@ body.theme-tech .viz-box {
           <input type="number" id="odQty" inputmode="numeric" placeholder="0" step="1" min="1" oninput="onQtyInput()" data-page-node-id="u2zlLQfpXNd8yke0WAHfVh">
         </div>
       </div>
+      <!-- ★ JXC-PATCH v1：金小存数据来源说明（数据缺失 / 未接入时不渲染，见 renderJxcSrc） -->
+      <div class="jxc-src" id="jxcSrc" style="display:none"></div>
       <div class="info-grid" id="odInfo" data-page-node-id="dtbPOFQzUQbmMGH09fxADH"></div>
       <button class="btn block" id="odAdd" onclick="addToCart()">
         <span id="odAddTxt">加入清单</span>
@@ -2453,6 +2464,83 @@ function catMatch(p) { var cf = catFilterVal(); return !cf || classifyCat(p) ===
 // ★ 台账「门店」列：选了细分 → 具体门店名（秦岭东）；没选 → 服务区名（秦岭）
 function curStore() { return curSide() || curSite(); }
 
+/* ============================================================================
+   ★★ JXC-PATCH v1（2026-10-16）：金小存进销存桥接（前端展示层）
+   ----------------------------------------------------------------------------
+   打通「订货工具」与「金小存进销存」——下单时能当场看到这款商品**在本站**的
+   实时库存和近期销量，不再靠拍脑袋报数。
+
+   数据链路：金山多维表（sheet9 实时库存 / sheet11 出库流水）
+             → .github/scripts/jxc_bridge.mjs（每轮同步时聚合）
+             → data.json 的 jxc 字段
+             → 本文件读取展示
+
+   数据结构：
+     data.jxc.stats[订货门店][订货商品名] = {
+       stock  : 当前库存（件，跨同条码的多条字典记录求和）
+       stockAmt: 库存金额（元）
+       sales30: 近 30 天出库数量
+       sales90: 近 90 天出库数量
+       code   : 商品条码（用于人工核对）
+       skuId  : 金小存字典记录 ID
+     }
+     data.jxc.meta = { ok, latestFlowDate, cellsWithStock, cellsWithSales, ... }
+
+   ★ 设计铁律：这是**增强**，不是**依赖**。
+     data.jxc 缺失 / 该商品没做对照 / 该站没有进销存数据 → 一律静默不显示，
+     **绝不允许报错，更不允许挡住下单**。老版本 data.json 打开本页照常能用。
+   ============================================================================ */
+function jxcData() { return (window.data && data.jxc && data.jxc.stats) ? data.jxc : null; }
+function jxcMeta() { var j = jxcData(); return (j && j.meta) ? j.meta : null; }
+
+/* 当前「订货单位」→ 对应的金小存站点名列表（服务区要跨东/西两站求和）。
+   v2：优先用 data.jxc.siteMap（45 个订货单位全覆盖，由 bridge 按名字自动解析）；
+   老版 data.json（stats 直接以订货门店为一级键、没有 siteMap）走兜底分支。 */
+function jxcKeys() {
+  var j = jxcData();
+  if (!j) return [];
+  var st = j.stats, side = curSide(), site = curSite(), name = side || site, out = [], i;
+  if (!name) return out;
+  if (j.siteMap && Object.keys(j.siteMap).length) return j.siteMap[name] || [];
+  if (st[name]) { out.push(name); return out; }             // 老版：服务区名本身是键
+  var subs = storesOfSite(site);                            // 老版：拆成东/西分别取
+  for (i = 0; i < subs.length; i++) if (st[subs[i]]) out.push(subs[i]);
+  return out;
+}
+
+/* 取某商品在当前订货单位的进销存实况（跨东/西站求和）。返回 null = 没有可用数据。 */
+function jxcOf(name) {
+  var j = jxcData();
+  if (!name || !j) return null;
+  var ks = jxcKeys(), st = j.stats, acc = null, i, c;
+  for (i = 0; i < ks.length; i++) {
+    c = st[ks[i]] && st[ks[i]][name];
+    if (!c) continue;
+    if (!acc) acc = { stock: 0, stockAmt: 0, sales30: 0, sales90: 0, code: '', skuId: '', n: 0 };
+    acc.stock    += Number(c.stock)    || 0;
+    acc.stockAmt += Number(c.stockAmt) || 0;
+    acc.sales30  += Number(c.sales30)  || 0;
+    acc.sales90  += Number(c.sales90)  || 0;
+    acc.n++;
+  }
+  // 条码/字典 ID 对同一款商品是常量，bridge 抽到了 codes 里（省体积），这里补回来
+  if (acc && j.codes && j.codes[name]) {
+    acc.code = j.codes[name].code || '';
+    acc.skuId = j.codes[name].skuId || '';
+  }
+  return acc;
+}
+
+/* 商品下拉里挂的一小段尾巴：一眼看到「还有多少 / 卖得动不动」 */
+function jxcTail(name, unit) {
+  var c = jxcOf(name);
+  if (!c) return '';
+  var u = unit ? esc(unit) : '';
+  var s = '库 ' + nf(c.stock) + u;
+  if (c.sales90 > 0) s += ' · 90天销 ' + nf(c.sales90);
+  return '（' + s + '）';
+}
+
 // 明细筛选：选「秦岭」时，把「秦岭东 / 秦岭西」这些旧数据也一并算进来
 function storeMatch(filterVal, storeVal) {
   if (!filterVal) return true;
@@ -2469,8 +2557,25 @@ function renderSide() {
   }).join('');
   if (arr.indexOf(cur) >= 0) el.value = cur;
 }
-function onStorePick() { renderSide(); renderCart(); renderSideStat(); }
-function onSidePick() { renderCart(); renderSideStat(); }
+// ★ JXC-PATCH v1：换订货单位/细分 → 库存销量要按新站点重算，来源说明也要跟着改
+function onStorePick() { renderSide(); renderCart(); renderSideStat(); refreshProductTails(); renderFormInfo(); }
+function onSidePick() { renderCart(); renderSideStat(); refreshProductTails(); renderFormInfo(); }
+
+/* ★ JXC-PATCH v1：换站点后，商品下拉里挂的「库 X · 90天销 Y」要按新站点重算。
+   只改 option 的显示文案，**不重建 select** —— 重建会清掉已选商品、还会触发换供应商的清清单逻辑。 */
+function refreshProductTails() {
+  var sel = document.getElementById('odProduct');
+  if (!sel) return;
+  var sup = curSupplier();
+  for (var i = 0; i < sel.options.length; i++) {
+    var o = sel.options[i], p = prodOf(sup, o.value);
+    if (!p) continue;
+    var b = balOf(sup, p.name);
+    var t = (effCap(p) > 0 && b) ? '（余 ' + b.balQty + p.unit + '）' : '';
+    t += jxcTail(p.name, p.unit);
+    o.text = p.name + t;
+  }
+}
 
 /* ---------- 清单增删改 ---------- */
 function cartTotal() {
@@ -2537,7 +2642,10 @@ function renderCart() {
       list.innerHTML = '<div class="empty">还没加商品。选好商品和数量点「加入清单」往上加；' +
         '只下一样的话，直接点下面的「提交下定」也行。</div>';
     } else {
+      // ★ JXC-PATCH v1：清单里多一列「现存」——提交前通盘看一遍，哪些是压货、哪些是真断货
+      var jxcAny = cart.some(function (l) { return !!jxcOf(l.product); });
       var h = '<table class="cart-tbl"><thead><tr><th>商品</th><th class="spec-col">规格</th>' +
+        (jxcAny ? '<th class="num">现存<span class="th-sub">金小存</span></th>' : '') +
         '<th class="num">单价</th><th class="num">数量</th><th class="num">金额</th><th></th></tr></thead><tbody>';
       cart.forEach(function (l, i) {
         var p = prodOf(sup, l.product) || { spec: '', unit: '', price: 0, capQty: 0 };
@@ -2545,10 +2653,15 @@ function renderCart() {
         var cap = effCap(p);
         var bal = cap > 0 ? (b ? b.balQty : cap) : null;
         var over = (bal != null && l.qty > bal);
+        var jx = jxcAny ? jxcOf(l.product) : null;
         h += '<tr' + (over ? ' class="over"' : '') + '>' +
           '<td>' + esc(l.product) +
           (over ? '<div class="warn-t">超出余额 ' + nf(bal) + esc(p.unit) + '</div>' : '') + '</td>' +
           '<td class="dim spec-col">' + esc(p.spec || '—') + '</td>' +
+          (jxcAny ? '<td class="num">' + (jx
+            ? '<b style="color:var(--' + (jx.stock <= 0 ? 'red' : jx.stock <= 10 ? 'orange' : 'green') + ')">' + nf(jx.stock) + '</b>' +
+              (jx.sales90 > 0 ? '<div class="warn-t" style="color:var(--text2)">90天销 ' + nf(jx.sales90) + '</div>' : '')
+            : '<span style="color:var(--text2)">—</span>') + '</td>' : '') +
           '<td class="num">' + money(p.price) + '</td>' +
           '<td class="num"><input type="number" class="qty-in" min="1" step="1" value="' + l.qty + '" ' +
           'oninput="setCartQty(' + i + ', this.value)"><span class="unit">' + esc(p.unit) + '</span></td>' +
@@ -3805,6 +3918,8 @@ function renderForm() {
   pdSel.innerHTML = goods.map(function (p) {
     var b = balOf(supSel.value, p.name);
     var tail = (effCap(p) > 0 && b) ? '（余 ' + b.balQty + p.unit + '）' : '';
+    // ★ JXC-PATCH v1：额度余量后面再挂一段金小存实况（库存 / 近90天销量）
+    tail += jxcTail(p.name, p.unit);
     return '<option value="' + esc(p.name) + '">' + esc(p.name) + tail + '</option>';
   }).join('');
   if (curP && goods.some(function (p) { return p.name === curP; })) pdSel.value = curP;
@@ -3834,6 +3949,7 @@ function renderForm() {
   pdSel2.innerHTML = goods2.map(function (p) {
     var b2 = balOf(supSel.value, p.name);
     var tail2 = (effCap(p) > 0 && b2) ? '（余 ' + b2.balQty + p.unit + '）' : '';
+    tail2 += jxcTail(p.name, p.unit);            // ★ JXC-PATCH v1
     return '<option value="' + esc(p.name) + '">' + esc(p.name) + tail2 + '</option>';
   }).join('');
   if (curP2 && goods2.some(function (p) { return p.name === curP2; })) pdSel2.value = curP2;
@@ -3890,11 +4006,52 @@ function renderFormInfo() {
      不提示的话用户会以为「下单成功但金额没算」是系统坏了。 */
   var noPrice = !(Number(p.price) > 0);
 
+  /* ★★ JXC-PATCH v1（2026-10-16）：把金小存的「实时库存 / 近90天销量」摆到下单表单里。
+     以前下单只能看到「额度还剩多少」——那是**采购合同口径**；
+     但真正该问的是「我店里还剩几件、这东西走不走得动」——那是**进销存口径**。
+     两条口径互补：额度管别超合同，库存管别压货 / 别断货。 */
+  var jx = jxcOf(nm), jxcCells = '';
+  if (jx) {
+    var sCls = (jx.stock <= 0) ? 'r' : (jx.stock <= 10 ? 'o' : 'g');
+    var sTxt = (jx.stock <= 0) ? '已无库存' : (jx.stock <= 10 ? '库存偏低' : '');
+    var sug = '';
+    // 补货建议：按近 90 天日均速度，补到够卖 30 天（已在库的不重复订）
+    if (jx.sales90 > 0) {
+      var daily = jx.sales90 / 90;
+      var need = Math.max(0, Math.round(daily * 30 - jx.stock));
+      sug = '近 90 天日均走 <b>' + (Math.round(daily * 10) / 10) + '</b> ' + esc(p.unit) +
+            '／天 → 补到 30 天量约需 <b>' + nf(need) + ' ' + esc(p.unit) + '</b>' +
+            (need === 0 ? '（现有库存已够，可不订）' : '');
+    } else {
+      sug = '金小存出库流水里这款还没有销量记录（可能是新品，或该品类没走扫码出库）——' +
+            '建议按经验值报量，别照着 0 走。';
+    }
+    jxcCells =
+      '<div class="info-cell jxc-key"><div class="k">金小存 · 本站库存</div><div class="v ' + sCls + '">' +
+        nf(jx.stock) + ' ' + esc(p.unit) +
+        (sTxt ? ' <small>' + sTxt + '</small>' : '') + '</div></div>' +
+      '<div class="info-cell jxc-key"><div class="k">金小存 · 近90天销量</div><div class="v">' +
+        (jx.sales90 > 0 ? nf(jx.sales90) + ' ' + esc(p.unit) +
+          ' <small>日均 ' + (Math.round(jx.sales90 / 90 * 10) / 10) + '</small>'
+          : '<span style="font-size:12px;color:var(--text2);font-weight:500">流水暂无</span>') +
+        '</div></div>' +
+      '<div class="info-cell" style="grid-column:1/-1"><div class="k">补货参考（按近90天速度）</div>' +
+        '<div class="v" style="font-size:12px;font-weight:500">' + sug + '</div></div>';
+  } else {
+    // 明确说明「为什么没有」，避免用户以为系统坏了
+    var why = !jxcData() ? '未接入金小存数据'
+      : (!jxcKeys().length ? '金小存里还没有本站的库存表'
+      : '这款商品还没做对照（进销存品名对不上）');
+    jxcCells = '<div class="info-cell"><div class="k">金小存 · 库存/销量</div>' +
+      '<div class="v" style="font-size:12px;color:var(--text2);font-weight:500">' + why + '</div></div>';
+  }
+
   box.innerHTML =
     (noPrice ? '<div class="info-cell" style="grid-column:1/-1;background:rgba(214,69,42,.12)">' +
       '<div class="k" style="color:var(--red)">⚠ 这款商品还没定价</div>' +
       '<div class="v" style="font-size:12px;font-weight:500">单价 ¥0 → 下单不会产生金额，标段额度也扣不动。' +
       '请联系管理员在《商品档案》里补齐单价（天易蓝 4 款现为「待定价」）。</div></div>' : '') +
+    jxcCells +                                     // ★ JXC-PATCH v1：金小存库存/销量/补货参考
     '<div class="info-cell"><div class="k">规格</div><div class="v" style="font-size:12px">' + esc(p.spec || '—') + '</div></div>' +
     '<div class="info-cell"><div class="k">单位 / 单价</div><div class="v" style="font-size:13px">' + esc(p.unit) + ' · ' + money(p.price) + '</div></div>' +
     poolCells +
@@ -3908,7 +4065,32 @@ function renderFormInfo() {
     '<div class="info-cell"><div class="k">预计到期</div><div class="v" style="font-size:12px">' + esc(exp) + '</div></div>' +
     '<div class="info-cell"><div class="k">保质期</div><div class="v" style="font-size:13px">' + (p.shelf ? p.shelf + ' 天' : '—') + '</div></div>' +
     '<div class="info-cell"><div class="k">累计已订</div><div class="v" style="font-size:13px">' + nf(b ? b.usedQty : 0) + ' ' + esc(p.unit) + '</div></div>';
+  renderJxcSrc();
   renderCart();   // ★ 按钮文案/禁用态统一由 renderCart 管（清单为空时算当前这一行）
+}
+
+/* ★ JXC-PATCH v1：表单上方一行小字，交代数据出处与新鲜度。
+   出问题的第一反应永远是「这数准不准 / 多久的」——把答案写在脸上，省得每次来问。 */
+function renderJxcSrc() {
+  var el = document.getElementById('jxcSrc');
+  if (!el) return;
+  var j = jxcData();
+  if (!j) { el.style.display = 'none'; el.innerHTML = ''; return; }
+  var m = j.meta || {};
+  var ks = jxcKeys();
+  if (!ks.length) {
+    // 有数据但本站解析不到金小存站点：明说是「本站缺库存表」，别让人以为全系统没数
+    el.style.display = '';
+    el.innerHTML = '⇄ 金小存里<b>还没有「' + esc(curStore() || '未选') + '」的库存表</b>，看不到库存/销量。' +
+      '其余 ' + Object.keys(j.stats).length + ' 个站点不受影响（目前仅照金系未录入实时库存）。';
+    return;
+  }
+  el.style.display = '';
+  el.innerHTML = '⇄ 库存/销量来自 <b>金小存进销存</b>（金山多维表 sheet9 实时库存 + sheet11 出库流水）' +
+    '，按 <b>' + esc(ks.join(' + ')) + '</b> 统计' +
+    (m.latestFlowDate ? '；出库流水最新到 <b>' + esc(m.latestFlowDate) + '</b>' : '') +
+    (m.generatedAt ? '（同步于 ' + esc(String(m.generatedAt).slice(0, 16).replace('T', ' ')) + '）' : '') + '。' +
+    '仅供参考，以现场实盘为准。';
 }
 
 // 换供应商 → 清单作废（一个供应商一张台账 Sheet，混着加没意义）

@@ -97,12 +97,20 @@ async function listAll(sheet, fields, label, token, tv = 'original') {
   return [];
 }
 
+/* 归一 A（流水口径）：只剥「加油站 /（高速）/空格」。
+   库存站点「秦岭服务区东站」与流水站点「秦岭服务区加油站东站（高速）」在此口径下相等，
+   用于把 s9 的站点名拿去 s11 里查销量。 */
 function normSite(s) {
   return String(s == null ? '' : s)
     .replace(/加油站/g, '')
     .replace(/[（(]\s*高速\s*[）)]/g, '')
     .replace(/\s+/g, '')
     .trim();
+}
+/* 归一 B（门店口径）：在 A 之上再剥「服务区 / 停车区 / 站」。
+   把金小存站点名（秦岭服务区东站）压缩成和订货系统一致的门店名（秦岭东）。 */
+function normStore(s) {
+  return normSite(s).replace(/服务区|停车区/g, '').replace(/站/g, '').trim();
 }
 function parseDate(v) {
   const m = String(v == null ? '' : v).match(/(\d{4})[\/\-年](\d{1,2})[\/\-月](\d{1,2})/);
@@ -158,39 +166,67 @@ export async function pullJxcStats(token, mapsPath) {
     if (age <= 30) sales30.set(k, (sales30.get(k) || 0) + qty);
     if (age <= 90) sales90.set(k, (sales90.get(k) || 0) + qty);
   }
-  // 门店 -> 金小存站点数组
-  const siteMap = new Map();
-  (maps.sites || []).forEach(s => {
-    siteMap.set(s.订货门店, (s.金小存站点 && s.金小存站点 !== '(未匹配)') ? s.金小存站点.split(' + ') : []);
-  });
+  // ---------- 站点解析：订货「服务区 / 门店」→ 金小存站点数组 ----------
+  // ★ v2（2026-10-16）：v1 只搬 _link_maps.json 里现成的 10 条对照，
+  //   结果 15 个服务区里 6 个（宁陕/富县/华山/南沙/玉华宫/旬阳/略阳）根本查不到数——
+  //   不是金小存没数据，是**根本没给它们建对照**。改成运行时按名字自动解析，全覆盖。
+  const jxcSiteNames = [...new Set(s9.map(r => r.c).filter(Boolean))].sort();
+  const idx = jxcSiteNames.map(n => ({ raw: n, n: normStore(n) }));
+  function resolveJxcSites(orderName) {
+    const t = normStore(orderName);
+    if (!t) return [];
+    const exact = idx.filter(x => x.n === t).map(x => x.raw);
+    if (exact.length) return exact;                      // 「秦岭东」→ 秦岭服务区东站
+    return idx.filter(x => x.n.indexOf(t) === 0).map(x => x.raw);  // 「秦岭」→ 东站 + 西站
+  }
+  const siteMap = {};
+  const srcNames = (maps.orderSites && maps.orderSites.length)
+    ? maps.orderSites.map(o => o.name)                   // 45 个：15 服务区 + 30 门店
+    : (maps.sites || []).map(s => s.订货门店);            // 老对照表兜底
+  [...new Set(srcNames)].forEach(n => { siteMap[n] = resolveJxcSites(n); });
+  const unmatched = Object.keys(siteMap).filter(k => !siteMap[k].length);
 
+  // ---------- 聚合：stats 以【金小存站点】为一级键 ----------
+  // 为什么不再以「订货门店」为键：那样 45 个门店要各存一份，服务区那一份还是东+西的重复求和，
+  // 体积翻 3 倍。改成只存 28 个真实站点，门店→站点的映射另给 siteMap，前端自己求和。
   const stats = {};
   let nStock = 0, nSales = 0;
-  for (const p of maps.products) {
-    const skuId = p.金小存记录ID, code = p.条码;
-    if (!skuId && !code) continue;
-    for (const [storeName, jSites] of siteMap) {
-      if (!jSites.length) continue;
-      let qty = 0, amt = 0, s30 = 0, s90 = 0;
+  for (const js of jxcSiteNames) {
+    const g = {};
+    for (const p of maps.products) {
+      const skuId = p.金小存记录ID, code = p.条码;
+      if (!skuId && !code) continue;                     // 未对照的商品不占位
       const ids = (code && code2ids.get(code)) ? [...code2ids.get(code)] : (skuId ? [skuId] : []);
-      for (const js of jSites) {
-        for (const id of ids) { const st = stock.get(js + '|' + id); if (st) { qty += st.qty; amt += st.amt; } }
-        if (code) { const nk = normSite(js) + '|' + code; s30 += sales30.get(nk) || 0; s90 += sales90.get(nk) || 0; }
-      }
+      let qty = 0, amt = 0;
+      for (const id of ids) { const st = stock.get(js + '|' + id); if (st) { qty += st.qty; amt += st.amt; } }
+      let s30 = 0, s90 = 0;
+      if (code) { const nk = normSite(js) + '|' + code; s30 = sales30.get(nk) || 0; s90 = sales90.get(nk) || 0; }
       if (qty > 0) nStock++;
       if (s30 > 0 || s90 > 0) nSales++;
-      (stats[storeName] = stats[storeName] || {})[p.订货商品名] = {
-        stock: qty, stockAmt: Math.round(amt * 100) / 100, sales30: s30, sales90: s90,
-        code: code || '', skuId: skuId || ''
+      // ★ 即使全 0 也要写：否则前端分不清「本站真的没货」和「这款没对照」
+      // ★ 体积：code/skuId 对同一款商品是常量，写进 4592 个格子纯属浪费（571KB → 约 300KB），
+      //   单独抽到 codes 里，前端要条码时按商品名查一次即可。
+      g[p.订货商品名] = {
+        stock: qty, stockAmt: Math.round(amt * 100) / 100, sales30: s30, sales90: s90
       };
     }
+    stats[js] = g;
   }
+  const codes = {};
+  maps.products.forEach(p => {
+    if (!p.订货商品名) return;
+    codes[p.订货商品名] = { code: p.条码 || '', skuId: p.金小存记录ID || '' };
+  });
   return {
     ok: true,
     stats,
+    siteMap,                      // 订货门店/服务区 → 金小存站点数组
+    codes,                        // 订货商品名 → { 条码, 金小存记录ID }
     meta: {
       generatedAt: new Date().toISOString(),
-      jxcSites: new Set(s9.map(r => r.c)).size,
+      jxcSites: jxcSiteNames.length,
+      orderSites: Object.keys(siteMap).length,
+      unmatchedSites: unmatched,
       s9Rows: s9.length, s11Rows: s11.length, s7Rows: s7.length,
       mappedProducts: maps.products.filter(p => p.金小存记录ID).length,
       cellsWithStock: nStock, cellsWithSales: nSales,
@@ -210,8 +246,12 @@ if (process.argv[1] && process.argv[1].endsWith('jxc_bridge.mjs')) {
   if (!r.ok) { console.error('✗', r.reason); process.exit(1); }
   console.log('✅ 金小存桥接自检通过');
   console.log('meta:', JSON.stringify(r.meta, null, 2));
+  const sm = r.siteMap || {}, ks = Object.keys(sm);
+  const ok = ks.filter(k => sm[k].length), bad = ks.filter(k => !sm[k].length);
+  console.log('站点解析：' + ks.length + ' 个订货单位 → 命中 ' + ok.length + ' / 未命中 ' + bad.length +
+    (bad.length ? '（' + bad.join('、') + '）' : ''));
   const stores = Object.keys(r.stats);
-  console.log('覆盖订货门店 ' + stores.length + ' 个：' + stores.join(' / '));
+  console.log('stats 一级键（金小存站点）' + stores.length + ' 个：' + stores.join(' / '));
   let n = 0;
   for (const s of stores) {
     const items = Object.entries(r.stats[s]).filter(([, v]) => v.stock > 0 || v.sales90 > 0);
