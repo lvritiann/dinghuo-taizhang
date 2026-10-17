@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T00:55:25.584Z",
+  "updatedAt": "2026-10-17T02:26:55.936Z",
   "source": "kdocs",
   "today": "2026-10-17",
   "products": [
@@ -7587,12 +7587,29 @@
       "supplier": "天天",
       "ts": "2026-10-16 17:39",
       "unit": "箱"
+    },
+    {
+      "by": "富县西",
+      "diff": 0,
+      "note": "",
+      "product": "尿素PET",
+      "qtyGot": 100,
+      "qtyShould": 100,
+      "reason": "",
+      "row": 13,
+      "site": "富县",
+      "spec": "",
+      "store": "富县西",
+      "supplier": "天易蓝",
+      "ts": "2026-10-17 10:25",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmvbrzls7hrz7et",
     "a:cmvas1tte7nx0gv",
     "a:cmvap9ngz58jpcz",
     "cmvadsiks9hi1xb",
@@ -36336,7 +36353,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-17T00:55:37.084Z",
+      "generatedAt": "2026-10-17T02:27:07.694Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
