@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T00:19:08.141Z",
+  "updatedAt": "2026-10-19T00:51:25.673Z",
   "source": "kdocs",
   "today": "2026-10-19",
   "products": [
@@ -7619,12 +7619,29 @@
       "supplier": "天易蓝",
       "ts": "2026-10-17 10:29",
       "unit": "桶"
+    },
+    {
+      "by": "华山",
+      "diff": 0,
+      "note": "",
+      "product": "玻璃水0#",
+      "qtyGot": 10,
+      "qtyShould": 10,
+      "reason": "",
+      "row": 15,
+      "site": "华山",
+      "spec": "2L",
+      "store": "华山",
+      "supplier": "天易蓝",
+      "ts": "2026-10-19 08:51",
+      "unit": "箱"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmvejggwdint0y7",
     "a:cmvbs3bo5pg25tg",
     "a:cmvbrzls7hrz7et",
     "a:cmvas1tte7nx0gv",
@@ -36370,7 +36387,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-19T00:19:18.443Z",
+      "generatedAt": "2026-10-19T00:51:37.550Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
