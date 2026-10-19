@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T00:51:25.673Z",
+  "updatedAt": "2026-10-19T01:03:57.320Z",
   "source": "kdocs",
   "today": "2026-10-19",
   "products": [
@@ -7633,6 +7633,22 @@
       "spec": "2L",
       "store": "华山",
       "supplier": "天易蓝",
+      "ts": "2026-10-19 08:51",
+      "unit": "箱"
+    },
+    {
+      "by": "华山",
+      "diff": 0,
+      "note": "",
+      "product": "红牛维生素功能饮料（天天）",
+      "qtyGot": 20,
+      "qtyShould": 20,
+      "reason": "",
+      "row": 16,
+      "site": "华山",
+      "spec": "1*24",
+      "store": "华山",
+      "supplier": "天天",
       "ts": "2026-10-19 08:51",
       "unit": "箱"
     }
@@ -36387,7 +36403,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-19T00:51:37.550Z",
+      "generatedAt": "2026-10-19T01:04:09.661Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
