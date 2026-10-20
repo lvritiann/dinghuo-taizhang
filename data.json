@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T00:50:42.333Z",
+  "updatedAt": "2026-10-20T01:03:47.859Z",
   "source": "kdocs",
   "today": "2026-10-20",
   "products": [
@@ -7712,12 +7712,29 @@
       "supplier": "天天",
       "ts": "2026-10-19 13:12",
       "unit": "箱"
+    },
+    {
+      "by": "宁陕",
+      "diff": 0,
+      "note": "",
+      "product": "玻璃水-20#",
+      "qtyGot": 80,
+      "qtyShould": 80,
+      "reason": "",
+      "row": 20,
+      "site": "宁陕",
+      "spec": "2L",
+      "store": "宁陕",
+      "supplier": "天易蓝",
+      "ts": "2026-10-20 09:03",
+      "unit": "箱"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmvfzc8t9ax8gne",
     "a:cmvesscx65tnmma",
     "a:cmvesru5mpgdj8h",
     "cmvenjtv84cu5l1",
@@ -36468,7 +36485,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-20T00:50:54.987Z",
+      "generatedAt": "2026-10-20T01:04:01.742Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
