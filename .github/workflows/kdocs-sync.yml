@@ -65,3 +65,10 @@ jobs:
         env:
           JXC_TOKEN: ${{ secrets.JXC_TOKEN }}
         run: node .github/scripts/orders_to_jxc.mjs --apply
+
+      # 到货确认 → 回写订货台账状态 + 生成 04_入库流水（仅站级明确的）
+      - name: 到货确认 → 订货台账/入库流水
+        continue-on-error: true
+        env:
+          JXC_TOKEN: ${{ secrets.JXC_TOKEN }}
+        run: node .github/scripts/arrivals_to_jxc.mjs --apply
