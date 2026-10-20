@@ -57,6 +57,15 @@ jobs:
           MODE:          ${{ github.event_name == 'repository_dispatch' && 'order' || github.event.inputs.mode || 'sync' }}
         run: node .github/scripts/kdocs_sync.mjs
 
+      # 销售SKU明细中转表 → 金小存 05_出库流水
+      # 替代本地 sync_sales.py + WorkBuddy automation，本机关机也照跑。
+      # 幂等：按「日期|站点id|条码」比对 05_出库流水 现有记录，已存在跳过。
+      - name: 销售SKU → 金小存 05_出库流水
+        continue-on-error: true
+        env:
+          JXC_TOKEN: ${{ secrets.JXC_TOKEN }}
+        run: node .github/scripts/sku_to_jxc.mjs --apply
+
       # 订货台账（金山在线表格）→ 金小存「10_订货台账」
       # 订货天生是服务区级（门店列写"白河""韩城"），不强行落站级入库流水；
       # 幂等靠「源键」，已存在的绝不重写。失败不影响上面的主同步。
