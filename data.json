@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T08:58:22.092Z",
+  "updatedAt": "2026-10-21T09:03:03.916Z",
   "source": "kdocs",
   "today": "2026-10-21",
   "products": [
@@ -3010,6 +3010,19 @@
       "unit": "箱"
     },
     {
+      "amount": 1761.6,
+      "date": "2026-10-25",
+      "expireDate": "",
+      "note": "",
+      "price": 3.67,
+      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
+      "qty": 480,
+      "spec": "1*24",
+      "store": "照金",
+      "supplier": "天天",
+      "unit": "箱"
+    },
+    {
       "amount": 1440,
       "date": "2026-10-16",
       "expireDate": "",
@@ -4794,12 +4807,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -60,
+      "balQty": -540,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 3,
+      "orderCount": 4,
       "pct": 0,
       "price": 3.67,
       "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
@@ -4807,8 +4820,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 220.2,
-      "usedQty": 60
+      "usedAmt": 1981.8,
+      "usedQty": 540
     },
     {
       "balQty": -70,
@@ -7321,16 +7334,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -554.8,
+      "balAmt": -2316.4,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-10-12",
+      "lastDate": "2026-10-25",
       "low": false,
-      "orderCount": 5,
+      "orderCount": 6,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 554.8
+      "usedAmt": 2316.4
     },
     {
       "balAmt": -2160,
@@ -7779,6 +7792,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmvhvwfm3se1ase",
     "cmvhvqbg9w27r4t",
     "a:cmvhhky640t0j8t",
     "a:cmvfzc8t9ax8gne",
@@ -36532,7 +36546,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-21T08:58:34.252Z",
+      "generatedAt": "2026-10-21T09:03:17.333Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
