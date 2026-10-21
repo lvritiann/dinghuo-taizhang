@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-21T02:22:14.668Z",
+  "updatedAt": "2026-10-21T06:13:27.089Z",
   "source": "kdocs",
   "today": "2026-10-21",
   "products": [
@@ -21873,8 +21873,8 @@
         "伊利心情": {
           "stock": 23,
           "stockAmt": 34.5,
-          "sales30": 0,
-          "sales90": 21
+          "sales30": 1,
+          "sales90": 22
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -22775,8 +22775,8 @@
         "壳牌防冻液-绿色 -45℃": {
           "stock": 2,
           "stockAmt": 76.22,
-          "sales30": 0,
-          "sales90": 0
+          "sales30": 1,
+          "sales90": 1
         },
         "车仆柴油防凝剂": {
           "stock": 0,
@@ -22811,8 +22811,8 @@
         "伊利冰工厂冰片蜜桃（70g）": {
           "stock": 41,
           "stockAmt": 44.69,
-          "sales30": 0,
-          "sales90": 36
+          "sales30": 1,
+          "sales90": 37
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -22919,8 +22919,8 @@
         "小叮当 100g": {
           "stock": 5,
           "stockAmt": 11.75,
-          "sales30": 0,
-          "sales90": 9
+          "sales30": 1,
+          "sales90": 10
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -22961,8 +22961,8 @@
         "蒙牛玉米棒65g4": {
           "stock": 5,
           "stockAmt": 7.05,
-          "sales30": 0,
-          "sales90": 20
+          "sales30": 1,
+          "sales90": 21
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -22979,8 +22979,8 @@
         "雀巢-8次方-甜橙乳酸菌": {
           "stock": 14,
           "stockAmt": 101.08,
-          "sales30": 0,
-          "sales90": 3
+          "sales30": 1,
+          "sales90": 4
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 14,
@@ -22991,14 +22991,14 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 170,
           "stockAmt": 632.49,
-          "sales30": 0,
-          "sales90": 334
+          "sales30": 2,
+          "sales90": 336
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 331,
           "stockAmt": 1529.35,
-          "sales30": 0,
-          "sales90": 0
+          "sales30": 31,
+          "sales90": 31
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -23069,26 +23069,26 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 170,
           "stockAmt": 632.49,
-          "sales30": 0,
-          "sales90": 334
+          "sales30": 2,
+          "sales90": 336
         },
         "东鹏特饮促销": {
           "stock": 170,
           "stockAmt": 632.49,
-          "sales30": 0,
-          "sales90": 334
+          "sales30": 2,
+          "sales90": 336
         },
         "东鹏特饮促销1": {
           "stock": 170,
           "stockAmt": 632.49,
-          "sales30": 0,
-          "sales90": 334
+          "sales30": 2,
+          "sales90": 336
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 41,
           "stockAmt": 44.69,
-          "sales30": 0,
-          "sales90": 36
+          "sales30": 1,
+          "sales90": 37
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -23183,8 +23183,8 @@
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 29,
           "stockAmt": 86.71,
-          "sales30": 0,
-          "sales90": 46
+          "sales30": 3,
+          "sales90": 49
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -23603,14 +23603,14 @@
         "旺旺雪饼84g": {
           "stock": 10,
           "stockAmt": 48.5,
-          "sales30": 0,
-          "sales90": 7
+          "sales30": 1,
+          "sales90": 8
         },
         "旺旺仙贝52g": {
           "stock": 5,
           "stockAmt": 22.05,
-          "sales30": 0,
-          "sales90": 5
+          "sales30": 2,
+          "sales90": 7
         },
         "尿素PE": {
           "stock": 260,
@@ -36518,7 +36518,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-21T02:22:29.147Z",
+      "generatedAt": "2026-10-21T06:13:39.711Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -36527,11 +36527,11 @@
         "照金北"
       ],
       "s9Rows": 6422,
-      "s11Rows": 5464,
+      "s11Rows": 5531,
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
-      "cellsWithSales": 771,
+      "cellsWithSales": 773,
       "latestFlowDate": "2026-10-20",
       "note": "销量可能为空：出库流水主要覆盖便利店商品，润滑油/汽车用品多数未进入流水"
     }
