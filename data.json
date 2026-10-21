@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-10-20T22:50:50.609Z",
+  "updatedAt": "2026-10-21T01:09:34.772Z",
   "source": "kdocs",
-  "today": "2026-10-20",
+  "today": "2026-10-21",
   "products": [
     {
       "capQty": 0,
@@ -23966,8 +23966,8 @@
         "红牛维生素功能饮料（天天）": {
           "stock": 488,
           "stockAmt": 2256.61,
-          "sales30": 0,
-          "sales90": 0
+          "sales30": 6,
+          "sales90": 6
         },
         "20元枸杞槟榔/包": {
           "stock": 7,
@@ -24946,8 +24946,8 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 734,
           "stockAmt": 2739.66,
-          "sales30": 0,
-          "sales90": 159
+          "sales30": 4,
+          "sales90": 163
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 429,
@@ -25024,20 +25024,20 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 734,
           "stockAmt": 2739.66,
-          "sales30": 0,
-          "sales90": 159
+          "sales30": 4,
+          "sales90": 163
         },
         "东鹏特饮促销": {
           "stock": 734,
           "stockAmt": 2739.66,
-          "sales30": 0,
-          "sales90": 159
+          "sales30": 4,
+          "sales90": 163
         },
         "东鹏特饮促销1": {
           "stock": 734,
           "stockAmt": 2739.66,
-          "sales30": 0,
-          "sales90": 159
+          "sales30": 4,
+          "sales90": 163
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 24,
@@ -36501,7 +36501,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-20T22:51:02.438Z",
+      "generatedAt": "2026-10-21T01:09:46.941Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -36510,11 +36510,11 @@
         "照金北"
       ],
       "s9Rows": 6422,
-      "s11Rows": 5093,
+      "s11Rows": 5118,
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
-      "cellsWithSales": 766,
+      "cellsWithSales": 767,
       "latestFlowDate": "2026-10-20",
       "note": "销量可能为空：出库流水主要覆盖便利店商品，润滑油/汽车用品多数未进入流水"
     }
