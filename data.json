@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T07:50:40.305Z",
+  "updatedAt": "2026-10-25T08:00:31.283Z",
   "source": "kdocs",
   "today": "2026-10-25",
   "products": [
@@ -8163,14 +8163,31 @@
       "spec": "",
       "store": "富平",
       "supplier": "天易蓝",
-      "ts": "2026-10-25 15:43",
+      "ts": "2026-10-25 15:44",
       "unit": ""
+    },
+    {
+      "by": "天汉水城",
+      "diff": 0,
+      "note": "",
+      "product": "玻璃水-20#",
+      "qtyGot": 40,
+      "qtyShould": 40,
+      "reason": "",
+      "row": 28,
+      "site": "天汉水城",
+      "spec": "2L",
+      "store": "天汉水城",
+      "supplier": "天易蓝",
+      "ts": "2026-10-25 15:59",
+      "unit": "箱"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmvnjfefy4a4s6l",
     "cmvnj2qkaxeaw78",
     "cmvnj0io7m32w0b",
     "cmvniz04nhiufnj",
@@ -36949,7 +36966,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-25T07:50:52.136Z",
+      "generatedAt": "2026-10-25T08:00:43.880Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
