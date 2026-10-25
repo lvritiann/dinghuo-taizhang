@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T08:20:32.552Z",
+  "updatedAt": "2026-10-25T08:24:15.394Z",
   "source": "kdocs",
   "today": "2026-10-25",
   "products": [
@@ -3062,6 +3062,19 @@
       "unit": "桶"
     },
     {
+      "amount": 542.4,
+      "date": "2026-10-25",
+      "expireDate": "",
+      "note": "",
+      "price": 45.2,
+      "product": "壳牌防冻液-红色 -45℃",
+      "qty": 12,
+      "spec": "4KG",
+      "store": "富平",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4125,12 +4138,12 @@
       "usedQty": 48
     },
     {
-      "balQty": -36,
+      "balQty": -48,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 4,
+      "orderCount": 5,
       "pct": 0,
       "price": 45.2,
       "product": "壳牌防冻液-红色 -45℃",
@@ -4138,8 +4151,8 @@
       "spec": "4KG",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 1627.2,
-      "usedQty": 36
+      "usedAmt": 2169.6,
+      "usedQty": 48
     },
     {
       "balQty": -28,
@@ -7636,16 +7649,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -22369.48,
+      "balAmt": -22911.88,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-25",
       "low": false,
-      "orderCount": 20,
+      "orderCount": 21,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 22369.48
+      "usedAmt": 22911.88
     },
     {
       "balAmt": 0,
@@ -8242,6 +8255,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmvnk9z25cdi26s",
     "cmvnk3w6d7d1u9g",
     "cmvnjsfwtuo24bs",
     "cmvnjj8osfxvu48",
@@ -37025,7 +37039,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-25T08:20:44.916Z",
+      "generatedAt": "2026-10-25T08:24:26.417Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
