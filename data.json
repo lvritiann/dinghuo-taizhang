@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T02:32:55.087Z",
+  "updatedAt": "2026-10-25T02:34:17.913Z",
   "source": "kdocs",
   "today": "2026-10-25",
   "products": [
@@ -3487,6 +3487,19 @@
       "qty": 200,
       "spec": "",
       "store": "秦岭",
+      "supplier": "天易蓝",
+      "unit": "桶"
+    },
+    {
+      "amount": 4407,
+      "date": "2026-10-25",
+      "expireDate": "",
+      "note": "",
+      "price": 14.69,
+      "product": "尿素PET",
+      "qty": 300,
+      "spec": "",
+      "store": "洋县",
       "supplier": "天易蓝",
       "unit": "桶"
     }
@@ -7437,12 +7450,12 @@
       "usedQty": 1600
     },
     {
-      "balQty": -3280,
+      "balQty": -3580,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 13,
+      "orderCount": 14,
       "pct": 0,
       "price": 14.69,
       "product": "尿素PET",
@@ -7450,8 +7463,8 @@
       "spec": "",
       "supplier": "天易蓝",
       "unit": "桶",
-      "usedAmt": 48183.2,
-      "usedQty": 3280
+      "usedAmt": 52590.2,
+      "usedQty": 3580
     }
   ],
   "supplierBal": [
@@ -7552,16 +7565,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -75216.72,
+      "balAmt": -79623.72,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-25",
       "low": false,
-      "orderCount": 27,
+      "orderCount": 28,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 75216.72
+      "usedAmt": 79623.72
     }
   ],
   "catCaps": [
@@ -8006,6 +8019,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmvn7rzoomltxnr",
     "cmvn7q2r37w5aiy",
     "cmvn7q2r3ycof2z",
     "cmvn7q2r3yf4l4e",
@@ -36774,7 +36788,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-25T02:33:06.300Z",
+      "generatedAt": "2026-10-25T02:34:29.396Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
