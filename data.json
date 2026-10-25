@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T01:47:42.512Z",
+  "updatedAt": "2026-10-25T01:53:29.808Z",
   "source": "kdocs",
   "today": "2026-10-25",
   "products": [
@@ -3357,6 +3357,32 @@
       "qty": 15,
       "spec": "2L",
       "store": "韩城西",
+      "supplier": "天易蓝",
+      "unit": "箱"
+    },
+    {
+      "amount": 54.24,
+      "date": "2026-10-25",
+      "expireDate": "",
+      "note": "",
+      "price": 3.616,
+      "product": "玻璃水-20#",
+      "qty": 15,
+      "spec": "2L",
+      "store": "韩城东",
+      "supplier": "天易蓝",
+      "unit": "箱"
+    },
+    {
+      "amount": 36.16,
+      "date": "2026-10-25",
+      "expireDate": "",
+      "note": "",
+      "price": 3.616,
+      "product": "玻璃水-20#",
+      "qty": 10,
+      "spec": "2L",
+      "store": "韩城东",
       "supplier": "天易蓝",
       "unit": "箱"
     }
@@ -7273,12 +7299,12 @@
       "usedQty": 10
     },
     {
-      "balQty": -795,
+      "balQty": -820,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 6,
+      "orderCount": 8,
       "pct": 0,
       "price": 3.616,
       "product": "玻璃水-20#",
@@ -7286,8 +7312,8 @@
       "spec": "2L",
       "supplier": "天易蓝",
       "unit": "箱",
-      "usedAmt": 2874.72,
-      "usedQty": 795
+      "usedAmt": 2965.12,
+      "usedQty": 820
     },
     {
       "balQty": -1400,
@@ -7422,16 +7448,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -72120.52,
+      "balAmt": -72210.92,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-25",
       "low": false,
-      "orderCount": 24,
+      "orderCount": 26,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 72120.52
+      "usedAmt": 72210.92
     }
   ],
   "catCaps": [
@@ -7844,6 +7870,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmvn6bga8a9h7u6",
     "cmvn63zyp8rutxt",
     "cmvn61tu7lris3h",
     "cmvm65oer2yyj9b",
@@ -36601,7 +36628,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-25T01:47:54.831Z",
+      "generatedAt": "2026-10-25T01:53:40.636Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
