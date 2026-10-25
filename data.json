@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T07:46:54.703Z",
+  "updatedAt": "2026-10-25T07:48:00.027Z",
   "source": "kdocs",
   "today": "2026-10-25",
   "products": [
@@ -3023,6 +3023,19 @@
       "unit": "桶"
     },
     {
+      "amount": 3091.68,
+      "date": "2026-10-25",
+      "expireDate": "",
+      "note": "",
+      "price": 64.41,
+      "product": "壳牌超凡喜力 5W30",
+      "qty": 48,
+      "spec": "1L",
+      "store": "富平",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4000,12 +4013,12 @@
       "usedQty": 24
     },
     {
-      "balQty": 0,
+      "balQty": -48,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 64.41,
       "product": "壳牌超凡喜力 5W30",
@@ -4013,8 +4026,8 @@
       "spec": "1L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 3091.68,
+      "usedQty": 48
     },
     {
       "balQty": 0,
@@ -7545,16 +7558,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -15643.72,
+      "balAmt": -18735.4,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-25",
       "low": false,
-      "orderCount": 17,
+      "orderCount": 18,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 15643.72
+      "usedAmt": 18735.4
     },
     {
       "balAmt": 0,
@@ -8119,6 +8132,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmvniz04nhiufnj",
     "cmvnixsy0r0z042",
     "cmvniwh7jkpdp45",
     "a:cmvniv5z2vqcpze",
@@ -36894,7 +36908,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-25T07:47:05.041Z",
+      "generatedAt": "2026-10-25T07:48:08.928Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
