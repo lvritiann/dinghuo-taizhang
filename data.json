@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T17:43:39.701Z",
+  "updatedAt": "2026-10-25T20:12:05.565Z",
   "source": "kdocs",
   "today": "2026-10-25",
   "products": [
@@ -10893,14 +10893,14 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 343,
           "stockAmt": 1258.57,
-          "sales30": 26,
-          "sales90": 214
+          "sales30": 28,
+          "sales90": 216
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1099,
           "stockAmt": 5077.38,
-          "sales30": 75,
-          "sales90": 75
+          "sales30": 82,
+          "sales90": 82
         },
         "20元枸杞槟榔/包": {
           "stock": 1,
@@ -10917,8 +10917,8 @@
         "50元枸杞槟榔/包": {
           "stock": 2,
           "stockAmt": 64,
-          "sales30": 1,
-          "sales90": 12
+          "sales30": 3,
+          "sales90": 14
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -10971,20 +10971,20 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 343,
           "stockAmt": 1258.57,
-          "sales30": 26,
-          "sales90": 214
+          "sales30": 28,
+          "sales90": 216
         },
         "东鹏特饮促销": {
           "stock": 343,
           "stockAmt": 1258.57,
-          "sales30": 26,
-          "sales90": 214
+          "sales30": 28,
+          "sales90": 216
         },
         "东鹏特饮促销1": {
           "stock": 343,
           "stockAmt": 1258.57,
-          "sales30": 26,
-          "sales90": 214
+          "sales30": 28,
+          "sales90": 216
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 5,
@@ -11657,8 +11657,8 @@
         "壳牌防冻液-红色 -45℃": {
           "stock": 4,
           "stockAmt": 152.44,
-          "sales30": 0,
-          "sales90": 0
+          "sales30": 4,
+          "sales90": 4
         },
         "壳牌防冻液-绿色 -45℃": {
           "stock": 5,
@@ -11885,8 +11885,8 @@
         "红牛维生素功能饮料（天天）": {
           "stock": 1480,
           "stockAmt": 6837.75,
-          "sales30": 59,
-          "sales90": 59
+          "sales30": 83,
+          "sales90": 83
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -12479,8 +12479,8 @@
         "康师傅香辣牛肉面113g": {
           "stock": 1,
           "stockAmt": 3.8,
-          "sales30": 1,
-          "sales90": 30
+          "sales30": 9,
+          "sales90": 38
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -37238,7 +37238,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-25T17:43:51.037Z",
+      "generatedAt": "2026-10-25T20:12:16.588Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37247,12 +37247,12 @@
         "照金北"
       ],
       "s9Rows": 6422,
-      "s11Rows": 8216,
+      "s11Rows": 8248,
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
-      "cellsWithSales": 811,
-      "latestFlowDate": "2026-10-24",
+      "cellsWithSales": 812,
+      "latestFlowDate": "2026-10-25",
       "note": "销量可能为空：出库流水主要覆盖便利店商品，润滑油/汽车用品多数未进入流水"
     }
   }
