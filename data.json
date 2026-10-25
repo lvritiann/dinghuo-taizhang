@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-25T02:03:09.089Z",
+  "updatedAt": "2026-10-25T02:13:40.353Z",
   "source": "kdocs",
   "today": "2026-10-25",
   "products": [
@@ -7880,12 +7880,29 @@
       "supplier": "天易蓝",
       "ts": "2026-10-25 10:02",
       "unit": "桶"
+    },
+    {
+      "by": "秦岭东",
+      "diff": 100,
+      "note": "",
+      "product": "尿素PE",
+      "qtyGot": 300,
+      "qtyShould": 200,
+      "reason": "尿素实际收货300桶",
+      "row": 24,
+      "site": "秦岭",
+      "spec": "",
+      "store": "秦岭东",
+      "supplier": "天易蓝",
+      "ts": "2026-10-25 10:12",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmvn71dbdpfhk01",
     "a:cmvn6nubkqn3baz",
     "cmvn6bga8a9h7u6",
     "cmvn63zyp8rutxt",
@@ -36645,7 +36662,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-25T02:03:21.464Z",
+      "generatedAt": "2026-10-25T02:13:52.746Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
