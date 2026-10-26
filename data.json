@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26T01:47:17.204Z",
+  "updatedAt": "2026-10-26T03:54:18.436Z",
   "source": "kdocs",
   "today": "2026-10-26",
   "products": [
@@ -3244,54 +3244,15 @@
       "unit": "箱"
     },
     {
-      "amount": 36.7,
-      "date": "2026-10-25",
-      "expireDate": "",
-      "note": "",
-      "price": 3.67,
-      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
-      "qty": 10,
-      "spec": "1*24",
-      "store": "华山南",
-      "supplier": "天天",
-      "unit": "箱"
-    },
-    {
-      "amount": 95.6,
-      "date": "2026-10-25",
+      "amount": 478,
+      "date": "2026-10-26",
       "expireDate": "",
       "note": "",
       "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
-      "qty": 20,
+      "qty": 100,
       "spec": "1*24",
-      "store": "华山南",
-      "supplier": "天天",
-      "unit": "箱"
-    },
-    {
-      "amount": 47.8,
-      "date": "2026-10-25",
-      "expireDate": "",
-      "note": "",
-      "price": 4.78,
-      "product": "红牛维生素功能饮料（天天）",
-      "qty": 10,
-      "spec": "1*24",
-      "store": "华山北",
-      "supplier": "天天",
-      "unit": "箱"
-    },
-    {
-      "amount": 36.7,
-      "date": "2026-10-25",
-      "expireDate": "",
-      "note": "",
-      "price": 3.67,
-      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
-      "qty": 10,
-      "spec": "1*24",
-      "store": "华山北",
+      "store": "洋县",
       "supplier": "天天",
       "unit": "箱"
     },
@@ -3760,58 +3721,6 @@
       "qty": 53,
       "spec": "",
       "store": "旬阳南",
-      "supplier": "天易蓝",
-      "unit": "桶"
-    },
-    {
-      "amount": 36.16,
-      "date": "2026-10-25",
-      "expireDate": "",
-      "note": "",
-      "price": 3.616,
-      "product": "玻璃水-20#",
-      "qty": 10,
-      "spec": "2L",
-      "store": "华山南",
-      "supplier": "天易蓝",
-      "unit": "箱"
-    },
-    {
-      "amount": 2938,
-      "date": "2026-10-25",
-      "expireDate": "",
-      "note": "",
-      "price": 14.69,
-      "product": "尿素PET",
-      "qty": 200,
-      "spec": "",
-      "store": "华山南",
-      "supplier": "天易蓝",
-      "unit": "桶"
-    },
-    {
-      "amount": 36.16,
-      "date": "2026-10-25",
-      "expireDate": "",
-      "note": "",
-      "price": 3.616,
-      "product": "玻璃水-20#",
-      "qty": 10,
-      "spec": "2L",
-      "store": "华山北",
-      "supplier": "天易蓝",
-      "unit": "箱"
-    },
-    {
-      "amount": 2938,
-      "date": "2026-10-25",
-      "expireDate": "",
-      "note": "",
-      "price": 14.69,
-      "product": "尿素PET",
-      "qty": 200,
-      "spec": "",
-      "store": "华山北",
       "supplier": "天易蓝",
       "unit": "桶"
     },
@@ -5327,12 +5236,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -1580,
+      "balQty": -1560,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 8,
+      "orderCount": 6,
       "pct": 0,
       "price": 3.67,
       "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
@@ -5340,16 +5249,16 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 5798.6,
-      "usedQty": 1580
+      "usedAmt": 5725.2,
+      "usedQty": 1560
     },
     {
-      "balQty": -4840,
+      "balQty": -4910,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 8,
+      "orderCount": 7,
       "pct": 0,
       "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
@@ -5357,8 +5266,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 23135.2,
-      "usedQty": 4840
+      "usedAmt": 23469.8,
+      "usedQty": 4910
     },
     {
       "balQty": -60,
@@ -7741,12 +7650,12 @@
       "usedQty": 10
     },
     {
-      "balQty": -900,
+      "balQty": -880,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 11,
+      "orderCount": 9,
       "pct": 0,
       "price": 3.616,
       "product": "玻璃水-20#",
@@ -7754,8 +7663,8 @@
       "spec": "2L",
       "supplier": "天易蓝",
       "unit": "箱",
-      "usedAmt": 3254.4,
-      "usedQty": 900
+      "usedAmt": 3182.08,
+      "usedQty": 880
     },
     {
       "balQty": -2700,
@@ -7775,12 +7684,12 @@
       "usedQty": 2700
     },
     {
-      "balQty": -4480,
+      "balQty": -4080,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 20,
+      "orderCount": 18,
       "pct": 0,
       "price": 14.69,
       "product": "尿素PET",
@@ -7788,8 +7697,8 @@
       "spec": "",
       "supplier": "天易蓝",
       "unit": "桶",
-      "usedAmt": 65811.2,
-      "usedQty": 4480
+      "usedAmt": 59935.2,
+      "usedQty": 4080
     }
   ],
   "supplierBal": [
@@ -7854,16 +7763,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -28933.8,
+      "balAmt": -29195,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-10-25",
+      "lastDate": "2026-10-26",
       "low": false,
-      "orderCount": 16,
+      "orderCount": 13,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 28933.8
+      "usedAmt": 29195
     },
     {
       "balAmt": -2160,
@@ -7890,16 +7799,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -109665.9,
+      "balAmt": -103717.58,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-26",
       "low": false,
-      "orderCount": 39,
+      "orderCount": 35,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 109665.9
+      "usedAmt": 103717.58
     }
   ],
   "catCaps": [
@@ -8440,6 +8349,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmvoq2mtoch6fko",
     "cmvolgmqljofjx6",
     "cmvolfodxta3vr9",
     "cmvolcdx1336m8k",
@@ -37241,7 +37151,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-26T01:47:32.905Z",
+      "generatedAt": "2026-10-26T03:54:32.227Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
