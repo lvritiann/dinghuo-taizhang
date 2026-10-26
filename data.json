@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26T01:43:35.734Z",
+  "updatedAt": "2026-10-26T01:44:50.678Z",
   "source": "kdocs",
   "today": "2026-10-26",
   "products": [
@@ -3062,6 +3062,19 @@
       "unit": "桶"
     },
     {
+      "amount": 1356,
+      "date": "2026-10-26",
+      "expireDate": "",
+      "note": "",
+      "price": 56.5,
+      "product": "壳牌喜力HX7+ 5W30",
+      "qty": 24,
+      "spec": "1L",
+      "store": "富平",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4192,12 +4205,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -48,
+      "balQty": -72,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 2,
       "pct": 0,
       "price": 56.5,
       "product": "壳牌喜力HX7+ 5W30",
@@ -4205,8 +4218,8 @@
       "spec": "1L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 2712,
-      "usedQty": 48
+      "usedAmt": 4068,
+      "usedQty": 72
     },
     {
       "balQty": -48,
@@ -7805,16 +7818,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -22369.48,
+      "balAmt": -23725.48,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-10-25",
+      "lastDate": "2026-10-26",
       "low": false,
-      "orderCount": 20,
+      "orderCount": 21,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 22369.48
+      "usedAmt": 23725.48
     },
     {
       "balAmt": 0,
@@ -8427,6 +8440,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmvolfodxta3vr9",
     "cmvolcdx1336m8k",
     "cmvnvd15h79nfnu",
     "cmvnvd15hp6nwh4",
@@ -37226,7 +37240,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-26T01:43:49.878Z",
+      "generatedAt": "2026-10-26T01:45:05.535Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
