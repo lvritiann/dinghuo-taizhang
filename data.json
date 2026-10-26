@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-26T01:44:50.678Z",
+  "updatedAt": "2026-10-26T01:46:05.208Z",
   "source": "kdocs",
   "today": "2026-10-26",
   "products": [
@@ -3075,6 +3075,19 @@
       "unit": "桶"
     },
     {
+      "amount": 542.4,
+      "date": "2026-10-26",
+      "expireDate": "",
+      "note": "",
+      "price": 45.2,
+      "product": "壳牌防冻液-绿色 -45℃",
+      "qty": 12,
+      "spec": "4KG",
+      "store": "富平",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4324,12 +4337,12 @@
       "usedQty": 36
     },
     {
-      "balQty": -28,
+      "balQty": -40,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 3,
+      "orderCount": 4,
       "pct": 0,
       "price": 45.2,
       "product": "壳牌防冻液-绿色 -45℃",
@@ -4337,8 +4350,8 @@
       "spec": "4KG",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 1265.6,
-      "usedQty": 28
+      "usedAmt": 1808,
+      "usedQty": 40
     },
     {
       "balQty": 0,
@@ -7818,16 +7831,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -23725.48,
+      "balAmt": -24267.88,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-26",
       "low": false,
-      "orderCount": 21,
+      "orderCount": 22,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 23725.48
+      "usedAmt": 24267.88
     },
     {
       "balAmt": 0,
@@ -8440,6 +8453,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmvolgmqljofjx6",
     "cmvolfodxta3vr9",
     "cmvolcdx1336m8k",
     "cmvnvd15h79nfnu",
@@ -37240,7 +37254,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-26T01:45:05.535Z",
+      "generatedAt": "2026-10-26T01:46:17.075Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
