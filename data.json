@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-10-26T22:48:10.018Z",
+  "updatedAt": "2026-10-27T01:45:07.026Z",
   "source": "kdocs",
-  "today": "2026-10-26",
+  "today": "2026-10-27",
   "products": [
     {
       "capQty": 0,
@@ -37151,7 +37151,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-26T22:48:21.006Z",
+      "generatedAt": "2026-10-27T01:45:22.731Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37160,12 +37160,12 @@
         "照金北"
       ],
       "s9Rows": 6422,
-      "s11Rows": 8710,
+      "s11Rows": 8711,
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
       "cellsWithSales": 821,
-      "latestFlowDate": "2026-10-25",
+      "latestFlowDate": "2026-10-27",
       "note": "销量可能为空：出库流水主要覆盖便利店商品，润滑油/汽车用品多数未进入流水"
     }
   }
