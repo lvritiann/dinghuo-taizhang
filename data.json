@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-28T06:18:27.915Z",
+  "updatedAt": "2026-10-28T07:51:25.272Z",
   "source": "kdocs",
   "today": "2026-10-28",
   "products": [
@@ -3602,19 +3602,6 @@
       "price": 3.616,
       "product": "玻璃水-20#",
       "qty": 15,
-      "spec": "2L",
-      "store": "韩城东",
-      "supplier": "天易蓝",
-      "unit": "箱"
-    },
-    {
-      "amount": 36.16,
-      "date": "2026-10-25",
-      "expireDate": "",
-      "note": "",
-      "price": 3.616,
-      "product": "玻璃水-20#",
-      "qty": 10,
       "spec": "2L",
       "store": "韩城东",
       "supplier": "天易蓝",
@@ -7676,12 +7663,12 @@
       "usedQty": 10
     },
     {
-      "balQty": -880,
+      "balQty": -870,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 9,
+      "orderCount": 8,
       "pct": 0,
       "price": 3.616,
       "product": "玻璃水-20#",
@@ -7689,8 +7676,8 @@
       "spec": "2L",
       "supplier": "天易蓝",
       "unit": "箱",
-      "usedAmt": 3182.08,
-      "usedQty": 880
+      "usedAmt": 3145.92,
+      "usedQty": 870
     },
     {
       "balQty": -2700,
@@ -7825,16 +7812,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -108124.58,
+      "balAmt": -108088.42,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-10-28",
       "low": false,
-      "orderCount": 37,
+      "orderCount": 36,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 108124.58
+      "usedAmt": 108088.42
     }
   ],
   "catCaps": [
@@ -37178,7 +37165,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-28T06:18:40.889Z",
+      "generatedAt": "2026-10-28T07:51:41.880Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
