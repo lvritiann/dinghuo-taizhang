@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-10-28T20:00:27.260Z",
+  "updatedAt": "2026-10-29T00:06:49.126Z",
   "source": "kdocs",
-  "today": "2026-10-28",
+  "today": "2026-10-29",
   "products": [
     {
       "capQty": 0,
@@ -8658,7 +8658,7 @@
           "stock": 30,
           "stockAmt": 62.1,
           "sales30": 0,
-          "sales90": 24
+          "sales90": 0
         },
         "伊利 奶皮子酸奶味70g": {
           "stock": 0,
@@ -8670,25 +8670,25 @@
           "stock": 14,
           "stockAmt": 15.26,
           "sales30": 0,
-          "sales90": 25
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 9,
           "stockAmt": 11.7,
           "sales30": 0,
-          "sales90": 22
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓（70g）": {
           "stock": 7,
           "stockAmt": 7.63,
           "sales30": 0,
-          "sales90": 26
+          "sales90": 0
         },
         "伊利冰工厂炫菠萝（70g）": {
           "stock": 3,
           "stockAmt": 5.52,
           "sales30": 0,
-          "sales90": 29
+          "sales90": 0
         },
         "伊利哈蜜瓜脆筒（73g）": {
           "stock": 0,
@@ -8700,7 +8700,7 @@
           "stock": 6,
           "stockAmt": 9,
           "sales30": 0,
-          "sales90": 23
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -8712,7 +8712,7 @@
           "stock": 6,
           "stockAmt": 18.96,
           "sales30": 1,
-          "sales90": 19
+          "sales90": 1
         },
         "伊利心情": {
           "stock": 22,
@@ -8724,19 +8724,19 @@
           "stock": 10,
           "stockAmt": 60,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "伊利甄稀青柑蜜瓜杯": {
           "stock": 6,
           "stockAmt": 36,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "伊利甄稀香草杯（90g）": {
           "stock": 15,
           "stockAmt": 100.65,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "伊利精火炬雪糕（80g）": {
           "stock": 0,
@@ -8802,13 +8802,13 @@
           "stock": 32,
           "stockAmt": 118.72,
           "sales30": 1,
-          "sales90": 3
+          "sales90": 1
         },
         "甄稀袋-蓝莓芝芝黑巧": {
           "stock": 22,
           "stockAmt": 81.62,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "蒙牛-随变 (咖啡味)  75g": {
           "stock": 0,
@@ -8826,7 +8826,7 @@
           "stock": 205,
           "stockAmt": 1332.5,
           "sales30": 2,
-          "sales90": 10
+          "sales90": 2
         },
         "速力奥发酵人参营养饮料(能量风味)（天朗）": {
           "stock": 220,
@@ -8850,7 +8850,7 @@
           "stock": 808,
           "stockAmt": 2965.93,
           "sales30": 35,
-          "sales90": 322
+          "sales90": 35
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 995,
@@ -8862,19 +8862,19 @@
           "stock": 18,
           "stockAmt": 216,
           "sales30": 9,
-          "sales90": 25
+          "sales90": 9
         },
         "30元枸杞槟榔/包": {
           "stock": 5,
           "stockAmt": 90,
           "sales30": 7,
-          "sales90": 27
+          "sales90": 7
         },
         "50元枸杞槟榔/包": {
           "stock": 10,
           "stockAmt": 320,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -8922,43 +8922,43 @@
           "stock": 11,
           "stockAmt": 31.13,
           "sales30": 0,
-          "sales90": 12
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 808,
           "stockAmt": 2965.93,
           "sales30": 35,
-          "sales90": 322
+          "sales90": 35
         },
         "东鹏特饮促销": {
           "stock": 808,
           "stockAmt": 2965.93,
           "sales30": 35,
-          "sales90": 322
+          "sales90": 35
         },
         "东鹏特饮促销1": {
           "stock": 808,
           "stockAmt": 2965.93,
           "sales30": 35,
-          "sales90": 322
+          "sales90": 35
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 14,
           "stockAmt": 15.26,
           "sales30": 0,
-          "sales90": 25
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 7,
           "stockAmt": 7.63,
           "sales30": 0,
-          "sales90": 26
+          "sales90": 0
         },
         "伊利巧乐兹巧丝绒35支": {
           "stock": 6,
           "stockAmt": 18.96,
           "sales30": 1,
-          "sales90": 19
+          "sales90": 1
         },
         "伊利牧场香草味奶昔雪糕（90克*16杯）": {
           "stock": 0,
@@ -9006,7 +9006,7 @@
           "stock": 39,
           "stockAmt": 94.77,
           "sales30": 0,
-          "sales90": 29
+          "sales90": 0
         },
         "巧乐兹巧榛橘冰淇凌70g*35支": {
           "stock": 0,
@@ -9036,13 +9036,13 @@
           "stock": 34,
           "stockAmt": 101.66,
           "sales30": 0,
-          "sales90": 37
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 28,
           "stockAmt": 83.72,
           "sales30": 5,
-          "sales90": 41
+          "sales90": 5
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -9102,19 +9102,19 @@
           "stock": 13,
           "stockAmt": 44.07,
           "sales30": 0,
-          "sales90": 16
+          "sales90": 0
         },
         "甄稀满满葡萄味90克*16": {
           "stock": 13,
           "stockAmt": 78,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "甄稀白桃乌龙冰淇凌90g*16支": {
           "stock": 10,
           "stockAmt": 60,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "甄稀醇真原味冰淇淋（70克*30支）": {
           "stock": 0,
@@ -9438,19 +9438,19 @@
           "stock": 45,
           "stockAmt": 220.95,
           "sales30": 32,
-          "sales90": 136
+          "sales90": 32
         },
         "康师傅红烧牛肉面": {
           "stock": 12,
           "stockAmt": 45.6,
           "sales30": 5,
-          "sales90": 26
+          "sales90": 5
         },
         "康师傅香辣牛肉面113g": {
           "stock": 3,
           "stockAmt": 11.4,
           "sales30": 4,
-          "sales90": 7
+          "sales90": 4
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -9462,13 +9462,13 @@
           "stock": 5,
           "stockAmt": 24.25,
           "sales30": 2,
-          "sales90": 10
+          "sales90": 2
         },
         "旺旺仙贝52g": {
           "stock": 11,
           "stockAmt": 48.55,
           "sales30": 3,
-          "sales90": 6
+          "sales90": 3
         },
         "尿素PE": {
           "stock": 188,
@@ -9644,7 +9644,7 @@
           "stock": 12,
           "stockAmt": 24.84,
           "sales30": 0,
-          "sales90": 25
+          "sales90": 0
         },
         "伊利 奶皮子酸奶味70g": {
           "stock": 27,
@@ -9656,25 +9656,25 @@
           "stock": 3,
           "stockAmt": 3.27,
           "sales30": 0,
-          "sales90": 39
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 1,
           "stockAmt": 1.3,
           "sales30": 0,
-          "sales90": 32
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓（70g）": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 45
+          "sales90": 0
         },
         "伊利冰工厂炫菠萝（70g）": {
           "stock": 30,
           "stockAmt": 55.2,
           "sales30": 0,
-          "sales90": 24
+          "sales90": 0
         },
         "伊利哈蜜瓜脆筒（73g）": {
           "stock": 0,
@@ -9686,7 +9686,7 @@
           "stock": 20,
           "stockAmt": 30,
           "sales30": 0,
-          "sales90": 26
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -9698,7 +9698,7 @@
           "stock": 28,
           "stockAmt": 88.48,
           "sales30": 4,
-          "sales90": 26
+          "sales90": 4
         },
         "伊利心情": {
           "stock": 17,
@@ -9710,19 +9710,19 @@
           "stock": 8,
           "stockAmt": 48,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "伊利甄稀青柑蜜瓜杯": {
           "stock": 4,
           "stockAmt": 24,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "伊利甄稀香草杯（90g）": {
           "stock": 8,
           "stockAmt": 53.68,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "伊利精火炬雪糕（80g）": {
           "stock": 0,
@@ -9788,13 +9788,13 @@
           "stock": 11,
           "stockAmt": 40.81,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "甄稀袋-蓝莓芝芝黑巧": {
           "stock": 11,
           "stockAmt": 40.81,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "蒙牛-随变 (咖啡味)  75g": {
           "stock": 0,
@@ -9812,13 +9812,13 @@
           "stock": 266,
           "stockAmt": 1729,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(能量风味)（天朗）": {
           "stock": 258,
           "stockAmt": 1677,
           "sales30": 5,
-          "sales90": 8
+          "sales90": 5
         },
         "雀巢-8次方-甜橙乳酸菌": {
           "stock": 0,
@@ -9836,7 +9836,7 @@
           "stock": 795,
           "stockAmt": 2917.65,
           "sales30": 29,
-          "sales90": 427
+          "sales90": 29
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1495,
@@ -9848,19 +9848,19 @@
           "stock": 7,
           "stockAmt": 84,
           "sales30": 6,
-          "sales90": 21
+          "sales90": 6
         },
         "30元枸杞槟榔/包": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 9,
-          "sales90": 31
+          "sales90": 9
         },
         "50元枸杞槟榔/包": {
           "stock": 2,
           "stockAmt": 64,
           "sales30": 1,
-          "sales90": 8
+          "sales90": 1
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -9908,43 +9908,43 @@
           "stock": 4,
           "stockAmt": 11.32,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 795,
           "stockAmt": 2917.65,
           "sales30": 29,
-          "sales90": 427
+          "sales90": 29
         },
         "东鹏特饮促销": {
           "stock": 795,
           "stockAmt": 2917.65,
           "sales30": 29,
-          "sales90": 427
+          "sales90": 29
         },
         "东鹏特饮促销1": {
           "stock": 795,
           "stockAmt": 2917.65,
           "sales30": 29,
-          "sales90": 427
+          "sales90": 29
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 3,
           "stockAmt": 3.27,
           "sales30": 0,
-          "sales90": 39
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 45
+          "sales90": 0
         },
         "伊利巧乐兹巧丝绒35支": {
           "stock": 28,
           "stockAmt": 88.48,
           "sales30": 4,
-          "sales90": 26
+          "sales90": 4
         },
         "伊利牧场香草味奶昔雪糕（90克*16杯）": {
           "stock": 0,
@@ -9992,7 +9992,7 @@
           "stock": 32,
           "stockAmt": 77.76,
           "sales30": 0,
-          "sales90": 37
+          "sales90": 0
         },
         "巧乐兹巧榛橘冰淇凌70g*35支": {
           "stock": 0,
@@ -10022,13 +10022,13 @@
           "stock": 17,
           "stockAmt": 50.83,
           "sales30": 1,
-          "sales90": 33
+          "sales90": 1
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 12,
           "stockAmt": 35.88,
           "sales30": 2,
-          "sales90": 36
+          "sales90": 2
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -10088,19 +10088,19 @@
           "stock": 4,
           "stockAmt": 13.56,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "甄稀满满葡萄味90克*16": {
           "stock": 6,
           "stockAmt": 36,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "甄稀白桃乌龙冰淇凌90g*16支": {
           "stock": 8,
           "stockAmt": 48,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "甄稀醇真原味冰淇淋（70克*30支）": {
           "stock": 0,
@@ -10424,19 +10424,19 @@
           "stock": 45,
           "stockAmt": 220.95,
           "sales30": 32,
-          "sales90": 126
+          "sales90": 32
         },
         "康师傅红烧牛肉面": {
           "stock": 12,
           "stockAmt": 45.6,
           "sales30": 3,
-          "sales90": 10
+          "sales90": 3
         },
         "康师傅香辣牛肉面113g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -10448,13 +10448,13 @@
           "stock": 20,
           "stockAmt": 97,
           "sales30": 5,
-          "sales90": 14
+          "sales90": 5
         },
         "旺旺仙贝52g": {
           "stock": 13,
           "stockAmt": 57.35,
           "sales30": 1,
-          "sales90": 10
+          "sales90": 1
         },
         "尿素PE": {
           "stock": 192,
@@ -10630,7 +10630,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 22
+          "sales90": 0
         },
         "伊利 奶皮子酸奶味70g": {
           "stock": 0,
@@ -10642,25 +10642,25 @@
           "stock": 5,
           "stockAmt": 5.45,
           "sales30": 0,
-          "sales90": 34
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 9,
           "stockAmt": 11.7,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓（70g）": {
           "stock": 8,
           "stockAmt": 8.72,
           "sales30": 0,
-          "sales90": 24
+          "sales90": 0
         },
         "伊利冰工厂炫菠萝（70g）": {
           "stock": 19,
           "stockAmt": 34.96,
           "sales30": 0,
-          "sales90": 11
+          "sales90": 0
         },
         "伊利哈蜜瓜脆筒（73g）": {
           "stock": 0,
@@ -10672,7 +10672,7 @@
           "stock": 32,
           "stockAmt": 48,
           "sales30": 0,
-          "sales90": 34
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -10684,7 +10684,7 @@
           "stock": 35,
           "stockAmt": 110.6,
           "sales30": 1,
-          "sales90": 30
+          "sales90": 1
         },
         "伊利心情": {
           "stock": 26,
@@ -10696,19 +10696,19 @@
           "stock": 8,
           "stockAmt": 48,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "伊利甄稀青柑蜜瓜杯": {
           "stock": 11,
           "stockAmt": 66,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "伊利甄稀香草杯（90g）": {
           "stock": 9,
           "stockAmt": 60.39,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "伊利精火炬雪糕（80g）": {
           "stock": 15,
@@ -10774,13 +10774,13 @@
           "stock": 13,
           "stockAmt": 48.23,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "甄稀袋-蓝莓芝芝黑巧": {
           "stock": 14,
           "stockAmt": 51.94,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "蒙牛-随变 (咖啡味)  75g": {
           "stock": 0,
@@ -10822,7 +10822,7 @@
           "stock": 343,
           "stockAmt": 1258.57,
           "sales30": 42,
-          "sales90": 230
+          "sales90": 42
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1099,
@@ -10834,19 +10834,19 @@
           "stock": 1,
           "stockAmt": 12,
           "sales30": 9,
-          "sales90": 56
+          "sales90": 9
         },
         "30元枸杞槟榔/包": {
           "stock": 3,
           "stockAmt": 54,
           "sales30": 9,
-          "sales90": 47
+          "sales90": 9
         },
         "50元枸杞槟榔/包": {
           "stock": 2,
           "stockAmt": 64,
           "sales30": 3,
-          "sales90": 14
+          "sales90": 3
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -10894,43 +10894,43 @@
           "stock": 16,
           "stockAmt": 45.28,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 343,
           "stockAmt": 1258.57,
           "sales30": 42,
-          "sales90": 230
+          "sales90": 42
         },
         "东鹏特饮促销": {
           "stock": 343,
           "stockAmt": 1258.57,
           "sales30": 42,
-          "sales90": 230
+          "sales90": 42
         },
         "东鹏特饮促销1": {
           "stock": 343,
           "stockAmt": 1258.57,
           "sales30": 42,
-          "sales90": 230
+          "sales90": 42
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 5,
           "stockAmt": 5.45,
           "sales30": 0,
-          "sales90": 34
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 8,
           "stockAmt": 8.72,
           "sales30": 0,
-          "sales90": 24
+          "sales90": 0
         },
         "伊利巧乐兹巧丝绒35支": {
           "stock": 35,
           "stockAmt": 110.6,
           "sales30": 1,
-          "sales90": 30
+          "sales90": 1
         },
         "伊利牧场香草味奶昔雪糕（90克*16杯）": {
           "stock": 0,
@@ -10978,7 +10978,7 @@
           "stock": 37,
           "stockAmt": 89.91,
           "sales30": 0,
-          "sales90": 24
+          "sales90": 0
         },
         "巧乐兹巧榛橘冰淇凌70g*35支": {
           "stock": 0,
@@ -11008,13 +11008,13 @@
           "stock": 32,
           "stockAmt": 95.68,
           "sales30": 1,
-          "sales90": 28
+          "sales90": 1
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 31,
           "stockAmt": 92.69,
           "sales30": 4,
-          "sales90": 38
+          "sales90": 4
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -11074,7 +11074,7 @@
           "stock": 1,
           "stockAmt": 3.39,
           "sales30": 0,
-          "sales90": 21
+          "sales90": 0
         },
         "甄稀满满葡萄味90克*16": {
           "stock": 14,
@@ -11086,7 +11086,7 @@
           "stock": 8,
           "stockAmt": 48,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "甄稀醇真原味冰淇淋（70克*30支）": {
           "stock": 0,
@@ -11410,19 +11410,19 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 25,
-          "sales90": 108
+          "sales90": 25
         },
         "康师傅红烧牛肉面": {
           "stock": 11,
           "stockAmt": 41.8,
           "sales30": 8,
-          "sales90": 41
+          "sales90": 8
         },
         "康师傅香辣牛肉面113g": {
           "stock": 24,
           "stockAmt": 91.2,
           "sales30": 8,
-          "sales90": 35
+          "sales90": 8
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -11440,7 +11440,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 176,
@@ -11616,7 +11616,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "伊利 奶皮子酸奶味70g": {
           "stock": 0,
@@ -11628,25 +11628,25 @@
           "stock": 3,
           "stockAmt": 3.27,
           "sales30": 0,
-          "sales90": 31
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 1,
           "stockAmt": 1.3,
           "sales30": 0,
-          "sales90": 26
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓（70g）": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 40
+          "sales90": 0
         },
         "伊利冰工厂炫菠萝（70g）": {
           "stock": 3,
           "stockAmt": 5.52,
           "sales30": 0,
-          "sales90": 25
+          "sales90": 0
         },
         "伊利哈蜜瓜脆筒（73g）": {
           "stock": 0,
@@ -11658,7 +11658,7 @@
           "stock": 37,
           "stockAmt": 55.5,
           "sales30": 0,
-          "sales90": 22
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -11670,7 +11670,7 @@
           "stock": 30,
           "stockAmt": 94.8,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "伊利心情": {
           "stock": 30,
@@ -11682,13 +11682,13 @@
           "stock": 9,
           "stockAmt": 54,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "伊利甄稀青柑蜜瓜杯": {
           "stock": 8,
           "stockAmt": 48,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "伊利甄稀香草杯（90g）": {
           "stock": 15,
@@ -11760,13 +11760,13 @@
           "stock": 24,
           "stockAmt": 89.04,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "甄稀袋-蓝莓芝芝黑巧": {
           "stock": 16,
           "stockAmt": 59.36,
           "sales30": 0,
-          "sales90": 12
+          "sales90": 0
         },
         "蒙牛-随变 (咖啡味)  75g": {
           "stock": 0,
@@ -11808,7 +11808,7 @@
           "stock": 291,
           "stockAmt": 1068,
           "sales30": 36,
-          "sales90": 287
+          "sales90": 36
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1480,
@@ -11820,19 +11820,19 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 55
+          "sales90": 0
         },
         "30元枸杞槟榔/包": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 42
+          "sales90": 0
         },
         "50元枸杞槟榔/包": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 2,
-          "sales90": 15
+          "sales90": 2
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -11880,43 +11880,43 @@
           "stock": 8,
           "stockAmt": 22.64,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 291,
           "stockAmt": 1068,
           "sales30": 36,
-          "sales90": 287
+          "sales90": 36
         },
         "东鹏特饮促销": {
           "stock": 291,
           "stockAmt": 1068,
           "sales30": 36,
-          "sales90": 287
+          "sales90": 36
         },
         "东鹏特饮促销1": {
           "stock": 291,
           "stockAmt": 1068,
           "sales30": 36,
-          "sales90": 287
+          "sales90": 36
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 3,
           "stockAmt": 3.27,
           "sales30": 0,
-          "sales90": 31
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 40
+          "sales90": 0
         },
         "伊利巧乐兹巧丝绒35支": {
           "stock": 30,
           "stockAmt": 94.8,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "伊利牧场香草味奶昔雪糕（90克*16杯）": {
           "stock": 0,
@@ -11964,7 +11964,7 @@
           "stock": 37,
           "stockAmt": 89.91,
           "sales30": 2,
-          "sales90": 32
+          "sales90": 2
         },
         "巧乐兹巧榛橘冰淇凌70g*35支": {
           "stock": 0,
@@ -11994,13 +11994,13 @@
           "stock": 33,
           "stockAmt": 98.67,
           "sales30": 0,
-          "sales90": 26
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 28,
           "stockAmt": 83.72,
           "sales30": 7,
-          "sales90": 31
+          "sales90": 7
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -12060,19 +12060,19 @@
           "stock": 9,
           "stockAmt": 30.51,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "甄稀满满葡萄味90克*16": {
           "stock": 12,
           "stockAmt": 72,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "甄稀白桃乌龙冰淇凌90g*16支": {
           "stock": 9,
           "stockAmt": 54,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "甄稀醇真原味冰淇淋（70克*30支）": {
           "stock": 0,
@@ -12396,19 +12396,19 @@
           "stock": 50,
           "stockAmt": 245.5,
           "sales30": 18,
-          "sales90": 116
+          "sales90": 18
         },
         "康师傅红烧牛肉面": {
           "stock": 24,
           "stockAmt": 91.2,
           "sales30": 7,
-          "sales90": 32
+          "sales90": 7
         },
         "康师傅香辣牛肉面113g": {
           "stock": 1,
           "stockAmt": 3.8,
           "sales30": 12,
-          "sales90": 41
+          "sales90": 12
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -12426,7 +12426,7 @@
           "stock": 4,
           "stockAmt": 17.64,
           "sales30": 0,
-          "sales90": 12
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 209,
@@ -12614,7 +12614,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 23
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -12644,7 +12644,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 1,
-          "sales90": 41
+          "sales90": 1
         },
         "伊利小布丁": {
           "stock": 0,
@@ -12662,7 +12662,7 @@
           "stock": 18,
           "stockAmt": 27,
           "sales30": 0,
-          "sales90": 21
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -12698,7 +12698,7 @@
           "stock": 6,
           "stockAmt": 12.24,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -12710,19 +12710,19 @@
           "stock": 79,
           "stockAmt": 80.58,
           "sales30": 0,
-          "sales90": 10
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 22,
           "stockAmt": 58.08,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 1,
           "stockAmt": 2.35,
           "sales30": 0,
-          "sales90": 16
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -12734,13 +12734,13 @@
           "stock": 14,
           "stockAmt": 105.42,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 10,
           "stockAmt": 60,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -12764,7 +12764,7 @@
           "stock": 4,
           "stockAmt": 5.64,
           "sales30": 1,
-          "sales90": 15
+          "sales90": 1
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -12788,13 +12788,13 @@
           "stock": 12,
           "stockAmt": 86.64,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 235,
           "stockAmt": 921.13,
           "sales30": 9,
-          "sales90": 70
+          "sales90": 9
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1826,
@@ -12806,19 +12806,19 @@
           "stock": 15,
           "stockAmt": 180,
           "sales30": 0,
-          "sales90": 18
+          "sales90": 0
         },
         "30元枸杞槟榔/包": {
           "stock": 12,
           "stockAmt": 216,
           "sales30": 10,
-          "sales90": 49
+          "sales90": 10
         },
         "50元枸杞槟榔/包": {
           "stock": 8,
           "stockAmt": 256,
           "sales30": 4,
-          "sales90": 18
+          "sales90": 4
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -12872,25 +12872,25 @@
           "stock": 235,
           "stockAmt": 921.13,
           "sales30": 9,
-          "sales90": 70
+          "sales90": 9
         },
         "东鹏特饮促销": {
           "stock": 235,
           "stockAmt": 921.13,
           "sales30": 9,
-          "sales90": 70
+          "sales90": 9
         },
         "东鹏特饮促销1": {
           "stock": 235,
           "stockAmt": 921.13,
           "sales30": 9,
-          "sales90": 70
+          "sales90": 9
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 23
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -12980,13 +12980,13 @@
           "stock": 53,
           "stockAmt": 158.47,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 21,
           "stockAmt": 62.79,
           "sales30": 0,
-          "sales90": 26
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -13382,7 +13382,7 @@
           "stock": 18,
           "stockAmt": 88.38,
           "sales30": 7,
-          "sales90": 47
+          "sales90": 7
         },
         "康师傅红烧牛肉面": {
           "stock": 0,
@@ -13394,7 +13394,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 2,
-          "sales90": 11
+          "sales90": 2
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -13406,13 +13406,13 @@
           "stock": 20,
           "stockAmt": 97,
           "sales30": 3,
-          "sales90": 5
+          "sales90": 3
         },
         "旺旺仙贝52g": {
           "stock": 3,
           "stockAmt": 13.23,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 0,
@@ -13600,7 +13600,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 40
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -13630,7 +13630,7 @@
           "stock": 7,
           "stockAmt": 10.5,
           "sales30": 2,
-          "sales90": 22
+          "sales90": 2
         },
         "伊利小布丁": {
           "stock": 0,
@@ -13648,7 +13648,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 1,
-          "sales90": 36
+          "sales90": 1
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -13684,7 +13684,7 @@
           "stock": 17,
           "stockAmt": 34.68,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -13696,19 +13696,19 @@
           "stock": 70,
           "stockAmt": 71.4,
           "sales30": 1,
-          "sales90": 18
+          "sales90": 1
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 23,
           "stockAmt": 60.72,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 3,
           "stockAmt": 7.05,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -13720,13 +13720,13 @@
           "stock": 13,
           "stockAmt": 97.89,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 10,
           "stockAmt": 60,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -13750,7 +13750,7 @@
           "stock": 1,
           "stockAmt": 1.41,
           "sales30": 2,
-          "sales90": 27
+          "sales90": 2
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -13768,19 +13768,19 @@
           "stock": 13,
           "stockAmt": 93.86,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 13,
           "stockAmt": 93.86,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 61,
           "stockAmt": 239.1,
           "sales30": 25,
-          "sales90": 160
+          "sales90": 25
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1722,
@@ -13792,19 +13792,19 @@
           "stock": 16,
           "stockAmt": 192,
           "sales30": 3,
-          "sales90": 40
+          "sales90": 3
         },
         "30元枸杞槟榔/包": {
           "stock": 21,
           "stockAmt": 378,
           "sales30": 19,
-          "sales90": 55
+          "sales90": 19
         },
         "50元枸杞槟榔/包": {
           "stock": 7,
           "stockAmt": 224,
           "sales30": 1,
-          "sales90": 10
+          "sales90": 1
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -13852,31 +13852,31 @@
           "stock": 19,
           "stockAmt": 53.77,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 61,
           "stockAmt": 239.1,
           "sales30": 25,
-          "sales90": 160
+          "sales90": 25
         },
         "东鹏特饮促销": {
           "stock": 61,
           "stockAmt": 239.1,
           "sales30": 25,
-          "sales90": 160
+          "sales90": 25
         },
         "东鹏特饮促销1": {
           "stock": 61,
           "stockAmt": 239.1,
           "sales30": 25,
-          "sales90": 160
+          "sales90": 25
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 40
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -13966,13 +13966,13 @@
           "stock": 33,
           "stockAmt": 98.67,
           "sales30": 4,
-          "sales90": 27
+          "sales90": 4
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 36
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -14368,7 +14368,7 @@
           "stock": 22,
           "stockAmt": 108.02,
           "sales30": 12,
-          "sales90": 69
+          "sales90": 12
         },
         "康师傅红烧牛肉面": {
           "stock": 0,
@@ -14380,7 +14380,7 @@
           "stock": 21,
           "stockAmt": 79.8,
           "sales30": 10,
-          "sales90": 15
+          "sales90": 10
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -14392,13 +14392,13 @@
           "stock": 16,
           "stockAmt": 77.6,
           "sales30": 3,
-          "sales90": 10
+          "sales90": 3
         },
         "旺旺仙贝52g": {
           "stock": 31,
           "stockAmt": 136.71,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 0,
@@ -14598,31 +14598,31 @@
           "stock": 15,
           "stockAmt": 16.35,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "伊利冰工厂炫菠萝（70g）": {
           "stock": 5,
           "stockAmt": 9.2,
           "sales30": 0,
-          "sales90": 12
+          "sales90": 0
         },
         "伊利哈蜜瓜脆筒（73g）": {
           "stock": 16,
           "stockAmt": 50.88,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "伊利奶提子": {
           "stock": 35,
           "stockAmt": 52.5,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 30,
           "stockAmt": 23.7,
           "sales30": 2,
-          "sales90": 38
+          "sales90": 2
         },
         "伊利巧乐兹巧丝绒": {
           "stock": 0,
@@ -14634,7 +14634,7 @@
           "stock": 16,
           "stockAmt": 24,
           "sales30": 0,
-          "sales90": 38
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -14658,7 +14658,7 @@
           "stock": 22,
           "stockAmt": 44.66,
           "sales30": 1,
-          "sales90": 24
+          "sales90": 1
         },
         "伊利茉莉荔枝流心": {
           "stock": 0,
@@ -14676,13 +14676,13 @@
           "stock": 22,
           "stockAmt": 96.58,
           "sales30": 0,
-          "sales90": 10
+          "sales90": 0
         },
         "天冰【嘿！小白】": {
           "stock": 3,
           "stockAmt": 3.06,
           "sales30": 0,
-          "sales90": 34
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 0,
@@ -14694,13 +14694,13 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 23
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 8,
           "stockAmt": 32.8,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "梦龙- 浓郁开心果口味 64g": {
           "stock": 0,
@@ -14736,7 +14736,7 @@
           "stock": 41,
           "stockAmt": 57.81,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -14766,7 +14766,7 @@
           "stock": 491,
           "stockAmt": 1808.16,
           "sales30": 9,
-          "sales90": 250
+          "sales90": 9
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 633,
@@ -14778,19 +14778,19 @@
           "stock": 4,
           "stockAmt": 48,
           "sales30": 1,
-          "sales90": 17
+          "sales90": 1
         },
         "30元枸杞槟榔/包": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 2,
-          "sales90": 25
+          "sales90": 2
         },
         "50元枸杞槟榔/包": {
           "stock": 6,
           "stockAmt": 192,
           "sales30": 3,
-          "sales90": 16
+          "sales90": 3
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -14844,19 +14844,19 @@
           "stock": 491,
           "stockAmt": 1808.16,
           "sales30": 9,
-          "sales90": 250
+          "sales90": 9
         },
         "东鹏特饮促销": {
           "stock": 491,
           "stockAmt": 1808.16,
           "sales30": 9,
-          "sales90": 250
+          "sales90": 9
         },
         "东鹏特饮促销1": {
           "stock": 491,
           "stockAmt": 1808.16,
           "sales30": 9,
-          "sales90": 250
+          "sales90": 9
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 0,
@@ -14868,7 +14868,7 @@
           "stock": 15,
           "stockAmt": 16.35,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "伊利巧乐兹巧丝绒35支": {
           "stock": 0,
@@ -14892,7 +14892,7 @@
           "stock": 22,
           "stockAmt": 44.66,
           "sales30": 1,
-          "sales90": 24
+          "sales90": 1
         },
         "伊利红枣牛奶味雪糕65g*35支": {
           "stock": 0,
@@ -14952,13 +14952,13 @@
           "stock": 24,
           "stockAmt": 71.76,
           "sales30": 0,
-          "sales90": 36
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 34,
           "stockAmt": 101.66,
           "sales30": 0,
-          "sales90": 32
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -15066,7 +15066,7 @@
           "stock": 20,
           "stockAmt": 16.2,
           "sales30": 0,
-          "sales90": 43
+          "sales90": 0
         },
         "苦咖啡雪糕（70克*35支）": {
           "stock": 27,
@@ -15348,19 +15348,19 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 32
+          "sales90": 0
         },
         "雀巢咖啡丝滑拿铁268ml": {
           "stock": 20,
           "stockAmt": 98.2,
           "sales30": 8,
-          "sales90": 102
+          "sales90": 8
         },
         "康师傅红烧牛肉面": {
           "stock": 4,
           "stockAmt": 15.2,
           "sales30": 1,
-          "sales90": 5
+          "sales90": 1
         },
         "康师傅香辣牛肉面113g": {
           "stock": 0,
@@ -15378,13 +15378,13 @@
           "stock": 24,
           "stockAmt": 116.41,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "旺旺仙贝52g": {
           "stock": 15,
           "stockAmt": 66.16,
           "sales30": 1,
-          "sales90": 13
+          "sales90": 1
         },
         "尿素PE": {
           "stock": 123,
@@ -15584,31 +15584,31 @@
           "stock": 21,
           "stockAmt": 22.89,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "伊利冰工厂炫菠萝（70g）": {
           "stock": 21,
           "stockAmt": 38.64,
           "sales30": 0,
-          "sales90": 16
+          "sales90": 0
         },
         "伊利哈蜜瓜脆筒（73g）": {
           "stock": 22,
           "stockAmt": 69.96,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "伊利奶提子": {
           "stock": 40,
           "stockAmt": 60,
           "sales30": 0,
-          "sales90": 28
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 56,
           "stockAmt": 44.24,
           "sales30": 3,
-          "sales90": 30
+          "sales90": 3
         },
         "伊利巧乐兹巧丝绒": {
           "stock": 0,
@@ -15620,7 +15620,7 @@
           "stock": 29,
           "stockAmt": 43.5,
           "sales30": 2,
-          "sales90": 42
+          "sales90": 2
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -15644,7 +15644,7 @@
           "stock": 33,
           "stockAmt": 66.99,
           "sales30": 1,
-          "sales90": 12
+          "sales90": 1
         },
         "伊利茉莉荔枝流心": {
           "stock": 0,
@@ -15662,13 +15662,13 @@
           "stock": 22,
           "stockAmt": 96.58,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "天冰【嘿！小白】": {
           "stock": 55,
           "stockAmt": 56.1,
           "sales30": 1,
-          "sales90": 39
+          "sales90": 1
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 0,
@@ -15680,13 +15680,13 @@
           "stock": 27,
           "stockAmt": 63.45,
           "sales30": 0,
-          "sales90": 16
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 20,
           "stockAmt": 82,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "梦龙- 浓郁开心果口味 64g": {
           "stock": 0,
@@ -15722,7 +15722,7 @@
           "stock": 6,
           "stockAmt": 8.46,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -15752,7 +15752,7 @@
           "stock": 372,
           "stockAmt": 1392.51,
           "sales30": 28,
-          "sales90": 209
+          "sales90": 28
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 632,
@@ -15764,19 +15764,19 @@
           "stock": 12,
           "stockAmt": 144,
           "sales30": 0,
-          "sales90": 10
+          "sales90": 0
         },
         "30元枸杞槟榔/包": {
           "stock": 7,
           "stockAmt": 126,
           "sales30": 0,
-          "sales90": 24
+          "sales90": 0
         },
         "50元枸杞槟榔/包": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 3,
-          "sales90": 11
+          "sales90": 3
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -15830,19 +15830,19 @@
           "stock": 372,
           "stockAmt": 1392.51,
           "sales30": 28,
-          "sales90": 209
+          "sales90": 28
         },
         "东鹏特饮促销": {
           "stock": 372,
           "stockAmt": 1392.51,
           "sales30": 28,
-          "sales90": 209
+          "sales90": 28
         },
         "东鹏特饮促销1": {
           "stock": 372,
           "stockAmt": 1392.51,
           "sales30": 28,
-          "sales90": 209
+          "sales90": 28
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 0,
@@ -15854,7 +15854,7 @@
           "stock": 21,
           "stockAmt": 22.89,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "伊利巧乐兹巧丝绒35支": {
           "stock": 0,
@@ -15878,7 +15878,7 @@
           "stock": 33,
           "stockAmt": 66.99,
           "sales30": 1,
-          "sales90": 12
+          "sales90": 1
         },
         "伊利红枣牛奶味雪糕65g*35支": {
           "stock": 0,
@@ -15938,13 +15938,13 @@
           "stock": 10,
           "stockAmt": 29.9,
           "sales30": 0,
-          "sales90": 21
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 42,
           "stockAmt": 125.58,
           "sales30": 0,
-          "sales90": 26
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -16052,7 +16052,7 @@
           "stock": 35,
           "stockAmt": 28.35,
           "sales30": 1,
-          "sales90": 49
+          "sales90": 1
         },
         "苦咖啡雪糕（70克*35支）": {
           "stock": 27,
@@ -16340,13 +16340,13 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 25,
-          "sales90": 157
+          "sales90": 25
         },
         "康师傅红烧牛肉面": {
           "stock": 1,
           "stockAmt": 3.8,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "康师傅香辣牛肉面113g": {
           "stock": 0,
@@ -16364,13 +16364,13 @@
           "stock": 26,
           "stockAmt": 126.14,
           "sales30": 2,
-          "sales90": 6
+          "sales90": 2
         },
         "旺旺仙贝52g": {
           "stock": 24,
           "stockAmt": 105.89,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 129,
@@ -16558,7 +16558,7 @@
           "stock": 36,
           "stockAmt": 39.24,
           "sales30": 2,
-          "sales90": 7
+          "sales90": 2
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -16588,7 +16588,7 @@
           "stock": 15,
           "stockAmt": 22.5,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -16606,7 +16606,7 @@
           "stock": 15,
           "stockAmt": 22.5,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -16642,7 +16642,7 @@
           "stock": 32,
           "stockAmt": 65.28,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -16654,7 +16654,7 @@
           "stock": 76,
           "stockAmt": 77.52,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 0,
@@ -16666,7 +16666,7 @@
           "stock": 2,
           "stockAmt": 4.7,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -16678,13 +16678,13 @@
           "stock": 10,
           "stockAmt": 75.3,
           "sales30": 1,
-          "sales90": 9
+          "sales90": 1
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 14,
           "stockAmt": 84,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -16708,7 +16708,7 @@
           "stock": 23,
           "stockAmt": 32.43,
           "sales30": 0,
-          "sales90": 10
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -16726,25 +16726,25 @@
           "stock": 16,
           "stockAmt": 115.52,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 14,
           "stockAmt": 101.08,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 237,
           "stockAmt": 871.31,
           "sales30": 24,
-          "sales90": 112
+          "sales90": 24
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1110,
           "stockAmt": 5156.06,
           "sales30": 69,
-          "sales90": 233
+          "sales90": 69
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -16810,31 +16810,31 @@
           "stock": 23,
           "stockAmt": 65.09,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 237,
           "stockAmt": 871.31,
           "sales30": 24,
-          "sales90": 112
+          "sales90": 24
         },
         "东鹏特饮促销": {
           "stock": 237,
           "stockAmt": 871.31,
           "sales30": 24,
-          "sales90": 112
+          "sales90": 24
         },
         "东鹏特饮促销1": {
           "stock": 237,
           "stockAmt": 871.31,
           "sales30": 24,
-          "sales90": 112
+          "sales90": 24
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 36,
           "stockAmt": 39.24,
           "sales30": 2,
-          "sales90": 7
+          "sales90": 2
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -16924,13 +16924,13 @@
           "stock": 72,
           "stockAmt": 215.28,
           "sales30": 1,
-          "sales90": 3
+          "sales90": 1
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 45,
           "stockAmt": 134.55,
           "sales30": 1,
-          "sales90": 14
+          "sales90": 1
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -17326,7 +17326,7 @@
           "stock": 25,
           "stockAmt": 122.75,
           "sales30": 13,
-          "sales90": 30
+          "sales90": 13
         },
         "康师傅红烧牛肉面": {
           "stock": 8,
@@ -17338,7 +17338,7 @@
           "stock": 9,
           "stockAmt": 34.2,
           "sales30": 1,
-          "sales90": 9
+          "sales90": 1
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -17350,7 +17350,7 @@
           "stock": 6,
           "stockAmt": 29.1,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "旺旺仙贝52g": {
           "stock": 0,
@@ -17544,7 +17544,7 @@
           "stock": 32,
           "stockAmt": 34.88,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -17574,7 +17574,7 @@
           "stock": 28,
           "stockAmt": 42,
           "sales30": 1,
-          "sales90": 6
+          "sales90": 1
         },
         "伊利小布丁": {
           "stock": 0,
@@ -17592,7 +17592,7 @@
           "stock": 28,
           "stockAmt": 42,
           "sales30": 1,
-          "sales90": 7
+          "sales90": 1
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -17640,7 +17640,7 @@
           "stock": 86,
           "stockAmt": 87.72,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 0,
@@ -17652,7 +17652,7 @@
           "stock": 21,
           "stockAmt": 49.35,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -17664,13 +17664,13 @@
           "stock": 17,
           "stockAmt": 128.01,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 14,
           "stockAmt": 84,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -17694,7 +17694,7 @@
           "stock": 22,
           "stockAmt": 31.02,
           "sales30": 1,
-          "sales90": 8
+          "sales90": 1
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -17718,19 +17718,19 @@
           "stock": 14,
           "stockAmt": 101.08,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 306,
           "stockAmt": 1124.49,
           "sales30": 7,
-          "sales90": 56
+          "sales90": 7
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1035,
           "stockAmt": 4800.33,
           "sales30": 54,
-          "sales90": 107
+          "sales90": 54
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -17796,31 +17796,31 @@
           "stock": 25,
           "stockAmt": 70.75,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 306,
           "stockAmt": 1124.49,
           "sales30": 7,
-          "sales90": 56
+          "sales90": 7
         },
         "东鹏特饮促销": {
           "stock": 306,
           "stockAmt": 1124.49,
           "sales30": 7,
-          "sales90": 56
+          "sales90": 7
         },
         "东鹏特饮促销1": {
           "stock": 306,
           "stockAmt": 1124.49,
           "sales30": 7,
-          "sales90": 56
+          "sales90": 7
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 32,
           "stockAmt": 34.88,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -17910,13 +17910,13 @@
           "stock": 73,
           "stockAmt": 218.27,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 63,
           "stockAmt": 188.37,
           "sales30": 1,
-          "sales90": 7
+          "sales90": 1
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -18312,13 +18312,13 @@
           "stock": 33,
           "stockAmt": 162.03,
           "sales30": 5,
-          "sales90": 32
+          "sales90": 5
         },
         "康师傅红烧牛肉面": {
           "stock": 8,
           "stockAmt": 30.4,
           "sales30": 1,
-          "sales90": 6
+          "sales90": 1
         },
         "康师傅香辣牛肉面113g": {
           "stock": 10,
@@ -18336,7 +18336,7 @@
           "stock": 14,
           "stockAmt": 67.9,
           "sales30": 1,
-          "sales90": 4
+          "sales90": 1
         },
         "旺旺仙贝52g": {
           "stock": 0,
@@ -18530,7 +18530,7 @@
           "stock": 36,
           "stockAmt": 39.24,
           "sales30": 0,
-          "sales90": 38
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -18560,7 +18560,7 @@
           "stock": 41,
           "stockAmt": 61.5,
           "sales30": 3,
-          "sales90": 25
+          "sales90": 3
         },
         "伊利小布丁": {
           "stock": 0,
@@ -18578,7 +18578,7 @@
           "stock": 27,
           "stockAmt": 40.5,
           "sales30": 0,
-          "sales90": 30
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -18614,7 +18614,7 @@
           "stock": 41,
           "stockAmt": 83.64,
           "sales30": 4,
-          "sales90": 22
+          "sales90": 4
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -18626,19 +18626,19 @@
           "stock": 56,
           "stockAmt": 57.12,
           "sales30": 1,
-          "sales90": 33
+          "sales90": 1
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 17,
           "stockAmt": 44.88,
           "sales30": 3,
-          "sales90": 13
+          "sales90": 3
         },
         "小叮当 100g": {
           "stock": 15,
           "stockAmt": 35.25,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 7,
@@ -18650,13 +18650,13 @@
           "stock": 6,
           "stockAmt": 45.18,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 10,
           "stockAmt": 60,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -18680,25 +18680,25 @@
           "stock": 29,
           "stockAmt": 40.89,
           "sales30": 1,
-          "sales90": 22
+          "sales90": 1
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 205,
           "stockAmt": 1332.5,
           "sales30": 2,
-          "sales90": 5
+          "sales90": 2
         },
         "速力奥发酵人参营养饮料(能量风味)（天朗）": {
           "stock": 181,
           "stockAmt": 1176.5,
           "sales30": 2,
-          "sales90": 5
+          "sales90": 2
         },
         "雀巢-8次方-甜橙乳酸菌": {
           "stock": 5,
           "stockAmt": 36.1,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 0,
@@ -18710,7 +18710,7 @@
           "stock": 429,
           "stockAmt": 1617.42,
           "sales30": 152,
-          "sales90": 612
+          "sales90": 152
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1108,
@@ -18722,19 +18722,19 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 4,
-          "sales90": 17
+          "sales90": 4
         },
         "30元枸杞槟榔/包": {
           "stock": 2,
           "stockAmt": 39.09,
           "sales30": 21,
-          "sales90": 48
+          "sales90": 21
         },
         "50元枸杞槟榔/包": {
           "stock": 12,
           "stockAmt": 417.9,
           "sales30": 8,
-          "sales90": 16
+          "sales90": 8
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -18782,31 +18782,31 @@
           "stock": 14,
           "stockAmt": 39.62,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 429,
           "stockAmt": 1617.42,
           "sales30": 152,
-          "sales90": 612
+          "sales90": 152
         },
         "东鹏特饮促销": {
           "stock": 429,
           "stockAmt": 1617.42,
           "sales30": 152,
-          "sales90": 612
+          "sales90": 152
         },
         "东鹏特饮促销1": {
           "stock": 429,
           "stockAmt": 1617.42,
           "sales30": 152,
-          "sales90": 612
+          "sales90": 152
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 36,
           "stockAmt": 39.24,
           "sales30": 0,
-          "sales90": 38
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -18896,13 +18896,13 @@
           "stock": 19,
           "stockAmt": 56.81,
           "sales30": 5,
-          "sales90": 38
+          "sales90": 5
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 14,
           "stockAmt": 41.86,
           "sales30": 4,
-          "sales90": 47
+          "sales90": 4
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -19298,19 +19298,19 @@
           "stock": 75,
           "stockAmt": 368.25,
           "sales30": 60,
-          "sales90": 136
+          "sales90": 60
         },
         "康师傅红烧牛肉面": {
           "stock": 1,
           "stockAmt": 3.8,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "康师傅香辣牛肉面113g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -19322,13 +19322,13 @@
           "stock": 1,
           "stockAmt": 4.85,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "旺旺仙贝52g": {
           "stock": 12,
           "stockAmt": 52.93,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 262,
@@ -19516,7 +19516,7 @@
           "stock": 39,
           "stockAmt": 42.51,
           "sales30": 3,
-          "sales90": 40
+          "sales90": 3
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -19546,7 +19546,7 @@
           "stock": 28,
           "stockAmt": 42,
           "sales30": 0,
-          "sales90": 36
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -19564,7 +19564,7 @@
           "stock": 17,
           "stockAmt": 25.5,
           "sales30": 0,
-          "sales90": 38
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -19600,7 +19600,7 @@
           "stock": 38,
           "stockAmt": 77.52,
           "sales30": 0,
-          "sales90": 30
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -19612,19 +19612,19 @@
           "stock": 40,
           "stockAmt": 40.8,
           "sales30": 0,
-          "sales90": 51
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 13,
           "stockAmt": 34.32,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 19,
           "stockAmt": 44.65,
           "sales30": 0,
-          "sales90": 21
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 11,
@@ -19636,13 +19636,13 @@
           "stock": 9,
           "stockAmt": 67.77,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 5,
           "stockAmt": 30,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -19666,25 +19666,25 @@
           "stock": 24,
           "stockAmt": 33.84,
           "sales30": 1,
-          "sales90": 34
+          "sales90": 1
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 219,
           "stockAmt": 1423.5,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(能量风味)（天朗）": {
           "stock": 186,
           "stockAmt": 1209,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "雀巢-8次方-甜橙乳酸菌": {
           "stock": 11,
           "stockAmt": 79.42,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 0,
@@ -19696,7 +19696,7 @@
           "stock": 431,
           "stockAmt": 1637.54,
           "sales30": 135,
-          "sales90": 697
+          "sales90": 135
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1077,
@@ -19708,19 +19708,19 @@
           "stock": 7,
           "stockAmt": 91.56,
           "sales30": 7,
-          "sales90": 23
+          "sales90": 7
         },
         "30元枸杞槟榔/包": {
           "stock": 4,
           "stockAmt": 78.48,
           "sales30": 13,
-          "sales90": 51
+          "sales90": 13
         },
         "50元枸杞槟榔/包": {
           "stock": 5,
           "stockAmt": 182.6,
           "sales30": 6,
-          "sales90": 22
+          "sales90": 6
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -19768,31 +19768,31 @@
           "stock": 12,
           "stockAmt": 33.96,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 431,
           "stockAmt": 1637.54,
           "sales30": 135,
-          "sales90": 697
+          "sales90": 135
         },
         "东鹏特饮促销": {
           "stock": 431,
           "stockAmt": 1637.54,
           "sales30": 135,
-          "sales90": 697
+          "sales90": 135
         },
         "东鹏特饮促销1": {
           "stock": 431,
           "stockAmt": 1637.54,
           "sales30": 135,
-          "sales90": 697
+          "sales90": 135
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 39,
           "stockAmt": 42.51,
           "sales30": 3,
-          "sales90": 40
+          "sales90": 3
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -19882,13 +19882,13 @@
           "stock": 84,
           "stockAmt": 251.16,
           "sales30": 1,
-          "sales90": 46
+          "sales90": 1
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 84,
           "stockAmt": 251.16,
           "sales30": 3,
-          "sales90": 58
+          "sales90": 3
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -20284,13 +20284,13 @@
           "stock": 75,
           "stockAmt": 368.25,
           "sales30": 26,
-          "sales90": 99
+          "sales90": 26
         },
         "康师傅红烧牛肉面": {
           "stock": 24,
           "stockAmt": 91.2,
           "sales30": 5,
-          "sales90": 9
+          "sales90": 5
         },
         "康师傅香辣牛肉面113g": {
           "stock": 0,
@@ -20314,7 +20314,7 @@
           "stock": 8,
           "stockAmt": 35.32,
           "sales30": 3,
-          "sales90": 10
+          "sales90": 3
         },
         "尿素PE": {
           "stock": 280,
@@ -20502,7 +20502,7 @@
           "stock": 8,
           "stockAmt": 8.72,
           "sales30": 0,
-          "sales90": 25
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -20532,7 +20532,7 @@
           "stock": 10,
           "stockAmt": 15,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -20550,7 +20550,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 39
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -20586,7 +20586,7 @@
           "stock": 25,
           "stockAmt": 51,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -20598,19 +20598,19 @@
           "stock": 54,
           "stockAmt": 55.08,
           "sales30": 1,
-          "sales90": 23
+          "sales90": 1
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 20,
           "stockAmt": 52.8,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 24
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -20622,13 +20622,13 @@
           "stock": 16,
           "stockAmt": 120.48,
           "sales30": 1,
-          "sales90": 3
+          "sales90": 1
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 13,
           "stockAmt": 78,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -20652,7 +20652,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 38
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -20670,19 +20670,19 @@
           "stock": 11,
           "stockAmt": 79.42,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 16,
           "stockAmt": 115.52,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 992,
           "stockAmt": 3640.64,
           "sales30": 37,
-          "sales90": 145
+          "sales90": 37
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 570,
@@ -20694,19 +20694,19 @@
           "stock": 20,
           "stockAmt": 240,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "30元枸杞槟榔/包": {
           "stock": 20,
           "stockAmt": 360,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "50元枸杞槟榔/包": {
           "stock": 11,
           "stockAmt": 352,
           "sales30": 2,
-          "sales90": 8
+          "sales90": 2
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -20754,31 +20754,31 @@
           "stock": 20,
           "stockAmt": 56.6,
           "sales30": 1,
-          "sales90": 10
+          "sales90": 1
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 992,
           "stockAmt": 3640.64,
           "sales30": 37,
-          "sales90": 145
+          "sales90": 37
         },
         "东鹏特饮促销": {
           "stock": 992,
           "stockAmt": 3640.64,
           "sales30": 37,
-          "sales90": 145
+          "sales90": 37
         },
         "东鹏特饮促销1": {
           "stock": 992,
           "stockAmt": 3640.64,
           "sales30": 37,
-          "sales90": 145
+          "sales90": 37
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 8,
           "stockAmt": 8.72,
           "sales30": 0,
-          "sales90": 25
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -20868,13 +20868,13 @@
           "stock": 51,
           "stockAmt": 152.49,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 32,
           "stockAmt": 95.68,
           "sales30": 0,
-          "sales90": 26
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -21270,19 +21270,19 @@
           "stock": 26,
           "stockAmt": 127.66,
           "sales30": 6,
-          "sales90": 65
+          "sales90": 6
         },
         "康师傅红烧牛肉面": {
           "stock": 8,
           "stockAmt": 30.4,
           "sales30": 5,
-          "sales90": 9
+          "sales90": 5
         },
         "康师傅香辣牛肉面113g": {
           "stock": 14,
           "stockAmt": 53.2,
           "sales30": 1,
-          "sales90": 4
+          "sales90": 1
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -21488,7 +21488,7 @@
           "stock": 29,
           "stockAmt": 31.61,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -21518,7 +21518,7 @@
           "stock": 23,
           "stockAmt": 34.5,
           "sales30": 2,
-          "sales90": 13
+          "sales90": 2
         },
         "伊利小布丁": {
           "stock": 0,
@@ -21536,7 +21536,7 @@
           "stock": 13,
           "stockAmt": 19.5,
           "sales30": 0,
-          "sales90": 21
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -21572,7 +21572,7 @@
           "stock": 26,
           "stockAmt": 53.04,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -21584,19 +21584,19 @@
           "stock": 91,
           "stockAmt": 92.82,
           "sales30": 2,
-          "sales90": 10
+          "sales90": 2
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 19,
           "stockAmt": 50.16,
           "sales30": 2,
-          "sales90": 12
+          "sales90": 2
         },
         "小叮当 100g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 18
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -21608,13 +21608,13 @@
           "stock": 19,
           "stockAmt": 143.07,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 14,
           "stockAmt": 84,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -21638,7 +21638,7 @@
           "stock": 16,
           "stockAmt": 22.56,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -21656,19 +21656,19 @@
           "stock": 16,
           "stockAmt": 115.52,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 17,
           "stockAmt": 122.74,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 1245,
           "stockAmt": 4597.91,
           "sales30": 24,
-          "sales90": 117
+          "sales90": 24
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 362,
@@ -21680,19 +21680,19 @@
           "stock": 18,
           "stockAmt": 216,
           "sales30": 1,
-          "sales90": 11
+          "sales90": 1
         },
         "30元枸杞槟榔/包": {
           "stock": 17,
           "stockAmt": 306,
           "sales30": 7,
-          "sales90": 23
+          "sales90": 7
         },
         "50元枸杞槟榔/包": {
           "stock": 3,
           "stockAmt": 96,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -21746,25 +21746,25 @@
           "stock": 1245,
           "stockAmt": 4597.91,
           "sales30": 24,
-          "sales90": 117
+          "sales90": 24
         },
         "东鹏特饮促销": {
           "stock": 1245,
           "stockAmt": 4597.91,
           "sales30": 24,
-          "sales90": 117
+          "sales90": 24
         },
         "东鹏特饮促销1": {
           "stock": 1245,
           "stockAmt": 4597.91,
           "sales30": 24,
-          "sales90": 117
+          "sales90": 24
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 29,
           "stockAmt": 31.61,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -21854,13 +21854,13 @@
           "stock": 72,
           "stockAmt": 215.28,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 64,
           "stockAmt": 191.36,
           "sales30": 0,
-          "sales90": 12
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -22256,19 +22256,19 @@
           "stock": 24,
           "stockAmt": 117.84,
           "sales30": 7,
-          "sales90": 39
+          "sales90": 7
         },
         "康师傅红烧牛肉面": {
           "stock": 11,
           "stockAmt": 41.8,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "康师傅香辣牛肉面113g": {
           "stock": 11,
           "stockAmt": 41.8,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -22280,7 +22280,7 @@
           "stock": 2,
           "stockAmt": 9.7,
           "sales30": 2,
-          "sales90": 6
+          "sales90": 2
         },
         "旺旺仙贝52g": {
           "stock": 0,
@@ -22474,7 +22474,7 @@
           "stock": 29,
           "stockAmt": 31.61,
           "sales30": 0,
-          "sales90": 37
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -22504,7 +22504,7 @@
           "stock": 28,
           "stockAmt": 42,
           "sales30": 0,
-          "sales90": 27
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -22522,7 +22522,7 @@
           "stock": 23,
           "stockAmt": 34.5,
           "sales30": 1,
-          "sales90": 22
+          "sales90": 1
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -22558,7 +22558,7 @@
           "stock": 52,
           "stockAmt": 106.08,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -22570,19 +22570,19 @@
           "stock": 44,
           "stockAmt": 44.88,
           "sales30": 0,
-          "sales90": 28
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 11,
           "stockAmt": 29.04,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 20,
           "stockAmt": 47,
           "sales30": 1,
-          "sales90": 14
+          "sales90": 1
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -22594,13 +22594,13 @@
           "stock": 25,
           "stockAmt": 188.25,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 11,
           "stockAmt": 66,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -22624,7 +22624,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 18
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -22642,19 +22642,19 @@
           "stock": 7,
           "stockAmt": 50.54,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 12,
           "stockAmt": 86.64,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 107,
           "stockAmt": 392.69,
           "sales30": 14,
-          "sales90": 413
+          "sales90": 14
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 494,
@@ -22672,13 +22672,13 @@
           "stock": 21,
           "stockAmt": 378,
           "sales30": 5,
-          "sales90": 45
+          "sales90": 5
         },
         "50元枸杞槟榔/包": {
           "stock": 7,
           "stockAmt": 224,
           "sales30": 2,
-          "sales90": 14
+          "sales90": 2
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -22726,31 +22726,31 @@
           "stock": 26,
           "stockAmt": 73.58,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 107,
           "stockAmt": 392.69,
           "sales30": 14,
-          "sales90": 413
+          "sales90": 14
         },
         "东鹏特饮促销": {
           "stock": 107,
           "stockAmt": 392.69,
           "sales30": 14,
-          "sales90": 413
+          "sales90": 14
         },
         "东鹏特饮促销1": {
           "stock": 107,
           "stockAmt": 392.69,
           "sales30": 14,
-          "sales90": 413
+          "sales90": 14
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 29,
           "stockAmt": 31.61,
           "sales30": 0,
-          "sales90": 37
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -22840,13 +22840,13 @@
           "stock": 20,
           "stockAmt": 59.8,
           "sales30": 1,
-          "sales90": 23
+          "sales90": 1
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 5,
           "stockAmt": 14.95,
           "sales30": 1,
-          "sales90": 43
+          "sales90": 1
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -23248,13 +23248,13 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 4,
-          "sales90": 29
+          "sales90": 4
         },
         "康师傅香辣牛肉面113g": {
           "stock": 6,
           "stockAmt": 22.8,
           "sales30": 6,
-          "sales90": 28
+          "sales90": 6
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -23266,13 +23266,13 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "旺旺仙贝52g": {
           "stock": 5,
           "stockAmt": 22.06,
           "sales30": 1,
-          "sales90": 17
+          "sales90": 1
         },
         "尿素PE": {
           "stock": 366,
@@ -23460,7 +23460,7 @@
           "stock": 41,
           "stockAmt": 44.69,
           "sales30": 4,
-          "sales90": 40
+          "sales90": 4
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -23490,7 +23490,7 @@
           "stock": 39,
           "stockAmt": 58.5,
           "sales30": 2,
-          "sales90": 35
+          "sales90": 2
         },
         "伊利小布丁": {
           "stock": 0,
@@ -23508,7 +23508,7 @@
           "stock": 31,
           "stockAmt": 46.5,
           "sales30": 1,
-          "sales90": 31
+          "sales90": 1
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -23544,7 +23544,7 @@
           "stock": 17,
           "stockAmt": 34.68,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -23556,19 +23556,19 @@
           "stock": 33,
           "stockAmt": 33.66,
           "sales30": 1,
-          "sales90": 44
+          "sales90": 1
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 39,
           "stockAmt": 102.96,
           "sales30": 0,
-          "sales90": 14
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 5,
           "stockAmt": 11.75,
           "sales30": 1,
-          "sales90": 10
+          "sales90": 1
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -23580,13 +23580,13 @@
           "stock": 11,
           "stockAmt": 82.83,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 6,
           "stockAmt": 36,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -23610,7 +23610,7 @@
           "stock": 5,
           "stockAmt": 7.05,
           "sales30": 2,
-          "sales90": 22
+          "sales90": 2
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -23628,19 +23628,19 @@
           "stock": 14,
           "stockAmt": 101.08,
           "sales30": 1,
-          "sales90": 4
+          "sales90": 1
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 14,
           "stockAmt": 101.08,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 170,
           "stockAmt": 632.49,
           "sales30": 28,
-          "sales90": 362
+          "sales90": 28
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 331,
@@ -23658,13 +23658,13 @@
           "stock": 15,
           "stockAmt": 270,
           "sales30": 8,
-          "sales90": 36
+          "sales90": 8
         },
         "50元枸杞槟榔/包": {
           "stock": 9,
           "stockAmt": 288,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -23712,31 +23712,31 @@
           "stock": 18,
           "stockAmt": 50.94,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 170,
           "stockAmt": 632.49,
           "sales30": 28,
-          "sales90": 362
+          "sales90": 28
         },
         "东鹏特饮促销": {
           "stock": 170,
           "stockAmt": 632.49,
           "sales30": 28,
-          "sales90": 362
+          "sales90": 28
         },
         "东鹏特饮促销1": {
           "stock": 170,
           "stockAmt": 632.49,
           "sales30": 28,
-          "sales90": 362
+          "sales90": 28
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 41,
           "stockAmt": 44.69,
           "sales30": 4,
-          "sales90": 40
+          "sales90": 4
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -23826,13 +23826,13 @@
           "stock": 26,
           "stockAmt": 77.74,
           "sales30": 3,
-          "sales90": 32
+          "sales90": 3
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 29,
           "stockAmt": 86.71,
           "sales30": 9,
-          "sales90": 55
+          "sales90": 9
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -24234,13 +24234,13 @@
           "stock": 2,
           "stockAmt": 7.6,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "康师傅香辣牛肉面113g": {
           "stock": 1,
           "stockAmt": 3.8,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -24252,13 +24252,13 @@
           "stock": 10,
           "stockAmt": 48.5,
           "sales30": 1,
-          "sales90": 8
+          "sales90": 1
         },
         "旺旺仙贝52g": {
           "stock": 5,
           "stockAmt": 22.05,
           "sales30": 3,
-          "sales90": 8
+          "sales90": 3
         },
         "尿素PE": {
           "stock": 260,
@@ -24446,7 +24446,7 @@
           "stock": 5,
           "stockAmt": 5.45,
           "sales30": 0,
-          "sales90": 21
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -24476,7 +24476,7 @@
           "stock": 8,
           "stockAmt": 12,
           "sales30": 0,
-          "sales90": 25
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 42,
@@ -24494,7 +24494,7 @@
           "stock": 36,
           "stockAmt": 54,
           "sales30": 1,
-          "sales90": 35
+          "sales90": 1
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -24530,7 +24530,7 @@
           "stock": 62,
           "stockAmt": 126.48,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -24542,19 +24542,19 @@
           "stock": 36,
           "stockAmt": 36.72,
           "sales30": 0,
-          "sales90": 43
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 21,
           "stockAmt": 55.44,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 17,
           "stockAmt": 39.95,
           "sales30": 0,
-          "sales90": 22
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -24566,13 +24566,13 @@
           "stock": 14,
           "stockAmt": 105.42,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 9,
           "stockAmt": 54,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -24596,7 +24596,7 @@
           "stock": 32,
           "stockAmt": 45.12,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -24614,19 +24614,19 @@
           "stock": 10,
           "stockAmt": 72.2,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 10,
           "stockAmt": 72.2,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 817,
           "stockAmt": 3011.14,
           "sales30": 8,
-          "sales90": 201
+          "sales90": 8
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 488,
@@ -24638,19 +24638,19 @@
           "stock": 7,
           "stockAmt": 84,
           "sales30": 1,
-          "sales90": 27
+          "sales90": 1
         },
         "30元枸杞槟榔/包": {
           "stock": 2,
           "stockAmt": 36,
           "sales30": 3,
-          "sales90": 28
+          "sales90": 3
         },
         "50元枸杞槟榔/包": {
           "stock": 10,
           "stockAmt": 320,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -24698,31 +24698,31 @@
           "stock": 22,
           "stockAmt": 62.26,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 817,
           "stockAmt": 3011.14,
           "sales30": 8,
-          "sales90": 201
+          "sales90": 8
         },
         "东鹏特饮促销": {
           "stock": 817,
           "stockAmt": 3011.14,
           "sales30": 8,
-          "sales90": 201
+          "sales90": 8
         },
         "东鹏特饮促销1": {
           "stock": 817,
           "stockAmt": 3011.14,
           "sales30": 8,
-          "sales90": 201
+          "sales90": 8
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 5,
           "stockAmt": 5.45,
           "sales30": 0,
-          "sales90": 21
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -24812,13 +24812,13 @@
           "stock": 46,
           "stockAmt": 137.54,
           "sales30": 1,
-          "sales90": 21
+          "sales90": 1
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 31,
           "stockAmt": 92.69,
           "sales30": 0,
-          "sales90": 31
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -25214,19 +25214,19 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 29
+          "sales90": 0
         },
         "康师傅红烧牛肉面": {
           "stock": 8,
           "stockAmt": 30.4,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "康师傅香辣牛肉面113g": {
           "stock": 11,
           "stockAmt": 41.8,
           "sales30": 2,
-          "sales90": 30
+          "sales90": 2
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -25238,13 +25238,13 @@
           "stock": 2,
           "stockAmt": 9.7,
           "sales30": 1,
-          "sales90": 12
+          "sales90": 1
         },
         "旺旺仙贝52g": {
           "stock": 2,
           "stockAmt": 8.82,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 0,
@@ -25432,7 +25432,7 @@
           "stock": 24,
           "stockAmt": 26.16,
           "sales30": 0,
-          "sales90": 10
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -25462,7 +25462,7 @@
           "stock": 25,
           "stockAmt": 37.5,
           "sales30": 2,
-          "sales90": 9
+          "sales90": 2
         },
         "伊利小布丁": {
           "stock": 45,
@@ -25480,7 +25480,7 @@
           "stock": 46,
           "stockAmt": 69,
           "sales30": 1,
-          "sales90": 19
+          "sales90": 1
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -25516,7 +25516,7 @@
           "stock": 57,
           "stockAmt": 116.28,
           "sales30": 0,
-          "sales90": 10
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -25528,19 +25528,19 @@
           "stock": 70,
           "stockAmt": 71.4,
           "sales30": 0,
-          "sales90": 18
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 18,
           "stockAmt": 47.52,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 26,
           "stockAmt": 61.1,
           "sales30": 0,
-          "sales90": 17
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -25552,13 +25552,13 @@
           "stock": 18,
           "stockAmt": 135.54,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 14,
           "stockAmt": 84,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -25582,7 +25582,7 @@
           "stock": 37,
           "stockAmt": 52.17,
           "sales30": 0,
-          "sales90": 17
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -25600,19 +25600,19 @@
           "stock": 15,
           "stockAmt": 108.3,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 15,
           "stockAmt": 108.3,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 734,
           "stockAmt": 2739.66,
           "sales30": 49,
-          "sales90": 208
+          "sales90": 49
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 429,
@@ -25624,19 +25624,19 @@
           "stock": 19,
           "stockAmt": 228,
           "sales30": 6,
-          "sales90": 32
+          "sales90": 6
         },
         "30元枸杞槟榔/包": {
           "stock": 2,
           "stockAmt": 36,
           "sales30": 11,
-          "sales90": 39
+          "sales90": 11
         },
         "50元枸杞槟榔/包": {
           "stock": 10,
           "stockAmt": 320,
           "sales30": 2,
-          "sales90": 14
+          "sales90": 2
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -25684,31 +25684,31 @@
           "stock": 23,
           "stockAmt": 65.09,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 734,
           "stockAmt": 2739.66,
           "sales30": 49,
-          "sales90": 208
+          "sales90": 49
         },
         "东鹏特饮促销": {
           "stock": 734,
           "stockAmt": 2739.66,
           "sales30": 49,
-          "sales90": 208
+          "sales90": 49
         },
         "东鹏特饮促销1": {
           "stock": 734,
           "stockAmt": 2739.66,
           "sales30": 49,
-          "sales90": 208
+          "sales90": 49
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 24,
           "stockAmt": 26.16,
           "sales30": 0,
-          "sales90": 10
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -25798,13 +25798,13 @@
           "stock": 56,
           "stockAmt": 167.44,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 36,
           "stockAmt": 107.64,
           "sales30": 8,
-          "sales90": 22
+          "sales90": 8
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -26200,19 +26200,19 @@
           "stock": 27,
           "stockAmt": 132.57,
           "sales30": 0,
-          "sales90": 16
+          "sales90": 0
         },
         "康师傅红烧牛肉面": {
           "stock": 15,
           "stockAmt": 57,
           "sales30": 4,
-          "sales90": 10
+          "sales90": 4
         },
         "康师傅香辣牛肉面113g": {
           "stock": 5,
           "stockAmt": 19,
           "sales30": 2,
-          "sales90": 9
+          "sales90": 2
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -26224,13 +26224,13 @@
           "stock": 4,
           "stockAmt": 19.4,
           "sales30": 1,
-          "sales90": 8
+          "sales90": 1
         },
         "旺旺仙贝52g": {
           "stock": 3,
           "stockAmt": 13.23,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 0,
@@ -27410,7 +27410,7 @@
           "stock": 29,
           "stockAmt": 37.7,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓（70g）": {
           "stock": 0,
@@ -27422,7 +27422,7 @@
           "stock": 33,
           "stockAmt": 60.72,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "伊利哈蜜瓜脆筒（73g）": {
           "stock": 0,
@@ -27434,13 +27434,13 @@
           "stock": 31,
           "stockAmt": 46.5,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 16,
           "stockAmt": 12.64,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "伊利巧乐兹巧丝绒": {
           "stock": 0,
@@ -27452,7 +27452,7 @@
           "stock": 21,
           "stockAmt": 31.5,
           "sales30": 0,
-          "sales90": 11
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -27482,7 +27482,7 @@
           "stock": 21,
           "stockAmt": 77.91,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "和路雪-绿舌头苹果口味 54g": {
           "stock": 0,
@@ -27500,7 +27500,7 @@
           "stock": 26,
           "stockAmt": 26.52,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 0,
@@ -27518,7 +27518,7 @@
           "stock": 8,
           "stockAmt": 32.8,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "梦龙- 浓郁开心果口味 64g": {
           "stock": 0,
@@ -27542,7 +27542,7 @@
           "stock": 21,
           "stockAmt": 77.91,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "蒙牛-随变 (咖啡味)  75g": {
           "stock": 0,
@@ -27554,7 +27554,7 @@
           "stock": 32,
           "stockAmt": 45.12,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -27584,13 +27584,13 @@
           "stock": 249,
           "stockAmt": 984.15,
           "sales30": 0,
-          "sales90": 70
+          "sales90": 0
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 733,
           "stockAmt": 3444.22,
           "sales30": 0,
-          "sales90": 115
+          "sales90": 0
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -27662,19 +27662,19 @@
           "stock": 249,
           "stockAmt": 984.15,
           "sales30": 0,
-          "sales90": 70
+          "sales90": 0
         },
         "东鹏特饮促销": {
           "stock": 249,
           "stockAmt": 984.15,
           "sales30": 0,
-          "sales90": 70
+          "sales90": 0
         },
         "东鹏特饮促销1": {
           "stock": 249,
           "stockAmt": 984.15,
           "sales30": 0,
-          "sales90": 70
+          "sales90": 0
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 0,
@@ -27884,7 +27884,7 @@
           "stock": 37,
           "stockAmt": 29.97,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "苦咖啡雪糕（70克*35支）": {
           "stock": 0,
@@ -28252,7 +28252,7 @@
           "stock": 28,
           "stockAmt": 700,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "车仆防冻液2公斤红色-35度": {
           "stock": 13,
@@ -28348,13 +28348,13 @@
           "stock": 3,
           "stockAmt": 114.33,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "壳牌防冻液-绿色 -45℃": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "车仆柴油防凝剂": {
           "stock": 0,
@@ -28366,7 +28366,7 @@
           "stock": 29,
           "stockAmt": 448.92,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "山东新蓝": {
           "stock": 0,
@@ -28576,7 +28576,7 @@
           "stock": 1223,
           "stockAmt": 5650.99,
           "sales30": 6,
-          "sales90": 106
+          "sales90": 6
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -29158,7 +29158,7 @@
           "stock": 6,
           "stockAmt": 30.42,
           "sales30": 1,
-          "sales90": 11
+          "sales90": 1
         },
         "康师傅红烧牛肉面": {
           "stock": 0,
@@ -29194,13 +29194,13 @@
           "stock": 9,
           "stockAmt": 120.87,
           "sales30": 5,
-          "sales90": 32
+          "sales90": 5
         },
         "尿素PET": {
           "stock": 9,
           "stockAmt": 120.87,
           "sales30": 5,
-          "sales90": 32
+          "sales90": 5
         }
       },
       "略阳服务区西站": {
@@ -29352,7 +29352,7 @@
           "stock": 53,
           "stockAmt": 820.44,
           "sales30": 8,
-          "sales90": 13
+          "sales90": 8
         },
         "山东新蓝": {
           "stock": 0,
@@ -29562,7 +29562,7 @@
           "stock": 1348,
           "stockAmt": 6229.92,
           "sales30": 18,
-          "sales90": 139
+          "sales90": 18
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -30144,7 +30144,7 @@
           "stock": 11,
           "stockAmt": 55.77,
           "sales30": 5,
-          "sales90": 8
+          "sales90": 5
         },
         "康师傅红烧牛肉面": {
           "stock": 0,
@@ -30180,13 +30180,13 @@
           "stock": 2,
           "stockAmt": 26.86,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "尿素PET": {
           "stock": 2,
           "stockAmt": 26.86,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         }
       },
       "白河服务区北站": {
@@ -30362,7 +30362,7 @@
           "stock": 1,
           "stockAmt": 1.09,
           "sales30": 0,
-          "sales90": 44
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -30392,7 +30392,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 35
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -30410,7 +30410,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 40
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -30446,7 +30446,7 @@
           "stock": 7,
           "stockAmt": 14.28,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -30458,19 +30458,19 @@
           "stock": 54,
           "stockAmt": 55.08,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 14,
           "stockAmt": 36.96,
           "sales30": 0,
-          "sales90": 11
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 24
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -30482,7 +30482,7 @@
           "stock": 15,
           "stockAmt": 112.95,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 13,
@@ -30512,7 +30512,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 2,
-          "sales90": 37
+          "sales90": 2
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -30530,19 +30530,19 @@
           "stock": 14,
           "stockAmt": 101.08,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 13,
           "stockAmt": 93.86,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 443,
           "stockAmt": 1736.56,
           "sales30": 43,
-          "sales90": 128
+          "sales90": 43
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1002,
@@ -30554,19 +30554,19 @@
           "stock": 9,
           "stockAmt": 108,
           "sales30": 6,
-          "sales90": 25
+          "sales90": 6
         },
         "30元枸杞槟榔/包": {
           "stock": 13,
           "stockAmt": 234.07,
           "sales30": 16,
-          "sales90": 41
+          "sales90": 16
         },
         "50元枸杞槟榔/包": {
           "stock": 12,
           "stockAmt": 384,
           "sales30": 6,
-          "sales90": 9
+          "sales90": 6
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -30614,31 +30614,31 @@
           "stock": 25,
           "stockAmt": 70.75,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 443,
           "stockAmt": 1736.56,
           "sales30": 43,
-          "sales90": 128
+          "sales90": 43
         },
         "东鹏特饮促销": {
           "stock": 443,
           "stockAmt": 1736.56,
           "sales30": 43,
-          "sales90": 128
+          "sales90": 43
         },
         "东鹏特饮促销1": {
           "stock": 443,
           "stockAmt": 1736.56,
           "sales30": 43,
-          "sales90": 128
+          "sales90": 43
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 1,
           "stockAmt": 1.09,
           "sales30": 0,
-          "sales90": 44
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -30728,13 +30728,13 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 24
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 1,
-          "sales90": 50
+          "sales90": 1
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -31130,19 +31130,19 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 16,
-          "sales90": 49
+          "sales90": 16
         },
         "康师傅红烧牛肉面": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 3,
-          "sales90": 16
+          "sales90": 3
         },
         "康师傅香辣牛肉面113g": {
           "stock": 8,
           "stockAmt": 30.4,
           "sales30": 9,
-          "sales90": 16
+          "sales90": 9
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -31154,7 +31154,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "旺旺仙贝52g": {
           "stock": 0,
@@ -31348,7 +31348,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 41
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -31378,7 +31378,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 40
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -31396,7 +31396,7 @@
           "stock": 1,
           "stockAmt": 1.5,
           "sales30": 0,
-          "sales90": 39
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -31432,7 +31432,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 11
+          "sales90": 0
         },
         "和路雪千层雪棒抹茶口味65g": {
           "stock": 0,
@@ -31444,19 +31444,19 @@
           "stock": 10,
           "stockAmt": 10.2,
           "sales30": 0,
-          "sales90": 27
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 18,
           "stockAmt": 47.52,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "小叮当 100g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 23
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -31468,13 +31468,13 @@
           "stock": 9,
           "stockAmt": 67.77,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 15,
           "stockAmt": 90,
           "sales30": 0,
-          "sales90": 1
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -31498,7 +31498,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 28
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -31516,19 +31516,19 @@
           "stock": 14,
           "stockAmt": 101.08,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 14,
           "stockAmt": 101.08,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 483,
           "stockAmt": 1893.36,
           "sales30": 17,
-          "sales90": 91
+          "sales90": 17
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 966,
@@ -31540,19 +31540,19 @@
           "stock": 12,
           "stockAmt": 144,
           "sales30": 3,
-          "sales90": 5
+          "sales90": 3
         },
         "30元枸杞槟榔/包": {
           "stock": 14,
           "stockAmt": 252.11,
           "sales30": 2,
-          "sales90": 27
+          "sales90": 2
         },
         "50元枸杞槟榔/包": {
           "stock": 3,
           "stockAmt": 96,
           "sales30": 2,
-          "sales90": 8
+          "sales90": 2
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -31600,31 +31600,31 @@
           "stock": 22,
           "stockAmt": 62.26,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 483,
           "stockAmt": 1893.36,
           "sales30": 17,
-          "sales90": 91
+          "sales90": 17
         },
         "东鹏特饮促销": {
           "stock": 483,
           "stockAmt": 1893.36,
           "sales30": 17,
-          "sales90": 91
+          "sales90": 17
         },
         "东鹏特饮促销1": {
           "stock": 483,
           "stockAmt": 1893.36,
           "sales30": 17,
-          "sales90": 91
+          "sales90": 17
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 41
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -31714,13 +31714,13 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 33
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 68
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -32116,19 +32116,19 @@
           "stock": 4,
           "stockAmt": 19.64,
           "sales30": 10,
-          "sales90": 37
+          "sales90": 10
         },
         "康师傅红烧牛肉面": {
           "stock": 11,
           "stockAmt": 41.8,
           "sales30": 6,
-          "sales90": 13
+          "sales90": 6
         },
         "康师傅香辣牛肉面113g": {
           "stock": 13,
           "stockAmt": 49.4,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -32140,7 +32140,7 @@
           "stock": 4,
           "stockAmt": 19.4,
           "sales30": 2,
-          "sales90": 3
+          "sales90": 2
         },
         "旺旺仙贝52g": {
           "stock": 0,
@@ -32322,7 +32322,7 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "伊利 奶皮子酸奶味70g": {
           "stock": 0,
@@ -32334,25 +32334,25 @@
           "stock": 2,
           "stockAmt": 2.18,
           "sales30": 0,
-          "sales90": 32
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 7,
           "stockAmt": 9.1,
           "sales30": 0,
-          "sales90": 23
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓（70g）": {
           "stock": 5,
           "stockAmt": 5.45,
           "sales30": 0,
-          "sales90": 18
+          "sales90": 0
         },
         "伊利冰工厂炫菠萝（70g）": {
           "stock": 4,
           "stockAmt": 7.36,
           "sales30": 0,
-          "sales90": 23
+          "sales90": 0
         },
         "伊利哈蜜瓜脆筒（73g）": {
           "stock": 9,
@@ -32364,7 +32364,7 @@
           "stock": 23,
           "stockAmt": 34.5,
           "sales30": 0,
-          "sales90": 34
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -32376,7 +32376,7 @@
           "stock": 32,
           "stockAmt": 101.12,
           "sales30": 0,
-          "sales90": 22
+          "sales90": 0
         },
         "伊利心情": {
           "stock": 32,
@@ -32388,19 +32388,19 @@
           "stock": 3,
           "stockAmt": 18,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "伊利甄稀青柑蜜瓜杯": {
           "stock": 3,
           "stockAmt": 18,
           "sales30": 0,
-          "sales90": 10
+          "sales90": 0
         },
         "伊利甄稀香草杯（90g）": {
           "stock": 9,
           "stockAmt": 60.39,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "伊利精火炬雪糕（80g）": {
           "stock": 15,
@@ -32466,13 +32466,13 @@
           "stock": 21,
           "stockAmt": 77.91,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "甄稀袋-蓝莓芝芝黑巧": {
           "stock": 20,
           "stockAmt": 74.2,
           "sales30": 0,
-          "sales90": 12
+          "sales90": 0
         },
         "蒙牛-随变 (咖啡味)  75g": {
           "stock": 0,
@@ -32514,7 +32514,7 @@
           "stock": 480,
           "stockAmt": 1761.6,
           "sales30": 0,
-          "sales90": 119
+          "sales90": 0
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 720,
@@ -32586,43 +32586,43 @@
           "stock": 10,
           "stockAmt": 28.3,
           "sales30": 0,
-          "sales90": 16
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 480,
           "stockAmt": 1761.6,
           "sales30": 0,
-          "sales90": 119
+          "sales90": 0
         },
         "东鹏特饮促销": {
           "stock": 480,
           "stockAmt": 1761.6,
           "sales30": 0,
-          "sales90": 119
+          "sales90": 0
         },
         "东鹏特饮促销1": {
           "stock": 480,
           "stockAmt": 1761.6,
           "sales30": 0,
-          "sales90": 119
+          "sales90": 0
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 2,
           "stockAmt": 2.18,
           "sales30": 0,
-          "sales90": 32
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 5,
           "stockAmt": 5.45,
           "sales30": 0,
-          "sales90": 18
+          "sales90": 0
         },
         "伊利巧乐兹巧丝绒35支": {
           "stock": 32,
           "stockAmt": 101.12,
           "sales30": 0,
-          "sales90": 22
+          "sales90": 0
         },
         "伊利牧场香草味奶昔雪糕（90克*16杯）": {
           "stock": 0,
@@ -32670,7 +32670,7 @@
           "stock": 32,
           "stockAmt": 77.76,
           "sales30": 0,
-          "sales90": 17
+          "sales90": 0
         },
         "巧乐兹巧榛橘冰淇凌70g*35支": {
           "stock": 0,
@@ -32700,13 +32700,13 @@
           "stock": 37,
           "stockAmt": 110.63,
           "sales30": 0,
-          "sales90": 22
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 1,
           "stockAmt": 2.99,
           "sales30": 0,
-          "sales90": 39
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -32766,19 +32766,19 @@
           "stock": 16,
           "stockAmt": 54.24,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "甄稀满满葡萄味90克*16": {
           "stock": 3,
           "stockAmt": 18,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "甄稀白桃乌龙冰淇凌90g*16支": {
           "stock": 3,
           "stockAmt": 18,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "甄稀醇真原味冰淇淋（70克*30支）": {
           "stock": 0,
@@ -33102,19 +33102,19 @@
           "stock": 18,
           "stockAmt": 88.38,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "康师傅红烧牛肉面": {
           "stock": 7,
           "stockAmt": 26.6,
           "sales30": 0,
-          "sales90": 11
+          "sales90": 0
         },
         "康师傅香辣牛肉面113g": {
           "stock": 1,
           "stockAmt": 3.8,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -33126,13 +33126,13 @@
           "stock": 5,
           "stockAmt": 24.26,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "旺旺仙贝52g": {
           "stock": 6,
           "stockAmt": 26.46,
           "sales30": 0,
-          "sales90": 12
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 0,
@@ -33308,7 +33308,7 @@
           "stock": 21,
           "stockAmt": 43.47,
           "sales30": 0,
-          "sales90": 29
+          "sales90": 0
         },
         "伊利 奶皮子酸奶味70g": {
           "stock": 0,
@@ -33320,25 +33320,25 @@
           "stock": 31,
           "stockAmt": 33.79,
           "sales30": 0,
-          "sales90": 45
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 27,
           "stockAmt": 35.1,
           "sales30": 0,
-          "sales90": 39
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓（70g）": {
           "stock": 30,
           "stockAmt": 32.7,
           "sales30": 0,
-          "sales90": 43
+          "sales90": 0
         },
         "伊利冰工厂炫菠萝（70g）": {
           "stock": 36,
           "stockAmt": 66.24,
           "sales30": 0,
-          "sales90": 31
+          "sales90": 0
         },
         "伊利哈蜜瓜脆筒（73g）": {
           "stock": 5,
@@ -33350,7 +33350,7 @@
           "stock": 25,
           "stockAmt": 37.5,
           "sales30": 0,
-          "sales90": 36
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 0,
@@ -33362,7 +33362,7 @@
           "stock": 18,
           "stockAmt": 56.88,
           "sales30": 0,
-          "sales90": 34
+          "sales90": 0
         },
         "伊利心情": {
           "stock": 23,
@@ -33374,19 +33374,19 @@
           "stock": 2,
           "stockAmt": 12,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "伊利甄稀青柑蜜瓜杯": {
           "stock": 12,
           "stockAmt": 72,
           "sales30": 0,
-          "sales90": 15
+          "sales90": 0
         },
         "伊利甄稀香草杯（90g）": {
           "stock": 4,
           "stockAmt": 26.84,
           "sales30": 0,
-          "sales90": 7
+          "sales90": 0
         },
         "伊利精火炬雪糕（80g）": {
           "stock": 10,
@@ -33452,13 +33452,13 @@
           "stock": 29,
           "stockAmt": 107.59,
           "sales30": 0,
-          "sales90": 30
+          "sales90": 0
         },
         "甄稀袋-蓝莓芝芝黑巧": {
           "stock": 4,
           "stockAmt": 14.84,
           "sales30": 0,
-          "sales90": 26
+          "sales90": 0
         },
         "蒙牛-随变 (咖啡味)  75g": {
           "stock": 0,
@@ -33500,7 +33500,7 @@
           "stock": 730,
           "stockAmt": 2682.6,
           "sales30": 0,
-          "sales90": 230
+          "sales90": 0
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1158,
@@ -33572,43 +33572,43 @@
           "stock": 1,
           "stockAmt": 2.83,
           "sales30": 0,
-          "sales90": 19
+          "sales90": 0
         },
         "东鹏特饮1*24瓶500ML": {
           "stock": 730,
           "stockAmt": 2682.6,
           "sales30": 0,
-          "sales90": 230
+          "sales90": 0
         },
         "东鹏特饮促销": {
           "stock": 730,
           "stockAmt": 2682.6,
           "sales30": 0,
-          "sales90": 230
+          "sales90": 0
         },
         "东鹏特饮促销1": {
           "stock": 730,
           "stockAmt": 2682.6,
           "sales30": 0,
-          "sales90": 230
+          "sales90": 0
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 31,
           "stockAmt": 33.79,
           "sales30": 0,
-          "sales90": 45
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 30,
           "stockAmt": 32.7,
           "sales30": 0,
-          "sales90": 43
+          "sales90": 0
         },
         "伊利巧乐兹巧丝绒35支": {
           "stock": 18,
           "stockAmt": 56.88,
           "sales30": 0,
-          "sales90": 34
+          "sales90": 0
         },
         "伊利牧场香草味奶昔雪糕（90克*16杯）": {
           "stock": 0,
@@ -33656,7 +33656,7 @@
           "stock": 29,
           "stockAmt": 70.47,
           "sales30": 0,
-          "sales90": 38
+          "sales90": 0
         },
         "巧乐兹巧榛橘冰淇凌70g*35支": {
           "stock": 0,
@@ -33686,13 +33686,13 @@
           "stock": 18,
           "stockAmt": 53.82,
           "sales30": 0,
-          "sales90": 39
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 9,
           "stockAmt": 26.91,
           "sales30": 0,
-          "sales90": 36
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -33752,19 +33752,19 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 30
+          "sales90": 0
         },
         "甄稀满满葡萄味90克*16": {
           "stock": 5,
           "stockAmt": 30,
           "sales30": 0,
-          "sales90": 10
+          "sales90": 0
         },
         "甄稀白桃乌龙冰淇凌90g*16支": {
           "stock": 2,
           "stockAmt": 12,
           "sales30": 0,
-          "sales90": 13
+          "sales90": 0
         },
         "甄稀醇真原味冰淇淋（70克*30支）": {
           "stock": 0,
@@ -34088,19 +34088,19 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 23
+          "sales90": 0
         },
         "康师傅红烧牛肉面": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 6
+          "sales90": 0
         },
         "康师傅香辣牛肉面113g": {
           "stock": 9,
           "stockAmt": 34.2,
           "sales30": 0,
-          "sales90": 11
+          "sales90": 0
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -34112,13 +34112,13 @@
           "stock": 5,
           "stockAmt": 24.26,
           "sales30": 0,
-          "sales90": 28
+          "sales90": 0
         },
         "旺旺仙贝52g": {
           "stock": 16,
           "stockAmt": 70.58,
           "sales30": 0,
-          "sales90": 23
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 0,
@@ -34306,7 +34306,7 @@
           "stock": 45,
           "stockAmt": 49.05,
           "sales30": 0,
-          "sales90": 42
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -34336,7 +34336,7 @@
           "stock": 40,
           "stockAmt": 60,
           "sales30": 0,
-          "sales90": 18
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 50,
@@ -34354,7 +34354,7 @@
           "stock": 40,
           "stockAmt": 60,
           "sales30": 0,
-          "sales90": 30
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -34402,7 +34402,7 @@
           "stock": 37,
           "stockAmt": 37.74,
           "sales30": 0,
-          "sales90": 20
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 0,
@@ -34414,7 +34414,7 @@
           "stock": 23,
           "stockAmt": 54.05,
           "sales30": 0,
-          "sales90": 18
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -34426,13 +34426,13 @@
           "stock": 14,
           "stockAmt": 105.42,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 11,
           "stockAmt": 66,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -34456,7 +34456,7 @@
           "stock": 40,
           "stockAmt": 56.4,
           "sales30": 0,
-          "sales90": 21
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -34474,7 +34474,7 @@
           "stock": 4,
           "stockAmt": 28.88,
           "sales30": 0,
-          "sales90": 3
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 18,
@@ -34486,7 +34486,7 @@
           "stock": 398,
           "stockAmt": 1460.66,
           "sales30": 0,
-          "sales90": 261
+          "sales90": 0
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1664,
@@ -34504,13 +34504,13 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 39
+          "sales90": 0
         },
         "50元枸杞槟榔/包": {
           "stock": 4,
           "stockAmt": 128,
           "sales30": 0,
-          "sales90": 21
+          "sales90": 0
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -34564,25 +34564,25 @@
           "stock": 398,
           "stockAmt": 1460.66,
           "sales30": 0,
-          "sales90": 261
+          "sales90": 0
         },
         "东鹏特饮促销": {
           "stock": 398,
           "stockAmt": 1460.66,
           "sales30": 0,
-          "sales90": 261
+          "sales90": 0
         },
         "东鹏特饮促销1": {
           "stock": 398,
           "stockAmt": 1460.66,
           "sales30": 0,
-          "sales90": 261
+          "sales90": 0
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 45,
           "stockAmt": 49.05,
           "sales30": 0,
-          "sales90": 42
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -34672,13 +34672,13 @@
           "stock": 45,
           "stockAmt": 134.55,
           "sales30": 0,
-          "sales90": 38
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 44,
           "stockAmt": 131.56,
           "sales30": 0,
-          "sales90": 34
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -34792,7 +34792,7 @@
           "stock": 41,
           "stockAmt": 79.95,
           "sales30": 0,
-          "sales90": 27
+          "sales90": 0
         },
         "趣趣脆 30克 小馒头蛋黄味1*10*15中袋": {
           "stock": 0,
@@ -35074,13 +35074,13 @@
           "stock": 70,
           "stockAmt": 343.74,
           "sales30": 0,
-          "sales90": 63
+          "sales90": 0
         },
         "康师傅红烧牛肉面": {
           "stock": 15,
           "stockAmt": 57,
           "sales30": 0,
-          "sales90": 36
+          "sales90": 0
         },
         "康师傅香辣牛肉面113g": {
           "stock": 0,
@@ -35098,13 +35098,13 @@
           "stock": 3,
           "stockAmt": 14.55,
           "sales30": 0,
-          "sales90": 2
+          "sales90": 0
         },
         "旺旺仙贝52g": {
           "stock": 1,
           "stockAmt": 4.41,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 166,
@@ -35292,7 +35292,7 @@
           "stock": 45,
           "stockAmt": 49.05,
           "sales30": 0,
-          "sales90": 43
+          "sales90": 0
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -35322,7 +35322,7 @@
           "stock": 40,
           "stockAmt": 60,
           "sales30": 0,
-          "sales90": 29
+          "sales90": 0
         },
         "伊利小布丁": {
           "stock": 50,
@@ -35340,7 +35340,7 @@
           "stock": 41,
           "stockAmt": 61.5,
           "sales30": 0,
-          "sales90": 36
+          "sales90": 0
         },
         "伊利甄稀白桃乌龙杯（90g）": {
           "stock": 0,
@@ -35388,7 +35388,7 @@
           "stock": 30,
           "stockAmt": 30.6,
           "sales30": 0,
-          "sales90": 34
+          "sales90": 0
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 0,
@@ -35400,7 +35400,7 @@
           "stock": 24,
           "stockAmt": 56.4,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -35412,13 +35412,13 @@
           "stock": 11,
           "stockAmt": 82.83,
           "sales30": 0,
-          "sales90": 5
+          "sales90": 0
         },
         "甄稀杯 -草莓多多 味     90g": {
           "stock": 9,
           "stockAmt": 54,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "甄稀袋-桑葚莓莓乌龙": {
           "stock": 0,
@@ -35442,7 +35442,7 @@
           "stock": 43,
           "stockAmt": 60.63,
           "sales30": 0,
-          "sales90": 40
+          "sales90": 0
         },
         "速力奥发酵人参营养饮料(含气)（天朗）": {
           "stock": 0,
@@ -35460,7 +35460,7 @@
           "stock": 1,
           "stockAmt": 7.22,
           "sales30": 0,
-          "sales90": 8
+          "sales90": 0
         },
         "雀巢-8次方-香草巧克力": {
           "stock": 16,
@@ -35472,7 +35472,7 @@
           "stock": 357,
           "stockAmt": 1311.4,
           "sales30": 0,
-          "sales90": 262
+          "sales90": 0
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1603,
@@ -35490,13 +35490,13 @@
           "stock": 9,
           "stockAmt": 162,
           "sales30": 0,
-          "sales90": 47
+          "sales90": 0
         },
         "50元枸杞槟榔/包": {
           "stock": 4,
           "stockAmt": 128,
           "sales30": 0,
-          "sales90": 16
+          "sales90": 0
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -35550,25 +35550,25 @@
           "stock": 357,
           "stockAmt": 1311.4,
           "sales30": 0,
-          "sales90": 262
+          "sales90": 0
         },
         "东鹏特饮促销": {
           "stock": 357,
           "stockAmt": 1311.4,
           "sales30": 0,
-          "sales90": 262
+          "sales90": 0
         },
         "东鹏特饮促销1": {
           "stock": 357,
           "stockAmt": 1311.4,
           "sales30": 0,
-          "sales90": 262
+          "sales90": 0
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 45,
           "stockAmt": 49.05,
           "sales30": 0,
-          "sales90": 43
+          "sales90": 0
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -35658,13 +35658,13 @@
           "stock": 50,
           "stockAmt": 149.5,
           "sales30": 0,
-          "sales90": 56
+          "sales90": 0
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 42,
           "stockAmt": 125.58,
           "sales30": 0,
-          "sales90": 53
+          "sales90": 0
         },
         "巧乐兹经典香奶棒冰淇淋（75克*40支）": {
           "stock": 0,
@@ -35778,7 +35778,7 @@
           "stock": 41,
           "stockAmt": 79.95,
           "sales30": 0,
-          "sales90": 30
+          "sales90": 0
         },
         "趣趣脆 30克 小馒头蛋黄味1*10*15中袋": {
           "stock": 0,
@@ -36060,13 +36060,13 @@
           "stock": 5,
           "stockAmt": 24.55,
           "sales30": 0,
-          "sales90": 48
+          "sales90": 0
         },
         "康师傅红烧牛肉面": {
           "stock": 18,
           "stockAmt": 68.4,
           "sales30": 0,
-          "sales90": 18
+          "sales90": 0
         },
         "康师傅香辣牛肉面113g": {
           "stock": 0,
@@ -36084,13 +36084,13 @@
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 9
+          "sales90": 0
         },
         "旺旺仙贝52g": {
           "stock": 0,
           "stockAmt": 0,
           "sales30": 0,
-          "sales90": 4
+          "sales90": 0
         },
         "尿素PE": {
           "stock": 130,
@@ -37166,7 +37166,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-28T20:00:38.689Z",
+      "generatedAt": "2026-10-29T00:07:00.052Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37179,7 +37179,7 @@
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
-      "cellsWithSales": 839,
+      "cellsWithSales": 382,
       "latestFlowDate": "2026-10-27",
       "note": "销量可能为空：出库流水主要覆盖便利店商品，润滑油/汽车用品多数未进入流水"
     }
