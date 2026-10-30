@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T04:30:29.871Z",
+  "updatedAt": "2026-10-30T07:58:43.423Z",
   "source": "kdocs",
   "today": "2026-10-30",
   "products": [
@@ -8370,14 +8370,47 @@
       "spec": "",
       "store": "南沙",
       "supplier": "鑫湘缘",
-      "ts": "2026-10-30 12:30",
+      "ts": "2026-10-30 12:29",
       "unit": "包"
+    },
+    {
+      "by": "管理员/秦岭",
+      "diff": 0,
+      "note": "",
+      "product": "30元枸杞槟榔/包",
+      "qtyGot": 80,
+      "qtyShould": 80,
+      "reason": "",
+      "row": 32,
+      "site": "南沙",
+      "spec": "",
+      "store": "南沙",
+      "supplier": "鑫湘缘",
+      "ts": "2026-10-30 12:31",
+      "unit": "包"
+    },
+    {
+      "by": "照金",
+      "diff": 0,
+      "note": "",
+      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
+      "qtyGot": 20,
+      "qtyShould": 20,
+      "reason": "",
+      "row": 33,
+      "site": "照金",
+      "spec": "1*24",
+      "store": "照金",
+      "supplier": "天天",
+      "ts": "2026-10-30 15:58",
+      "unit": "箱"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmvuokawz91gsvh",
     "a:cmvuh4k59tdewxu",
     "cmvrvfb3vfri4o4",
     "cmvrokcpiyhlt3e",
@@ -37183,7 +37216,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-30T04:30:41.295Z",
+      "generatedAt": "2026-10-30T07:59:01.965Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
