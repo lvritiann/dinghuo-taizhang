@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-10-30T20:56:41.881Z",
+  "updatedAt": "2026-10-31T00:19:41.623Z",
   "source": "kdocs",
-  "today": "2026-10-30",
+  "today": "2026-10-31",
   "products": [
     {
       "capQty": 0,
@@ -18501,8 +18501,8 @@
         "壳牌喜力HX7+ 5W30": {
           "stock": 26,
           "stockAmt": 1258.66,
-          "sales30": 0,
-          "sales90": 0
+          "sales30": 1,
+          "sales90": 1
         },
         "壳牌喜力HX7+ 5W40": {
           "stock": 9,
@@ -18759,26 +18759,26 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 429,
           "stockAmt": 1617.42,
-          "sales30": 211,
-          "sales90": 211
+          "sales30": 225,
+          "sales90": 225
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1108,
           "stockAmt": 5118.96,
-          "sales30": 324,
-          "sales90": 324
+          "sales30": 338,
+          "sales90": 338
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
           "stockAmt": 0,
-          "sales30": 11,
-          "sales90": 11
+          "sales30": 12,
+          "sales90": 12
         },
         "30元枸杞槟榔/包": {
           "stock": 2,
           "stockAmt": 39.09,
-          "sales30": 33,
-          "sales90": 33
+          "sales30": 36,
+          "sales90": 36
         },
         "50元枸杞槟榔/包": {
           "stock": 12,
@@ -18837,20 +18837,20 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 429,
           "stockAmt": 1617.42,
-          "sales30": 211,
-          "sales90": 211
+          "sales30": 225,
+          "sales90": 225
         },
         "东鹏特饮促销": {
           "stock": 429,
           "stockAmt": 1617.42,
-          "sales30": 211,
-          "sales90": 211
+          "sales30": 225,
+          "sales90": 225
         },
         "东鹏特饮促销1": {
           "stock": 429,
           "stockAmt": 1617.42,
-          "sales30": 211,
-          "sales90": 211
+          "sales30": 225,
+          "sales90": 225
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 36,
@@ -19709,8 +19709,8 @@
         "蒙牛-随变 (咖啡味)  75g": {
           "stock": 35,
           "stockAmt": 96.6,
-          "sales30": 3,
-          "sales90": 3
+          "sales30": 7,
+          "sales90": 7
         },
         "蒙牛玉米棒65g4": {
           "stock": 24,
@@ -19745,26 +19745,26 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 431,
           "stockAmt": 1637.54,
-          "sales30": 193,
-          "sales90": 193
+          "sales30": 207,
+          "sales90": 207
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1077,
           "stockAmt": 4975.74,
-          "sales30": 296,
-          "sales90": 296
+          "sales30": 329,
+          "sales90": 329
         },
         "20元枸杞槟榔/包": {
           "stock": 7,
           "stockAmt": 91.56,
-          "sales30": 9,
-          "sales90": 9
+          "sales30": 10,
+          "sales90": 10
         },
         "30元枸杞槟榔/包": {
           "stock": 4,
           "stockAmt": 78.48,
-          "sales30": 19,
-          "sales90": 19
+          "sales30": 22,
+          "sales90": 22
         },
         "50元枸杞槟榔/包": {
           "stock": 5,
@@ -19823,20 +19823,20 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 431,
           "stockAmt": 1637.54,
-          "sales30": 193,
-          "sales90": 193
+          "sales30": 207,
+          "sales90": 207
         },
         "东鹏特饮促销": {
           "stock": 431,
           "stockAmt": 1637.54,
-          "sales30": 193,
-          "sales90": 193
+          "sales30": 207,
+          "sales90": 207
         },
         "东鹏特饮促销1": {
           "stock": 431,
           "stockAmt": 1637.54,
-          "sales30": 193,
-          "sales90": 193
+          "sales30": 207,
+          "sales90": 207
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 39,
@@ -19931,8 +19931,8 @@
         "巧乐兹经典巧恋果冰淇淋（75克×40支）": {
           "stock": 84,
           "stockAmt": 251.16,
-          "sales30": 1,
-          "sales90": 1
+          "sales30": 3,
+          "sales90": 3
         },
         "巧乐兹经典巧脆棒冰淇淋（75克×40支）": {
           "stock": 84,
@@ -20333,14 +20333,14 @@
         "雀巢咖啡丝滑拿铁268ml": {
           "stock": 75,
           "stockAmt": 368.25,
-          "sales30": 27,
-          "sales90": 27
+          "sales30": 34,
+          "sales90": 34
         },
         "康师傅红烧牛肉面": {
           "stock": 24,
           "stockAmt": 91.2,
-          "sales30": 8,
-          "sales90": 8
+          "sales30": 9,
+          "sales90": 9
         },
         "康师傅香辣牛肉面113g": {
           "stock": 0,
@@ -37216,7 +37216,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-10-30T20:56:53.450Z",
+      "generatedAt": "2026-10-31T00:19:53.730Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37225,12 +37225,12 @@
         "照金北"
       ],
       "s9Rows": 6422,
-      "s11Rows": 11475,
+      "s11Rows": 11571,
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
-      "cellsWithSales": 419,
-      "latestFlowDate": "2026-10-29",
+      "cellsWithSales": 420,
+      "latestFlowDate": "2026-10-30",
       "note": "销量可能为空：出库流水主要覆盖便利店商品，润滑油/汽车用品多数未进入流水"
     }
   }
