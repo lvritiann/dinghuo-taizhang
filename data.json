@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-02T06:33:03.641Z",
+  "updatedAt": "2026-11-02T16:42:41.676Z",
   "source": "kdocs",
   "today": "2026-11-02",
   "products": [
@@ -22665,8 +22665,8 @@
         "小叮当 100g": {
           "stock": 20,
           "stockAmt": 47,
-          "sales30": 1,
-          "sales90": 1
+          "sales30": 2,
+          "sales90": 2
         },
         "巧乐兹巧克力香草口味脆筒冰激凌（85g）": {
           "stock": 0,
@@ -22737,14 +22737,14 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 107,
           "stockAmt": 392.69,
-          "sales30": 33,
-          "sales90": 33
+          "sales30": 36,
+          "sales90": 36
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 494,
           "stockAmt": 2300.61,
-          "sales30": 174,
-          "sales90": 174
+          "sales30": 194,
+          "sales90": 194
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -22815,20 +22815,20 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 107,
           "stockAmt": 392.69,
-          "sales30": 33,
-          "sales90": 33
+          "sales30": 36,
+          "sales90": 36
         },
         "东鹏特饮促销": {
           "stock": 107,
           "stockAmt": 392.69,
-          "sales30": 33,
-          "sales90": 33
+          "sales30": 36,
+          "sales90": 36
         },
         "东鹏特饮促销1": {
           "stock": 107,
           "stockAmt": 392.69,
-          "sales30": 33,
-          "sales90": 33
+          "sales30": 36,
+          "sales90": 36
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 29,
@@ -23405,8 +23405,8 @@
         "车仆金罐燃油宝": {
           "stock": 239,
           "stockAmt": 4781.29,
-          "sales30": 2,
-          "sales90": 2
+          "sales30": 3,
+          "sales90": 3
         },
         "车仆防冻液2公斤红色-35度": {
           "stock": 1,
@@ -23543,8 +23543,8 @@
         "伊利冰工厂冰片蜜桃（70g）": {
           "stock": 41,
           "stockAmt": 44.69,
-          "sales30": 4,
-          "sales90": 4
+          "sales30": 5,
+          "sales90": 5
         },
         "伊利冰工厂山楂爽棒冰（70g）": {
           "stock": 0,
@@ -23717,14 +23717,14 @@
         "雀巢-8次方-香草巧克力": {
           "stock": 14,
           "stockAmt": 101.08,
-          "sales30": 2,
-          "sales90": 2
+          "sales30": 3,
+          "sales90": 3
         },
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 170,
           "stockAmt": 632.49,
-          "sales30": 40,
-          "sales90": 40
+          "sales30": 50,
+          "sales90": 50
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 331,
@@ -23741,14 +23741,14 @@
         "30元枸杞槟榔/包": {
           "stock": 15,
           "stockAmt": 270,
-          "sales30": 8,
-          "sales90": 8
+          "sales30": 9,
+          "sales90": 9
         },
         "50元枸杞槟榔/包": {
           "stock": 9,
           "stockAmt": 288,
-          "sales30": 4,
-          "sales90": 4
+          "sales30": 5,
+          "sales90": 5
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -23801,26 +23801,26 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 170,
           "stockAmt": 632.49,
-          "sales30": 40,
-          "sales90": 40
+          "sales30": 50,
+          "sales90": 50
         },
         "东鹏特饮促销": {
           "stock": 170,
           "stockAmt": 632.49,
-          "sales30": 40,
-          "sales90": 40
+          "sales30": 50,
+          "sales90": 50
         },
         "东鹏特饮促销1": {
           "stock": 170,
           "stockAmt": 632.49,
-          "sales30": 40,
-          "sales90": 40
+          "sales30": 50,
+          "sales90": 50
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 41,
           "stockAmt": 44.69,
-          "sales30": 4,
-          "sales90": 4
+          "sales30": 5,
+          "sales90": 5
         },
         "伊利冰工厂清爽蓝莓": {
           "stock": 0,
@@ -37250,7 +37250,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-02T06:33:20.428Z",
+      "generatedAt": "2026-11-02T16:42:54.807Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37259,7 +37259,7 @@
         "照金北"
       ],
       "s9Rows": 6422,
-      "s11Rows": 13123,
+      "s11Rows": 13197,
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
