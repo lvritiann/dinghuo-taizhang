@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T16:58:48.036Z",
+  "updatedAt": "2026-11-05T22:35:26.921Z",
   "source": "kdocs",
   "today": "2026-11-05",
   "products": [
@@ -18598,8 +18598,8 @@
         "壳牌喜力HX8 0W30": {
           "stock": 24,
           "stockAmt": 1285.44,
-          "sales30": 0,
-          "sales90": 0
+          "sales30": 1,
+          "sales90": 1
         },
         "壳牌喜力HX8 0W40": {
           "stock": 15,
@@ -18760,8 +18760,8 @@
         "天冰【嘿！小白】": {
           "stock": 56,
           "stockAmt": 57.12,
-          "sales30": 1,
-          "sales90": 1
+          "sales30": 3,
+          "sales90": 3
         },
         "宏宝莱 千层榴莲雪糕": {
           "stock": 17,
@@ -18844,14 +18844,14 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 429,
           "stockAmt": 1617.42,
-          "sales30": 298,
-          "sales90": 298
+          "sales30": 322,
+          "sales90": 322
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1108,
           "stockAmt": 5118.96,
-          "sales30": 467,
-          "sales90": 467
+          "sales30": 492,
+          "sales90": 492
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -18922,20 +18922,20 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 429,
           "stockAmt": 1617.42,
-          "sales30": 298,
-          "sales90": 298
+          "sales30": 322,
+          "sales90": 322
         },
         "东鹏特饮促销": {
           "stock": 429,
           "stockAmt": 1617.42,
-          "sales30": 298,
-          "sales90": 298
+          "sales30": 322,
+          "sales90": 322
         },
         "东鹏特饮促销1": {
           "stock": 429,
           "stockAmt": 1617.42,
-          "sales30": 298,
-          "sales90": 298
+          "sales30": 322,
+          "sales90": 322
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 36,
@@ -19432,8 +19432,8 @@
         "雀巢咖啡丝滑拿铁268ml": {
           "stock": 75,
           "stockAmt": 368.25,
-          "sales30": 80,
-          "sales90": 80
+          "sales30": 81,
+          "sales90": 81
         },
         "康师傅红烧牛肉面": {
           "stock": 1,
@@ -19830,20 +19830,20 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 431,
           "stockAmt": 1637.54,
-          "sales30": 236,
-          "sales90": 236
+          "sales30": 250,
+          "sales90": 250
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1077,
           "stockAmt": 4975.74,
-          "sales30": 497,
-          "sales90": 497
+          "sales30": 506,
+          "sales90": 506
         },
         "20元枸杞槟榔/包": {
           "stock": 7,
           "stockAmt": 91.56,
-          "sales30": 15,
-          "sales90": 15
+          "sales30": 16,
+          "sales90": 16
         },
         "30元枸杞槟榔/包": {
           "stock": 4,
@@ -19854,8 +19854,8 @@
         "50元枸杞槟榔/包": {
           "stock": 5,
           "stockAmt": 182.6,
-          "sales30": 7,
-          "sales90": 7
+          "sales30": 8,
+          "sales90": 8
         },
         "30克爆浆熊仔饼巧克力1*10包*15中袋": {
           "stock": 0,
@@ -19908,20 +19908,20 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 431,
           "stockAmt": 1637.54,
-          "sales30": 236,
-          "sales90": 236
+          "sales30": 250,
+          "sales90": 250
         },
         "东鹏特饮促销": {
           "stock": 431,
           "stockAmt": 1637.54,
-          "sales30": 236,
-          "sales90": 236
+          "sales30": 250,
+          "sales90": 250
         },
         "东鹏特饮促销1": {
           "stock": 431,
           "stockAmt": 1637.54,
-          "sales30": 236,
-          "sales90": 236
+          "sales30": 250,
+          "sales90": 250
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 39,
@@ -20418,8 +20418,8 @@
         "雀巢咖啡丝滑拿铁268ml": {
           "stock": 75,
           "stockAmt": 368.25,
-          "sales30": 37,
-          "sales90": 37
+          "sales30": 39,
+          "sales90": 39
         },
         "康师傅红烧牛肉面": {
           "stock": 24,
@@ -37301,7 +37301,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-05T16:58:59.868Z",
+      "generatedAt": "2026-11-05T22:35:41.217Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37310,12 +37310,12 @@
         "照金北"
       ],
       "s9Rows": 6422,
-      "s11Rows": 15069,
+      "s11Rows": 15153,
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
-      "cellsWithSales": 477,
-      "latestFlowDate": "2026-11-04",
+      "cellsWithSales": 478,
+      "latestFlowDate": "2026-11-05",
       "note": "销量可能为空：出库流水主要覆盖便利店商品，润滑油/汽车用品多数未进入流水"
     }
   }
