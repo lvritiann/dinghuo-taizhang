@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-07T23:16:40.194Z",
+  "updatedAt": "2026-11-08T02:36:28.565Z",
   "source": "kdocs",
-  "today": "2026-11-07",
+  "today": "2026-11-08",
   "products": [
     {
       "capQty": 0,
@@ -16889,14 +16889,14 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 237,
           "stockAmt": 871.31,
-          "sales30": 43,
-          "sales90": 43
+          "sales30": 46,
+          "sales90": 46
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1110,
           "stockAmt": 5156.06,
-          "sales30": 134,
-          "sales90": 134
+          "sales30": 144,
+          "sales90": 144
         },
         "20元枸杞槟榔/包": {
           "stock": 0,
@@ -16967,20 +16967,20 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 237,
           "stockAmt": 871.31,
-          "sales30": 43,
-          "sales90": 43
+          "sales30": 46,
+          "sales90": 46
         },
         "东鹏特饮促销": {
           "stock": 237,
           "stockAmt": 871.31,
-          "sales30": 43,
-          "sales90": 43
+          "sales30": 46,
+          "sales90": 46
         },
         "东鹏特饮促销1": {
           "stock": 237,
           "stockAmt": 871.31,
-          "sales30": 43,
-          "sales90": 43
+          "sales30": 46,
+          "sales90": 46
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 36,
@@ -17477,8 +17477,8 @@
         "雀巢咖啡丝滑拿铁268ml": {
           "stock": 25,
           "stockAmt": 122.75,
-          "sales30": 22,
-          "sales90": 22
+          "sales30": 24,
+          "sales90": 24
         },
         "康师傅红烧牛肉面": {
           "stock": 8,
@@ -17489,8 +17489,8 @@
         "康师傅香辣牛肉面113g": {
           "stock": 9,
           "stockAmt": 34.2,
-          "sales30": 4,
-          "sales90": 4
+          "sales30": 5,
+          "sales90": 5
         },
         "箭牌益达蓝莓味40粒瓶": {
           "stock": 0,
@@ -17501,8 +17501,8 @@
         "旺旺雪饼84g": {
           "stock": 6,
           "stockAmt": 29.1,
-          "sales30": 0,
-          "sales90": 0
+          "sales30": 1,
+          "sales90": 1
         },
         "旺旺仙贝52g": {
           "stock": 0,
@@ -18463,8 +18463,8 @@
         "雀巢咖啡丝滑拿铁268ml": {
           "stock": 33,
           "stockAmt": 162.03,
-          "sales30": 8,
-          "sales90": 8
+          "sales30": 9,
+          "sales90": 9
         },
         "康师傅红烧牛肉面": {
           "stock": 8,
@@ -37318,7 +37318,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-07T23:16:55.581Z",
+      "generatedAt": "2026-11-08T02:36:46.619Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37327,11 +37327,11 @@
         "照金北"
       ],
       "s9Rows": 6422,
-      "s11Rows": 16444,
+      "s11Rows": 16491,
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
-      "cellsWithSales": 510,
+      "cellsWithSales": 511,
       "latestFlowDate": "2026-11-07",
       "note": "销量可能为空：出库流水主要覆盖便利店商品，润滑油/汽车用品多数未进入流水"
     }
