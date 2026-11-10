@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T08:39:51.305Z",
+  "updatedAt": "2026-11-10T11:06:19.224Z",
   "source": "kdocs",
   "today": "2026-11-10",
   "products": [
@@ -3179,6 +3179,32 @@
       "unit": "桶"
     },
     {
+      "amount": 723.2,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 45.2,
+      "product": "壳牌防冻液-红色 -45℃",
+      "qty": 16,
+      "spec": "4KG",
+      "store": "汉中",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 723.2,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 45.2,
+      "product": "壳牌防冻液-绿色 -45℃",
+      "qty": 16,
+      "spec": "4KG",
+      "store": "汉中",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4463,24 +4489,7 @@
       "usedQty": 48
     },
     {
-      "balQty": -44,
-      "capAmt": 0,
-      "capQty": 0,
-      "full": false,
-      "low": false,
-      "orderCount": 5,
-      "pct": 0,
-      "price": 45.2,
-      "product": "壳牌防冻液-红色 -45℃",
-      "shelf": 0,
-      "spec": "4KG",
-      "supplier": "天朗尚品",
-      "unit": "桶",
-      "usedAmt": 1988.8,
-      "usedQty": 44
-    },
-    {
-      "balQty": -64,
+      "balQty": -60,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
@@ -4488,13 +4497,30 @@
       "orderCount": 6,
       "pct": 0,
       "price": 45.2,
+      "product": "壳牌防冻液-红色 -45℃",
+      "shelf": 0,
+      "spec": "4KG",
+      "supplier": "天朗尚品",
+      "unit": "桶",
+      "usedAmt": 2712,
+      "usedQty": 60
+    },
+    {
+      "balQty": -80,
+      "capAmt": 0,
+      "capQty": 0,
+      "full": false,
+      "low": false,
+      "orderCount": 7,
+      "pct": 0,
+      "price": 45.2,
       "product": "壳牌防冻液-绿色 -45℃",
       "shelf": 0,
       "spec": "4KG",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 2892.8,
-      "usedQty": 64
+      "usedAmt": 3616,
+      "usedQty": 80
     },
     {
       "balQty": 0,
@@ -7974,16 +8000,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -27874.84,
+      "balAmt": -29321.24,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-11-10",
       "low": false,
-      "orderCount": 29,
+      "orderCount": 31,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 27874.84
+      "usedAmt": 29321.24
     },
     {
       "balAmt": 0,
@@ -8804,6 +8830,8 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmwal3w2k1gfg10",
+    "cmwal3w2k5k64qd",
     "cmwafq0s35ajixn",
     "cmwaf5rfoxvg0ib",
     "a:cmwaewhfhadvg6u",
@@ -37637,7 +37665,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-10T08:40:08.318Z",
+      "generatedAt": "2026-11-10T11:06:39.548Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
