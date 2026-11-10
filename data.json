@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T11:06:19.224Z",
+  "updatedAt": "2026-11-10T11:08:29.339Z",
   "source": "kdocs",
   "today": "2026-11-10",
   "products": [
@@ -3400,6 +3400,32 @@
       "unit": "箱"
     },
     {
+      "amount": 5736,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 4.78,
+      "product": "红牛维生素功能饮料（天天）",
+      "qty": 1200,
+      "spec": "1*24",
+      "store": "汉中",
+      "supplier": "天天",
+      "unit": "箱"
+    },
+    {
+      "amount": 1761.6,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 3.67,
+      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
+      "qty": 480,
+      "spec": "1*24",
+      "store": "汉中",
+      "supplier": "天天",
+      "unit": "箱"
+    },
+    {
       "amount": 1440,
       "date": "2026-10-16",
       "expireDate": "",
@@ -5509,12 +5535,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -200,
+      "balQty": -680,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 8,
+      "orderCount": 9,
       "pct": 0,
       "price": 3.67,
       "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
@@ -5522,16 +5548,16 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 5798.6,
-      "usedQty": 200
+      "usedAmt": 7560.2,
+      "usedQty": 680
     },
     {
-      "balQty": -425,
+      "balQty": -1625,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 7,
+      "orderCount": 8,
       "pct": 0,
       "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
@@ -5539,8 +5565,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 12475.8,
-      "usedQty": 425
+      "usedAmt": 18211.8,
+      "usedQty": 1625
     },
     {
       "balQty": -60,
@@ -8036,16 +8062,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -18274.4,
+      "balAmt": -25772,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-11-10",
       "low": false,
-      "orderCount": 15,
+      "orderCount": 17,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 18274.4
+      "usedAmt": 25772
     },
     {
       "balAmt": -2160,
@@ -8830,6 +8856,8 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmwal5mu47qdjy2",
+    "cmwal5mu4av8z5r",
     "cmwal3w2k1gfg10",
     "cmwal3w2k5k64qd",
     "cmwafq0s35ajixn",
@@ -37665,7 +37693,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-10T11:06:39.548Z",
+      "generatedAt": "2026-11-10T11:08:48.341Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
