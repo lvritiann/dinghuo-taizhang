@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T03:08:24.890Z",
+  "updatedAt": "2026-11-10T03:10:46.214Z",
   "source": "kdocs",
   "today": "2026-11-10",
   "products": [
@@ -3088,6 +3088,19 @@
       "unit": "桶"
     },
     {
+      "amount": 119.78,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 119.78,
+      "product": "壳牌喜力HX5 +10W40",
+      "qty": 1,
+      "spec": "4L",
+      "store": "韩城",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4098,12 +4111,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -8,
+      "balQty": -9,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 2,
       "pct": 0,
       "price": 119.78,
       "product": "壳牌喜力HX5 +10W40",
@@ -4111,8 +4124,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 958.24,
-      "usedQty": 8
+      "usedAmt": 1078.02,
+      "usedQty": 9
     },
     {
       "balQty": -8,
@@ -7779,16 +7792,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -24267.88,
+      "balAmt": -24387.66,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-10-26",
+      "lastDate": "2026-11-10",
       "low": false,
-      "orderCount": 22,
+      "orderCount": 23,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 24267.88
+      "usedAmt": 24387.66
     },
     {
       "balAmt": 0,
@@ -8577,6 +8590,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmwa43y04wgue4h",
     "cmwa41caapm3ztu",
     "cmw9zmpkj4r087r",
     "cmw9zkf0nym6szl",
@@ -37394,7 +37408,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-10T03:08:46.559Z",
+      "generatedAt": "2026-11-10T03:11:07.785Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
