@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T07:09:01.153Z",
+  "updatedAt": "2026-11-10T07:11:38.938Z",
   "source": "kdocs",
   "today": "2026-11-10",
   "products": [
@@ -8675,12 +8675,29 @@
       "supplier": "天易蓝",
       "ts": "2026-11-10 08:42",
       "unit": "桶"
+    },
+    {
+      "by": "白河",
+      "diff": 0,
+      "note": "",
+      "product": "壳牌喜力HX5 +5W30",
+      "qtyGot": 8,
+      "qtyShould": 8,
+      "reason": "",
+      "row": 42,
+      "site": "白河",
+      "spec": "4L",
+      "store": "白河",
+      "supplier": "天朗尚品",
+      "ts": "2026-11-10 15:11",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmwacq14ol8bn4e",
     "cmwabot1m72fs02",
     "cmwabot1m9lzrmv",
     "cmwabot1mtqnwyu",
@@ -37506,7 +37523,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-10T07:09:23.235Z",
+      "generatedAt": "2026-11-10T07:12:00.450Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
