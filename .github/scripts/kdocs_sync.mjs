@@ -10,6 +10,7 @@
  *   0. 读回上一次的 data.json，取出「已写过的 cid」建立幂等基线（防重复入账）
  *   1. mode=order  时按 payload.orders 逐笔 POST 写入金山「供应商 Sheet」（cid 已写过的直接跳过）
  *      mode=arrive 时按 payload.arrive 调用到货确认（新增 / 改数量 / 撤销整行）
+ *      mode=capSet 时按 payload.capSet.caps 逐条覆盖写入《品类额度》（不参与 cid 基线）
  *   2. POST dump 拉回全量数据（商品档案 + 全部订单 + 到货确认 + 算好的余额）
  *   3. 生成 data.json（含 arrivals + recentCids 幂等基线）
  *   4. git commit + push（用 workflow 自带的 GITHUB_TOKEN）
@@ -18,8 +19,8 @@
  *   KDOCS_WEBHOOK 金山 AirScript webhook URL     （Secrets）
  *   KDOCS_TOKEN   AirScript-Token                （Secrets）
  *   APP_TOKEN     自定义二次口令，防 PAT 泄露被滥用（Secrets）
- *   PAYLOAD_JSON  dispatch 传入的 JSON（含 appToken + orders / arrive）
- *   MODE          probe | sync | order | arrive
+ *   PAYLOAD_JSON  dispatch 传入的 JSON（含 appToken + orders / arrive / capSet / tobacco）
+ *   MODE          probe | sync | order | arrive | capSet
  *                 ⚠ 线上 workflow 的 choice options 暂无 arrive（推它要 token 有 Workflows 权限），
  *                   到货确认实际是带 arrive 载荷、用 mode=order 发的 —— 见下面 EFF 的说明。
  *
@@ -57,18 +58,20 @@ catch (e) { die('PAYLOAD_JSON 解析失败：' + e.message); }
  * 要把 arrive 补进去，推送 .github/workflows/ 需要 token 具备 **Workflows** 权限，
  * 而当前的 fine-grained PAT 没有（PUT 返回 403 Resource not accessible by personal access token）。
  *
- * 所以：**到货确认借 order 这个「合法外壳」发送**，在这里按「载荷形状」认回来 ——
- * 只要带了 payload.arrive，就按 arrive 处理。口令校验、cid 幂等、日志文案全部照旧。
+ * 所以：**到货确认与品类额度设置借 order 这个「合法外壳」发送**，在这里按「载荷形状」认回来 ——
+ * 带 payload.arrive 就按 arrive 处理；带 payload.capSet 就按 capSet 处理。
+ * 口令校验、日志文案全部照旧；capSet 是覆盖写，天然幂等，不进入 cid 基线。
  *
- * 将来 workflow 的 options 补上 arrive 之后，页面会直接发 mode=arrive，
- * 这一行自然不再命中，两种发法都能用（前向兼容，不是死路）。
- * 想撤掉这层兼容：把下面一行删掉，同时把页面 ghDispatch() 里的 WIRE 也删掉。 */
+ * 将来 workflow 的 options 补上 arrive / capSet 之后，页面可以直接发对应 mode，
+ * 这两行自然不再命中，两种发法都能用（前向兼容，不是死路）。
+ * 想撤掉这层兼容：把下面两行删掉，同时把页面 ghDispatch() 里的 WIRE 也删掉。 */
 const EFF = (MODE === 'order' && payload && payload.tobacco) ? 'tobacco'
-         : (MODE === 'order' && payload && payload.arrive) ? 'arrive' : MODE;
+         : (MODE === 'order' && payload && payload.arrive) ? 'arrive'
+         : (MODE === 'order' && payload && payload.capSet) ? 'capSet' : MODE;
 
-// 口令校验：仅对「写入类」动作（order / arrive / tobacco）强校验；probe/sync 为只读，无需口令
+// 口令校验：仅对「写入类」动作（order / arrive / capSet / tobacco）强校验；probe/sync 为只读，无需口令
 // （手动/定时触发时 payload 里没有 appToken，但仍应放行只读动作）
-if (APP_TOKEN && (EFF === 'order' || EFF === 'arrive' || EFF === 'tobacco')) {
+if (APP_TOKEN && (EFF === 'order' || EFF === 'arrive' || EFF === 'capSet' || EFF === 'tobacco')) {
   if (payload.appToken !== APP_TOKEN) die('appToken 不匹配，拒绝执行（防止令牌泄露后被滥用）');
 }
 
@@ -240,6 +243,40 @@ if (EFF === 'tobacco') {
   }
 }
 
+// 1d) 品类额度设置（CATCAP-PATCH v2）：逐条覆盖写，天然幂等，不参与 cid 基线
+let capLabel = '';
+if (EFF === 'capSet') {
+  const cs = (payload.capSet && typeof payload.capSet === 'object') ? payload.capSet : {};
+  const caps = Array.isArray(cs.caps) ? cs.caps : [];
+  if (!caps.length) die('capSet 缺少 caps（要设置的品类额度）');
+  let capDone = 0;
+  for (const c of caps) {
+    const cat = String((c && c.cat) || '').trim();
+    const rawCap = c && c.cap;
+    const cap = (rawCap === undefined || rawCap === null || rawCap === '') ? 0 : Number(rawCap);
+    const capMode = String((c && c.mode) || '').trim();
+    if (!cat || !Number.isFinite(cap) || cap < 0 || (capMode && capMode !== '金额' && capMode !== '数量')) {
+      failed.push('品类额度格式错误：' + JSON.stringify(c));
+      continue;
+    }
+    try {
+      const r = await kdocs({
+        mode: 'capSet', cat: cat, cap: cap, capMode: capMode,
+        appToken: payload.appToken || '', today
+      });
+      if (r && r.ok) {
+        done++; capDone++;
+        console.log(`  ✓ 额度设置：${cat} = ${cap}${capMode ? '（' + capMode + '）' : ''}（第 ${r.row} 行）`);
+      } else {
+        failed.push(`品类额度 ${cat} → ${(r && r.error) || '未知'}`);
+      }
+    } catch (e) {
+      failed.push(`品类额度 ${cat} → ${e.message}`);
+    }
+  }
+  capLabel = `额度设置 ${capDone} 类`;
+}
+
 // 2) 拉全量
 const dump = await kdocs({ mode: 'dump', appToken: payload.appToken || '', today });
 if (!dump.ok) die('dump 失败：' + (dump.error || JSON.stringify(dump)));
@@ -313,6 +350,7 @@ if (!hasChange) {
   const parts = [];
   if (done && EFF === 'order') parts.push(`新增订单 ${done} 笔`);
   if (arrLabel) parts.push(arrLabel);
+  if (capLabel) parts.push(capLabel);
   if (dupSkipped2) parts.push('重复提交跳过 ' + dupSkipped2 + ' 笔');
   if (tobLabel) parts.push(tobLabel);
   if (dupSkipped2) parts.push('重复提交跳过 ' + dupSkipped2 + ' 笔');
