@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T08:02:09.586Z",
+  "updatedAt": "2026-11-10T08:12:32.406Z",
   "source": "kdocs",
   "today": "2026-11-10",
   "products": [
@@ -8756,12 +8756,29 @@
       "supplier": "天朗尚品",
       "ts": "2026-11-10 15:11",
       "unit": "桶"
+    },
+    {
+      "by": "富平",
+      "diff": 0,
+      "note": "",
+      "product": "红牛维生素功能饮料（天天）",
+      "qtyGot": 80,
+      "qtyShould": 80,
+      "reason": "",
+      "row": 43,
+      "site": "富平",
+      "spec": "1*24",
+      "store": "富平",
+      "supplier": "天天",
+      "ts": "2026-11-10 16:12",
+      "unit": "箱"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmwaewhfhadvg6u",
     "cmwadqlft466uh1",
     "cmwadn9thb2qqyo",
     "cmwad7k2p4t0c35",
@@ -37592,7 +37609,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-10T08:02:32.314Z",
+      "generatedAt": "2026-11-10T08:12:52.541Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
