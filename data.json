@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T06:29:10.646Z",
+  "updatedAt": "2026-11-10T06:42:35.646Z",
   "source": "kdocs",
   "today": "2026-11-10",
   "products": [
@@ -3101,6 +3101,58 @@
       "unit": "桶"
     },
     {
+      "amount": 904,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 45.2,
+      "product": "壳牌防冻液-绿色 -45℃",
+      "qty": 20,
+      "spec": "4KG",
+      "store": "秦岭西",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 361.6,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 45.2,
+      "product": "壳牌防冻液-红色 -45℃",
+      "qty": 8,
+      "spec": "4KG",
+      "store": "秦岭西",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 569.52,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 47.46,
+      "product": "壳牌喜力HX6+ 5W40",
+      "qty": 12,
+      "spec": "1L",
+      "store": "秦岭西",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 1111.92,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 92.66,
+      "product": "壳牌劲霸 R3 15W40",
+      "qty": 12,
+      "spec": "4L",
+      "store": "秦岭西",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4048,12 +4100,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -24,
+      "balQty": -36,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 2,
+      "orderCount": 3,
       "pct": 0,
       "price": 92.66,
       "product": "壳牌劲霸 R3 15W40",
@@ -4061,8 +4113,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 2223.84,
-      "usedQty": 24
+      "usedAmt": 3335.76,
+      "usedQty": 36
     },
     {
       "balQty": -8,
@@ -4201,12 +4253,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -12,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 47.46,
       "product": "壳牌喜力HX6+ 5W40",
@@ -4214,8 +4266,8 @@
       "spec": "1L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 569.52,
+      "usedQty": 12
     },
     {
       "balQty": -72,
@@ -4320,12 +4372,12 @@
       "usedQty": 48
     },
     {
-      "balQty": -36,
+      "balQty": -44,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 4,
+      "orderCount": 5,
       "pct": 0,
       "price": 45.2,
       "product": "壳牌防冻液-红色 -45℃",
@@ -4333,16 +4385,16 @@
       "spec": "4KG",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 1627.2,
-      "usedQty": 36
+      "usedAmt": 1988.8,
+      "usedQty": 44
     },
     {
-      "balQty": -40,
+      "balQty": -60,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 4,
+      "orderCount": 5,
       "pct": 0,
       "price": 45.2,
       "product": "壳牌防冻液-绿色 -45℃",
@@ -4350,8 +4402,8 @@
       "spec": "4KG",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 1808,
-      "usedQty": 40
+      "usedAmt": 2712,
+      "usedQty": 60
     },
     {
       "balQty": 0,
@@ -7831,16 +7883,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -24387.66,
+      "balAmt": -27334.7,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-11-10",
       "low": false,
-      "orderCount": 23,
+      "orderCount": 27,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 24387.66
+      "usedAmt": 27334.7
     },
     {
       "balAmt": 0,
@@ -8629,6 +8681,10 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmwabot1m72fs02",
+    "cmwabot1m9lzrmv",
+    "cmwabot1mtqnwyu",
+    "cmwabot1micsaoh",
     "cmwaat5iiu9dwpt",
     "cmwaapun0v8c5ue",
     "cmwaamdgby7uqy2",
@@ -37450,7 +37506,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-10T06:29:32.749Z",
+      "generatedAt": "2026-11-10T06:42:56.738Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
