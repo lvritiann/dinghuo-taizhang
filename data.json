@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T07:44:21.086Z",
+  "updatedAt": "2026-11-10T07:54:56.296Z",
   "source": "kdocs",
   "today": "2026-11-10",
   "products": [
@@ -2761,7 +2761,7 @@
       "siteOnly": "",
       "spec": "2L",
       "supplier": "天易蓝",
-      "unit": "箱"
+      "unit": "桶"
     },
     {
       "capQty": 0,
@@ -2773,7 +2773,7 @@
       "siteOnly": "",
       "spec": "2L",
       "supplier": "天易蓝",
-      "unit": "箱"
+      "unit": "桶"
     },
     {
       "capQty": 0,
@@ -7866,7 +7866,7 @@
       "shelf": 0,
       "spec": "2L",
       "supplier": "天易蓝",
-      "unit": "箱",
+      "unit": "桶",
       "usedAmt": 22,
       "usedQty": 10
     },
@@ -7883,7 +7883,7 @@
       "shelf": 0,
       "spec": "2L",
       "supplier": "天易蓝",
-      "unit": "箱",
+      "unit": "桶",
       "usedAmt": 6111.04,
       "usedQty": 1690
     },
@@ -37592,7 +37592,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-10T07:44:43.967Z",
+      "generatedAt": "2026-11-10T07:55:18.985Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
