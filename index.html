@@ -63,11 +63,11 @@
   .cart-tbl, .cart-tbl tbody, .cart-tbl tr { display: block; width: 100%; }
   .cart-tbl tr { position: relative; padding: 10px 50px 10px 0; border-bottom: 1px solid var(--border); }
   .cart-tbl td { display: inline-block; border: 0; padding: 2px 0; vertical-align: middle; }
-  .cart-tbl td:nth-child(1) { display: block; font-weight: 500; margin-bottom: 4px; }
-  .cart-tbl td.spec-col, .cart-tbl td:nth-child(3) { display: none; }
-  .cart-tbl td:nth-child(4) { margin-right: 12px; }
-  .cart-tbl td:nth-child(5) { font-weight: 600; }
-  .cart-tbl td:nth-child(6) { position: absolute; right: 0; top: 10px; }
+  .cart-tbl td.product-col { display: block; font-weight: 500; margin-bottom: 4px; }
+  .cart-tbl td.spec-col, .cart-tbl td.stock-col, .cart-tbl td.price-col { display: none; }
+  .cart-tbl td.qty-col { margin-right: 12px; }
+  .cart-tbl td.amount-col { font-weight: 600; }
+  .cart-tbl td.action-col { position: absolute; right: 0; top: 10px; }
   .qty-in { width: 78px; font-size: 13px; padding: 6px 8px; }
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1165,6 +1165,124 @@ body.theme-tech .kpi, body.theme-tech .cat-card, body.theme-tech .info-cell,
 body.theme-tech .viz-box {
   box-shadow: 0 10px 24px -14px rgba(56,189,248,.40);
 }
+
+/* ===== UX-CAP-PATCH v1：下定三步卡 + 额度一页式 ===== */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.step-card { scroll-margin-top: 130px; }
+.step-card > .card-h { margin-bottom: 16px; }
+.step-card > .card-h h2 { font-size: 16px; }
+.step-card .add-box { border-top: 0; margin-top: 0; padding-top: 0; }
+.step-card .cart { border-top: 0; margin-top: 0; padding-top: 0; }
+.step-card .step-note { font-size: 12px; color: var(--text2); font-weight: 500; }
+.info-grid-primary { margin-top: 12px; }
+.info-grid-primary > .info-cell { min-height: 72px; }
+.info-details { margin: 2px 0 12px; }
+.info-details > summary {
+  width: max-content; max-width: 100%; cursor: pointer; color: var(--text2);
+  font-size: 12px; font-weight: 600; padding: 7px 0; min-height: 32px;
+}
+.info-details > summary:hover { color: var(--text); }
+.info-details > .info-grid { margin: 6px 0 0; }
+.cap-sync-bar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  box-shadow: inset 4px 0 0 var(--hero), 0 8px 16px -6px rgba(28,28,26,.08);
+}
+.cap-sync-bar .cap-sync-copy { flex: 1 1 320px; min-width: 0; }
+.cap-sync-bar .cap-sync-title { font-size: 14px; font-weight: 750; }
+.cap-sync-bar .cap-sync-state { font-size: 12px; color: var(--text2); margin-top: 3px; }
+.cat-cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(235px, 100%), 1fr)); gap: 12px; }
+.cat-cap-item {
+  min-width: 0; background: var(--card2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 10px;
+}
+.cat-cap-item.local { box-shadow: inset 3px 0 0 var(--orange); }
+.cat-cap-item .cc-head { display: flex; align-items: flex-start; gap: 8px; }
+.cat-cap-item .cc-name { min-width: 0; flex: 1; font-weight: 750; color: var(--accent); word-break: break-word; }
+.cat-cap-item .cc-reset { flex-shrink: 0; border: 0; background: transparent; color: var(--orange); cursor: pointer; font: inherit; font-size: 11px; padding: 2px; }
+.cat-cap-item .cc-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.cat-cap-item .cc-meta > div { min-width: 0; }
+.cat-cap-item .cc-k { color: var(--text2); font-size: 10.5px; }
+.cat-cap-item .cc-v { margin-top: 2px; font-size: 12px; font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cat-cap-item .cc-input-label { color: var(--text2); font-size: 11px; }
+.cat-cap-item .cat-cap-input {
+  width: 100%; min-height: 56px; padding: 8px 12px; text-align: right;
+  font-size: 23px; font-weight: 750; font-variant-numeric: tabular-nums;
+}
+.cap-details > summary { cursor: pointer; list-style-position: inside; }
+.cap-details > summary > .card-h { display: inline-flex; width: calc(100% - 24px); margin-bottom: 0; vertical-align: middle; }
+.cap-details[open] > summary > .card-h { margin-bottom: 14px; }
+@media (min-width: 901px) {
+  .step-head-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .split-help { order: -2; }
+  .today { order: -1; }
+  .step-head-grid { grid-template-columns: 1fr; }
+  .info-grid-primary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .info-grid-primary > .info-cell { min-width: 0; }
+  .cat-cap-grid { grid-template-columns: 1fr; }
+  .cap-sync-bar .btn { flex: 1 1 150px; }
+}
+
+/* ===== UX-CAP-PATCH v1：下定三步卡 + 额度一页式 ===== */
+.step-card { scroll-margin-top: 130px; }
+.step-card > .card-h { margin-bottom: 16px; }
+.step-card > .card-h h2 { font-size: 16px; }
+.step-card .add-box { border-top: 0; margin-top: 0; padding-top: 0; }
+.step-card .cart { border-top: 0; margin-top: 0; padding-top: 0; }
+.step-card .step-note { font-size: 12px; color: var(--text2); font-weight: 500; }
+.info-grid-primary { margin-top: 12px; }
+.info-grid-primary > .info-cell { min-height: 72px; }
+.info-details { margin: 2px 0 12px; }
+.info-details > summary {
+  width: max-content; max-width: 100%; cursor: pointer; color: var(--text2);
+  font-size: 12px; font-weight: 600; padding: 7px 0; min-height: 32px;
+}
+.info-details > summary:hover { color: var(--text); }
+.info-details > .info-grid { margin: 6px 0 0; }
+.cap-sync-bar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  box-shadow: inset 4px 0 0 var(--hero), 0 8px 16px -6px rgba(28,28,26,.08);
+}
+.cap-sync-bar .cap-sync-copy { flex: 1 1 320px; min-width: 0; }
+.cap-sync-bar .cap-sync-title { font-size: 14px; font-weight: 750; }
+.cap-sync-bar .cap-sync-state { font-size: 12px; color: var(--text2); margin-top: 3px; }
+.cat-cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(235px, 100%), 1fr)); gap: 12px; }
+.cat-cap-item {
+  min-width: 0; background: var(--card2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 10px;
+}
+.cat-cap-item.local { box-shadow: inset 3px 0 0 var(--orange); }
+.cat-cap-item .cc-head { display: flex; align-items: flex-start; gap: 8px; }
+.cat-cap-item .cc-name { min-width: 0; flex: 1; font-weight: 750; color: var(--accent); word-break: break-word; }
+.cat-cap-item .cc-reset { flex-shrink: 0; border: 0; background: transparent; color: var(--orange); cursor: pointer; font: inherit; font-size: 11px; padding: 2px; }
+.cat-cap-item .cc-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.cat-cap-item .cc-meta > div { min-width: 0; }
+.cat-cap-item .cc-k { color: var(--text2); font-size: 10.5px; }
+.cat-cap-item .cc-v { margin-top: 2px; font-size: 12px; font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cat-cap-item .cc-input-label { color: var(--text2); font-size: 11px; }
+.cat-cap-item .cat-cap-input {
+  width: 100%; min-height: 56px; padding: 8px 12px; text-align: right;
+  font-size: 23px; font-weight: 750; font-variant-numeric: tabular-nums;
+}
+.cap-details > summary { cursor: pointer; list-style-position: inside; }
+.cap-details > summary > .card-h { display: inline-flex; width: calc(100% - 24px); margin-bottom: 0; vertical-align: middle; }
+.cap-details[open] > summary > .card-h { margin-bottom: 14px; }
+@media (min-width: 901px) {
+  .step-head-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .split-help { order: -2; }
+  .today { order: -1; }
+  .step-head-grid { grid-template-columns: 1fr; }
+  .info-grid-primary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .info-grid-primary > .info-cell { min-width: 0; }
+  .cat-cap-grid { grid-template-columns: 1fr; }
+  .cap-sync-bar .btn { flex: 1 1 150px; }
+}
 </style>
 </head>
 <body data-page-node-id="CSPRGLCesET6WkNuzD9hXG">
@@ -1254,25 +1372,25 @@ body.theme-tech .viz-box {
     <div id="todayList" data-page-node-id="RU4mNYYfxUvMrQATfPx1uo"></div>
   </div>
 
-  <!-- ② 按供应商下定 -->
-  <div class="card" data-page-node-id="HsHyXJ6ehlGqkFlgZ9f8Vl">
+  <!-- ① 确认订货信息 -->
+  <div class="card step-card" id="orderStep1" data-page-node-id="HsHyXJ6ehlGqkFlgZ9f8Vl">
     <div class="card-h" data-page-node-id="bcH9SGbBPHCDkw1ulrG151">
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="byasb7v96qMYjkxtzdmaGL"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" data-page-node-id="Wvb4RZr5oo9PqBdxyK88vn"/><line x1="3" y1="6" x2="21" y2="6" data-page-node-id="xiBRXvmA6LXhhUTykEVowY"/><path d="M16 10a4 4 0 0 1-8 0" data-page-node-id="bJtc3qLZ2t9O2ziOT5mJXs"/></svg>
-      <h2 data-page-node-id="qBlsD1DyqyN6kNCJoMDvoP">按供应商下定</h2>
+      <h2 data-page-node-id="qBlsD1DyqyN6kNCJoMDvoP">① 确认订货信息</h2>
+      <span class="spacer"></span><span class="step-note">默认值已填好，确认即可</span>
     </div>
-    <div class="form-row two" data-page-node-id="6RocbbZDzRlHvrmVGzLB1O">
+    <div class="form-row four step-head-grid" data-page-node-id="6RocbbZDzRlHvrmVGzLB1O">
       <div class="field" data-page-node-id="YFlHwr8R5LsyjQsnmAIQwd">
-        <label for="odSupplier" data-page-node-id="KID1IEUuTGjbsMwF4iYkTc">① 供应商</label>
+        <label for="odSupplier" data-page-node-id="KID1IEUuTGjbsMwF4iYkTc">供应商</label>
         <select id="odSupplier" onchange="onSupplierPick()" data-page-node-id="q2ORcQd1EQ86wuRTTqjqGB"></select>
       </div>
       <div class="field" data-page-node-id="zGn6u9GwJnrWlBS0lTzoSt">
-        <label for="odStore" data-page-node-id="ErSwtwI5nUdBR4RAmv7r9l">② 订货单位</label>
+        <label for="odStore" data-page-node-id="ErSwtwI5nUdBR4RAmv7r9l">订货单位</label>
         <select id="odStore" onchange="onStorePick()" data-page-node-id="GxlFlt8TKWGHhWu9R6XuNf"></select>
       </div>
-    </div>
-    <div class="form-row two" data-page-node-id="TY7j5uCTpgIWjel6BVpDB1">
+
       <div class="field" data-page-node-id="BG835rwEbRDGbfDpmy3TKG">
-        <label for="odSide">③ 细分（可选）</label>
+        <label for="odSide">细分（可选）</label>
         <select id="odSide" onchange="onSidePick()"></select>
       </div>
       <div class="field" data-page-node-id="tGNzzCxABwcvUtUpbsW0UF">
@@ -1281,11 +1399,19 @@ body.theme-tech .viz-box {
       </div>
     </div>
 
+  </div><!-- /orderStep1 -->
+
+  <!-- ② 选择商品并加入清单 -->
+  <div class="card step-card" id="orderStep2">
+    <div class="card-h">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+      <h2>② 选择商品</h2><span class="spacer"></span><span class="step-note">同一供应商可连续添加</span>
+    </div>
     <div class="add-box">
-      <div class="add-h">④ 加商品 —— 商品太多先选「品类」缩小范围（如 咖啡及相关物资 / 照金百货）；同一家供应商可连续加多行，最后一起提交</div>
+      <div class="add-h">先按标段缩小范围，再选商品、填数量；确认「还能订」后点「加入清单」。</div>
       <div class="form-row" data-page-node-id="TY7j5uCTpgIWjel6BVpDB1b">
         <div class="field">
-          <label for="odCatFilter">品类筛选</label>
+          <label for="odCatFilter">标段筛选</label>
           <select id="odCatFilter" onchange="onCatFilterPick()"></select>
         </div>
         <div class="field" data-page-node-id="zGn6u9GwJnrWlBS0lTzoStb">
@@ -1305,6 +1431,14 @@ body.theme-tech .viz-box {
       </button>
     </div>
 
+  </div><!-- /orderStep2 -->
+
+  <!-- ③ 核对清单并提交 -->
+  <div class="card step-card" id="orderStep3">
+    <div class="card-h">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <h2>③ 核对清单并提交</h2><span class="spacer"></span><span class="step-note">提交前检查数量与金额</span>
+    </div>
     <div class="cart" id="cartBox">
       <div class="cart-h"><b>本单清单</b><span class="hint" id="cartHint"></span>
         <button class="btn sm" id="cartClear" onclick="clearCart()">清空</button></div>
@@ -1339,10 +1473,10 @@ body.theme-tech .viz-box {
       <h2>怎么下单</h2>
     </div>
     <div class="howto">
-      <div class="howto-step"><span class="howto-n">1</span><span class="howto-t">选<b>供应商</b>、<b>订货单位</b>、<b>下订日期</b>。下单只会记到这一个服务区名下。</span></div>
-      <div class="howto-step"><span class="howto-n">2</span><span class="howto-t">④ 加商品：<b>先选品类再选商品</b>。商品多时用「品类筛选」缩小范围，同一家可连加多行。</span></div>
-      <div class="howto-step"><span class="howto-n">3</span><span class="howto-t">填数量前先看 <b>「标段余额」</b>。余额按标段扣、与供应商无关；金额口径看 ¥，数量口径看单位。</span></div>
-      <div class="howto-step"><span class="howto-n">4</span><span class="howto-t"><b>下单只是「订」</b>；货到后要到 <b>【收货确认】</b> 点一下才算入库。</span></div>
+      <div class="howto-step"><span class="howto-n">1</span><span class="howto-t">确认<b>供应商、订货单位、细分和日期</b>，默认值已填好。</span></div>
+      <div class="howto-step"><span class="howto-n">2</span><span class="howto-t">按<b>标段</b>筛选商品并填数量，先看「还能订」。</span></div>
+      <div class="howto-step"><span class="howto-n">3</span><span class="howto-t">点<b>「加入清单」</b>，可连续添加多款；在清单里核对数量与金额。</span></div>
+      <div class="howto-step"><span class="howto-n">4</span><span class="howto-t">点<b>「提交下定」</b>。货到后再到【收货确认】点确认，才算入库。</span></div>
     </div>
   </div>
 
@@ -1363,7 +1497,7 @@ body.theme-tech .viz-box {
     </div>
     <div class="kpis" id="kpis" data-page-node-id="Ly29JaJi46hPuB5fQoXy8x"></div>
     <div class="chart-box" data-page-node-id="catSumBox">
-      <div class="chart-title" data-page-node-id="catSumTitle">各品类共用额度余额（数量口径显数量 / 金额口径显金额 · 防定超监管）</div>
+      <div class="chart-title" data-page-node-id="catSumTitle">各标段共用额度余额（数量口径显数量 / 金额口径显金额 · 防定超监管）</div>
       <div class="cat-cards" id="catCards" data-page-node-id="catCards"></div>
     </div>
   </div>
@@ -1386,7 +1520,7 @@ body.theme-tech .viz-box {
         <div id="chartTrend"></div>
       </div>
       <div class="viz-box">
-        <div class="chart-title">品类额度占用率（环内 = 已订 / 额度）</div>
+        <div class="chart-title">标段额度占用率（环内 = 已订 / 额度）</div>
         <div id="chartRings"></div>
       </div>
       <div class="viz-box">
@@ -1422,16 +1556,16 @@ body.theme-tech .viz-box {
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="pbIco"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="4" width="3" height="14"/></svg>
       <h2 data-page-node-id="prodBalTitle">各商品已订明细</h2>
       <span class="spacer" data-page-node-id="prodBalSp"></span>
-      <span class="hint" data-page-node-id="prodBalHint">额度与余额按品类共用 —— 看上方「各品类共用额度余额」；这里看每款订了多少</span>
+      <span class="hint" data-page-node-id="prodBalHint">额度与余额按标段共用 —— 看上方「各标段共用额度余额」；这里看每款订了多少</span>
     </div>
     <div class="dash-filters" id="dashFilters">
       <select id="dashCat"></select>
       <select id="dashSup"></select>
       <select id="dashStatus">
         <option value="all">全部状态</option>
-        <option value="warn">仅看品类将尽/用尽</option>
-        <option value="ok">仅看品类充足</option>
-        <option value="nocap">仅看品类未设额度</option>
+        <option value="warn">仅看标段将尽/用尽</option>
+        <option value="ok">仅看标段充足</option>
+        <option value="nocap">仅看标段未设额度</option>
       </select>
       <input id="dashSearch" type="search" placeholder="搜索商品名" />
       <span class="hint" id="dashPageInfo"></span>
@@ -1468,6 +1602,15 @@ body.theme-tech .viz-box {
 
   <section class="view admin-only" data-view="admin" data-page-node-id="viewAdmin">
     <div class="view-stack">
+  <div class="card cap-sync-bar" id="catCapSyncBar">
+    <div class="cap-sync-copy">
+      <div class="cap-sync-title">改完点『同步到金山』全站生效</div>
+      <div class="cap-sync-state" id="catCapSyncState">输入会立即在本机生效；同步成功后写入金山《品类额度》。</div>
+    </div>
+    <button id="catCapSync" class="btn primary">同步到金山</button>
+    <button class="btn sm" onclick="exportCatCaps()">导出补丁 CSV</button>
+  </div>
+
   <!-- ⑥ 管理口令（仅管理员可见） -->
   <div class="card" data-page-node-id="keyCard">
     <div class="card-h" data-page-node-id="keyCardH">
@@ -1476,7 +1619,7 @@ body.theme-tech .viz-box {
       <span class="spacer"></span>
       <span class="hint">油站看不到本页</span>
     </div>
-    <div class="note" data-page-node-id="keyCardNote">油站打开页面时只有「下定 / 订单明细」两个标签，台账与维护功能对他们不可见。<br>
+    <div class="note" data-page-node-id="keyCardNote">油站打开页面时有「下定 / 订单明细 / 收货确认 / 烟草订货」4 个标签，台账与维护功能对他们不可见。<br>
       修改口令后<b>本机立即生效</b>；若要让所有设备统一，把生成的两行哈希发给维护人员写进页面即可。</div>
     <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:12px" data-page-node-id="keyCardBtns">
       <button class="btn sm" onclick="openChangeKey()">修改管理口令</button>
@@ -1485,32 +1628,33 @@ body.theme-tech .viz-box {
     <div class="note" id="keyHashBox" style="display:none;word-break:break-all"></div>
   </div>
 
-  <!-- ④ 品类共用额度（一个品类一个额度，9 行填完即可） -->
+  <!-- ④ 标段共用额度（11 张卡片） -->
   <div class="card" data-page-node-id="catCapCard">
     <div class="card-h" data-page-node-id="catCapH">
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v4H3z"/><path d="M5 7v14h14V7"/><path d="M9 11h6"/></svg>
-      <h2>① 品类共用额度</h2>
+      <h2>① 标段共用额度（11 个标段）</h2>
       <span class="spacer"></span>
       <span class="hint" id="catCapHint"></span>
     </div>
-    <div class="note">一个品类填<b>一个</b>额度，该品类下所有商品共用。<br>
-      <b>数量口径</b>（该类商品单位一致，如玻璃水都是「桶」）按件数填；<b>金额口径</b>（单位不一致，如冰淇淋有 件/支/袋）按钱填 —— 口径由页面自动判定。</div>
-    <div class="tbl-wrap"><table class="tbl" id="tblCatCap"></table></div>
-    <div class="note">填好后点「导出补丁」→ 把 CSV 内容贴到金山《品类额度》表 → 回页面点顶栏「同步」即全局生效。</div>
+    <div class="note">每个标段一个共用额度，标段下所有商品共享。输入即在本机生效；<b>0 = 不限制，清空 = 恢复台账值</b>。<br>
+      数量口径按件数填，金额口径按元填；具体口径以金山《品类额度》C 列为准。</div>
+    <div class="cat-cap-grid" id="tblCatCap"></div>
+    <div class="note">改完点页面上方『同步到金山』全站生效；网络或配置失败时，可点「导出补丁 CSV」手工回贴。</div>
     <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:12px">
-      <button id="catCapExport" class="btn sm">导出补丁</button>
+      <button id="catCapExport" class="btn sm">导出补丁 CSV</button>
       <button id="catCapClear" class="btn sm">清空本地修改</button>
     </div>
   </div>
 
   <!-- ⑤ 单品额度（可选 · 品类未设额度时兜底） -->
-  <div class="card" data-page-node-id="capPanelCard">
-    <div class="card-h" data-page-node-id="capPanelH">
+  <details class="card cap-details" data-page-node-id="capPanelCard">
+    <summary><div class="card-h" data-page-node-id="capPanelH">
       <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="capIco"><path d="M3 3h18v4H3z" data-page-node-id="ca1"/><path d="M5 7v14h14V7" data-page-node-id="ca2"/><path d="M9 11h6" data-page-node-id="ca3"/></svg>
-      <h2 data-page-node-id="capTitle">② 单品额度（可选 · 仅在品类未设额度时生效）</h2>
+      <h2 data-page-node-id="capTitle">② 单品额度（可选 · 仅在标段未设额度时生效）</h2>
       <span class="spacer" data-page-node-id="capSp"></span>
       <span class="hint" id="capHint" data-page-node-id="capHint"></span>
-    </div>
+    </div></summary>
+    <div class="note"><b>0 = 不限制；清空 = 恢复台账值。</b>单品额度仅在所属标段未设共用额度时参与校验。</div>
     <div class="dash-filters" id="capFilters" data-page-node-id="capFilters">
       <select id="capCat"></select>
       <select id="capSup"></select>
@@ -1528,7 +1672,7 @@ body.theme-tech .viz-box {
       <button id="capClear" class="btn sm">清空本地覆盖</button>
     </div>
     <div class="tbl-wrap" data-page-node-id="capTblWrap"><table class="tbl" id="tblCap" data-page-node-id="tblCap"></table></div>
-  </div>
+  </details>
     </div>
   </section>
 
@@ -2132,16 +2276,17 @@ function computeAll() {
   });
   data.productBal = data.products.map(function (p) {
     var u = byP[p.supplier + '|' + p.name] || { qty: 0, amt: 0, count: 0 };
-    var bal = p.capQty - u.qty;
+    var cap = effCap(p);
+    var bal = cap - u.qty;
     return {
       supplier: p.supplier, product: p.name, spec: p.spec, unit: p.unit,
-      price: p.price, shelf: p.shelf, capQty: effCap(p), cat: classifyCat(p),
+      price: p.price, shelf: p.shelf, capQty: cap, cat: classifyCat(p),
       usedQty: u.qty, balQty: bal,
-      usedAmt: n2(u.amt), capAmt: n2(p.capQty * p.price),
+      usedAmt: n2(u.amt), capAmt: n2(cap * p.price),
       orderCount: u.count,
-      pct: p.capQty > 0 ? Math.round(u.qty / p.capQty * 1000) / 10 : 0,
-      full: p.capQty > 0 && u.qty >= p.capQty,
-      low: p.capQty > 0 && bal > 0 && bal <= p.capQty * 0.1
+      pct: cap > 0 ? Math.round(u.qty / cap * 1000) / 10 : 0,
+      full: cap > 0 && u.qty >= cap,
+      low: cap > 0 && bal > 0 && bal <= cap * 0.1
     };
   });
   var sups = suppliers();
@@ -2392,6 +2537,17 @@ function applyHashParams() {
 }
 // 兼容旧名（万一别处引用）
 function applyHashToken() { applyHashParams(); }
+
+function placeOrderHelp() {
+  var help = document.querySelector('.split-help');
+  var flow = document.querySelector('.narrow.split');
+  var main = flow && flow.querySelector(':scope > .col-main');
+  var side = flow && flow.querySelector(':scope > .col-side');
+  if (!help || !flow || !main || !side) return;
+  if (window.innerWidth <= 900) {
+    if (help.parentNode !== flow) flow.insertBefore(help, main);
+  } else if (help.parentNode !== side) side.appendChild(help);
+}
 
 /* ---------- 视图切换 ---------- */
 function setView(name) {
@@ -2644,29 +2800,30 @@ function renderCart() {
     } else {
       // ★ JXC-PATCH v1：清单里多一列「现存」——提交前通盘看一遍，哪些是压货、哪些是真断货
       var jxcAny = cart.some(function (l) { return !!jxcOf(l.product); });
-      var h = '<table class="cart-tbl"><thead><tr><th>商品</th><th class="spec-col">规格</th>' +
-        (jxcAny ? '<th class="num">现存<span class="th-sub">金小存</span></th>' : '') +
-        '<th class="num">单价</th><th class="num">数量</th><th class="num">金额</th><th></th></tr></thead><tbody>';
+      var h = '<table class="cart-tbl"><thead><tr><th class="product-col">商品</th><th class="spec-col">规格</th>' +
+        (jxcAny ? '<th class="num stock-col">现存<span class="th-sub">金小存</span></th>' : '') +
+        '<th class="num price-col">单价</th><th class="num qty-col">数量</th><th class="num amount-col">金额</th><th class="action-col"><span class="sr-only">操作</span></th></tr></thead><tbody>';
       cart.forEach(function (l, i) {
         var p = prodOf(sup, l.product) || { spec: '', unit: '', price: 0, capQty: 0 };
         var b = balOf(sup, l.product);
         var cap = effCap(p);
-        var bal = cap > 0 ? (b ? b.balQty : cap) : null;
+        var pool = catBalOf(classifyCat(p));
+        var bal = (!(pool && pool.set) && cap > 0) ? (b ? b.balQty : cap) : null;
         var over = (bal != null && l.qty > bal);
         var jx = jxcAny ? jxcOf(l.product) : null;
         h += '<tr' + (over ? ' class="over"' : '') + '>' +
-          '<td>' + esc(l.product) +
-          (over ? '<div class="warn-t">超出余额 ' + nf(bal) + esc(p.unit) + '</div>' : '') + '</td>' +
+          '<td class="product-col">' + esc(l.product) +
+          (over ? '<div class="warn-t">超出单品余额 ' + nf(bal) + esc(p.unit) + '</div>' : '') + '</td>' +
           '<td class="dim spec-col">' + esc(p.spec || '—') + '</td>' +
-          (jxcAny ? '<td class="num">' + (jx
+          (jxcAny ? '<td class="num stock-col">' + (jx
             ? '<b style="color:var(--' + (jx.stock <= 0 ? 'red' : jx.stock <= 10 ? 'orange' : 'green') + ')">' + nf(jx.stock) + '</b>' +
               (jx.sales90 > 0 ? '<div class="warn-t" style="color:var(--text2)">90天销 ' + nf(jx.sales90) + '</div>' : '')
             : '<span style="color:var(--text2)">—</span>') + '</td>' : '') +
-          '<td class="num">' + money(p.price) + '</td>' +
-          '<td class="num"><input type="number" class="qty-in" min="1" step="1" value="' + l.qty + '" ' +
+          '<td class="num price-col">' + money(p.price) + '</td>' +
+          '<td class="num qty-col"><input type="number" class="qty-in" min="1" step="1" aria-label="' + esc(l.product) + '数量" value="' + l.qty + '" ' +
           'oninput="setCartQty(' + i + ', this.value)"><span class="unit">' + esc(p.unit) + '</span></td>' +
-          '<td class="num"><b>' + money(l.qty * p.price) + '</b></td>' +
-          '<td><button class="btn sm del" onclick="delCart(' + i + ')">删</button></td></tr>';
+          '<td class="num amount-col"><b>' + money(l.qty * p.price) + '</b></td>' +
+          '<td class="action-col"><button class="btn sm del" aria-label="删除' + esc(l.product) + '" onclick="delCart(' + i + ')">删</button></td></tr>';
       });
       list.innerHTML = h + '</tbody></table>';
     }
@@ -2751,7 +2908,7 @@ function tryAdminLogin() {
   checkAdminKey(key, function (ok) {
     var n = document.getElementById('admNote');
     if (!ok) { if (n) { n.textContent = '口令不对，请重试。'; n.style.color = 'var(--red)'; } toast('口令不对'); return; }
-    setRole('admin'); closeAdminLogin(); renderRole(); setView('ledger'); toast('已进入管理员模式');
+    setRole('admin'); closeAdminLogin(); renderRole(); setView('admin'); toast('已进入管理员模式');
   });
 }
 /* ---------- 修改管理口令 ---------- */
@@ -3298,7 +3455,7 @@ function tickRowsSvg(rows) {
 
 function renderChartRings() {
   var el = document.getElementById('chartRings'); if (!el) return;
-  if (!data.catBal.length) { el.innerHTML = '<div class="empty">暂无品类数据</div>'; return; }
+  if (!data.catBal.length) { el.innerHTML = '<div class="empty">暂无标段数据</div>'; return; }
   // 已设额度的排前（按占用率降序），未设额度的沉底，避免「未设」插在中间打断读数
   var rows = data.catBal.slice().sort(function (a, b) {
     if (!!b.set !== !!a.set) return b.set ? 1 : -1;
@@ -3716,9 +3873,9 @@ function renderDash() {
     { v: money(cap), l: '可下订总额度', c: 'accent' },
     { v: money(used), l: '已下订金额', c: '' },
     { v: money(cap - used), l: '金额余额', c: (cap - used) < cap * 0.15 ? 'orange' : 'green' },
-    { v: fullCnt + ' 类' + (lowCnt ? ' / ' + lowCnt + ' 将尽' : ''), l: '额度用尽品类', c: fullCnt ? 'red' : '' }
+    { v: fullCnt + ' 类' + (lowCnt ? ' / ' + lowCnt + ' 将尽' : ''), l: '额度用尽标段', c: fullCnt ? 'red' : '' }
   ].map(function (k) { return '<div class="kpi ' + k.c + '"><div class="v">' + k.v + '</div><div class="l">' + k.l + '</div></div>'; }).join('');
-  document.getElementById('dashHint').textContent = '品类 ' + data.catBal.length + ' 类（已设额度 ' + setCnt + ' 类） / 供应商 ' +
+  document.getElementById('dashHint').textContent = '标段 ' + data.catBal.length + ' 类（已设额度 ' + setCnt + ' 类） / 供应商 ' +
     data.supplierBal.length + ' 家 / 商品 ' + data.productBal.length + ' 款 / 订单 ' + data.orders.length + ' 笔';
 
   // 供应商已下订金额 —— ★ LIEFLAT-PATCH v3：F5 Tick Rows（与「服务区下订排行」同语法）
@@ -3835,7 +3992,7 @@ function renderDash() {
   var catEl = document.getElementById('dashCat');
   if (catEl) {
     var curCat = catEl.value;
-    catEl.innerHTML = '<option value="">全部大类</option>' + CATS.map(function (c) {
+    catEl.innerHTML = '<option value="">全部标段</option>' + CATS.map(function (c) {
       return '<option value="' + esc(c) + '">' + esc(c) + '</option>';
     }).join('');
     catEl.value = curCat;
@@ -3868,7 +4025,7 @@ function renderDash() {
   var piEl = document.getElementById('dashPageInfo');
   if (piEl) piEl.textContent = '共 ' + total + ' 款 · 第 ' + ds.page + '/' + pages + ' 页' + (total ? ' · 显示 ' + (start + 1) + '-' + Math.min(start + size, total) : '');
 
-  var h = '<thead><tr><th>品类</th><th>供应商</th><th>商品</th><th>规格</th><th>单位</th><th class="num">单价</th>' +
+  var h = '<thead><tr><th>标段</th><th>供应商</th><th>商品</th><th>规格</th><th>单位</th><th class="num">单价</th>' +
     '<th class="num">已订数量</th><th class="num">已订金额</th><th class="num">订单数</th><th>本类额度</th></tr></thead><tbody>';
   if (!pageRows.length) {
     h += '<tr><td colspan="10" style="text-align:center;color:var(--text2);padding:18px">没有匹配的商品</td></tr>';
@@ -3939,7 +4096,7 @@ function renderForm() {
       });
       if (n) { catVals.push(c); catOpts += '<option value="' + esc(c) + '">' + esc(c) + '（' + n + ' 款）</option>'; }
     });
-    catSel.innerHTML = '<option value="">全部品类</option>' + catOpts;
+    catSel.innerHTML = '<option value="">全部标段</option>' + catOpts;
     catSel.value = (catCur && catVals.indexOf(catCur) >= 0) ? catCur : '';
   }
 
@@ -4023,7 +4180,7 @@ function renderFormInfo() {
             '／天 → 补到 30 天量约需 <b>' + nf(need) + ' ' + esc(p.unit) + '</b>' +
             (need === 0 ? '（现有库存已够，可不订）' : '');
     } else {
-      sug = '金小存出库流水里这款还没有销量记录（可能是新品，或该品类没走扫码出库）——' +
+      sug = '金小存出库流水里这款还没有销量记录（可能是新品，或该标段没走扫码出库）——' +
             '建议按经验值报量，别照着 0 走。';
     }
     jxcCells =
@@ -4046,25 +4203,37 @@ function renderFormInfo() {
       '<div class="v" style="font-size:12px;color:var(--text2);font-weight:500">' + why + '</div></div>';
   }
 
+  var poolSet = !!(catPool && catPool.set);
+  var availKey = poolSet ? '还能订 · 标段池' : (hasCap ? '还能订 · 单品' : '还能订');
+  var availVal = poolSet ? fmtPool(catPool.bal, catPool) + poolUnit(catPool) : (hasCap ? nf(bal) + ' ' + esc(p.unit) : '不限制');
+  var availCls = poolSet ? (catPool.bal <= 0 ? 'r' : (catPool.low ? 'o' : 'g')) : (hasCap ? (bal <= 0 ? 'r' : bal <= effCap(p) * 0.1 ? 'o' : 'g') : '');
+  var singleCells = '';
+  if (!poolSet) {
+    singleCells = hasCap
+      ? '<div class="info-cell"><div class="k">单品当前余额</div><div class="v ' + (bal <= 0 ? 'r' : bal <= effCap(p) * 0.1 ? 'o' : 'g') + '">' + nf(bal) + ' ' + esc(p.unit) + '</div></div>' +
+        '<div class="info-cell"><div class="k">单品下订后余额</div><div class="v ' + (over ? 'r' : 'g') + '">' + nf(after) + ' ' + esc(p.unit) + '</div></div>'
+      : '<div class="info-cell"><div class="k">单品额度上限</div><div class="v" style="font-size:12px;color:var(--text2)">未设置（不限制）</div></div>';
+  }
+  var oldDetails = box.querySelector('details.info-details');
+  var detailsOpen = oldDetails && oldDetails.open ? ' open' : '';
   box.innerHTML =
-    (noPrice ? '<div class="info-cell" style="grid-column:1/-1;background:rgba(214,69,42,.12)">' +
-      '<div class="k" style="color:var(--red)">⚠ 这款商品还没定价</div>' +
-      '<div class="v" style="font-size:12px;font-weight:500">单价 ¥0 → 下单不会产生金额，标段额度也扣不动。' +
-      '请联系管理员在《商品档案》里补齐单价（天易蓝 4 款现为「待定价」）。</div></div>' : '') +
-    jxcCells +                                     // ★ JXC-PATCH v1：金小存库存/销量/补货参考
-    '<div class="info-cell"><div class="k">规格</div><div class="v" style="font-size:12px">' + esc(p.spec || '—') + '</div></div>' +
-    '<div class="info-cell"><div class="k">单位 / 单价</div><div class="v" style="font-size:13px">' + esc(p.unit) + ' · ' + money(p.price) + '</div></div>' +
-    poolCells +
-    (hasCap
-      ? '<div class="info-cell"><div class="k">当前余额</div><div class="v ' + (bal <= 0 ? 'r' : bal <= effCap(p) * 0.1 ? 'o' : 'g') + '">' + nf(bal) + ' ' + esc(p.unit) + '</div></div>'
-      : '<div class="info-cell"><div class="k">额度上限</div><div class="v" style="font-size:12px;color:var(--text2)">未设置（不限制）</div></div>') +
-    '<div class="info-cell"><div class="k">本次金额</div><div class="v' + (noPrice ? ' r' : '') + '">' + money(amt) + '</div></div>' +
-    (hasCap
-      ? '<div class="info-cell"><div class="k">下订后余额</div><div class="v ' + (over ? 'r' : 'g') + '">' + nf(after) + ' ' + esc(p.unit) + '</div></div>'
-      : '') +
-    '<div class="info-cell"><div class="k">预计到期</div><div class="v" style="font-size:12px">' + esc(exp) + '</div></div>' +
-    '<div class="info-cell"><div class="k">保质期</div><div class="v" style="font-size:13px">' + (p.shelf ? p.shelf + ' 天' : '—') + '</div></div>' +
-    '<div class="info-cell"><div class="k">累计已订</div><div class="v" style="font-size:13px">' + nf(b ? b.usedQty : 0) + ' ' + esc(p.unit) + '</div></div>';
+    '<div class="info-grid info-grid-primary">' +
+      '<div class="info-cell"><div class="k">单价</div><div class="v' + (noPrice ? ' r' : '') + '">' + money(p.price) + ' <small>' + esc(p.unit) + '</small></div></div>' +
+      '<div class="info-cell pool-key"><div class="k">' + availKey + '</div><div class="v ' + availCls + '">' + availVal + '</div></div>' +
+      '<div class="info-cell"><div class="k">本单金额</div><div class="v' + (noPrice ? ' r' : '') + '">' + money(amt) + '</div></div>' +
+    '</div>' +
+    '<details class="info-details"' + detailsOpen + '><summary>详细信息（库存 / 销量 / 建议 / 到期 / 单品额度）</summary>' +
+      '<div class="info-grid">' +
+        (noPrice ? '<div class="info-cell" style="grid-column:1/-1;background:rgba(214,69,42,.12)">' +
+          '<div class="k" style="color:var(--red)">⚠ 这款商品还没定价</div>' +
+          '<div class="v" style="font-size:12px;font-weight:500">单价 ¥0 → 下单不会产生金额，标段额度也扣不动。请联系管理员补齐单价。</div></div>' : '') +
+        jxcCells +
+        '<div class="info-cell"><div class="k">规格</div><div class="v" style="font-size:12px">' + esc(p.spec || '—') + '</div></div>' +
+        poolCells + singleCells +
+        '<div class="info-cell"><div class="k">预计到期</div><div class="v" style="font-size:12px">' + esc(exp) + '</div></div>' +
+        '<div class="info-cell"><div class="k">保质期</div><div class="v" style="font-size:13px">' + (p.shelf ? p.shelf + ' 天' : '—') + '</div></div>' +
+        '<div class="info-cell"><div class="k">累计已订</div><div class="v" style="font-size:13px">' + nf(b ? b.usedQty : 0) + ' ' + esc(p.unit) + '</div></div>' +
+      '</div></details>';
   renderJxcSrc();
   renderCart();   // ★ 按钮文案/禁用态统一由 renderCart 管（清单为空时算当前这一行）
 }
@@ -4345,8 +4514,13 @@ function submitOrder() {
 
   // 清单 + 表单里那一行（没点「加入清单」直接提交的，一并算上，避免漏下）
   var lines = cart.map(function (l) { return { product: l.product, qty: l.qty }; });
-  if (curName && curQty > 0 && !lines.some(function (l) { return l.product === curName; })) {
-    lines.push({ product: curName, qty: curQty });
+  if (curName && curQty > 0) {
+    var sameLine = null;
+    for (var li = 0; li < lines.length; li++) {
+      if (lines[li].product === curName) { sameLine = lines[li]; break; }
+    }
+    if (sameLine) sameLine.qty = n2(Number(sameLine.qty) + curQty);
+    else lines.push({ product: curName, qty: curQty });
   }
   if (!lines.length) { toast('请先选商品、填数量（或加入清单）'); return; }
 
@@ -4538,7 +4712,7 @@ function retryPending(i) {
    线上 options 目前只有 [probe, sync, order]；补 arrive 要 token 具备 Workflows 权限（当前没有），
    所以到货确认借用 order 这个「合法外壳」发送，由中转脚本按载荷形状（payload.arrive）认回来。
    等 workflow 的 options 补上 arrive 之后，把 WIRE_MODE 里这一项删掉即可直发 arrive。 */
-var WIRE_MODE = { arrive: 'order', tobacco: 'order' };
+var WIRE_MODE = { arrive: 'order', tobacco: 'order', capSet: 'order' };
 function wireMode(m) { m = m || 'order'; return WIRE_MODE[m] || m; }
 
 function ghDispatch(payload, mode) {
@@ -4685,36 +4859,63 @@ function renderCatCap() {
   if (!t) return;
   var ovN = 0; for (var k in catOverrides) if (catOverrides.hasOwnProperty(k)) ovN++;
   var he = document.getElementById('catCapHint');
-  if (he) he.textContent = ovN ? ('本地已改 ' + ovN + ' 类（尚未回贴台账）') : '一个品类一个额度；口径自动判定';
+  if (he) he.textContent = ovN ? ('本地已改 ' + ovN + ' 个标段（尚未同步）') : '11 个标段 · 输入即本地生效';
 
-  var h = '<thead><tr><th>品类</th><th>口径</th><th>商品数</th><th class="num">额度</th>' +
-    '<th class="num">已订</th><th class="num">余额</th><th>状态</th></tr></thead><tbody>';
+  var h = '';
   data.catBal.forEach(function (p) {
-    var q = poolUnit(p);
-    var local = p.local;
-    var st = local ? '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">本地改</span>'
-      : (p.set ? '<span class="tag ok">已设</span>' : '<span class="tag" style="background:var(--tag-off-bg);color:var(--text2)">未设</span>');
-    var reset = local ? ' <a href="#" onclick="onCatCapReset(\'' + esc(p.cat) + '\');return false" style="font-size:11px;color:var(--orange)">复原</a>' : '';
-    var siteTag = (p.sites && p.sites.length)
-      ? ' <span class="tag low" style="font-size:10.5px">仅 ' + esc(p.sites.join('/')) + '</span>' : '';
-    h += '<tr><td style="white-space:nowrap;color:var(--accent)"><b>' + esc(p.cat) + '</b>' + siteTag + '</td>' +
-      '<td>' + esc(p.mode) + '<span style="color:var(--text2)">' + (q ? '（' + esc(q) + '）' : '（元）') + '</span></td>' +
-      '<td class="num" style="color:var(--text2)">' + p.productCount + '</td>' +
-      '<td class="num"><input class="cap-in" type="number" min="0" step="1" data-cat="' + esc(p.cat) +
+    var q = poolUnit(p), local = p.local;
+    var reset = local ? '<button type="button" class="cc-reset" onclick="onCatCapReset(\'' + esc(p.cat) + '\')">复原</button>' : '';
+    var siteTag = (p.sites && p.sites.length) ? '<div class="cc-k">限定：' + esc(p.sites.join('/')) + '</div>' : '';
+    h += '<div class="cat-cap-item' + (local ? ' local' : '') + '" data-cat-card="' + esc(p.cat) + '">' +
+      '<div class="cc-head"><div class="cc-name">' + esc(p.cat) + '</div>' + reset + '</div>' + siteTag +
+      '<div class="cc-meta">' +
+        '<div><div class="cc-k">口径</div><div class="cc-v" title="' + esc(p.mode) + '">' + esc(p.mode) + '</div></div>' +
+        '<div><div class="cc-k">已订</div><div class="cc-v">' + (p.set ? fmtPool(p.used, p) + q : '—') + '</div></div>' +
+        '<div><div class="cc-k">余额</div><div class="cc-v" style="color:' + (!p.set ? 'var(--text2)' : p.bal <= 0 ? 'var(--red)' : 'var(--green)') + '">' + (p.set ? fmtPool(p.bal, p) + q : '不限') + '</div></div>' +
+      '</div>' +
+      '<label class="cc-input-label" for="catCap_' + esc(p.cat) + '">共用额度（' + esc(p.mode) + '）</label>' +
+      '<input id="catCap_' + esc(p.cat) + '" class="cap-in cat-cap-input" type="number" min="0" step="1" inputmode="decimal" data-cat="' + esc(p.cat) +
         '" value="' + (local ? esc(catOverrides[p.cat]) : (p.set ? esc(p.cap) : '')) +
-        '" placeholder="0" onchange="onCatCapInput(this)" /></td>' +
-      '<td class="num">' + (p.set ? fmtPool(p.used, p) + q : '—') + '</td>' +
-      '<td class="num"><b style="color:' + (!p.set ? 'var(--text2)' : p.bal <= 0 ? 'var(--red)' : 'var(--green)') + '">' +
-        (p.set ? fmtPool(p.bal, p) + q : '—') + '</b></td>' +
-      '<td>' + st + reset + '</td></tr>';
+        '" placeholder="0 = 不限制" aria-label="' + esc(p.cat) + '共用额度" oninput="onCatCapInput(this)">' +
+      (local ? '<div class="cc-k">本地覆盖 · 点『同步到金山』全站生效</div>' : '') +
+    '</div>';
   });
-  t.innerHTML = h + '</tbody>';
+  t.innerHTML = h;
 }
 function onCatCapInput(inp) {
-  setCatCap(inp.getAttribute('data-cat'), inp.value.trim());
-  refreshDerived();     // refreshDerived 已含 renderCatCap；9 行重渲染很便宜，且「余额/状态」立刻跟上
+  var cat = inp.getAttribute('data-cat'), pos = inp.selectionStart;
+  setCatCap(cat, inp.value.trim());
+  refreshDerived();
+  var inputs = document.querySelectorAll('#tblCatCap input[data-cat]'), next = null;
+  for (var i = 0; i < inputs.length; i++) if (inputs[i].getAttribute('data-cat') === cat) { next = inputs[i]; break; }
+  if (next) {
+    next.focus();
+    try { next.setSelectionRange(pos, pos); } catch (e) {}
+  }
 }
 function onCatCapReset(c) { setCatCap(c, ''); refreshAll(); }
+function syncCatCaps() {
+  var btn = document.getElementById('catCapSync'), state = document.getElementById('catCapSyncState');
+  if (btn && btn.disabled) return;
+  if (!cfg.owner || !cfg.repo || !cfg.pat) {
+    if (state) { state.textContent = '同步配置不完整：请先在「设置」填仓库与 PAT；也可点「导出补丁 CSV」。'; state.style.color = 'var(--red)'; }
+    toast('未配置 GitHub，无法同步；请使用「导出补丁 CSV」降级');
+    return;
+  }
+  var caps = data.catBal.map(function (p) { return { cat: p.cat, cap: n2(catCapOf(p.cat)), mode: p.mode }; });
+  if (btn) { btn.disabled = true; btn.classList.add('busy'); btn.textContent = '同步中…'; }
+  if (state) { state.textContent = '正在提交 ' + caps.length + ' 个标段，请稍候…'; state.style.color = ''; }
+  ghDispatch({ capSet: { caps: caps } }, 'capSet').then(function () {
+    if (btn) { btn.disabled = false; btn.classList.remove('busy'); btn.textContent = '同步到金山'; }
+    if (state) { state.textContent = '已触发同步，金山写入完成后全站生效。'; state.style.color = 'var(--green)'; }
+    toast('已提交 ' + caps.length + ' 个标段额度，正在同步到金山');
+    pollUpdate();
+  }).catch(function (e) {
+    if (btn) { btn.disabled = false; btn.classList.remove('busy'); btn.textContent = '重试同步到金山'; }
+    if (state) { state.textContent = '同步失败：' + e.message + '。可重试，或点「导出补丁 CSV」手工回贴。'; state.style.color = 'var(--red)'; }
+    toast('同步失败：' + e.message + '（可导出补丁 CSV）');
+  });
+}
 function exportCatCaps() {
   var n = 0, rows = [];
   data.catBal.forEach(function (p) {
@@ -4722,16 +4923,17 @@ function exportCatCaps() {
     rows.push(p.cat + ',' + catOverrides[p.cat] + ',' + p.mode);
     n++;
   });
-  if (!n) { toast('没有本地改过的品类额度可导出'); return; }
+  if (!n) { toast('没有本地改过的标段额度可导出'); return; }
   var csv = '\ufeff' + '品类,额度,口径\n' + rows.join('\n');
   var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = '品类额度补丁_' + todayStr().replace(/-/g, '') + '.csv';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  toast('已导出 ' + n + ' 条品类额度 → 贴到金山《品类额度》表后点「同步」');
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 0);
+  toast('已导出 ' + n + ' 条标段额度 → 贴到金山《品类额度》表后点「同步」');
 }
-function clearCatCaps() { catOverrides = {}; saveCats(); refreshAll(); toast('已清空本地品类额度，恢复台账值'); }
+function clearCatCaps() { catOverrides = {}; saveCats(); refreshAll(); toast('已清空本地标段额度，恢复台账值'); }
 
 
 
@@ -4741,7 +4943,7 @@ function renderCap() {
   var catEl = document.getElementById('capCat');
   if (catEl) {
     var curCat = catEl.value;
-    catEl.innerHTML = '<option value="">全部大类</option>' + CATS.map(function (c) {
+    catEl.innerHTML = '<option value="">全部标段</option>' + CATS.map(function (c) {
       return '<option value="' + esc(c) + '">' + esc(c) + '</option>';
     }).join('');
     catEl.value = curCat;
@@ -4776,7 +4978,7 @@ function renderCap() {
   var ovN = 0; for (var kk in capOverrides) if (capOverrides.hasOwnProperty(kk)) ovN++;
   var hintEl = document.getElementById('capHint');
   if (hintEl) hintEl.textContent = ovN ? ('本地已改 ' + ovN + ' 款（尚未回贴台账）') : '网页临时改额度，导出补丁回贴台账后即生效';
-  var h = '<thead><tr><th>大类</th><th>供应商</th><th>商品</th><th>单位</th><th class="num">最高可下订数量</th><th>状态</th></tr></thead><tbody>';
+  var h = '<thead><tr><th>标段</th><th>供应商</th><th>商品</th><th>单位</th><th class="num">最高可下订数量</th><th>状态</th></tr></thead><tbody>';
   if (!rows.length) {
     h += '<tr><td colspan="6" style="text-align:center;color:var(--text2);padding:18px">没有匹配的商品</td></tr>';
   }
@@ -4825,15 +5027,22 @@ function exportCaps() {
   a.href = URL.createObjectURL(blob);
   a.download = '额度补丁_' + todayStr().replace(/-/g, '') + '.csv';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 0);
   toast('已导出 ' + n + ' 条覆盖 → 粘贴到台账《商品档案》第7列后，找我重新生成 data.json');
 }
-function clearCaps() { capOverrides = {}; saveCaps(); refreshAll(); toast('已清空本地覆盖，恢复台账额度'); }
+function clearCaps() {
+  if (!Object.keys(capOverrides).length) { toast('没有需要清空的本地覆盖'); return; }
+  if (!confirm('确定清空全部单品额度的本地覆盖并恢复台账值吗？')) return;
+  capOverrides = {}; saveCaps(); refreshAll(); toast('已清空本地覆盖，恢复台账额度');
+}
 
 function bindCatCapPanel() {
   var ex = document.getElementById('catCapExport');
   var cl = document.getElementById('catCapClear');
+  var sy = document.getElementById('catCapSync');
   if (ex) ex.addEventListener('click', exportCatCaps);
   if (cl) cl.addEventListener('click', clearCatCaps);
+  if (sy) sy.addEventListener('click', syncCatCaps);
 }
 
 function bindCapPanel() {
@@ -5326,6 +5535,8 @@ function boot() {
   loadCfg(); loadTheme(); initSplash(); applyHashParams(); loadRole(); loadPending(); loadCaps(); loadCats(); loadRecent(); loadCart();
   loadRecvSent();
   bindDashFilters(); bindCapPanel(); bindCatCapPanel(); bindSubmitGuard(); bindRecv();
+  placeOrderHelp();
+  if (!placeOrderHelp.bound) { window.addEventListener('resize', placeOrderHelp); placeOrderHelp.bound = true; }
   renderRole();
   var want = isAdmin() ? 'ledger' : 'order';
   try {
@@ -5333,7 +5544,7 @@ function boot() {
     if (sv && (isAdmin() || (sv !== 'ledger' && sv !== 'admin'))) want = sv;
   } catch (e) {}
   setView(want);
-  if (hashWantAdmin) { if (isAdmin()) setView('ledger'); else openAdminLogin(); }
+  if (hashWantAdmin) { if (isAdmin()) setView('admin'); else openAdminLogin(); }
   var hasLocal = loadLocal();
   syncState = 'busy'; refreshAll();
   // ★ 加载失败自动重试：手机/弱网下 GitHub Pages 偶发一次拉不到，最多试 3 次再降级本地
@@ -5363,7 +5574,5 @@ function boot() {
 
 document.addEventListener('DOMContentLoaded', function () { boot(); });
 </script>
-<!-- HUB-HOME v1 · 一键返回导航站首页（勿删） -->
-<script src="hub-home.js" defer></script>
 </body>
 </html>
