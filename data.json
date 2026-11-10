@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-09T17:09:50.082Z",
+  "updatedAt": "2026-11-10T00:40:02.973Z",
   "source": "kdocs",
-  "today": "2026-11-09",
+  "today": "2026-11-10",
   "products": [
     {
       "capQty": 0,
@@ -8500,12 +8500,29 @@
       "supplier": "天易蓝",
       "ts": "2026-11-06 08:28",
       "unit": "桶"
+    },
+    {
+      "by": "韩城东",
+      "diff": 0,
+      "note": "",
+      "product": "尿素PET",
+      "qtyGot": 350,
+      "qtyShould": 350,
+      "reason": "",
+      "row": 40,
+      "site": "韩城",
+      "spec": "",
+      "store": "韩城东",
+      "supplier": "天易蓝",
+      "ts": "2026-11-10 08:39",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmw9yqkenwts7da",
     "a:cmw48lnc917v86q",
     "a:cmw3107f0xltxa5",
     "a:cmw2v4ojwshok8d",
@@ -30477,8 +30494,8 @@
         "壳牌防冻液-绿色 -45℃": {
           "stock": 14,
           "stockAmt": 573.24,
-          "sales30": 2,
-          "sales90": 2
+          "sales30": 4,
+          "sales90": 4
         },
         "车仆柴油防凝剂": {
           "stock": 0,
@@ -30693,14 +30710,14 @@
         "东鹏特饮1*24瓶500ML（天天）【进价3.67】": {
           "stock": 443,
           "stockAmt": 1736.56,
-          "sales30": 271,
-          "sales90": 271
+          "sales30": 272,
+          "sales90": 272
         },
         "红牛维生素功能饮料（天天）": {
           "stock": 1002,
           "stockAmt": 4658.3,
-          "sales30": 318,
-          "sales90": 318
+          "sales30": 324,
+          "sales90": 324
         },
         "20元枸杞槟榔/包": {
           "stock": 9,
@@ -30759,8 +30776,8 @@
         "68g笑喔喔苹果维c软糖": {
           "stock": 5,
           "stockAmt": 22.5,
-          "sales30": 0,
-          "sales90": 0
+          "sales30": 1,
+          "sales90": 1
         },
         "三色心香(95克*27杯)": {
           "stock": 25,
@@ -30771,20 +30788,20 @@
         "东鹏特饮1*24瓶500ML": {
           "stock": 443,
           "stockAmt": 1736.56,
-          "sales30": 271,
-          "sales90": 271
+          "sales30": 272,
+          "sales90": 272
         },
         "东鹏特饮促销": {
           "stock": 443,
           "stockAmt": 1736.56,
-          "sales30": 271,
-          "sales90": 271
+          "sales30": 272,
+          "sales90": 272
         },
         "东鹏特饮促销1": {
           "stock": 443,
           "stockAmt": 1736.56,
-          "sales30": 271,
-          "sales90": 271
+          "sales30": 272,
+          "sales90": 272
         },
         "伊利冰工厂冰片蜜桃70g": {
           "stock": 1,
@@ -30999,8 +31016,8 @@
         "苦咖啡雪糕（70克*35支）": {
           "stock": 0,
           "stockAmt": 0,
-          "sales30": 1,
-          "sales90": 1
+          "sales30": 2,
+          "sales90": 2
         },
         "趣趣脆 30克 小馒头蛋黄味1*10*15中袋": {
           "stock": 0,
@@ -31685,8 +31702,8 @@
         "红牛维生素功能饮料（天天）": {
           "stock": 966,
           "stockAmt": 4497.6,
-          "sales30": 179,
-          "sales90": 179
+          "sales30": 185,
+          "sales90": 185
         },
         "20元枸杞槟榔/包": {
           "stock": 12,
@@ -32267,8 +32284,8 @@
         "雀巢咖啡丝滑拿铁268ml": {
           "stock": 4,
           "stockAmt": 19.64,
-          "sales30": 43,
-          "sales90": 43
+          "sales30": 46,
+          "sales90": 46
         },
         "康师傅红烧牛肉面": {
           "stock": 11,
@@ -37318,7 +37335,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-09T17:10:07.555Z",
+      "generatedAt": "2026-11-10T00:40:21.805Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37327,11 +37344,11 @@
         "照金北"
       ],
       "s9Rows": 6422,
-      "s11Rows": 17553,
+      "s11Rows": 17589,
       "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
-      "cellsWithSales": 521,
+      "cellsWithSales": 522,
       "latestFlowDate": "2026-11-09",
       "note": "销量可能为空：出库流水主要覆盖便利店商品，润滑油/汽车用品多数未进入流水"
     }
