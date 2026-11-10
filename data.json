@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T00:46:42.309Z",
+  "updatedAt": "2026-11-10T00:50:40.428Z",
   "source": "kdocs",
   "today": "2026-11-10",
   "products": [
@@ -3257,6 +3257,19 @@
       "unit": "箱"
     },
     {
+      "amount": 36.7,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 3.67,
+      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
+      "qty": 10,
+      "spec": "1*24",
+      "store": "韩城东",
+      "supplier": "天天",
+      "unit": "箱"
+    },
+    {
       "amount": 1440,
       "date": "2026-10-16",
       "expireDate": "",
@@ -5249,12 +5262,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -180,
+      "balQty": -190,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 6,
+      "orderCount": 7,
       "pct": 0,
       "price": 3.67,
       "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
@@ -5262,8 +5275,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 5725.2,
-      "usedQty": 180
+      "usedAmt": 5761.9,
+      "usedQty": 190
     },
     {
       "balQty": -425,
@@ -7776,16 +7789,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -18201,
+      "balAmt": -18237.7,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-10-28",
+      "lastDate": "2026-11-10",
       "low": false,
-      "orderCount": 13,
+      "orderCount": 14,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 18201
+      "usedAmt": 18237.7
     },
     {
       "balAmt": -2160,
@@ -8538,6 +8551,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmw9z4ami1aqvzb",
     "a:cmw9yqkenwts7da",
     "a:cmw48lnc917v86q",
     "a:cmw3107f0xltxa5",
@@ -37351,7 +37365,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-10T00:46:56.755Z",
+      "generatedAt": "2026-11-10T00:50:55.823Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37361,7 +37375,7 @@
       ],
       "s9Rows": 6422,
       "s11Rows": 18133,
-      "s7Rows": 2344,
+      "s7Rows": 2000,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
       "cellsWithSales": 526,
