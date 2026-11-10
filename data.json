@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T00:50:40.428Z",
+  "updatedAt": "2026-11-10T01:03:14.332Z",
   "source": "kdocs",
   "today": "2026-11-10",
   "products": [
@@ -3270,6 +3270,19 @@
       "unit": "箱"
     },
     {
+      "amount": 36.7,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 3.67,
+      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
+      "qty": 10,
+      "spec": "1*24",
+      "store": "韩城西",
+      "supplier": "天天",
+      "unit": "箱"
+    },
+    {
       "amount": 1440,
       "date": "2026-10-16",
       "expireDate": "",
@@ -3762,6 +3775,19 @@
       "store": "韩城西",
       "supplier": "天易蓝",
       "unit": "桶"
+    },
+    {
+      "amount": 110,
+      "date": "2026-11-10",
+      "expireDate": "",
+      "note": "",
+      "price": 2.2,
+      "product": "玻璃水0#",
+      "qty": 50,
+      "spec": "2L",
+      "store": "韩城东",
+      "supplier": "天易蓝",
+      "unit": "箱"
     }
   ],
   "productBal": [
@@ -5262,12 +5288,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -190,
+      "balQty": -200,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 7,
+      "orderCount": 8,
       "pct": 0,
       "price": 3.67,
       "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
@@ -5275,8 +5301,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "箱",
-      "usedAmt": 5761.9,
-      "usedQty": 190
+      "usedAmt": 5798.6,
+      "usedQty": 200
     },
     {
       "balQty": -425,
@@ -7659,12 +7685,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -10,
+      "balQty": -60,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 2,
       "pct": 0,
       "price": 2.2,
       "product": "玻璃水0#",
@@ -7672,8 +7698,8 @@
       "spec": "2L",
       "supplier": "天易蓝",
       "unit": "箱",
-      "usedAmt": 22,
-      "usedQty": 10
+      "usedAmt": 132,
+      "usedQty": 60
     },
     {
       "balQty": -870,
@@ -7789,16 +7815,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -18237.7,
+      "balAmt": -18274.4,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-11-10",
       "low": false,
-      "orderCount": 14,
+      "orderCount": 15,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 18237.7
+      "usedAmt": 18274.4
     },
     {
       "balAmt": -2160,
@@ -7825,16 +7851,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -108088.42,
+      "balAmt": -108198.42,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-10-28",
+      "lastDate": "2026-11-10",
       "low": false,
-      "orderCount": 36,
+      "orderCount": 37,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 108088.42
+      "usedAmt": 108198.42
     }
   ],
   "catCaps": [
@@ -8551,6 +8577,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmw9zkf0nym6szl",
     "cmw9z4ami1aqvzb",
     "a:cmw9yqkenwts7da",
     "a:cmw48lnc917v86q",
@@ -37365,7 +37392,7 @@
       }
     },
     "meta": {
-      "generatedAt": "2026-11-10T00:50:55.823Z",
+      "generatedAt": "2026-11-10T01:03:32.994Z",
       "jxcSites": 28,
       "orderSites": 45,
       "unmatchedSites": [
@@ -37375,7 +37402,7 @@
       ],
       "s9Rows": 6422,
       "s11Rows": 18133,
-      "s7Rows": 2000,
+      "s7Rows": 2344,
       "mappedProducts": 169,
       "cellsWithStock": 1262,
       "cellsWithSales": 526,
