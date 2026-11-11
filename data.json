@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T02:14:48.549Z",
+  "updatedAt": "2026-11-11T08:40:29.865Z",
   "source": "kdocs",
   "today": "2026-11-11",
   "products": [
@@ -3406,7 +3406,7 @@
       "note": "",
       "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
-      "qty": 1200,
+      "qty": 50,
       "spec": "1*24",
       "store": "汉中",
       "supplier": "天天",
@@ -3419,7 +3419,7 @@
       "note": "",
       "price": 3.67,
       "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
-      "qty": 480,
+      "qty": 20,
       "spec": "1*24",
       "store": "汉中",
       "supplier": "天天",
@@ -3926,7 +3926,7 @@
       "note": "",
       "price": 3.616,
       "product": "玻璃水-20#",
-      "qty": 50,
+      "qty": 480,
       "spec": "2L",
       "store": "韩城西",
       "supplier": "天易蓝",
@@ -3939,7 +3939,7 @@
       "note": "",
       "price": 3.616,
       "product": "玻璃水-20#",
-      "qty": 50,
+      "qty": 480,
       "spec": "2L",
       "store": "韩城东",
       "supplier": "天易蓝",
@@ -5574,7 +5574,7 @@
       "usedQty": 0
     },
     {
-      "balQty": -680,
+      "balQty": -220,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
@@ -5588,10 +5588,10 @@
       "supplier": "天天",
       "unit": "箱",
       "usedAmt": 7560.2,
-      "usedQty": 680
+      "usedQty": 220
     },
     {
-      "balQty": -1625,
+      "balQty": -475,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
@@ -5605,7 +5605,7 @@
       "supplier": "天天",
       "unit": "箱",
       "usedAmt": 18211.8,
-      "usedQty": 1625
+      "usedQty": 475
     },
     {
       "balQty": -60,
@@ -7988,7 +7988,7 @@
       "usedQty": 10
     },
     {
-      "balQty": -1930,
+      "balQty": -2790,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
@@ -8002,7 +8002,7 @@
       "supplier": "天易蓝",
       "unit": "桶",
       "usedAmt": 6978.88,
-      "usedQty": 1930
+      "usedQty": 2790
     },
     {
       "balQty": -3150,
@@ -8937,6 +8937,22 @@
       "supplier": "天天",
       "ts": "2026-11-11 10:14",
       "unit": "箱"
+    },
+    {
+      "by": "宁陕",
+      "diff": 0,
+      "note": "",
+      "product": "壳牌喜力HX8 0W30",
+      "qtyGot": 12,
+      "qtyShould": 12,
+      "reason": "",
+      "row": 47,
+      "site": "宁陕",
+      "spec": "1L",
+      "store": "宁陕",
+      "supplier": "天朗尚品",
+      "ts": "2026-11-11 10:16",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
