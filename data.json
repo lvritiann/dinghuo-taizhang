@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T01:42:05.026Z",
+  "updatedAt": "2026-11-12T01:45:16.328Z",
   "source": "kdocs",
   "today": "2026-11-12",
   "products": [
@@ -2802,6 +2802,19 @@
   ],
   "orders": [
     {
+      "amount": 2707.2,
+      "date": "2026-11-12",
+      "expireDate": "",
+      "note": "",
+      "price": 3.76,
+      "product": "玻璃水-20#",
+      "qty": 720,
+      "spec": "2L",
+      "store": "洋县",
+      "supplier": "河南心连心",
+      "unit": "桶"
+    },
+    {
       "amount": 361.6,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4095,12 +4108,12 @@
       "usedQty": 0
     },
     {
-      "balQty": 0,
+      "balQty": -720,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "price": 3.76,
       "product": "玻璃水-20#",
@@ -4108,8 +4121,8 @@
       "spec": "2L",
       "supplier": "河南心连心",
       "unit": "桶",
-      "usedAmt": 0,
-      "usedQty": 0
+      "usedAmt": 2707.2,
+      "usedQty": 720
     },
     {
       "balQty": 0,
@@ -8041,16 +8054,16 @@
   ],
   "supplierBal": [
     {
-      "balAmt": 0,
+      "balAmt": -2707.2,
       "capAmt": 0,
       "full": false,
-      "lastDate": "",
+      "lastDate": "2026-11-12",
       "low": false,
-      "orderCount": 0,
+      "orderCount": 1,
       "pct": 0,
       "productCount": 3,
       "supplier": "河南心连心",
-      "usedAmt": 0
+      "usedAmt": 2707.2
     },
     {
       "balAmt": 0,
@@ -8969,12 +8982,29 @@
       "supplier": "天易蓝",
       "ts": "2026-11-12 09:42",
       "unit": ""
+    },
+    {
+      "by": "洋县",
+      "diff": 0,
+      "note": "",
+      "product": "红牛维生素功能饮料（天天）",
+      "qtyGot": 100,
+      "qtyShould": 100,
+      "reason": "",
+      "row": 49,
+      "site": "洋县",
+      "spec": "1*24",
+      "store": "洋县",
+      "supplier": "天天",
+      "ts": "2026-11-12 09:43",
+      "unit": "箱"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmwcvxq0wv94qin",
     "a:cmwcvu28bkavsrk",
     "a:cmwbhkbs3591p57",
     "a:cmwbdkjqmm4ruad",
