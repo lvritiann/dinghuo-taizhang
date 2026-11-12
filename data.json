@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T03:57:59.918Z",
+  "updatedAt": "2026-11-12T07:54:12.139Z",
   "source": "kdocs",
   "today": "2026-11-12",
   "products": [
@@ -8998,12 +8998,29 @@
       "supplier": "天天",
       "ts": "2026-11-12 09:44",
       "unit": "箱"
+    },
+    {
+      "by": "天汉水城",
+      "diff": 0,
+      "note": "",
+      "product": "壳牌劲霸 R3 15W50",
+      "qtyGot": 8,
+      "qtyShould": 8,
+      "reason": "",
+      "row": 50,
+      "site": "天汉水城",
+      "spec": "4L",
+      "store": "天汉水城",
+      "supplier": "天朗尚品",
+      "ts": "2026-11-12 15:53",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmwd94m1txph6yl",
     "cmwcvxq0wv94qin",
     "a:cmwcvu28bkavsrk",
     "a:cmwbhkbs3591p57",
