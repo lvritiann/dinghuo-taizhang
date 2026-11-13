@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T01:28:27.471Z",
+  "updatedAt": "2026-11-13T08:20:25.830Z",
   "source": "kdocs",
   "today": "2026-11-13",
   "products": [
@@ -9045,6 +9045,22 @@
       "store": "秦岭西",
       "supplier": "天朗尚品",
       "ts": "2026-11-13 09:27",
+      "unit": "桶"
+    },
+    {
+      "by": "秦岭西",
+      "diff": 0,
+      "note": "",
+      "product": "壳牌喜力HX6+ 5W40",
+      "qtyGot": 12,
+      "qtyShould": 12,
+      "reason": "",
+      "row": 53,
+      "site": "秦岭",
+      "spec": "1L",
+      "store": "秦岭西",
+      "supplier": "天朗尚品",
+      "ts": "2026-11-13 09:29",
       "unit": "桶"
     }
   ],
