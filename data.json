@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T00:05:22.497Z",
+  "updatedAt": "2026-11-16T01:12:13.460Z",
   "source": "kdocs",
   "today": "2026-11-16",
   "products": [
@@ -2815,6 +2815,19 @@
       "unit": "桶"
     },
     {
+      "amount": 2707.2,
+      "date": "2026-11-16",
+      "expireDate": "",
+      "note": "",
+      "price": 3.76,
+      "product": "玻璃水-20#",
+      "qty": 720,
+      "spec": "2L",
+      "store": "洋县",
+      "supplier": "河南心连心",
+      "unit": "桶"
+    },
+    {
       "amount": 361.6,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4108,12 +4121,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -720,
+      "balQty": -1440,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 2,
       "pct": 0,
       "price": 3.76,
       "product": "玻璃水-20#",
@@ -4121,8 +4134,8 @@
       "spec": "2L",
       "supplier": "河南心连心",
       "unit": "桶",
-      "usedAmt": 2707.2,
-      "usedQty": 720
+      "usedAmt": 5414.4,
+      "usedQty": 1440
     },
     {
       "balQty": 0,
@@ -8054,16 +8067,16 @@
   ],
   "supplierBal": [
     {
-      "balAmt": -2707.2,
+      "balAmt": -5414.4,
       "capAmt": 0,
       "full": false,
-      "lastDate": "2026-11-12",
+      "lastDate": "2026-11-16",
       "low": false,
-      "orderCount": 1,
+      "orderCount": 2,
       "pct": 0,
       "productCount": 3,
       "supplier": "河南心连心",
-      "usedAmt": 2707.2
+      "usedAmt": 5414.4
     },
     {
       "balAmt": 0,
@@ -9100,6 +9113,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmwikj50hzf8iji",
     "a:cmwfo7eg9cmzvvy",
     "a:cmwfo5nm58d38ky",
     "a:cmweasbtx4lsfao",
