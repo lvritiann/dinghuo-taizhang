@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T06:23:07.136Z",
+  "updatedAt": "2026-11-17T06:25:43.378Z",
   "source": "kdocs",
   "today": "2026-11-17",
   "products": [
@@ -9136,12 +9136,29 @@
       "supplier": "天朗尚品",
       "ts": "2026-11-17 14:23",
       "unit": "桶"
+    },
+    {
+      "by": "韩城",
+      "diff": 0,
+      "note": "",
+      "product": "壳牌喜力HX7+ 5W40",
+      "qtyGot": 12,
+      "qtyShould": 12,
+      "reason": "",
+      "row": 57,
+      "site": "韩城",
+      "spec": "1L",
+      "store": "韩城",
+      "supplier": "天朗尚品",
+      "ts": "2026-11-17 14:25",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmwkb5ixcplp4yu",
     "a:cmwkb2ol2nt4a37",
     "cmwilax3l29hlvh",
     "cmwikj50hzf8iji",
