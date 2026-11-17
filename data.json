@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T06:51:18.675Z",
+  "updatedAt": "2026-11-17T08:42:03.840Z",
   "source": "kdocs",
   "today": "2026-11-17",
   "products": [
@@ -9197,6 +9197,22 @@
       "supplier": "天天",
       "ts": "2026-11-17 14:51",
       "unit": "箱"
+    },
+    {
+      "by": "富平",
+      "diff": 0,
+      "note": "",
+      "product": "尿素PE",
+      "qtyGot": 600,
+      "qtyShould": 600,
+      "reason": "",
+      "row": 60,
+      "site": "富平",
+      "spec": "",
+      "store": "富平",
+      "supplier": "天易蓝",
+      "ts": "2026-11-17 14:53",
+      "unit": ""
     }
   ],
   "tobacco": [],
