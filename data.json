@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T00:35:07.314Z",
+  "updatedAt": "2026-11-17T06:23:07.136Z",
   "source": "kdocs",
   "today": "2026-11-17",
   "products": [
@@ -9120,12 +9120,29 @@
       "supplier": "天朗尚品",
       "ts": "2026-11-14 08:32",
       "unit": "桶"
+    },
+    {
+      "by": "韩城",
+      "diff": 0,
+      "note": "",
+      "product": "壳牌喜力HX5 +10W40",
+      "qtyGot": 4,
+      "qtyShould": 4,
+      "reason": "",
+      "row": 56,
+      "site": "韩城",
+      "spec": "4L",
+      "store": "韩城",
+      "supplier": "天朗尚品",
+      "ts": "2026-11-17 14:23",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmwkb2ol2nt4a37",
     "cmwilax3l29hlvh",
     "cmwikj50hzf8iji",
     "a:cmwfo7eg9cmzvvy",
