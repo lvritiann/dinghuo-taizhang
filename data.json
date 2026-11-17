@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T06:48:27.280Z",
+  "updatedAt": "2026-11-17T06:51:18.675Z",
   "source": "kdocs",
   "today": "2026-11-17",
   "products": [
@@ -9181,12 +9181,29 @@
       "supplier": "天易蓝",
       "ts": "2026-11-17 14:41",
       "unit": ""
+    },
+    {
+      "by": "富平",
+      "diff": 0,
+      "note": "",
+      "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
+      "qtyGot": 60,
+      "qtyShould": 60,
+      "reason": "",
+      "row": 59,
+      "site": "富平",
+      "spec": "1*24",
+      "store": "富平",
+      "supplier": "天天",
+      "ts": "2026-11-17 14:51",
+      "unit": "箱"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmwkc2up0icqwvm",
     "cmwkbz4r1v6epw5",
     "a:cmwkbnoacn8mamd",
     "a:cmwkb5ixcplp4yu",
