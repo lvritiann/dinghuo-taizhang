@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T02:55:57.337Z",
+  "updatedAt": "2026-11-23T05:54:37.785Z",
   "source": "kdocs",
   "today": "2026-11-23",
   "products": [
@@ -9226,12 +9226,29 @@
       "supplier": "天易蓝",
       "ts": "2026-11-17 14:53",
       "unit": ""
+    },
+    {
+      "by": "略阳西",
+      "diff": 0,
+      "note": "",
+      "product": "尿素PE",
+      "qtyGot": 50,
+      "qtyShould": 50,
+      "reason": "",
+      "row": 61,
+      "site": "略阳",
+      "spec": "",
+      "store": "略阳西",
+      "supplier": "天易蓝",
+      "ts": "2026-11-23 13:54",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmwsup8aadwgj5m",
     "cmwnbogdcph2leu",
     "a:cmwkc2up0icqwvm",
     "cmwkbz4r1v6epw5",
