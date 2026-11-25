@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T13:12:17.489Z",
+  "updatedAt": "2026-11-25T20:54:33.838Z",
   "source": "kdocs",
   "today": "2026-11-25",
   "products": [
@@ -3725,6 +3725,19 @@
       "unit": "瓶"
     },
     {
+      "amount": 1147.2,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 4.78,
+      "product": "红牛维生素功能饮料（天天）",
+      "qty": 240,
+      "spec": "1*24",
+      "store": "照金北",
+      "supplier": "天天",
+      "unit": "瓶"
+    },
+    {
       "amount": 1440,
       "date": "2026-10-16",
       "expireDate": "",
@@ -6098,12 +6111,12 @@
       "usedQty": 2380
     },
     {
-      "balQty": -5515,
+      "balQty": -5755,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 12,
+      "orderCount": 13,
       "pct": 0,
       "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
@@ -6111,8 +6124,8 @@
       "spec": "1*24",
       "supplier": "天天",
       "unit": "瓶",
-      "usedAmt": 42303,
-      "usedQty": 5515
+      "usedAmt": 43450.2,
+      "usedQty": 5755
     },
     {
       "balQty": -60,
@@ -8608,16 +8621,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -57790.4,
+      "balAmt": -58937.6,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-11-25",
       "low": false,
-      "orderCount": 26,
+      "orderCount": 27,
       "pct": 0,
       "productCount": 2,
       "supplier": "天天",
-      "usedAmt": 57790.4
+      "usedAmt": 58937.6
     },
     {
       "balAmt": -2160,
