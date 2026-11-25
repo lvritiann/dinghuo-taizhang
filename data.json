@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T04:56:14.519Z",
+  "updatedAt": "2026-11-25T05:08:37.564Z",
   "source": "kdocs",
   "today": "2026-11-25",
   "products": [
@@ -3283,6 +3283,45 @@
       "unit": "桶"
     },
     {
+      "amount": 555.96,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 92.66,
+      "product": "壳牌劲霸 R3 15W40",
+      "qty": 6,
+      "spec": "4L",
+      "store": "南沙",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 562.74,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 93.79,
+      "product": "壳牌劲霸 R4 15W40",
+      "qty": 6,
+      "spec": "4L",
+      "store": "南沙",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 678,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 56.5,
+      "product": "壳牌喜力HX7+ 5W40",
+      "qty": 12,
+      "spec": "1L",
+      "store": "南沙",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4542,12 +4581,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -36,
+      "balQty": -42,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 3,
+      "orderCount": 4,
       "pct": 0,
       "price": 92.66,
       "product": "壳牌劲霸 R3 15W40",
@@ -4555,8 +4594,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 3335.76,
-      "usedQty": 36
+      "usedAmt": 3891.72,
+      "usedQty": 42
     },
     {
       "balQty": -8,
@@ -4593,12 +4632,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -4,
+      "balQty": -10,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 2,
       "pct": 0,
       "price": 93.79,
       "product": "壳牌劲霸 R4 15W40",
@@ -4606,8 +4645,8 @@
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 375.16,
-      "usedQty": 4
+      "usedAmt": 937.9,
+      "usedQty": 10
     },
     {
       "balQty": -4,
@@ -4729,12 +4768,12 @@
       "usedQty": 72
     },
     {
-      "balQty": -60,
+      "balQty": -72,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 2,
+      "orderCount": 3,
       "pct": 0,
       "price": 56.5,
       "product": "壳牌喜力HX7+ 5W40",
@@ -4742,8 +4781,8 @@
       "spec": "1L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 2712,
-      "usedQty": 60
+      "usedAmt": 3390,
+      "usedQty": 72
     },
     {
       "balQty": -12,
@@ -8325,16 +8364,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -30317.9,
+      "balAmt": -32114.6,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-11-25",
       "low": false,
-      "orderCount": 34,
+      "orderCount": 37,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 30317.9
+      "usedAmt": 32114.6
     },
     {
       "balAmt": 0,
@@ -9475,6 +9514,9 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmwvnxpxrua8ew9",
+    "cmwvnxpxrkfzr5t",
+    "cmwvnxpxr6clwgr",
     "cmwvnhtkgm99gu5",
     "cmwvl4bz73h8025",
     "cmwvl0a3ey1z022",
