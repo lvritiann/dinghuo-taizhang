@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T02:47:27.681Z",
+  "updatedAt": "2026-11-25T02:50:02.873Z",
   "source": "kdocs",
   "today": "2026-11-25",
   "products": [
@@ -1064,24 +1064,24 @@
       "cat": "",
       "name": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
       "note": "",
-      "price": 88.08,
+      "price": 3.67,
       "shelf": 0,
       "siteOnly": "",
       "spec": "1*24",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "capQty": 0,
       "cat": "",
       "name": "红牛维生素功能饮料（天天）",
       "note": "",
-      "price": 114.72,
+      "price": 4.78,
       "shelf": 0,
       "siteOnly": "",
       "spec": "1*24",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "capQty": 0,
@@ -3267,7 +3267,7 @@
       "spec": "1*24",
       "store": "天汉水城",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 95.6,
@@ -3280,7 +3280,7 @@
       "spec": "1*24",
       "store": "华山",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 73.4,
@@ -3293,7 +3293,7 @@
       "spec": "1*24",
       "store": "白河",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 239,
@@ -3306,7 +3306,7 @@
       "spec": "1*24",
       "store": "白河",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 73.4,
@@ -3319,7 +3319,7 @@
       "spec": "1*24",
       "store": "韩城",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 286.8,
@@ -3332,7 +3332,7 @@
       "spec": "1*24",
       "store": "宁陕",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 146.8,
@@ -3345,7 +3345,7 @@
       "spec": "1*24",
       "store": "宁陕",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 5284.8,
@@ -3358,7 +3358,7 @@
       "spec": "1*24",
       "store": "富平",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 1720.8,
@@ -3371,7 +3371,7 @@
       "spec": "1*24",
       "store": "玉华宫东",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 9177.6,
@@ -3384,7 +3384,7 @@
       "spec": "1*24",
       "store": "富平",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 73.4,
@@ -3397,7 +3397,7 @@
       "spec": "1*24",
       "store": "照金",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 478,
@@ -3410,7 +3410,7 @@
       "spec": "1*24",
       "store": "洋县",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 478,
@@ -3423,7 +3423,7 @@
       "spec": "1*24",
       "store": "秦岭",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 36.7,
@@ -3436,7 +3436,7 @@
       "spec": "1*24",
       "store": "韩城东",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 36.7,
@@ -3449,7 +3449,7 @@
       "spec": "1*24",
       "store": "韩城西",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 5736,
@@ -3462,7 +3462,7 @@
       "spec": "1*24",
       "store": "汉中",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 1761.6,
@@ -3475,7 +3475,7 @@
       "spec": "1*24",
       "store": "汉中",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 1321.2,
@@ -3488,7 +3488,7 @@
       "spec": "1*24",
       "store": "玉华宫东",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 1321.2,
@@ -3501,7 +3501,7 @@
       "spec": "1*24",
       "store": "玉华宫西",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 2642.4,
@@ -3514,7 +3514,7 @@
       "spec": "1*24",
       "store": "秦岭",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 1761.6,
@@ -3527,7 +3527,7 @@
       "spec": "1*24",
       "store": "南沙",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 11472,
@@ -3540,7 +3540,7 @@
       "spec": "1*24",
       "store": "南沙",
       "supplier": "天天",
-      "unit": "箱"
+      "unit": "瓶"
     },
     {
       "amount": 1440,
@@ -5776,12 +5776,12 @@
       "low": false,
       "orderCount": 13,
       "pct": 0,
-      "price": 88.08,
+      "price": 3.67,
       "product": "东鹏特饮1*24瓶500ML（天天）【进价3.67】",
       "shelf": 0,
       "spec": "1*24",
       "supplier": "天天",
-      "unit": "箱",
+      "unit": "瓶",
       "usedAmt": 14606.6,
       "usedQty": 2140
     },
@@ -5793,12 +5793,12 @@
       "low": false,
       "orderCount": 9,
       "pct": 0,
-      "price": 114.72,
+      "price": 4.78,
       "product": "红牛维生素功能饮料（天天）",
       "shelf": 0,
       "spec": "1*24",
       "supplier": "天天",
-      "unit": "箱",
+      "unit": "瓶",
       "usedAmt": 29683.8,
       "usedQty": 2875
     },
