@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T02:27:42.205Z",
+  "updatedAt": "2026-11-25T02:30:46.750Z",
   "source": "kdocs",
   "today": "2026-11-25",
   "products": [
@@ -9346,12 +9346,29 @@
       "supplier": "天易蓝",
       "ts": "2026-11-23 13:54",
       "unit": "桶"
+    },
+    {
+      "by": "南沙",
+      "diff": 100,
+      "note": "",
+      "product": "尿素PET",
+      "qtyGot": 300,
+      "qtyShould": 200,
+      "reason": "",
+      "row": 62,
+      "site": "南沙",
+      "spec": "",
+      "store": "南沙",
+      "supplier": "天易蓝",
+      "ts": "2026-11-25 10:30",
+      "unit": "桶"
     }
   ],
   "tobacco": [],
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "a:cmwvi9phq8f5evo",
     "cmwvi6tk8xdbkwh",
     "cmwvhz7ls26jysk",
     "cmwvhk3mxh8o4a4",
