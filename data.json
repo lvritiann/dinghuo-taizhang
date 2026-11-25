@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T05:08:37.564Z",
+  "updatedAt": "2026-11-25T07:41:13.452Z",
   "source": "kdocs",
   "today": "2026-11-25",
   "products": [
@@ -3322,6 +3322,71 @@
       "unit": "桶"
     },
     {
+      "amount": 361.6,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 45.2,
+      "product": "壳牌防冻液-绿色 -45℃",
+      "qty": 8,
+      "spec": "4KG",
+      "store": "富平东",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 1545.84,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 64.41,
+      "product": "壳牌超凡喜力 5W40",
+      "qty": 24,
+      "spec": "1L",
+      "store": "富平东",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 1356,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 56.5,
+      "product": "壳牌喜力HX7+ 5W40",
+      "qty": 24,
+      "spec": "1L",
+      "store": "富平东",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 479.12,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 119.78,
+      "product": "壳牌喜力HX5 +5W30",
+      "qty": 4,
+      "spec": "4L",
+      "store": "富平东",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
+      "amount": 479.12,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 119.78,
+      "product": "壳牌喜力HX5 +10W40",
+      "qty": 4,
+      "spec": "4L",
+      "store": "富平东",
+      "supplier": "天朗尚品",
+      "unit": "桶"
+    },
+    {
       "amount": 73.4,
       "date": "2026-10-10",
       "expireDate": "",
@@ -4683,6 +4748,23 @@
       "usedQty": 0
     },
     {
+      "balQty": -16,
+      "capAmt": 0,
+      "capQty": 0,
+      "full": false,
+      "low": false,
+      "orderCount": 3,
+      "pct": 0,
+      "price": 119.78,
+      "product": "壳牌喜力HX5 +10W40",
+      "shelf": 0,
+      "spec": "4L",
+      "supplier": "天朗尚品",
+      "unit": "桶",
+      "usedAmt": 1557.14,
+      "usedQty": 16
+    },
+    {
       "balQty": -12,
       "capAmt": 0,
       "capQty": 0,
@@ -4691,30 +4773,13 @@
       "orderCount": 2,
       "pct": 0,
       "price": 119.78,
-      "product": "壳牌喜力HX5 +10W40",
-      "shelf": 0,
-      "spec": "4L",
-      "supplier": "天朗尚品",
-      "unit": "桶",
-      "usedAmt": 1078.02,
-      "usedQty": 12
-    },
-    {
-      "balQty": -8,
-      "capAmt": 0,
-      "capQty": 0,
-      "full": false,
-      "low": false,
-      "orderCount": 1,
-      "pct": 0,
-      "price": 119.78,
       "product": "壳牌喜力HX5 +5W30",
       "shelf": 0,
       "spec": "4L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 958.24,
-      "usedQty": 8
+      "usedAmt": 1437.36,
+      "usedQty": 12
     },
     {
       "balQty": 0,
@@ -4768,12 +4833,12 @@
       "usedQty": 72
     },
     {
-      "balQty": -72,
+      "balQty": -96,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 3,
+      "orderCount": 4,
       "pct": 0,
       "price": 56.5,
       "product": "壳牌喜力HX7+ 5W40",
@@ -4781,8 +4846,8 @@
       "spec": "1L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 3390,
-      "usedQty": 72
+      "usedAmt": 4746,
+      "usedQty": 96
     },
     {
       "balQty": -12,
@@ -4836,12 +4901,12 @@
       "usedQty": 48
     },
     {
-      "balQty": -48,
+      "balQty": -72,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 2,
       "pct": 0,
       "price": 64.41,
       "product": "壳牌超凡喜力 5W40",
@@ -4849,8 +4914,8 @@
       "spec": "1L",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 3091.68,
-      "usedQty": 48
+      "usedAmt": 4637.52,
+      "usedQty": 72
     },
     {
       "balQty": -78,
@@ -4870,12 +4935,12 @@
       "usedQty": 78
     },
     {
-      "balQty": -92,
+      "balQty": -100,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 8,
+      "orderCount": 9,
       "pct": 0,
       "price": 45.2,
       "product": "壳牌防冻液-绿色 -45℃",
@@ -4883,8 +4948,8 @@
       "spec": "4KG",
       "supplier": "天朗尚品",
       "unit": "桶",
-      "usedAmt": 4158.4,
-      "usedQty": 92
+      "usedAmt": 4520,
+      "usedQty": 100
     },
     {
       "balQty": 0,
@@ -8364,16 +8429,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -32114.6,
+      "balAmt": -36336.28,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-11-25",
       "low": false,
-      "orderCount": 37,
+      "orderCount": 42,
       "pct": 0,
       "productCount": 19,
       "supplier": "天朗尚品",
-      "usedAmt": 32114.6
+      "usedAmt": 36336.28
     },
     {
       "balAmt": 0,
@@ -9514,6 +9579,11 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmwvtdwecqc1r2a",
+    "cmwvtdwectn2wyr",
+    "cmwvtdwec9s73s7",
+    "cmwvtdwecjav7i8",
+    "cmwvtdwecdmln1g",
     "cmwvnxpxrua8ew9",
     "cmwvnxpxrkfzr5t",
     "cmwvnxpxr6clwgr",
