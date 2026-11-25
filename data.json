@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T11:55:32.417Z",
+  "updatedAt": "2026-11-25T12:52:26.857Z",
   "source": "kdocs",
   "today": "2026-11-25",
   "products": [
@@ -4516,6 +4516,19 @@
       "store": "汉中",
       "supplier": "天易蓝",
       "unit": "桶"
+    },
+    {
+      "amount": 1056,
+      "date": "2026-11-25",
+      "expireDate": "",
+      "note": "",
+      "price": 2.2,
+      "product": "玻璃水0#",
+      "qty": 480,
+      "spec": "2L",
+      "store": "韩城东",
+      "supplier": "天易蓝",
+      "unit": "桶"
     }
   ],
   "productBal": [
@@ -8413,12 +8426,12 @@
       "usedQty": 0
     },
     {
-      "balQty": -10,
+      "balQty": -490,
       "capAmt": 0,
       "capQty": 0,
       "full": false,
       "low": false,
-      "orderCount": 1,
+      "orderCount": 2,
       "pct": 0,
       "price": 2.2,
       "product": "玻璃水0#",
@@ -8426,8 +8439,8 @@
       "spec": "2L",
       "supplier": "天易蓝",
       "unit": "桶",
-      "usedAmt": 22,
-      "usedQty": 10
+      "usedAmt": 1078,
+      "usedQty": 490
     },
     {
       "balQty": -4110,
@@ -8579,16 +8592,16 @@
       "usedAmt": 0
     },
     {
-      "balAmt": -169770.6,
+      "balAmt": -170826.6,
       "capAmt": 0,
       "full": false,
       "lastDate": "2026-11-25",
       "low": false,
-      "orderCount": 60,
+      "orderCount": 61,
       "pct": 0,
       "productCount": 4,
       "supplier": "天易蓝",
-      "usedAmt": 169770.6
+      "usedAmt": 170826.6
     }
   ],
   "catCaps": [
@@ -9657,6 +9670,7 @@
   "expiring": [],
   "missingSheets": [],
   "recentCids": [
+    "cmww4i8b07i7oma",
     "cmwvxmhj0k5wyfu",
     "cmwvxh5xzwco96y",
     "cmwvuzee1x1ot4s",
